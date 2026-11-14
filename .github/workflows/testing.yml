@@ -1,0 +1,65 @@
+name: "🎳 Testing"
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+# Supersede in-progress runs for the same branch/PR instead of stacking the matrix.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHON_VERSION: "3.15"
+
+jobs:
+  test:
+    # Named by runner only: this job is meant to be a required status check, and the
+    # check name is the required context.
+    name: "🧪 Tests · ${{ matrix.runner }}"
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 20
+    permissions:
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        runner:
+          - ubuntu-latest
+          - windows-latest
+          - macos-latest
+
+    steps:
+      - name: Get source code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          # Persist uv's download cache across runs (rolling restore-keys).
+          enable-cache: true
+
+      - name: Run tests
+        run: >-
+          uv run --locked --no-dev --group test pytest
+          --junitxml=junit/test-results.xml
+          --cov-report=xml:coverage-reports/coverage.xml
+
+      - name: Upload test reports
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: test-reports-${{ matrix.runner }}
+          path: |
+            junit/test-results.xml
+            coverage-reports/coverage.xml
+          if-no-files-found: warn
