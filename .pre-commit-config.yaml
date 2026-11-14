@@ -132,6 +132,19 @@ repos:
           - ruff==0.17.5  # sync-with-uv
           - wcwidth==0.9.4  # sync-with-uv
 
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.7.12
+    hooks:
+      - id: actionlint
+        language: golang
+        additional_dependencies:
+          - github.com/wasilibs/go-shellcheck/cmd/shellcheck@v0.11.1
+
+  - repo: https://github.com/zizmorcore/zizmor-pre-commit
+    rev: v1.32.0
+    hooks:
+      - id: zizmor
+
   # These run in the project's own environment, so their versions and plugins come straight
   # from uv.lock and they see the same installed packages as the code they check.
   - repo: local
