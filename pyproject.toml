@@ -71,3 +71,125 @@ hook = [
 
 [tool.uv]
 required-version = ">=0.13"
+
+[tool.ruff]
+required-version = ">=0.17"
+line-length = 99
+format.docstring-code-line-length = 99
+format.docstring-code-format = true
+lint.select = [ "ALL" ]
+lint.ignore = [
+  "COM812", # Trailing comma missing (conflicts with the formatter)
+  "CPY001", # Missing copyright notice at top of file
+  "D203",   # Use a blank line to separate the docstring from the class definition
+  "D212",   # Multi-line docstring summary should start at the first line
+]
+lint.per-file-ignores."tests/**/*.py" = [
+  "PLR2004", # Magic values are OK in tests
+  "S101",    # assert is a first class citizen in pytest tests
+]
+lint.mccabe.max-complexity = 12  # default 10  # C901
+lint.pylint.max-args = 10  # default 5  # PLR0913
+
+[tool.pylint]
+messages_control.disable = [
+  "broad-exception-caught",     # W0718 — governed by ruff BLE001.
+  "import-error",               # E0401 — governed by mypy and ty.
+  "import-outside-toplevel",    # C0415 — governed by ruff PLC0415.
+  "invalid-name",               # C0103 — governed by ruff N*.
+  "line-too-long",              # C0301 — governed by ruff E501.
+  "missing-function-docstring", # C0116 — governed by ruff D103.
+  "no-member",                  # E1101 — governed by mypy and ty.
+  "no-name-in-module",          # E0611 — governed by mypy and ty.
+  "protected-access",           # W0212 — governed by ruff SLF001 (enforced in non-test code).
+  "redefined-builtin",          # W0622 — governed by ruff A001/A002/A004.
+  "too-few-public-methods",     # R0903 — data models and mapped classes rarely have any.
+  "too-many-arguments",         # R0913 — governed by ruff (lint.pylint.max-args).
+  "unused-argument",            # W0613 — governed by ruff ARG001/ARG002.
+  "wrong-import-order",         # C0411 — governed by ruff I001.
+  "wrong-import-position",      # C0413 — governed by ruff E402.
+]
+ignore-paths = [
+  ".*/__pycache__/.*",
+  "^[.].*/.*",         # Can't use \. because pylint reads backslashes as folder separators
+  "^build/.*",
+  "^dist/.*",
+  "^docs/_build/.*",
+]
+# Not 0 (one per CPU): parallel runs pickle the linter with dill, and dill 0.4.1 reads
+# `co_lnotab`, which Python 3.15 removed.
+jobs = 1
+
+[tool.mypy]
+disallow_any_generics = true
+disallow_subclassing_any = true
+disallow_untyped_calls = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_return_any = true
+warn_unreachable = true
+enable_error_code = [
+  "deprecated",
+  "exhaustive-match",
+  "explicit-override",
+  "ignore-without-code",
+  "mutable-override",
+  "possibly-undefined",
+  "redundant-expr",
+  "redundant-self",
+  "truthy-bool",
+  "truthy-iterable",
+  "unimported-reveal",
+  "unused-awaitable",
+]
+extra_checks = true
+strict_equality = true
+strict_equality_for_none = true
+show_error_context = true
+show_column_numbers = true
+warn_unused_configs = true
+no_implicit_reexport = true
+
+[tool.pyright]
+# Not part of the gate: lets Pylance/Pyright in an editor use the project's Python 3.15 venv.
+venv = ".venv"
+venvPath = "."
+
+[tool.ty]
+analysis.respect-type-ignore-comments = false
+
+[tool.pytest]
+addopts = [
+  "-ra",
+  "--cov=steam_manager",
+  "--cov-report=term-missing:skip-covered",
+  "--cov-report=html",
+  # Network tests never run unless asked for: `pytest -m live`.
+  "-m",
+  "not live",
+]
+markers = [
+  "live: talks to Steam or HowLongToBeat over the network; never runs in CI (select with '-m live')",
+]
+minversion = "9.2"
+python_files = [
+  "test_*.py",
+]
+strict = true
+testpaths = [
+  "tests",
+]
+
+[tool.coverage]
+run.branch = true
+run.relative_files = true
+report.exclude_also = [
+  "if TYPE_CHECKING:",
+  "raise NotImplementedError",
+]
+report.fail_under = 90
+report.show_missing = true

@@ -1,0 +1,66 @@
+[flake8]
+count = True
+exclude =
+    .*
+    __pycache__
+    build
+    dist
+    docs/_build
+extend-ignore =
+    # Function/method has "Raises" section in docstring, but no "raise" statements in the body (pydoclint)
+    ## Exceptions may be raised implicitly from another function called in the body.
+    DOC502
+    # Exceptions in the "Raises" section in the docstring do not match those in the function body (pydoclint)
+    ## Exceptions may be raised implicitly from another function called in the body.
+    DOC503
+    # Whitespace before ',', ';', or ':' (pycodestyle)
+    ## The ruff formatter puts equal whitespace around slice operators.
+    E203
+    # Line too long (pycodestyle) — governed by ruff
+    E501
+    # Multiple statements on one line (colon)
+    ## The ruff formatter collapses classes/functions consisting of ... to a single line.
+    E701
+    # Doc line too long (pycodestyle) — governed by ruff
+    W505
+max-complexity = 15
+max-doc-length = 99
+max-line-length = 99
+max-cognitive-complexity = 25
+statistics = True
+
+# flake8-rst-docstrings
+rst-directives =
+    envvar
+rst-roles =
+    # https://www.sphinx-doc.org/en/master/usage/domains/python.html#cross-referencing-python-objects
+    attr
+    class
+    const
+    data
+    deco
+    exc
+    func
+    meth
+    mod
+    obj
+    type
+    # https://www.sphinx-doc.org/en/master/usage/referencing.html
+    any
+    confval
+    doc
+    download
+    envvar
+    keyword
+    numref
+    option
+    ref
+    term
+    token
+
+# pydoclint
+style = sphinx
+allow-init-docstring = True
+arg-type-hints-in-docstring = False
+check-return-types = False
+check-yield-types = False
