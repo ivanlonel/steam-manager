@@ -110,7 +110,8 @@ plus the archive, rather than rebuilding everything on each run.
 - **Kaggle files.** `catalog import <folder>` reads a local folder holding the output of the
   owner's public `steam-games` notebook: `steam_games_raw.jsonl.gz` (one record per app with
   `store_item`, `is_listed`, `store_country`), `steam_games.csv` (exact review totals) and
-  `steam_lookups.json`.
+  `steam_lookups.json`. The records carry no fetch time, so an imported answer is dated by the
+  modification time of the file it came from (builder's call, not the owner's).
 - **Steam client protocol** (milestone 5), implemented in-house.
 - Steam Spy is never contacted. Delisted appids are known from: appids already seen (never
   forgotten), the account's lists, an imported Kaggle catalog, and later the PICS change feed.
@@ -240,8 +241,15 @@ The full `data_request` for store data sets every `include_*` flag the notebooks
 - An app is replaced in place: its rows are removed and written again in one transaction, so a
   tag or screenshot Steam removed disappears.
 - When several answers describe the same app, the most complete one wins: a full entry from the
-  home country, then from a fallback country, then a light entry, then the short record nested
-  inside another app.
+  home country, then from a fallback country in list order, then from any other country (an
+  imported Kaggle record, for a profile outside Brazil and the US), then a light entry, then the
+  short record nested inside another app. Within one rank the most recently fetched answer wins,
+  whichever source it came from (builder's call).
+- A price is always stored under the country it was quoted in. `v_games.price` shows the home
+  country's price only, so a price in another currency is never mistaken for a local one: a
+  profile outside Brazil that imports the Kaggle catalog gets names, tags, reviews and
+  descriptions for every app, and prices only for what it has fetched itself (builder's call,
+  following the notebooks' rule for dollar prices).
 - Answers are validated with Pydantic at this boundary. A field no model declares is counted
   and reported ("fields Steam sent that nothing stores"); a value the schema leaves out as
   derivable is checked against its derivation and mismatches are reported. Both reports must be
@@ -280,6 +288,23 @@ The full `data_request` for store data sets every `include_*` flag the notebooks
   GitHub Release). Renovate keeps dependencies and hook pins current.
 - Documentation: Sphinx with MyST, autodoc and sphinx-autodoc-typehints.
 - Python 3.15-only syntax is used only where every tool in the gate can parse it.
+
+## Reference material
+
+The notebooks are not part of this repository. They live in the owner's `steam-collection`
+repository, checked out next to this one (`../steam-collection`). The plans for the schema and
+loader pull requests copy what they need from these files, which are authoritative for the
+names they define:
+
+- `steam-database/steam-database.ipynb`: cell 2 is the schema (every table and column name);
+  cells 3 to 6 are the loader, including which values are left out as derivable and how each is
+  derived; cell 7 is the views and the score formulas in SQL; cells 8 and 9 are the checks.
+- `steam-database/compare_db.py`: the field-by-field comparison the acceptance check is based
+  on.
+- `steam-games/steam-games.ipynb`: request shapes, paging, the positive-count estimate, the
+  Bayes prior and the Wilson bound.
+- `steam-wishlist`, `steam-owned-games`, `steam-account-data`: the per-account requests.
+- `CLAUDE.md`: findings about the Steam API, each of which becomes a test.
 
 ## Left to the builder
 
