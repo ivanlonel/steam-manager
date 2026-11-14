@@ -1,0 +1,42 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.py[codz]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Virtual environments and local settings
+.venv/
+.env
+
+# Test, coverage and type-checker artifacts
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+junit/
+.hypothesis/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Documentation builds
+docs/_build/
+docs/api/generated/
+
+# Profile data must never be committed: it holds private account data
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Downloaded CI artifacts
+.ci/
