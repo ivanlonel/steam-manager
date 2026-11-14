@@ -187,9 +187,15 @@ testpaths = [
 [tool.coverage]
 run.branch = true
 run.relative_files = true
+report.fail_under = 90
 report.exclude_also = [
   "if TYPE_CHECKING:",
   "raise NotImplementedError",
 ]
-report.fail_under = 90
 report.show_missing = true
+
+[tool.sync-with-uv]
+repo-to-package."https://github.com/astral-sh/uv-pre-commit" = "uv"
+repo-to-package."https://github.com/ComPWA/taplo-pre-commit" = "taplo"
+repo-to-package."https://github.com/editorconfig-checker/editorconfig-checker.python" = "editorconfig-checker"
+repo-to-package."https://github.com/zizmorcore/zizmor-pre-commit" = "zizmor"
