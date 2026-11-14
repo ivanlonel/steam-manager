@@ -183,3 +183,12 @@ repos:
         pass_filenames: false
         require_serial: true
         always_run: true
+
+      - id: just-fmt
+        name: justfile is formatted
+        entry: just --fmt --check
+        language: python
+        additional_dependencies:
+          - rust-just==1.59.0  # sync-with-uv
+        pass_filenames: false
+        files: ^justfile$
