@@ -55,7 +55,7 @@ Runtime is Python 3.15+. Dependencies via **uv** (`pyproject.toml`, `uv.lock`); 
 just bootstrap     # uv sync --locked, then install the git hooks
 just check         # everything CI checks: every hook, then the tests
 just format        # ruff check --fix, ruff format
-just lint          # ruff check, flake8, pylint src tests
+just lint          # ruff check, pylint src tests (flake8: `just prek flake8`)
 just type-check    # ty check, mypy .
 just test [args]   # uv run pytest [args]; network tests need `-m live`
 just prek [hook]   # every hook on every file, or one hook
@@ -66,3 +66,4 @@ prek only checks tracked files: `git add` new files before running it.
 ## Known constraints
 
 - pylint runs with `jobs = 1`: its parallel mode pickles with dill, and dill 0.4.1 fails on Python 3.15.
+- Never install the `hook` dependency group into the project environment (`uv sync --group hook`, `uv run --group hook`). pydoclint needs `docstring-parser-fork` and cyclopts needs `docstring-parser`; both provide the module `docstring_parser`, and whichever is installed last breaks the other. That is also why flake8 and its plugins run as a hook with their own environment instead of through `uv run`.

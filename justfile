@@ -39,11 +39,10 @@ format:
     uv run ruff check --fix
     uv run ruff format
 
-# Run the linters: ruff, flake8, pylint
+# Run the linters installed with the project: ruff, pylint (flake8 has its own environment: `just prek flake8`)
 [group("qa")]
 lint:
     uv run ruff check
-    uv run flake8
     uv run pylint src tests
 
 # Run the type checkers: ty, mypy
