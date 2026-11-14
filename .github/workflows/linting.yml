@@ -45,6 +45,8 @@ jobs:
           extra-args: --all-files --verbose
 
       # Contributors without PowerShell rely on the recipes working in sh, which nothing
-      # else exercises: the maintainer's machine runs them in pwsh.
+      # else exercises: the maintainer's machine runs them in pwsh. `just` comes from the
+      # hook group in an isolated environment, because that group must never be installed
+      # next to the project (see its comment in pyproject.toml).
       - name: Check that the justfile's recipes run in sh
-        run: uv run --locked --group hook just lint
+        run: uv run --locked --isolated --only-group hook just lint

@@ -145,20 +145,33 @@ repos:
     hooks:
       - id: zizmor
 
-  # These run in the project's own environment, so their versions and plugins come straight
-  # from uv.lock and they see the same installed packages as the code they check.
-  - repo: local
+  # In its own environment, never the project's: pydoclint needs docstring-parser-fork, which
+  # provides the same `docstring_parser` module as the docstring-parser that cyclopts needs.
+  - repo: https://github.com/PyCQA/flake8
+    rev: 7.5.0
     hooks:
       - id: flake8
-        name: flake8
-        entry: uv run --exact flake8
-        language: system
-        pass_filenames: false
-        require_serial: true
-        types_or:
-          - python
-          - pyi
+        args:
+          - --config=.flake8
+        language: python
+        additional_dependencies:
+          - flake8-cognitive-complexity==0.1.0  # sync-with-uv
+          - flake8-rst-docstrings==0.4.0  # sync-with-uv
+          - pydoclint[flake8]==0.12.0  # sync-with-uv
+          # The checks' engines, pinned so they too change only with uv.lock.
+          - cognitive-complexity==1.3.0  # sync-with-uv
+          - docstring-parser-fork==0.0.16  # sync-with-uv
+          - docutils==0.23  # sync-with-uv
+          - mccabe==0.7.0  # sync-with-uv
+          - pycodestyle==2.15.0  # sync-with-uv
+          - pyflakes==4.1.0  # sync-with-uv
+          - pygments==2.21.0  # sync-with-uv
+          - restructuredtext-lint==2.0.2  # sync-with-uv
 
+  # These run in the project's own environment, so their versions come straight from uv.lock
+  # and they see the same installed packages as the code they check.
+  - repo: local
+    hooks:
       - id: pylint
         name: pylint
         entry: uv run --exact pylint src tests
