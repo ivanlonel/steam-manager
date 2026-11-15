@@ -1,12 +1,28 @@
 """Tests for the base of the Steam tables: the flag type, STRICT tables, the notebook check."""
 
 from contextlib import closing
+from typing import Final
 
 import pytest
 from sqlalchemy import Column, Integer, MetaData, Table, Text, create_engine, insert, select
 
 from steam_manager.db.schema import Flag, SteamBase
 from tests.steam_manager.db.schema._notebook import build, differences
+from tests.steam_manager.db.schema.test_apps import APP_TABLES
+from tests.steam_manager.db.schema.test_classification import CLASSIFICATION_TABLES
+from tests.steam_manager.db.schema.test_creators import CREDIT_TABLES
+from tests.steam_manager.db.schema.test_lookups import LOOKUPS
+
+STEAM_TABLES: Final = frozenset(
+    {
+        *LOOKUPS,
+        *APP_TABLES,
+        *CLASSIFICATION_TABLES,
+        *CREDIT_TABLES,
+        "app_compatibility_test",  # the notebook has no such table, so nothing compares it
+    }
+)
+"""Every Steam table this release declares: the notebook's, each compared with it, and more."""
 
 
 def test_a_flag_is_stored_as_an_integer() -> None:
@@ -54,6 +70,11 @@ def test_a_table_the_notebook_lacks_is_refused() -> None:
     """Comparing a table the notebook doesn't have is a mistake in the test, not a match."""
     with pytest.raises(LookupError, match="app_compatibility_test"):
         differences("app_compatibility_test")
+
+
+def test_every_table_the_notebook_has_is_compared_with_it() -> None:
+    """A table declared later can't skip the comparison by being left out of every list."""
+    assert set(SteamBase.metadata.tables) == STEAM_TABLES
 
 
 def test_every_table_is_strict() -> None:

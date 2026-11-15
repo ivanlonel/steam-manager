@@ -1,4 +1,4 @@
-"""Rebuild the Steam tables when this release declares them differently from the file's."""
+"""Drop and recreate the Steam tables when this release declares them differently."""
 
 from hashlib import sha256
 from typing import TYPE_CHECKING, Final
@@ -52,11 +52,13 @@ def ensure_steam_schema(engine: Engine) -> bool:
 
     Only the tables this release declares, and the ones the file records as Steam's, are
     dropped: a table holding the user's own data never is. Steam tables are never migrated;
-    the caller replays the raw archive into the new, empty ones.
+    the caller fills the new, empty ones with a rebuild.
 
     :param engine: The profile database.
     :return: ``True`` when the tables were created and are empty, ``False`` when they were
         already current.
+    :raise RuntimeError: When SQLite kept foreign keys on, so that dropping a table could
+        cascade into the user's own; nothing is dropped then.
     """
     current = fingerprint()
     with engine.begin() as connection:
@@ -69,11 +71,16 @@ def ensure_steam_schema(engine: Engine) -> bool:
             fingerprints.add(stored)
         if fingerprints == {current}:
             return False
-        # ponytail: pysqlite runs DDL outside a transaction, so an interrupted rebuild isn't
-        # undone; the fingerprints are written last, and the next open redoes it.
-        # Off so the tables drop in any order, even with rows pointing at each other.
+        # ponytail: pysqlite runs DDL outside a transaction, so an interrupted drop and create
+        # isn't undone; the fingerprints are written last, and the next open redoes it.
+        # Off so the tables drop in any order, and above all because with foreign keys on,
+        # dropping app deletes its rows first, cascading into the user's ON DELETE CASCADE.
+        # SQLite ignores this inside a transaction, which a DML statement here would open.
         connection.exec_driver_sql("PRAGMA foreign_keys = OFF")
         try:
+            if connection.exec_driver_sql("PRAGMA foreign_keys").scalar():
+                message = "foreign keys are still on: dropping the Steam tables could cascade"
+                raise RuntimeError(message)
             for name in sorted(names):
                 connection.execute(DropTable(Table(name, MetaData()), if_exists=True))
             SteamBase.metadata.create_all(connection)

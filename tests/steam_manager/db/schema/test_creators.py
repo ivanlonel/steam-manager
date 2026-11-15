@@ -1,6 +1,6 @@
 """Tests for the credit tables, compared with the notebook's."""
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Final
 
 import pytest
 from sqlalchemy import exc, insert
@@ -13,7 +13,11 @@ if TYPE_CHECKING:
     from sqlalchemy import Engine
 
 
-@pytest.mark.parametrize("table", ["creator", "credit", "app_credit"])
+CREDIT_TABLES: Final = ("creator", "credit", "app_credit")
+"""The tables that say who made an app."""
+
+
+@pytest.mark.parametrize("table", CREDIT_TABLES)
 def test_a_credit_table_matches_the_notebook(table: str) -> None:
     """Each has the notebook's columns, keys and unique indexes, the partial one included."""
     assert differences(table) == []

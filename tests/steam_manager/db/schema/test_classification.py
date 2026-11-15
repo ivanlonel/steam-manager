@@ -1,6 +1,6 @@
 """Tests for the tables that classify apps, compared with the notebook's."""
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Final
 
 import pytest
 from sqlalchemy import exc, insert, select
@@ -15,21 +15,21 @@ if TYPE_CHECKING:
 DEVICES = ("steam_deck", "steam_os", "steam_machine", "steam_frame")
 """The devices Steam reports compatibility results for."""
 
-
-@pytest.mark.parametrize(
-    "table",
-    [
-        "app_category",
-        "app_tag",
-        "app_genre",
-        "app_language",
-        "app_content_descriptor",
-        "app_interactive_element",
-        "app_rating_descriptor",
-        "app_document",
-        "app_manufacturer",
-    ],
+CLASSIFICATION_TABLES: Final = (
+    "app_category",
+    "app_tag",
+    "app_genre",
+    "app_language",
+    "app_content_descriptor",
+    "app_interactive_element",
+    "app_rating_descriptor",
+    "app_document",
+    "app_manufacturer",
 )
+"""The classification tables the notebook has."""
+
+
+@pytest.mark.parametrize("table", CLASSIFICATION_TABLES)
 def test_a_classification_table_matches_the_notebook(table: str) -> None:
     """Each has the notebook's columns, its composite key and its references."""
     assert differences(table) == []
