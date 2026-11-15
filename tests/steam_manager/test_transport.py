@@ -1,12 +1,18 @@
 """Tests for the HTTP transport: pacing, retries, failures in a row and redaction."""
 
 import asyncio
+from typing import override
 lazy from collections.abc import Callable, Sequence
 
 import httpx
 import pytest
 
-from steam_manager.transport import RequestFailedError, Transport, make_client
+from steam_manager.transport import (
+    FailureStreakError,
+    RequestFailedError,
+    Transport,
+    make_client,
+)
 
 URL = "https://api.steampowered.com/IStoreQueryService/Query/v1/"
 """An endpoint on Steam's Web API host."""
@@ -365,6 +371,117 @@ def test_another_httpx_error_fails_at_once() -> None:
 
     assert caught.value.attempts == 1
     assert not clock.sleeps
+
+
+async def fail(transport: Transport, url: str, times: int) -> None:
+    """
+    Make *times* requests that each fail with a plain :class:`RequestFailedError`.
+
+    :param transport: A transport whose handler answers *url* with a failure.
+    :param url: The URL to request.
+    :param times: How many failing requests to make.
+    """
+    for _ in range(times):
+        with pytest.raises(RequestFailedError):
+            await transport.get(url, interval=0)
+
+
+def test_the_tenth_failure_in_a_row_stops() -> None:
+    """Ten failures in a row on a host stop the step, with the last failure as the cause."""
+    transport = transport_for(answers([400]), FakeClock())
+
+    async def ten() -> None:
+        await fail(transport, URL, 9)
+        await transport.get(URL, interval=0)
+
+    with pytest.raises(FailureStreakError) as caught:
+        asyncio.run(ten())
+
+    assert (caught.value.host, caught.value.count) == ("api.steampowered.com", 10)
+    assert str(caught.value) == "api.steampowered.com failed 10 requests in a row; stopping"
+    assert isinstance(caught.value.__cause__, RequestFailedError)
+
+
+def test_a_success_resets_the_count() -> None:
+    """A success between two runs of nine failures means neither run is ten in a row."""
+    transport = transport_for(answers([*[400] * 9, 200, 400]), FakeClock())
+
+    async def nineteen() -> None:
+        await fail(transport, URL, 9)
+        await transport.get(URL, interval=0)
+        await fail(transport, URL, 9)
+
+    asyncio.run(nineteen())
+
+
+def test_failures_on_another_host_do_not_count() -> None:
+    """A run of failures on one host doesn't count against another."""
+    transport = transport_for(answers([400]), FakeClock())
+
+    async def eighteen() -> None:
+        await fail(transport, URL, 9)
+        await fail(transport, STORE_URL, 9)
+
+    asyncio.run(eighteen())
+
+
+def test_the_count_keeps_stopping_until_a_success() -> None:
+    """After a stop, the next failure on that host stops again: the host hasn't recovered."""
+    transport = transport_for(answers([400]), FakeClock())
+
+    async def eleven() -> None:
+        await fail(transport, URL, 9)
+        with pytest.raises(FailureStreakError):
+            await transport.get(URL, interval=0)
+        await transport.get(URL, interval=0)
+
+    with pytest.raises(FailureStreakError) as caught:
+        asyncio.run(eleven())
+
+    assert caught.value.count == 11
+
+
+class StuckClock(FakeClock):
+    """A clock whose sleeps never end, so a call can be cancelled while it waits."""
+
+    def __init__(self) -> None:
+        """Start at time 0 with nobody asleep."""
+        super().__init__()
+        self.asleep: asyncio.Event = asyncio.Event()
+        """Set once the transport has started sleeping."""
+
+    @override
+    async def sleep(self, seconds: float) -> None:
+        """
+        Record the sleep, signal :attr:`asleep`, and wait forever.
+
+        :param seconds: How long the transport asked to sleep.
+        """
+        self.sleeps.append(seconds)
+        self.asleep.set()
+        await asyncio.Event().wait()
+
+
+def test_cancelling_a_waiting_call_releases_the_host() -> None:
+    """A call cancelled while it waits to retry frees the host and isn't counted as a failure."""
+    clock = StuckClock()
+    transport = transport_for(answers([503, 400]), clock)
+
+    async def cancel_then_fail() -> None:
+        waiting = asyncio.create_task(transport.get(URL, interval=0))
+        await clock.asleep.wait()
+        waiting.cancel()
+        with pytest.raises(asyncio.CancelledError):
+            await waiting
+        for _ in range(9):
+            with pytest.raises(RequestFailedError):
+                await asyncio.wait_for(transport.get(URL, interval=0), timeout=1)
+        await asyncio.wait_for(transport.get(URL, interval=0), timeout=1)
+
+    with pytest.raises(FailureStreakError) as caught:
+        asyncio.run(cancel_then_fail())
+
+    assert caught.value.count == 10
 
 
 def test_make_client_identifies_the_application() -> None:
