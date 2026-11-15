@@ -256,6 +256,20 @@ The builder's calls, where the owner set no value:
 - A batched answer is archived per item (one row per app), so the loader always works on one
   app at a time.
 
+The builder's calls:
+
+- **Layout:** one `STRICT`, `WITHOUT ROWID` table, `answer`, keyed by source, kind, key and
+  country. The time is in microseconds since the Unix epoch, UTC. The body is UTF-8 JSON
+  compressed with zstd. Lone surrogates, from half an emoji escaped in Steam's JSON, are kept.
+- **Latest:** an answer replaces another only if it was fetched later, so a Kaggle import dated
+  by its file never undoes a fresh fetch. A batch is written in one transaction, whole or not
+  at all.
+- **WAL mode:** the web interface reads while a sync writes.
+- **Version:** `PRAGMA user_version` holds the layout's version. A file from a newer release is
+  refused; it can be deleted, and the next sync fetches it again.
+- **Damage:** a row that won't decompress is reported with its key, never as a bare zstd
+  error.
+
 ### Database
 
 - The schema keeps the notebooks' table and column names wherever the concept is unchanged
