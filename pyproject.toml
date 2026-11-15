@@ -116,6 +116,8 @@ lint.per-file-ignores."tests/**/*.py" = [
 lint.flake8-type-checking.runtime-evaluated-base-classes = [
   "pydantic.BaseModel",
   "pydantic.RootModel",
+  "sqlalchemy.orm.DeclarativeBase",
+  "steam_manager.db.schema.base.SteamBase",
   "steam_manager.steam.models.base.SteamModel",
 ]
 lint.mccabe.max-complexity = 12  # default 10  # C901

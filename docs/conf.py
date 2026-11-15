@@ -26,7 +26,27 @@ exclude_patterns: Final[list[str]] = ["_build", "superpowers"]
 # Unresolved cross-references are warnings, and the build treats warnings as errors.
 nitpicky: Final[bool] = True
 # httpx documents itself with MkDocs, so there is no inventory to link its classes to.
-nitpick_ignore_regex: Final[list[tuple[str, str]]] = [("py:class", r"httpx\..*")]
+# DeclarativeBase's attribute docstrings use SQLAlchemy's private shorthands (_orm., _schema.),
+# which only its own documentation resolves.
+nitpick_ignore_regex: Final[list[tuple[str, str]]] = [
+    ("py:class", r"httpx\..*"),
+    ("py:class", r"_(orm|schema)\..*"),
+]
+# SQLAlchemy builds each mapped class's __init__ inside sqlalchemy.orm.instrumentation, whose
+# TYPE_CHECKING block uses relative imports that can't run outside that package.
+suppress_warnings: Final[list[str]] = ["sphinx_autodoc_typehints.guarded_import"]
+
+
+def typehints_fixup_module_name(module: str) -> str:
+    """
+    Name a module as its documentation does, so that links to its members resolve.
+
+    :param module: Where a class is defined.
+    :return: Where it is documented.
+    """
+    return "sqlalchemy.types" if module == "sqlalchemy.sql.type_api" else module
+
+
 
 autodoc_default_options: Final[dict[str, bool]] = {"members": True, "undoc-members": True}
 autodoc_member_order: Final[str] = "bysource"
