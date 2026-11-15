@@ -19,6 +19,7 @@ from sqlalchemy import (
 
 from steam_manager.db.schema import Flag, SteamBase
 from tests.steam_manager.db.schema._notebook import build, differences
+from tests.steam_manager.db.schema.test_account import ACCOUNT_TABLES
 from tests.steam_manager.db.schema.test_apps import APP_TABLES
 from tests.steam_manager.db.schema.test_classification import CLASSIFICATION_TABLES
 from tests.steam_manager.db.schema.test_creators import CREDIT_TABLES
@@ -42,6 +43,7 @@ STEAM_TABLES: Final = frozenset(
         *STORE_LIST_TABLES,
         *REQUIREMENT_TABLES,
         *REVIEW_TABLES,
+        *ACCOUNT_TABLES,
         "app_compatibility_test",  # the notebook has no such table, so nothing compares it
     }
 )
