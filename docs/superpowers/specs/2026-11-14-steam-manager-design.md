@@ -144,15 +144,15 @@ Any table or view can be exported. The web interface adds a button that copies T
 Each starts with its own interview with the owner before any of its code.
 
 1. Foundation (this document's detailed part).
-2. Sign-in and account data; tracking status and custom lists. The database reaches the
+1. Sign-in and account data; tracking status and custom lists. The database reaches the
    notebooks' completeness here.
-3. Web interface: FastAPI, Jinja2 pages and HTMX; one vendored table library with server-side
+1. Web interface: FastAPI, Jinja2 pages and HTMX; one vendored table library with server-side
    paging and one chart library.
-4. Steam writes: reorder the wishlist, add and remove wishlist items, edit **wishlist
+1. Steam writes: reorder the wishlist, add and remove wishlist items, edit **wishlist
    categories**, follow and ignore. Each previews and changes nothing until confirmed.
-5. Client protocol: licenses, PICS app and package info, PICS change feed, **library
+1. Client protocol: licenses, PICS app and package info, PICS change feed, **library
    collections** (read-only).
-6. Extras: change feed, bundle advisor, saved filters and rankings, local Steam client data,
+1. Extras: change feed, bundle advisor, saved filters and rankings, local Steam client data,
    Notion sync, MCP server, scheduled sync and notifications, family-sharing library, IGDB sync.
 
 ## Milestone 1 in detail
@@ -181,18 +181,18 @@ implied. `python -m steam_manager` is the same program.
 
 All on `api.steampowered.com` unless a host is given. None needs a credential.
 
-| Purpose | Endpoint | Notes |
-| --- | --- | --- |
-| List apps | `IStoreQueryService/Query` | `sort: 2` (ascending appid; the default sort repeats and skips). 1,000 per page at most. Type filters: games, mods, software. A listing may differ from its reported total by 0.1% at most. |
-| Store data by appid | `IStoreBrowseService/GetItems` | Batches of 100 (300 fails). Use `id`, never `appid` (0 on delisted apps). `success: 15` mostly means "not sold in this country". A 200 answer without `store_items` is a failure: retry. |
-| Lookups | `IStoreBrowseService/GetStoreCategories`, `IStoreService/GetTagList` | Names of store categories and tags. |
-| Genre names | `store.steampowered.com/api/appdetails?filters=genres` | No endpoint lists genres, so one app is asked per unseen genre. 1.5 s apart. |
-| Exact review counts | `IUserReviewsService/GetAppReviews` | `languages: ["all"]`, `num_per_page: 1`. `purchase_type` 0 (Steam purchases) for paid apps, 1 (all) for free ones; if the total is more than 2% off `review_count`, try the other. 0.2 s apart. |
-| Review histogram | `store.steampowered.com/appreviewhistogram/<appid>` | Account apps only. 1 s apart. Its totals are a different figure from `review_count`. |
-| Current players | `ISteamUserStats/GetNumberOfCurrentPlayers` | Account apps only. A 404 means no figure. 0.2 s apart. |
-| Wishlist | `IWishlistService/GetWishlist` | By SteamID. Priority 0 means unranked. |
-| Followed apps | `IStoreService/GetGamesFollowed` | By SteamID. |
-| Vanity URL | `steamcommunity.com/id/<name>?xml=1` | Resolves a profile URL to a SteamID without a key. |
+| Purpose             | Endpoint                                                             | Notes                                                                                                                                                                                           |
+| ------------------- | -------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| List apps           | `IStoreQueryService/Query`                                           | `sort: 2` (ascending appid; the default sort repeats and skips). 1,000 per page at most. Type filters: games, mods, software. A listing may differ from its reported total by 0.1% at most.     |
+| Store data by appid | `IStoreBrowseService/GetItems`                                       | Batches of 100 (300 fails). Use `id`, never `appid` (0 on delisted apps). `success: 15` mostly means "not sold in this country". A 200 answer without `store_items` is a failure: retry.        |
+| Lookups             | `IStoreBrowseService/GetStoreCategories`, `IStoreService/GetTagList` | Names of store categories and tags.                                                                                                                                                             |
+| Genre names         | `store.steampowered.com/api/appdetails?filters=genres`               | No endpoint lists genres, so one app is asked per unseen genre. 1.5 s apart.                                                                                                                    |
+| Exact review counts | `IUserReviewsService/GetAppReviews`                                  | `languages: ["all"]`, `num_per_page: 1`. `purchase_type` 0 (Steam purchases) for paid apps, 1 (all) for free ones; if the total is more than 2% off `review_count`, try the other. 0.2 s apart. |
+| Review histogram    | `store.steampowered.com/appreviewhistogram/<appid>`                  | Account apps only. 1 s apart. Its totals are a different figure from `review_count`.                                                                                                            |
+| Current players     | `ISteamUserStats/GetNumberOfCurrentPlayers`                          | Account apps only. A 404 means no figure. 0.2 s apart.                                                                                                                                          |
+| Wishlist            | `IWishlistService/GetWishlist`                                       | By SteamID. Priority 0 means unranked.                                                                                                                                                          |
+| Followed apps       | `IStoreService/GetGamesFollowed`                                     | By SteamID.                                                                                                                                                                                     |
+| Vanity URL          | `steamcommunity.com/id/<name>?xml=1`                                 | Resolves a profile URL to a SteamID without a key.                                                                                                                                              |
 
 The full `data_request` for store data sets every `include_*` flag the notebooks set
 (`include_all_purchase_options`, `include_assets`, `include_assets_without_overrides`,

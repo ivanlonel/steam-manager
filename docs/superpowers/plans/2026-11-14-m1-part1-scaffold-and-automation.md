@@ -36,8 +36,7 @@ hypothesis, Sphinx + MyST, GitHub Actions, Renovate, just.
   `sh` as well as `pwsh`. Pinned by Task 4's verification on the CI runners.
 - A hook that matches no file passes silently and guards nothing: `check-hooks-apply` is
   enabled, and each hook is added in the pull request that brings its first file (Task 3, 7).
-- A test file named `foo_test.py` would never be collected: `name-tests-test
-  --pytest-test-first` is enabled (Task 3).
+- A test file named `foo_test.py` would never be collected: `name-tests-test --pytest-test-first` is enabled (Task 3).
 - A linter running on an older Python cannot parse 3.15-only syntax: hook environments use
   `python3.15` and Task 2 probes each tool with a `lazy import` statement.
 - A network test slipping into CI: the `live` marker is deselected by default (Task 2).
@@ -45,6 +44,7 @@ hypothesis, Sphinx + MyST, GitHub Actions, Renovate, just.
 ## File Structure
 
 PR 1:
+
 - `pyproject.toml`: project metadata, dependency groups, every tool's configuration.
 - `uv.lock`, `.python-version` (`3.15`).
 - `src/steam_manager/__init__.py`: package docstring and `__version__`.
@@ -56,22 +56,25 @@ PR 1:
 - `.github/workflows/linting.yml`, `.github/workflows/testing.yml`, `.github/zizmor.yml`.
 
 PR 2:
+
 - `docs/conf.py`, `docs/index.md`, `docs/development/*.md`, `docs/reference/*.md`.
 - `GLOSSARY.md`, `docs/adr/*.md`, `docs/superpowers/**` (already written).
 - `.github/workflows/documentation.yml`, `update-dependencies.yml`, `auto-labeler.yml`,
   `release.yml` (workflow), `.github/release.yml` (release-notes categories),
   `.github/labeler.yml`, `.github/renovate.json`, `.github/ISSUE_TEMPLATE/*.yml`.
 
----
+______________________________________________________________________
 
 ### Task 1: Package skeleton
 
 **Files:**
+
 - Create: `pyproject.toml`, `.python-version`, `src/steam_manager/__init__.py`,
   `src/steam_manager/py.typed`, `tests/__init__.py`, `tests/steam_manager/__init__.py`
 - Test: `tests/steam_manager/test___init__.py`
 
 **Interfaces:**
+
 - Produces: `steam_manager.__version__: Final[str]`, read with
   `importlib.metadata.version("steam-manager")`.
 
@@ -105,7 +108,9 @@ Expected: FAIL with `AttributeError: module 'steam_manager' has no attribute '__
 ### Task 2: Tool configuration
 
 **Files:**
+
 - Modify: `pyproject.toml`
+
 - Create: `.flake8`, `.editorconfig`, `.gitattributes`, `.mdformat.toml`
 
 - [ ] **Step 1: Add the `dev`, `type` and `hook` groups**
@@ -128,8 +133,7 @@ ruff (`select = ["ALL"]`, ignore COM812, CPY001, D203, D212; `line-length = 99`;
 
 - [ ] **Step 3: Verify every tool runs clean on Python 3.15**
 
-Run: `uv run ruff check`, `uv run ruff format --check`, `uv run flake8`, `uv run pylint src
-tests`, `uv run mypy .`, `uv run ty check`, `uv run deptry .`, `uv run pytest`
+Run: `uv run ruff check`, `uv run ruff format --check`, `uv run flake8`, `uv run pylint src tests`, `uv run mypy .`, `uv run ty check`, `uv run deptry .`, `uv run pytest`
 Expected: each exits 0; pytest reports 100% coverage.
 
 - [ ] **Step 4: Probe 3.15-only syntax**
@@ -143,7 +147,9 @@ Delete the scratch module.
 ### Task 3: Git hooks
 
 **Files:**
+
 - Create: `.pre-commit-config.yaml`
+
 - Modify: `pyproject.toml` (`[tool.sync-with-uv]`)
 
 - [ ] **Step 1: Write the hook configuration**
@@ -153,8 +159,7 @@ Hook environments use `python3.15`. Hooks in PR 1: meta (`check-hooks-apply`,
 `debug-statements`, `name-tests-test --pytest-test-first`); editorconfig-checker; typos;
 gitleaks; pygrep hooks; uv-lock; uv-sync (`--locked`); sync-with-uv; pyproject-fmt; taplo (other
 TOML files); ruff-check `--fix` and ruff-format; flake8 and pylint with their plugins pinned
-through `# sync-with-uv`; local `ty`, `mypy`, `deptry` (`uv run --exact`), `just --fmt
---check`; mdformat with plugins; actionlint; zizmor.
+through `# sync-with-uv`; local `ty`, `mypy`, `deptry` (`uv run --exact`), `just --fmt --check`; mdformat with plugins; actionlint; zizmor.
 
 - [ ] **Step 2: Verify**
 
@@ -166,6 +171,7 @@ Expected: every hook passes or reports "Passed"; none reports "no files to check
 ### Task 4: Task runner
 
 **Files:**
+
 - Create: `justfile`
 
 - [ ] **Step 1: Write recipes that run unchanged in `sh` and `pwsh`**
@@ -184,7 +190,9 @@ Expected: exit 0.
 ### Task 5: Contributor documents
 
 **Files:**
+
 - Create: `CLAUDE.md`, `CONTRIBUTING.md`, `CHANGELOG.md`
+
 - Modify: `README.md`
 
 - [ ] **Step 1: Write them**
@@ -201,6 +209,7 @@ pull-request workflow, and the commands. `CHANGELOG.md` in Keep a Changelog form
 ### Task 6: Linting and testing workflows
 
 **Files:**
+
 - Create: `.github/workflows/linting.yml`, `.github/workflows/testing.yml`,
   `.github/zizmor.yml`
 
@@ -222,7 +231,9 @@ Check the size first: `git diff main...HEAD | Measure-Object -Character`. Then
 ### Task 7: Documentation site and repository automation (PR 2)
 
 **Files:**
+
 - Create: the PR 2 files listed under *File Structure*
+
 - Modify: `pyproject.toml` (`doc` group), `.pre-commit-config.yaml` (hooks that now have
   files: `check-json`, `check-jsonc`, `renovate-config-validator`), `justfile` (`docs`,
   `docs-live`), `.flake8` / ruff per-file ignores for `docs/conf.py`
