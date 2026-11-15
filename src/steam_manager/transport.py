@@ -40,7 +40,14 @@ class RequestFailedError(FetchError):
     """A request failed for good: an unexpected status, or a network error that didn't clear."""
 
     def __init__(
-        self, method: str, endpoint: str, *, status: int | None, reason: str, attempts: int
+        self,
+        method: str,
+        endpoint: str,
+        *,
+        status: int | None,
+        reason: str,
+        attempts: int,
+        refused_wait: float | None = None,
     ) -> None:
         """
         Describe the failure without the query string, the headers or the answer's body.
@@ -50,6 +57,8 @@ class RequestFailedError(FetchError):
         :param status: The last answer's HTTP status, or ``None`` when no answer came.
         :param reason: ``HTTP <status>``, or the name of the network error's class.
         :param attempts: How many times the request was sent.
+        :param refused_wait: The ``Retry-After`` seconds the server asked for, when that was
+            longer than :data:`MAX_RETRY_AFTER_SECONDS`.
         """
         noun = "attempt" if attempts == 1 else "attempts"
         super().__init__(f"{method} {endpoint} failed: {reason} after {attempts} {noun}")
@@ -63,23 +72,29 @@ class RequestFailedError(FetchError):
         """``HTTP <status>``, or the name of the network error's class."""
         self.attempts: int = attempts
         """How many times the request was sent."""
+        self.refused_wait: float | None = refused_wait
+        """The ``Retry-After`` seconds the server asked for, when too long to honour."""
 
 
 class FailureStreakError(FetchError):
-    """A host failed too many requests in a row: the step that was running must stop."""
+    """A host failed too often in a row, or asked for a long pause: the step must stop."""
 
-    def __init__(self, host: str, count: int) -> None:
+    def __init__(self, host: str, count: int, reason: str) -> None:
         """
-        Describe the run of failures.
+        Describe why requests to *host* stop.
 
         :param host: The host that kept failing.
         :param count: How many of its requests failed in a row, this one included.
+        :param reason: Why the last one failed, as :attr:`RequestFailedError.reason`.
         """
-        super().__init__(f"{host} failed {count} requests in a row; stopping")
+        noun = "request" if count == 1 else "requests"
+        super().__init__(f"stopping requests to {host}: {reason} ({count} failed {noun} in a row)")
         self.host: str = host
         """The host that kept failing."""
         self.count: int = count
         """How many of its requests failed in a row, this one included."""
+        self.reason: str = reason
+        """Why the last one failed, as :attr:`RequestFailedError.reason`."""
 
 
 def endpoint_of(url: httpx.URL) -> str:
@@ -153,8 +168,9 @@ class Transport:
             except RequestFailedError as failure:
                 count = self._failures_in_a_row.get(host, 0) + 1
                 self._failures_in_a_row[host] = count
-                if count >= FAILURE_STREAK_LIMIT:
-                    raise FailureStreakError(host, count) from failure
+                # A server asking for a long pause gets it: nothing more goes to it this step.
+                if count >= FAILURE_STREAK_LIMIT or failure.refused_wait is not None:
+                    raise FailureStreakError(host, count, failure.reason) from failure
                 raise
             self._failures_in_a_row[host] = 0
             return response
@@ -197,6 +213,15 @@ class Transport:
                 wait = retry_wait(response, attempt)
             finally:
                 self._last_ended[host] = self._clock()
+            if wait is not None and wait > MAX_RETRY_AFTER_SECONDS:
+                raise RequestFailedError(
+                    request.method,
+                    endpoint,
+                    status=status,
+                    reason=f"{reason}, Retry-After {wait:.0f} s",
+                    attempts=attempt,
+                    refused_wait=wait,
+                )
             if wait is None or attempt > MAX_RETRIES:
                 raise RequestFailedError(
                     request.method, endpoint, status=status, reason=reason, attempts=attempt
@@ -259,15 +284,14 @@ def retry_wait(response: httpx.Response, attempt: int) -> float | None:
 
     :param response: An answer that is neither a success nor allowed.
     :param attempt: The attempt that got it, counting from 1.
-    :return: The seconds to wait, or ``None`` when the request must fail now.
+    :return: The seconds to wait, which the caller refuses when over
+        :data:`MAX_RETRY_AFTER_SECONDS`, or ``None`` when the status isn't worth retrying.
     """
     if response.status_code != httpx.codes.TOO_MANY_REQUESTS and not response.is_server_error:
         return None
     header = response.headers.get("Retry-After")
     asked = None if header is None else retry_after_seconds(header)
-    if asked is None:
-        return backoff_seconds(attempt)
-    return asked if asked <= MAX_RETRY_AFTER_SECONDS else None
+    return backoff_seconds(attempt) if asked is None else asked
 
 
 def make_client() -> httpx.AsyncClient:
