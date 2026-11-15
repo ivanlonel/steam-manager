@@ -63,6 +63,28 @@ def answer(status: int) -> Callable[[httpx.Request], httpx.Response]:
     return handler
 
 
+def recorder(
+    *, status: int = 200, json: object = None, text: str | None = None
+) -> tuple[Callable[[httpx.Request], httpx.Response], list[httpx.Request]]:
+    """
+    Make a handler that gives the same answer to every request and keeps each request.
+
+    :param status: The HTTP status of the answer.
+    :param json: The answer's body as JSON, when *text* is ``None``.
+    :param text: The answer's body as text.
+    :return: The handler, and the requests it received, in order.
+    """
+    requests: list[httpx.Request] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        requests.append(request)
+        if text is not None:
+            return httpx.Response(status, text=text)
+        return httpx.Response(status, json=json)
+
+    return handler, requests
+
+
 type Step = int | httpx.Response | type[httpx.RequestError]
 """One answer of :func:`answers`: a status, a whole response, or a network error to raise."""
 
