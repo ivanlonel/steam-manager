@@ -10,7 +10,7 @@ from steam_manager.answers import Answer, Kind
 from steam_manager.steam.webapi import STORE, call, is_json, item_answer, response_answer
 
 if TYPE_CHECKING:
-    from collections.abc import AsyncGenerator, Callable, Iterable, Mapping, Sequence
+    from collections.abc import AsyncGenerator, Callable, Collection, Iterable, Mapping, Sequence
 
     import httpx
 
@@ -56,6 +56,13 @@ GENRES_INTERVAL: Final = 1.5
 PLAYERS_INTERVAL: Final = 0.2
 """Seconds between two player counts, as the notebooks paused."""
 
+QUERY_FIELDS: Final = frozenset(
+    {"metadata.total_matching_records", "metadata.start", "metadata.count", "ids", "store_items"}
+)
+"""What a ``Query`` page holds besides new fields: the items, their ids, and the paging."""
+ITEMS_FIELDS: Final = frozenset({"store_items"})
+"""What a ``GetItems`` answer holds besides new fields."""
+
 _LOGGER: Final = logging.getLogger(__name__)
 _ITEMS: Final = TypeAdapter(list[dict[str, JsonValue]])
 _INT: Final = TypeAdapter(int)
@@ -96,6 +103,37 @@ def _requires(keys: Sequence[str]) -> Callable[[httpx.Response], str | None]:
     return check
 
 
+def _report_unknown(
+    method: str, found: Mapping[str, object], known: Collection[str], reported: set[str]
+) -> None:
+    """
+    Log the fields of a batched answer's envelope that nothing stores, once per run.
+
+    Only a batched answer's items reach the raw archive, so a field Steam adds around them could
+    be reported nowhere else.
+
+    :param method: The method that answered, such as ``Query``.
+    :param found: The envelope, as ``{"metadata": {...}, "ids": [...], "store_items": [...]}``.
+    :param known: The dotted paths of the envelope that the endpoint reads or knows it ignores.
+    :param reported: The paths logged so far in this run; new ones are added.
+    """
+    paths: set[str] = set()
+    for key, value in found.items():
+        if value in (None, [], {}):
+            continue
+        if isinstance(value, dict) and any(path.startswith(f"{key}.") for path in known):
+            paths.update(
+                f"{key}.{inner}"
+                for inner, inner_value in value.items()
+                if f"{key}.{inner}" not in known and inner_value not in (None, [], {})
+            )
+        elif key not in known:
+            paths.add(key)
+    if new := sorted(paths - reported):
+        reported.update(new)
+        _LOGGER.warning("%s sent fields nothing stores: %s", method, ", ".join(new))
+
+
 def _store_items(response: httpx.Response) -> list[dict[str, JsonValue]]:
     """
     Read the store items of an answer that the ``store_items`` check accepted.
@@ -120,6 +158,7 @@ async def list_apps(
         :data:`LISTING_TOLERANCE` from the total Steam reported.
     """
     seen: set[int] = set()
+    reported: set[str] = set()
     start, total = 0, 1
     while start < total:
         response = await call(
@@ -146,9 +185,9 @@ async def list_apps(
             },
             check=_requires(["metadata", "store_items"]),
         )
-        total = _INT.validate_python(
-            response.json()["response"]["metadata"]["total_matching_records"]
-        )
+        page = response.json()["response"]
+        _report_unknown("Query", page, QUERY_FIELDS, reported)
+        total = _INT.validate_python(page["metadata"]["total_matching_records"])
         for item in _store_items(response):
             appid = _INT.validate_python(item["id"])
             if appid not in seen:
@@ -174,6 +213,7 @@ async def get_items(
     :yield: A full entry per app Steam answered for, as the batches arrive. An app the country
         doesn't sell comes back with ``success`` 15, and is an answer too.
     """
+    reported: set[str] = set()
     for batch in itertools.batched(sorted(set(appids)), BATCH_SIZE, strict=False):
         response = await call(
             transport,
@@ -187,6 +227,7 @@ async def get_items(
             },
             check=_requires(["store_items"]),
         )
+        _report_unknown("GetItems", response.json()["response"], ITEMS_FIELDS, reported)
         answered: set[int] = set()
         for item in _store_items(response):
             # Never `appid`: delisted apps come back with 0 there.

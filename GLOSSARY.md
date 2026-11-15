@@ -18,7 +18,7 @@ _Avoid_: Cache, dump, raw store
 **Answer**:
 What one source returned for one key, in one country when it depends on one: the unit the raw
 archive keeps.
-_Avoid_: Response, payload, record
+_Avoid_: Response, record
 
 **Source**:
 A place raw answers come from: the Steam store, HowLongToBeat, Kaggle files or the Steam client

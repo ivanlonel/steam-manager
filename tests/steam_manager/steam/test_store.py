@@ -3,7 +3,7 @@
 import asyncio
 import json
 from typing import Any
-lazy from collections.abc import AsyncIterator, Callable, Sequence
+lazy from collections.abc import AsyncIterator, Callable, Mapping, Sequence
 
 import httpx
 import pytest
@@ -38,13 +38,14 @@ def collect(generator: AsyncIterator[Answer]) -> list[Answer]:
 
 
 def query_pages(
-    pages: Sequence[Sequence[int]], total: int
+    pages: Sequence[Sequence[int]], total: int, *, extra: Mapping[str, object] | None = None
 ) -> tuple[Callable[[httpx.Request], httpx.Response], list[Any]]:
     """
     Make a handler answering ``Query`` with one page of apps per request.
 
     :param pages: The ids on each page, in order.
     :param total: The total Steam reports on every page.
+    :param extra: Fields to add to every page's ``response``, as Steam's ``ids`` is.
     :return: The handler and the decoded ``input_json`` of each request.
     """
     asked: list[Any] = []
@@ -54,9 +55,35 @@ def query_pages(
         ids = pages[len(asked) - 1]
         items = [{"id": n, "name": f"App {n}", "type": 0} for n in ids]
         metadata = {"total_matching_records": total, "start": 0, "count": len(ids)}
-        return httpx.Response(200, json={"response": {"metadata": metadata, "store_items": items}})
+        found = {"metadata": metadata, "ids": [{"appid": n} for n in ids], "store_items": items}
+        return httpx.Response(200, json={"response": found | dict(extra or {})})
 
     return handler, asked
+
+
+def test_list_apps_reports_page_fields_nothing_stores(caplog: pytest.LogCaptureFixture) -> None:
+    """Only the items reach the archive, so a new field around them is reported once, here."""
+    extra = {"new_field": 1, "empty": [], "metadata": {"total_matching_records": 1001, "odd": 3}}
+    handler, _ = query_pages([range(1000), [1000]], total=1001, extra=extra)
+
+    collect(list_apps(transport_for(handler, FakeClock()), country="BR"))
+
+    reports = [
+        record.getMessage() for record in caplog.records if "nothing stores" in record.getMessage()
+    ]
+    assert reports == ["Query sent fields nothing stores: metadata.odd, new_field"]
+
+
+def test_get_items_reports_batch_fields_nothing_stores(caplog: pytest.LogCaptureFixture) -> None:
+    """A new field beside GetItems' items is reported."""
+
+    def handler(_request: httpx.Request) -> httpx.Response:
+        found = {"store_items": [{"id": 620}], "explanation": "why some are missing"}
+        return httpx.Response(200, json={"response": found})
+
+    collect(get_items(transport_for(handler, FakeClock()), [620], country="BR"))
+
+    assert "GetItems sent fields nothing stores: explanation" in caplog.text
 
 
 def test_list_apps_asks_ascending_appid_pages_of_a_thousand() -> None:

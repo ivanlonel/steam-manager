@@ -84,6 +84,19 @@ def test_a_missing_vanity_raises_profile_not_found() -> None:
     assert caught.value.profile == profile
 
 
+def test_the_error_never_shows_a_query_string() -> None:
+    """A pasted URL can carry a query string; the error names the profile without it."""
+    handler, _ = recorder(text=MISSING_XML)
+    profile = "https://steamcommunity.com/id/nobody-has-this?token=secret-123#top"
+
+    with pytest.raises(ProfileNotFoundError) as caught:
+        asyncio.run(resolve_steamid(transport_for(handler, FakeClock()), profile))
+
+    assert "secret-123" not in str(caught.value)
+    assert "#top" not in str(caught.value)
+    assert "nobody-has-this" in str(caught.value)
+
+
 @pytest.mark.parametrize(
     "profile",
     [
