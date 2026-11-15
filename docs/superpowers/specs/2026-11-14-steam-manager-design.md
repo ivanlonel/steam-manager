@@ -298,6 +298,10 @@ The builder's calls:
   them. Opening it with a release whose fingerprint differs drops the recorded and the declared
   Steam tables, and only those, creates them again and has the caller replay the archive. A
   table holding the user's own data is never dropped (builder's call).
+- A rebuild that stops before it finishes (an interrupted sync, a crash) is redone or resumed
+  on the next open, never left half-done in silence. The loader's plan settles how: by
+  recording the Steam schema only once the rebuild commits, or by keeping the loader's
+  progress inside the Steam tables, so it is dropped with them.
 - The database runs in WAL mode so it can be read while a sync writes.
 
 ### Loader

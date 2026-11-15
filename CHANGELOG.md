@@ -13,4 +13,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - HTTP transport: per-host pacing, retries honouring `Retry-After`, a stop after ten failures in a row, and secrets kept out of errors and logs.
 - Steam endpoints for milestone 1, needing no login: the catalog listing, store items, lookups, exact review totals, the review histogram, current players, profile resolution, wishlists and followed apps. Their answers are validated by payload models that report any field Steam adds.
 - Raw archive: the latest answer per source, kind, key and country, compressed, in a per-profile SQLite file.
-- Database schema, part 1: lookups, apps, classification and credits, as the notebooks have them, rebuilt whenever their schema changes.
+- Database schema, part 1: lookups, apps, classification and credits, as the notebooks have them, dropped and recreated empty whenever their schema changes.

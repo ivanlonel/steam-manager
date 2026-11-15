@@ -1,6 +1,6 @@
 """Tests for the app tables, compared with the notebook's."""
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Final
 
 import pytest
 from sqlalchemy import exc, insert, select
@@ -12,7 +12,11 @@ if TYPE_CHECKING:
     from sqlalchemy import Engine
 
 
-@pytest.mark.parametrize("table", ["app", "app_text"])
+APP_TABLES: Final = ("app", "app_text")
+"""The app tables."""
+
+
+@pytest.mark.parametrize("table", APP_TABLES)
 def test_an_app_table_matches_the_notebook(table: str) -> None:
     """Every column in the notebook's order, its keys, and the references between apps."""
     assert differences(table) == []
