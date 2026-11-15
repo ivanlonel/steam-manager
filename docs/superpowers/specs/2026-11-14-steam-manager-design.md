@@ -209,6 +209,22 @@ The full `data_request` for store data sets every `include_*` flag the notebooks
 - No error message or log line ever contains a query string, token, key or cookie. Tests
   enforce this with arbitrary secrets.
 
+The builder's calls, where the owner set no value:
+
+- Pacing keeps one request in flight per host, and each request waits its own interval after
+  the previous answer from that host arrived, as the notebooks paused after each call. Every
+  request states its interval; there is no default.
+- Up to five retries, as the notebooks' `Retry(total=5, backoff_factor=10)`: on 429, 5xx,
+  timeouts, refused and dropped connections. The wait is `Retry-After` when the server sends
+  one, else 10 s doubling up to 120 s. A `Retry-After` over five minutes fails the request
+  instead of stalling the sync.
+- Redirects are never followed: a retired Steam endpoint redirects to the store front, and that
+  page is not an answer.
+- Failures in a row are counted per host, so an outage of one source doesn't stop another; a
+  success resets the count.
+- httpx and httpcore log below `WARNING` never reaches the log: they record full URLs and
+  response headers. The transport logs its own lines, naming the endpoint only.
+
 ### Raw archive
 
 - A separate SQLite file per profile, so the database stays lean and the archive can be deleted.

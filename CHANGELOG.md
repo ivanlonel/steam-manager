@@ -10,3 +10,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - Project scaffold: packaging, quality gates, git hooks and continuous integration.
 - Documentation site, release workflow, Renovate configuration, pull-request labels and issue templates.
+- HTTP transport: per-host pacing, retries honouring `Retry-After`, a stop after ten failures in a row, and secrets kept out of errors and logs.
