@@ -23,6 +23,7 @@ from tests.steam_manager.db.schema.test_apps import APP_TABLES
 from tests.steam_manager.db.schema.test_classification import CLASSIFICATION_TABLES
 from tests.steam_manager.db.schema.test_creators import CREDIT_TABLES
 from tests.steam_manager.db.schema.test_lookups import LOOKUPS
+from tests.steam_manager.db.schema.test_media import MEDIA_TABLES
 from tests.steam_manager.db.schema.test_offers import OFFER_TABLES
 from tests.steam_manager.db.schema.test_relations import RELATION_TABLES
 
@@ -34,6 +35,7 @@ STEAM_TABLES: Final = frozenset(
         *CREDIT_TABLES,
         *RELATION_TABLES,
         *OFFER_TABLES,
+        *MEDIA_TABLES,
         "app_compatibility_test",  # the notebook has no such table, so nothing compares it
     }
 )
