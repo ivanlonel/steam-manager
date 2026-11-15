@@ -202,6 +202,29 @@ The full `data_request` for store data sets every `include_*` flag the notebooks
 `include_screenshots`, `include_supported_languages`, `include_trailers`) and
 `include_tag_count: 100`.
 
+The builder's calls, where the owner set no value:
+
+- **Pacing:** `Query` 0.5 s between pages, `GetItems` 1 s between batches, and lookups,
+  wishlist, followed apps and vanity URLs 1 s. The table's values hold for the rest.
+- **Light and full entries:** the light catalog comes from `Query` only, with
+  `data_request={"include_reviews": true}`. Full entries come from `GetItems` only, 100 at a
+  time, so a full catalog resumes batch by batch.
+- **Answer kinds:** the archive keeps each answer under its kind:
+  - `store_item` (a full entry) and `store_item_light`;
+  - `listing` (the appids a country lists, with Steam's total);
+  - `store_categories`, `tags` and `app_genres`;
+  - `app_reviews` (one per purchase type), `review_histogram` and `current_players`;
+  - `wishlist` and `followed_apps`.
+- **Profiles:** a person's SteamID64 is 76561197960265728 plus a 32-bit account id. A vanity
+  URL resolves through `steamcommunity.com/id/<name>?xml=1`; a missing one answers 200 with an
+  `<error>` element.
+- **New fields:** on 2026-11-15, Steam sent four fields the notebooks' loader never had. The
+  loader stage decides where they go:
+  - `extra_details.hardware_compatibility`;
+  - `extra_details.dlc_for_purchase`;
+  - `reviews.counts_all_purchases`;
+  - the store categories' `show_in_search`.
+
 ### Transport
 
 - One httpx `AsyncClient` wrapper. Per-host pacing with the intervals above; retries on 429 and
