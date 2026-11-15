@@ -109,6 +109,11 @@ class Transport:
         :param clock: A monotonic clock, in seconds.
         :param sleep: Waits the given number of seconds.
         """
+        # httpx logs every URL at INFO, query string included, and httpcore logs response
+        # headers (Set-Cookie among them) at DEBUG. This class logs its own redacted lines, so
+        # theirs are silenced below WARNING. Idempotent: every Transport sets the same levels.
+        for name in ("httpx", "httpcore"):
+            logging.getLogger(name).setLevel(logging.WARNING)
         self._client = client
         self._clock = clock
         self._sleep = sleep
@@ -186,6 +191,7 @@ class Transport:
                 wait = backoff_seconds(attempt) if isinstance(error, RETRYABLE_ERRORS) else None
             else:
                 status, reason = response.status_code, f"HTTP {response.status_code}"
+                _LOGGER.debug("%s %s -> %d", request.method, endpoint, status)
                 if response.is_success or status in allow:
                     return response
                 wait = retry_wait(response, attempt)
@@ -242,7 +248,7 @@ def retry_after_seconds(value: str) -> float | None:
         when = email.utils.parsedate_to_datetime(value)
     except TypeError, ValueError:
         return None
-    if when.tzinfo is None:
+    if when.tzinfo is None:  # A "-0000" zone: the date is in UTC, but parses without a zone.
         when = when.replace(tzinfo=UTC)
     return max(0.0, (when - datetime.now(UTC)).total_seconds())
 
