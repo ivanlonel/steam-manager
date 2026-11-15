@@ -15,6 +15,11 @@ _Avoid_: User, account (for the local data), workspace
 The compressed, unmodified answers a source returned, kept so the database can be rebuilt.
 _Avoid_: Cache, dump, raw store
 
+**Answer**:
+What one source returned for one key, in one country when it depends on one: the unit the raw
+archive keeps.
+_Avoid_: Response, payload, record
+
 **Source**:
 A place raw answers come from: the Steam store, HowLongToBeat, Kaggle files or the Steam client
 protocol.
