@@ -11,7 +11,7 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from steam_manager.answers import Answer, Kind
 
 if TYPE_CHECKING:
-    from collections.abc import Iterable
+    from collections.abc import Generator, Iterable
     from pathlib import Path
     from types import TracebackType
 
@@ -20,6 +20,8 @@ if TYPE_CHECKING:
 
 ARCHIVE_VERSION: Final = 1
 """The layout of the archive file this release reads and writes."""
+STREAM_ROWS: Final = 500
+"""Rows read from SQLite at a time while :meth:Archive.answers streams."""
 
 _EPOCH: Final = datetime(1970, 1, 1, tzinfo=UTC)
 _MICROSECOND: Final = timedelta(microseconds=1)
@@ -103,14 +105,49 @@ def _compress(body: str) -> bytes:
     return compression.zstd.compress(body.encode("utf-8", "surrogatepass"))
 
 
-def _decompress(data: bytes) -> str:
-    """
-    Read back what :func:`_compress` wrote.
+class CorruptAnswerError(ValueError):
+    """An archived answer can't be read back: its stored bytes are damaged."""
 
-    :param data: The compressed bytes.
-    :return: The text, exactly as it was.
+    def __init__(self, source: str, kind: str, key: str, country: str) -> None:
+        """
+        Name the answer that can't be read.
+
+        :param source: Where it came from.
+        :param kind: What it is about.
+        :param key: What it is about within its kind.
+        :param country: The store country it was asked in, or ``""``.
+        """
+        super().__init__(f"the archived answer {source} {kind} {key} {country} is damaged")
+        self.source: str = source
+        """Where it came from."""
+        self.kind: str = kind
+        """What it is about."""
+        self.key: str = key
+        """What it is about within its kind."""
+        self.country: str = country
+        """The store country it was asked in, or ``""``."""
+
+
+def _answer(
+    source: str, kind: str, key: str, country: str, *, fetched_at: int, body: bytes
+) -> Answer:
     """
-    return compression.zstd.decompress(data).decode("utf-8", "surrogatepass")
+    Rebuild an answer from an archive row.
+
+    :param source: The row's source.
+    :param kind: Its kind.
+    :param key: Its key.
+    :param country: Its country.
+    :param fetched_at: Its time, in microseconds since the Unix epoch.
+    :param body: Its compressed body.
+    :return: The answer, exactly as it was put.
+    :raise CorruptAnswerError: When the body doesn't decompress.
+    """
+    try:
+        text_ = compression.zstd.decompress(body).decode("utf-8", "surrogatepass")
+    except compression.zstd.ZstdError, UnicodeDecodeError:
+        raise CorruptAnswerError(source, kind, key, country) from None
+    return Answer(source, Kind(kind), key, country, text_, _moment(fetched_at))
 
 
 def _enable_wal(connection: DBAPIConnection, _record: ConnectionPoolEntry) -> None:
@@ -212,6 +249,7 @@ class Archive:
         :param key: What it is about within its kind.
         :param country: The store country it was asked in, or ``""``.
         :return: The answer, or ``None`` when the archive has none.
+        :raise CorruptAnswerError: When its stored bytes are damaged.
         """
         query = select(_ArchivedAnswer.fetched_at, _ArchivedAnswer.body).where(
             _ArchivedAnswer.source == source,
@@ -223,4 +261,53 @@ class Archive:
             row = connection.execute(query).one_or_none()
         if row is None:
             return None
-        return Answer(source, kind, key, country, _decompress(row.body), _moment(row.fetched_at))
+        return _answer(source, str(kind), key, country, fetched_at=row.fetched_at, body=row.body)
+
+    def answers(self, *, source: str | None = None, kind: Kind | None = None) -> Generator[Answer]:
+        """
+        Read every answer, or those of one source or kind, as the loader and a rebuild do.
+
+        :param source: Only answers from this source, such as ``steam``.
+        :param kind: Only answers of this kind.
+        :yield: The answers, ordered by source, kind, key and country, read as they are used:
+            a whole catalog is never held at once.
+        :raise CorruptAnswerError: At an answer whose stored bytes are damaged.
+        """
+        key = (
+            _ArchivedAnswer.source,
+            _ArchivedAnswer.kind,
+            _ArchivedAnswer.key,
+            _ArchivedAnswer.country,
+        )
+        query = select(*key, _ArchivedAnswer.fetched_at, _ArchivedAnswer.body).order_by(*key)
+        if source is not None:
+            query = query.where(_ArchivedAnswer.source == source)
+        if kind is not None:
+            query = query.where(_ArchivedAnswer.kind == str(kind))
+        with self._engine.connect() as connection:
+            for row in connection.execute(query.execution_options(yield_per=STREAM_ROWS)):
+                yield _answer(
+                    row.source,
+                    row.kind,
+                    row.key,
+                    row.country,
+                    fetched_at=row.fetched_at,
+                    body=row.body,
+                )
+
+    def fetched_at(self, source: str, kind: Kind, *, country: str = "") -> dict[str, datetime]:
+        """
+        Tell when each key's answer of one kind arrived: what the sync's staleness rests on.
+
+        :param source: Where the answers came from, such as ``steam``.
+        :param kind: Their kind.
+        :param country: The store country they were asked in, or ``""``.
+        :return: Each key's time, in UTC.
+        """
+        query = select(_ArchivedAnswer.key, _ArchivedAnswer.fetched_at).where(
+            _ArchivedAnswer.source == source,
+            _ArchivedAnswer.kind == str(kind),
+            _ArchivedAnswer.country == country,
+        )
+        with self._engine.connect() as connection:
+            return {row.key: _moment(row.fetched_at) for row in connection.execute(query)}
