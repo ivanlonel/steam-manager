@@ -15,11 +15,16 @@ if TYPE_CHECKING:
 APP_TABLES: Final = ("app", "app_text")
 """The app tables."""
 
+CHANGED_FROM_THE_NOTEBOOK: Final = {
+    "app": ["only in the notebook: app check (store_country IN ('BR', 'US'))"],
+}
+"""What the spec changes: a profile can be in any country."""
+
 
 @pytest.mark.parametrize("table", APP_TABLES)
 def test_an_app_table_matches_the_notebook(table: str) -> None:
     """Every column in the notebook's order, its keys, and the references between apps."""
-    assert differences(table) == []
+    assert differences(table) == CHANGED_FROM_THE_NOTEBOOK.get(table, [])
 
 
 def test_any_store_country_is_accepted(steam_tables: Engine) -> None:
