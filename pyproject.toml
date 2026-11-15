@@ -44,6 +44,14 @@ type = [
   "mypy[faster-cache]~=2.4.1",
   "ty~=0.0.104",
 ]
+doc = [
+  "myst-parser[linkify]~=5.2.0",
+  "sphinx~=9.2.0",
+  "sphinx-autobuild~=2025.8.25",
+  "sphinx-autodoc-typehints~=3.17.5",
+  "sphinx-copybutton~=0.5.2",
+  "sphinx-rtd-theme~=3.1.0",
+]
 # Packages that are not installed in the local environment but run as git hooks. Listing them
 # keeps their versions in uv.lock, from where sync-with-uv copies them into
 # .pre-commit-config.yaml, so a hook changes only in the pull request that changes the lock.
@@ -85,6 +93,9 @@ lint.ignore = [
   "CPY001", # Missing copyright notice at top of file
   "D203",   # Use a blank line to separate the docstring from the class definition
   "D212",   # Multi-line docstring summary should start at the first line
+]
+lint.per-file-ignores."docs/conf.py" = [
+  "INP001", # Sphinx loads conf.py by path, not as part of a package
 ]
 lint.per-file-ignores."tests/**/*.py" = [
   "PLR2004", # Magic values are OK in tests
@@ -205,3 +216,5 @@ repo-to-package."https://github.com/astral-sh/uv-pre-commit" = "uv"
 repo-to-package."https://github.com/ComPWA/taplo-pre-commit" = "taplo"
 repo-to-package."https://github.com/editorconfig-checker/editorconfig-checker.python" = "editorconfig-checker"
 repo-to-package."https://github.com/zizmorcore/zizmor-pre-commit" = "zizmor"
+# Not the `pre-commit-hooks` package its name suggests: Renovate itself, which Renovate updates.
+repo-to-package."https://github.com/renovatebot/pre-commit-hooks" = ""

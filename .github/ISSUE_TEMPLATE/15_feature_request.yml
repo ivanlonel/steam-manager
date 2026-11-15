@@ -1,0 +1,19 @@
+name: Feature request
+description: Suggest something steam-manager could do.
+labels:
+  - enhancement
+
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What would you like it to do?
+      description: The outcome you want, and why. A concrete example helps.
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Anything else, such as how you do it today or a tool that does it well.

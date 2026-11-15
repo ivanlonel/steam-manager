@@ -13,6 +13,10 @@ trim_trailing_whitespace = true
 [*.{css,html,js,json,jsonc,toml,yaml,yml}]
 indent_size = 2
 
+# reStructuredText directives indent their options and content under the directive's name.
+[*.rst]
+indent_size = 3
+
 # Markdown uses two trailing spaces for a line break, and a list item's continuation lines
 # align with its text (three spaces under `1.`), so no indent size fits.
 [*.md]

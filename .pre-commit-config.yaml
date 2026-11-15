@@ -24,6 +24,11 @@ repos:
       - id: check-merge-conflict
         args:
           - --assume-in-merge
+      # Renovate's config carries comments, so it is JSONC; no plain JSON file exists yet.
+      - id: check-jsonc
+        files: ^\.github/renovate\.json$
+        types:
+          - json
       - id: check-toml
       - id: check-yaml
       - id: destroyed-symlinks
@@ -131,6 +136,13 @@ repos:
           - ruff==0.17.5  # sync-with-uv
           - wcwidth==0.9.4  # sync-with-uv
 
+  - repo: https://github.com/renovatebot/pre-commit-hooks
+    rev: 44.239.1
+    hooks:
+      - id: renovate-config-validator
+        args:
+          - --strict
+
   - repo: https://github.com/rhysd/actionlint
     rev: v1.7.12
     hooks:
@@ -160,7 +172,7 @@ repos:
           # The checks' engines, pinned so they too change only with uv.lock.
           - cognitive-complexity==1.3.0  # sync-with-uv
           - docstring-parser-fork==0.0.16  # sync-with-uv
-          - docutils==0.23  # sync-with-uv
+          - docutils==0.22.4  # sync-with-uv
           - mccabe==0.7.0  # sync-with-uv
           - pycodestyle==2.15.0  # sync-with-uv
           - pyflakes==4.1.0  # sync-with-uv

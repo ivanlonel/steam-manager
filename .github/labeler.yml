@@ -1,0 +1,39 @@
+bug:
+  - head-branch:
+      - ^fix
+
+ci-cd:
+  - changed-files:
+      - any-glob-to-any-file: .github/**
+
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file: uv.lock
+
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - docs/**
+          - CLAUDE.md
+          - CONTRIBUTING.md
+          - GLOSSARY.md
+          - README.md
+
+enhancement:
+  - head-branch:
+      - ^feat
+
+quality:
+  - changed-files:
+      - any-glob-to-any-file: tests/**
+
+tooling:
+  - head-branch:
+      - ^build
+  - changed-files:
+      - any-glob-to-any-file:
+          - .editorconfig
+          - .flake8
+          - .mdformat.toml
+          - .pre-commit-config.yaml
+          - justfile

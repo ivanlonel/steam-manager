@@ -1,0 +1,47 @@
+name: Bug report
+description: Something steam-manager does wrong, or a crash.
+labels:
+  - bug
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a bug.
+
+        **Before pasting anything**, remove what identifies your account if you don't want it public: SteamIDs, profile URLs, account names. steam-manager never prints tokens or cookies; if you ever see one in its output, say so here but don't paste it.
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What went wrong?
+      description: What you expected, and what happened instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: The commands you ran, in order.
+      placeholder: |
+        1. steam-manager profile add ...
+        2. steam-manager sync
+    validations:
+      required: true
+
+  - type: textarea
+    id: output
+    attributes:
+      label: Output
+      description: The full error message or traceback, as text (not a screenshot).
+      render: text
+
+  - type: input
+    id: version
+    attributes:
+      label: Versions
+      description: steam-manager's version, your operating system and your Python version.
+      placeholder: steam-manager 0.1.0, Windows 11, Python 3.15.0
+    validations:
+      required: true
