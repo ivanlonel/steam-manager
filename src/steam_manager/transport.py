@@ -26,6 +26,8 @@ MAX_RETRY_AFTER_SECONDS: Final = 300.0
 """A ``Retry-After`` longer than this fails the request instead of stalling the sync."""
 RETRYABLE_ERRORS: Final = (httpx.TimeoutException, httpx.NetworkError, httpx.RemoteProtocolError)
 """Network errors a later attempt can get past; any other httpx error fails at once."""
+FAILURE_STREAK_LIMIT: Final = 10
+"""Failed requests in a row to one host that stop the step that was running."""
 
 _LOGGER: Final = logging.getLogger(__name__)
 
@@ -63,6 +65,23 @@ class RequestFailedError(FetchError):
         """How many times the request was sent."""
 
 
+class FailureStreakError(FetchError):
+    """A host failed too many requests in a row: the step that was running must stop."""
+
+    def __init__(self, host: str, count: int) -> None:
+        """
+        Describe the run of failures.
+
+        :param host: The host that kept failing.
+        :param count: How many of its requests failed in a row, this one included.
+        """
+        super().__init__(f"{host} failed {count} requests in a row; stopping")
+        self.host: str = host
+        """The host that kept failing."""
+        self.count: int = count
+        """How many of its requests failed in a row, this one included."""
+
+
 def endpoint_of(url: httpx.URL) -> str:
     """
     Name a URL the way errors and logs show it: scheme, host and path only.
@@ -95,6 +114,7 @@ class Transport:
         self._sleep = sleep
         self._locks: dict[str, asyncio.Lock] = {}
         self._last_ended: dict[str, float] = {}
+        self._failures_in_a_row: dict[str, int] = {}
 
     async def get(
         self,
@@ -113,6 +133,7 @@ class Transport:
         :param allow: Statuses besides 2xx that are answers rather than failures, such as 404.
         :return: The answer.
         :raise RequestFailedError: When the answer has another status, or none came.
+        :raise FailureStreakError: Instead, when the host has now failed ten requests in a row.
         """
         request = self._client.build_request("GET", url, params=params)
         endpoint = endpoint_of(request.url)
@@ -120,7 +141,18 @@ class Transport:
         # One request in flight per host, so the interval separates one answer from the next
         # request, as the notebooks' pause after each call did.
         async with self._locks.setdefault(host, asyncio.Lock()):
-            return await self._send(request, endpoint, host, interval=interval, allow=allow)
+            try:
+                response = await self._send(
+                    request, endpoint, host, interval=interval, allow=allow
+                )
+            except RequestFailedError as failure:
+                count = self._failures_in_a_row.get(host, 0) + 1
+                self._failures_in_a_row[host] = count
+                if count >= FAILURE_STREAK_LIMIT:
+                    raise FailureStreakError(host, count) from failure
+                raise
+            self._failures_in_a_row[host] = 0
+            return response
 
     async def _send(
         self,
