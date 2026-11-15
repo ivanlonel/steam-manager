@@ -1,6 +1,7 @@
 """The Steam tables, as the notebooks have them. Importing this declares every one."""
 
 from steam_manager.db.schema import (
+    account,
     apps,
     classification,
     creators,
@@ -19,6 +20,7 @@ __all__ = [
     "STRICT_WITHOUT_ROWID",
     "Flag",
     "SteamBase",
+    "account",
     "apps",
     "classification",
     "creators",
