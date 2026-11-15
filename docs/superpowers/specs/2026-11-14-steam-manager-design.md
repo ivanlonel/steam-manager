@@ -279,18 +279,23 @@ The builder's calls:
   `CreateView`.
 - Changes from the notebooks' schema: no check restricting countries to BR and US; Steam's
   `formatted_*` price strings are stored instead of derived (the derivation only worked for two
-  currencies); `list_entry` is replaced by tracking status and custom lists in milestone 2.
+  currencies), as four columns appended to `offer_price` after the notebook's own (builder's
+  call); `list_entry` is replaced by tracking status and custom lists in milestone 2.
   Fields Steam added since the notebooks get columns: `store_category.show_in_search`, and a new
   table `app_compatibility_test` holding the results of Steam's compatibility review per device
   and in Steam's order (builder's calls).
 - The notebook's DDL is a test fixture, and every shared table is compared with it column by
-  column: name, order, type, NOT NULL, primary key, foreign keys, unique indexes, `STRICT` and
+  column: name, order, type, NOT NULL, default, generated or not, primary key, foreign keys,
+  unique indexes and their conditions, CHECK and generated expressions, `STRICT` and
   `WITHOUT ROWID`. Flags are INTEGER 1 or 0 and dates ISO 8601 text, as the notebooks store
   them (builder's calls).
 - Milestone 1 creates the lookup, app, classification, credit, relation, offer, media,
   requirement and review tables, `wishlist_item`, `followed_app`, the HowLongToBeat tables and
-  the views `v_app_scores`, `v_games`, `v_wishlist` and `v_followed`. Tables for data that needs
-  sign-in arrive in milestone 2.
+  the views `v_app_scores`, `v_games`, `v_wishlist` and `v_followed`. It also creates the store
+  page's other lists (links, licence agreements, press quotes, sections, sale pages, Steam
+  Awards, purchase notes and sign-up options), which every full entry sends (builder's call).
+  `wishlist_item` and `followed_app` come from archived answers, so they are Steam tables. Tables
+  for data that needs sign-in arrive in milestone 2.
 - Steam tables are never migrated: when their schema changes they are dropped and rebuilt from
   the archive. Tables holding the user's own data are migrated with Alembic, whose baseline
   arrives with the first such table in milestone 2 (builder's call: milestone 1 has none).
