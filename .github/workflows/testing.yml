@@ -1,5 +1,7 @@
 name: "🎳 Testing"
 
+# A branch is checked through its pull request to main; pushes are checked on main only,
+# so a pull request's commits don't run everything twice.
 on:
   push:
     branches:

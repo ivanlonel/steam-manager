@@ -10,9 +10,11 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{css,html,js,json,jsonc,md,toml,yaml,yml}]
+[*.{css,html,js,json,jsonc,toml,yaml,yml}]
 indent_size = 2
 
-# Markdown uses two trailing spaces for a line break
+# Markdown uses two trailing spaces for a line break, and a list item's continuation lines
+# align with its text (three spaces under `1.`), so no indent size fits.
 [*.md]
+indent_size = unset
 trim_trailing_whitespace = false

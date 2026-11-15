@@ -79,10 +79,9 @@ repos:
     rev: 0.13.8
     hooks:
       - id: uv-lock
+      # Runs `uv sync --locked` after a checkout, merge or rebase (its own stages), which is
+      # why those hook types are installed above. It never runs at commit time.
       - id: uv-sync
-        always_run: true
-        args:
-          - --locked
 
   - repo: https://github.com/tsvikas/sync-with-uv
     rev: v0.6.0

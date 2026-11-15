@@ -65,7 +65,7 @@ check: prek test
 test *args:
     uv run pytest {{ args }}
 
-# Serve the HTML coverage report at http://localhost:PORT
+# Serve the HTML coverage report at http://localhost:PORT, to this machine only
 [group("test")]
 cov-serve port="8080":
-    uv run python -m http.server --directory htmlcov {{ port }}
+    uv run python -m http.server --bind 127.0.0.1 --directory htmlcov {{ port }}
