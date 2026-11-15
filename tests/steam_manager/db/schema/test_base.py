@@ -26,6 +26,7 @@ from tests.steam_manager.db.schema.test_lookups import LOOKUPS
 from tests.steam_manager.db.schema.test_media import MEDIA_TABLES
 from tests.steam_manager.db.schema.test_offers import OFFER_TABLES
 from tests.steam_manager.db.schema.test_relations import RELATION_TABLES
+from tests.steam_manager.db.schema.test_store_lists import STORE_LIST_TABLES
 
 STEAM_TABLES: Final = frozenset(
     {
@@ -36,6 +37,7 @@ STEAM_TABLES: Final = frozenset(
         *RELATION_TABLES,
         *OFFER_TABLES,
         *MEDIA_TABLES,
+        *STORE_LIST_TABLES,
         "app_compatibility_test",  # the notebook has no such table, so nothing compares it
     }
 )

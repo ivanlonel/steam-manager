@@ -8,6 +8,7 @@ from steam_manager.db.schema import (
     media,
     offers,
     relations,
+    store_lists,
 )
 from steam_manager.db.schema.base import STRICT, STRICT_WITHOUT_ROWID, Flag, SteamBase
 
@@ -23,4 +24,5 @@ __all__ = [
     "media",
     "offers",
     "relations",
+    "store_lists",
 ]
