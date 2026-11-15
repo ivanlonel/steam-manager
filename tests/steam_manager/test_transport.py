@@ -324,18 +324,44 @@ def test_a_past_retry_after_date_retries_at_once(value: str) -> None:
     assert clock.sleeps == [0.0]
 
 
-@pytest.mark.parametrize("value", ["301", "Fri, 01 Jan 2100 00:00:00 GMT"])
-def test_a_retry_after_over_five_minutes_fails_without_waiting(value: str) -> None:
-    """A server asking for a long pause gets it: the request fails instead of stalling the sync."""
+@pytest.mark.parametrize(
+    ("value", "reason"),
+    [
+        ("301", "HTTP 429, Retry-After 301 s"),
+        ("Fri, 01 Jan 2100 00:00:00 GMT", "HTTP 429, Retry-After "),
+    ],
+)
+def test_a_retry_after_over_five_minutes_stops_the_host_at_once(value: str, reason: str) -> None:
+    """A server asking for a long pause gets it: the step stops now, sending nothing more."""
     clock = FakeClock()
-    transport = transport_for(answers([throttled(value), 200]), clock)
+    calls: list[httpx.URL] = []
+    throttle = answers([throttled(value), 200])
 
-    with pytest.raises(RequestFailedError) as caught:
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(request.url)
+        return throttle(request)
+
+    transport = transport_for(handler, clock)
+
+    with pytest.raises(FailureStreakError) as caught:
         asyncio.run(transport.get(URL, interval=0))
 
-    assert caught.value.status == 429
-    assert caught.value.attempts == 1
+    assert caught.value.reason.startswith(reason)
+    assert caught.value.count == 1
+    assert isinstance(caught.value.__cause__, RequestFailedError)
+    assert caught.value.__cause__.attempts == 1
+    assert len(calls) == 1
     assert not clock.sleeps
+
+
+def test_a_retry_after_of_exactly_five_minutes_is_waited() -> None:
+    """Five minutes is the longest wait the transport honours."""
+    clock = FakeClock()
+    transport = transport_for(answers([throttled("300"), 200]), clock)
+
+    asyncio.run(transport.get(URL, interval=0))
+
+    assert clock.sleeps == [300.0]
 
 
 @pytest.mark.parametrize("value", ["soon", "-5", ""])
@@ -410,7 +436,9 @@ def test_the_tenth_failure_in_a_row_stops() -> None:
         asyncio.run(ten())
 
     assert (caught.value.host, caught.value.count) == ("api.steampowered.com", 10)
-    assert str(caught.value) == "api.steampowered.com failed 10 requests in a row; stopping"
+    assert str(caught.value) == (
+        "stopping requests to api.steampowered.com: HTTP 400 (10 failed requests in a row)"
+    )
     assert isinstance(caught.value.__cause__, RequestFailedError)
 
 
@@ -474,32 +502,46 @@ class StuckClock(FakeClock):
         await asyncio.Event().wait()
 
 
-def test_cancelling_a_waiting_call_releases_the_host() -> None:
-    """A call cancelled while it waits to retry frees the host and isn't counted as a failure."""
+@pytest.mark.parametrize(
+    ("steps", "warm_up", "interval"),
+    [([503, 400], False, 0.0), ([200, 400], True, 5.0)],
+    ids=["retry wait", "pacing wait"],
+)
+def test_cancelling_a_waiting_call_releases_the_host(
+    steps: Sequence[Step], *, warm_up: bool, interval: float
+) -> None:
+    """A call cancelled while it waits frees the host, and isn't counted as a failure."""
     clock = StuckClock()
-    transport = transport_for(answers([503, 400]), clock)
+    transport = transport_for(answers(steps), clock)
 
-    async def cancel_then_fail() -> None:
-        waiting = asyncio.create_task(transport.get(URL, interval=0))
+    async def cancel_then_fail() -> int:
+        if warm_up:
+            await transport.get(URL, interval=0)
+        waiting = asyncio.create_task(transport.get(URL, interval=interval))
         await clock.asleep.wait()
         waiting.cancel()
         with pytest.raises(asyncio.CancelledError):
             await waiting
+        # Nine failures, not ten: the cancelled call must not have counted as one.
         for _ in range(9):
             with pytest.raises(RequestFailedError):
                 await asyncio.wait_for(transport.get(URL, interval=0), timeout=1)
-        await asyncio.wait_for(transport.get(URL, interval=0), timeout=1)
+        with pytest.raises(FailureStreakError) as caught:
+            await asyncio.wait_for(transport.get(URL, interval=0), timeout=1)
+        return caught.value.count
 
-    with pytest.raises(FailureStreakError) as caught:
-        asyncio.run(cancel_then_fail())
-
-    assert caught.value.count == 10
+    assert asyncio.run(cancel_then_fail()) == 10
 
 
 SECRETS: Final = st.text(
     alphabet=string.ascii_letters + string.digits + string.punctuation, min_size=16
-)
-"""Stand-ins for a token, key or cookie: long enough never to occur by chance in a message."""
+).map(lambda text: f"secret-{text}")
+"""
+Stand-ins for a token, key or cookie, which no message can contain by chance.
+
+The prefix matters: hypothesis seeds text with the string literals of the imported source
+modules, so an unprefixed secret can be ``api.steampowered.com``, which every message names.
+"""
 
 
 def forms(secret: str) -> set[str]:
@@ -552,6 +594,23 @@ def everything_shown(request: Coroutine[object, object, object]) -> str:
         root.removeHandler(handler)
         root.setLevel(level)
     return "\n".join([*handler.lines, *shown])
+
+
+def test_creating_a_transport_silences_the_loggers_that_show_urls_and_headers() -> None:
+    """A transport turns off the URLs httpx logs at INFO and the headers httpcore logs at DEBUG."""
+    # MockTransport never reaches httpcore, so its loggers are checked directly.
+    names = ("httpx", "httpcore.connection", "httpcore.http11", "httpcore.http2", "httpcore.proxy")
+    root = logging.getLogger()
+    level = root.level
+    root.setLevel(logging.DEBUG)
+    for name in ("httpx", "httpcore"):
+        logging.getLogger(name).setLevel(logging.NOTSET)
+    try:
+        transport_for(answer(200), FakeClock())
+
+        assert not [name for name in names if logging.getLogger(name).isEnabledFor(logging.INFO)]
+    finally:
+        root.setLevel(level)
 
 
 @settings(deadline=None)
