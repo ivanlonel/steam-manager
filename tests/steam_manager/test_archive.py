@@ -1,17 +1,20 @@
 """Tests for the raw archive: the latest answer per source, kind, key and country."""
 
 import asyncio
+import itertools
 import sqlite3
+from collections.abc import Generator
 from contextlib import closing
 from datetime import UTC, datetime, timedelta
 from typing import Final
-lazy from collections.abc import Iterator
 lazy from pathlib import Path
 
 import pytest
+from hypothesis import given, settings
+from hypothesis import strategies as st
 
 from steam_manager.answers import Answer, Kind
-from steam_manager.archive import ARCHIVE_VERSION, Archive, ArchiveVersionError
+from steam_manager.archive import ARCHIVE_VERSION, Archive, ArchiveVersionError, CorruptAnswerError
 
 AT: Final = datetime(2026, 11, 15, 12, 0, 0, 123456, UTC)
 """When the test answers arrived, to the microsecond."""
@@ -52,7 +55,7 @@ def path_fixture(tmp_path: Path) -> Path:
 
 
 @pytest.fixture(name="archive")
-def archive_fixture(path: Path) -> Iterator[Archive]:
+def archive_fixture(path: Path) -> Generator[Archive]:
     """
     Open a new archive, and close it after the test.
 
@@ -221,3 +224,73 @@ def test_the_archive_works_from_worker_threads(archive: Archive) -> None:
         return await asyncio.to_thread(archive.get, "steam", Kind.STORE_ITEM, "620", "BR")
 
     assert asyncio.run(through_threads()) == answer()
+
+
+def test_answers_come_in_key_order(archive: Archive) -> None:
+    """The loader reads answers in a stable order: by kind, key and country, keys as text."""
+    archive.put([answer("70"), answer("620"), answer("400")])
+
+    assert [found.key for found in archive.answers()] == ["400", "620", "70"]
+
+
+def test_answers_filter_by_kind_and_source(archive: Archive) -> None:
+    """The loader can ask for one kind of one source."""
+    hltb = Answer("hltb", Kind.STORE_ITEM, "620", "", "{}", AT)
+    archive.put([answer(), answer(kind=Kind.STORE_ITEM_LIGHT), hltb])
+
+    found = list(archive.answers(source="steam", kind=Kind.STORE_ITEM_LIGHT))
+
+    assert [(each.source, each.kind) for each in found] == [("steam", Kind.STORE_ITEM_LIGHT)]
+    assert [each.source for each in archive.answers(source="hltb")] == ["hltb"]
+    assert len(list(archive.answers())) == 3
+
+
+def test_answers_are_streamed(archive: Archive) -> None:
+    """A rebuild reads the archive as it goes; it never holds a whole catalog."""
+    archive.put([answer(str(n)) for n in range(1200)])
+
+    first = list(itertools.islice(archive.answers(), 1))
+
+    assert isinstance(archive.answers(), Generator)
+    assert [each.key for each in first] == ["0"]
+
+
+def test_fetched_at_maps_each_key_to_its_time(archive: Archive) -> None:
+    """The sync learns what is stale from the time of each key's answer."""
+    archive.put(
+        [
+            answer("620"),
+            answer("400", at=LATER),
+            answer("570", country="US"),
+            answer("70", kind=Kind.STORE_ITEM_LIGHT),
+        ]
+    )
+
+    assert archive.fetched_at("steam", Kind.STORE_ITEM, country="BR") == {"620": AT, "400": LATER}
+
+
+def test_a_corrupt_body_names_its_answer(archive: Archive, path: Path) -> None:
+    """A damaged row is reported with its key, so the loader can say which answer it skipped."""
+    archive.put([answer()])
+    with closing(sqlite3.connect(path)) as connection:
+        connection.execute("UPDATE answer SET body = x'6f6f7073'")
+        connection.commit()
+
+    with pytest.raises(CorruptAnswerError, match="store_item 620 BR") as caught:
+        archive.get("steam", Kind.STORE_ITEM, "620", "BR")
+    with pytest.raises(CorruptAnswerError):
+        list(archive.answers())
+
+    assert (caught.value.source, caught.value.key, caught.value.country) == ("steam", "620", "BR")
+
+
+@settings(deadline=None)
+@given(body=st.text(), at=st.datetimes(timezones=st.just(UTC)))
+def test_any_text_and_time_come_back_exactly(
+    tmp_path_factory: pytest.TempPathFactory, body: str, at: datetime
+) -> None:
+    """Whatever text and time an answer holds, the archive gives back the same."""
+    with Archive(tmp_path_factory.mktemp("archive") / "archive.sqlite") as fresh:
+        fresh.put([answer(body=body, at=at)])
+
+        assert fresh.get("steam", Kind.STORE_ITEM, "620", "BR") == answer(body=body, at=at)
