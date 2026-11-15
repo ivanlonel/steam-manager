@@ -47,7 +47,6 @@ def typehints_fixup_module_name(module: str) -> str:
     return "sqlalchemy.types" if module == "sqlalchemy.sql.type_api" else module
 
 
-
 autodoc_default_options: Final[dict[str, bool]] = {"members": True, "undoc-members": True}
 autodoc_member_order: Final[str] = "bysource"
 autosummary_generate: Final[bool] = True
