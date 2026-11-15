@@ -20,67 +20,12 @@ from steam_manager.transport import (
     Transport,
     make_client,
 )
+from tests._fakes import FakeClock, Step, answer, answers, transport_for
 
 URL = "https://api.steampowered.com/IStoreQueryService/Query/v1/"
 """An endpoint on Steam's Web API host."""
 STORE_URL = "https://store.steampowered.com/appreviewhistogram/620"
 """An endpoint on the store's host."""
-
-
-class FakeClock:
-    """A monotonic clock that only moves when the transport sleeps or a handler says so."""
-
-    def __init__(self) -> None:
-        """Start at time 0 with no sleeps recorded."""
-        self.now: float = 0.0
-        """The current time, in seconds."""
-        self.sleeps: list[float] = []
-        """Every duration the transport slept for, in order."""
-
-    def __call__(self) -> float:
-        """
-        Tell the current time.
-
-        :return: The current time, in seconds.
-        """
-        return self.now
-
-    async def sleep(self, seconds: float) -> None:
-        """
-        Record a sleep and move the clock forward by it.
-
-        :param seconds: How long the transport asked to sleep.
-        """
-        self.sleeps.append(seconds)
-        self.now += seconds
-
-
-def transport_for(
-    handler: Callable[[httpx.Request], httpx.Response], clock: FakeClock
-) -> Transport:
-    """
-    Build a transport whose answers come from *handler* and whose time comes from *clock*.
-
-    :param handler: Answers each request the transport sends.
-    :param clock: The clock and sleep the transport uses.
-    :return: A transport that never touches the network.
-    """
-    client = httpx.AsyncClient(transport=httpx.MockTransport(handler))
-    return Transport(client, clock=clock, sleep=clock.sleep)
-
-
-def answer(status: int) -> Callable[[httpx.Request], httpx.Response]:
-    """
-    Make a handler that always answers with *status*.
-
-    :param status: The HTTP status of every answer.
-    :return: The handler.
-    """
-
-    def handler(_request: httpx.Request) -> httpx.Response:
-        return httpx.Response(status, json={"response": {}})
-
-    return handler
 
 
 def test_get_returns_a_successful_answer() -> None:
@@ -237,31 +182,6 @@ def test_a_redirect_is_a_failure_and_is_not_followed() -> None:
 
     assert caught.value.status == 302
     assert len(calls) == 1
-
-
-type Step = int | httpx.Response | type[httpx.RequestError]
-"""One answer of :func:`answers`: a status, a whole response, or a network error to raise."""
-
-
-def answers(steps: Sequence[Step]) -> Callable[[httpx.Request], httpx.Response]:
-    """
-    Make a handler that answers each request with the next step, repeating the last one.
-
-    :param steps: The answers, in order.
-    :return: The handler.
-    """
-    remaining = list(steps)
-
-    def handler(request: httpx.Request) -> httpx.Response:
-        step = remaining.pop(0) if len(remaining) > 1 else remaining[0]
-        if isinstance(step, httpx.Response):
-            return step
-        if isinstance(step, int):
-            return httpx.Response(step)
-        message = "a simulated network error"
-        raise step(message, request=request)
-
-    return handler
 
 
 def throttled(retry_after: str) -> httpx.Response:
@@ -677,6 +597,40 @@ def test_secrets_outside_the_query_string_never_show(secret: str) -> None:
 
     assert "HTTP 500 after 6 attempts" in shown
     assert not any(form in shown for form in forms(secret))
+
+
+def has_store_items(response: httpx.Response) -> str | None:
+    """
+    Reject an answer without ``store_items``, as the store endpoints do.
+
+    :param response: A 2xx answer.
+    :return: ``None`` when the answer holds items, else why not.
+    """
+    return None if "store_items" in response.json()["response"] else "no store_items"
+
+
+def test_a_failed_check_is_retried() -> None:
+    """A 200 the caller rejects is retried after the backoff, like a server error."""
+    clock = FakeClock()
+    empty = httpx.Response(200, json={"response": {}})
+    full = httpx.Response(200, json={"response": {"store_items": []}})
+    transport = transport_for(answers([empty, full]), clock)
+
+    response = asyncio.run(transport.get(URL, interval=0, check=has_store_items))
+
+    assert response.json()["response"] == {"store_items": []}
+    assert clock.sleeps == [10.0]
+
+
+def test_a_check_that_never_passes_fails_naming_its_reason() -> None:
+    """When every answer is rejected, the failure names the status and the check's reason."""
+    transport = transport_for(answers([httpx.Response(200, json={"response": {}})]), FakeClock())
+
+    with pytest.raises(RequestFailedError) as caught:
+        asyncio.run(transport.get(URL, interval=0, check=has_store_items))
+
+    assert caught.value.reason == "HTTP 200, no store_items"
+    assert caught.value.attempts == 6
 
 
 def test_make_client_identifies_the_application() -> None:
