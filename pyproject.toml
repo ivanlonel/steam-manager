@@ -23,7 +23,9 @@ classifiers = [
   "Programming Language :: Python :: 3.15",
 ]
 # A runtime dependency is declared by the change that first imports it (deptry enforces this).
-dependencies = []
+dependencies = [
+  "httpx~=0.28.1",
+]
 urls.Repository = "https://github.com/ivanlonel/steam-manager"
 
 [dependency-groups]
@@ -135,6 +137,11 @@ ignore-paths = [
 # Not 0 (one per CPU): parallel runs pickle the linter with dill, and dill 0.4.1 reads
 # `co_lnotab`, which Python 3.15 removed.
 jobs = 1
+
+[tool.deptry]
+# The package is installed as the `steam-manager` distribution, which deptry would otherwise
+# report as an undeclared transitive dependency of itself.
+known_first_party = [ "steam_manager" ]
 
 [tool.typos]
 default.extend-words.optin = "optin"  # Steam's field names: include_optin_registration_tags
