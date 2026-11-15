@@ -26,6 +26,7 @@ classifiers = [
 dependencies = [
   "httpx~=0.28.1",
   "pydantic~=2.14.3",
+  "sqlalchemy~=2.1.8",
 ]
 urls.Repository = "https://github.com/ivanlonel/steam-manager"
 

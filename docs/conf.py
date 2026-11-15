@@ -25,6 +25,13 @@ exclude_patterns: Final[list[str]] = ["_build", "superpowers"]
 
 # Unresolved cross-references are warnings, and the build treats warnings as errors.
 nitpicky: Final[bool] = True
+# sphinx-autodoc-typehints reads the annotations of imported third-party functions and classes,
+# such as SQLAlchemy's `select`, and fails on their internal forward references and guarded
+# imports. The project's own annotations are checked by mypy and ty.
+suppress_warnings: Final[list[str]] = [
+    "sphinx_autodoc_typehints.forward_reference",
+    "sphinx_autodoc_typehints.guarded_import",
+]
 # httpx documents itself with MkDocs, so there is no inventory to link its classes to.
 nitpick_ignore_regex: Final[list[tuple[str, str]]] = [("py:class", r"httpx\..*")]
 
@@ -36,6 +43,7 @@ autosummary_ignore_module_all: Final[bool] = False
 intersphinx_mapping: Final[dict[str, tuple[str, None]]] = {
     "pydantic": ("https://docs.pydantic.dev/latest/", None),
     "python": ("https://docs.python.org/3/", None),
+    "sqlalchemy": ("https://docs.sqlalchemy.org/en/21/", None),
 }
 
 myst_enable_extensions: Final[list[str]] = ["colon_fence", "deflist", "linkify"]
