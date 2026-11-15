@@ -12,23 +12,27 @@ from steam_manager.answers import Answer, Kind
 from steam_manager.steam.store import (
     FULL_DATA_REQUEST,
     ListingMismatchError,
+    app_genres,
+    current_players,
     get_items,
     list_apps,
+    store_categories,
+    tag_list,
 )
 from steam_manager.transport import RequestFailedError
-from tests._fakes import FakeClock, transport_for
+from tests._fakes import FakeClock, answers, recorder, transport_for
 
 
-def collect(answers: AsyncIterator[Answer]) -> list[Answer]:
+def collect(generator: AsyncIterator[Answer]) -> list[Answer]:
     """
     Run an answer generator to its end.
 
-    :param answers: The generator.
+    :param generator: The generator.
     :return: Everything it yielded.
     """
 
     async def drain() -> list[Answer]:
-        return [answer async for answer in answers]
+        return [answer async for answer in generator]
 
     return asyncio.run(drain())
 
@@ -238,3 +242,81 @@ def test_get_items_logs_apps_left_out(caplog: pytest.LogCaptureFixture) -> None:
     collect(get_items(transport_for(handler, FakeClock()), [10, 20, 30], country="BR"))
 
     assert "left out 2 of 3" in caplog.text
+
+
+def test_store_categories_are_asked_in_one_language() -> None:
+    """Category names come from GetStoreCategories, in the ELanguage asked for."""
+    handler, requests = recorder(json={"response": {"categories": []}})
+
+    answer = asyncio.run(store_categories(transport_for(handler, FakeClock()), elanguage=22))
+
+    assert requests[0].url.path == "/IStoreBrowseService/GetStoreCategories/v1/"
+    assert dict(requests[0].url.params) == {"elanguage": "22"}
+    assert (answer.kind, answer.key, answer.country) == (Kind.STORE_CATEGORIES, "22", "")
+    assert json.loads(answer.body) == {"response": {"categories": []}}
+
+
+def test_tag_list_is_asked_in_one_language() -> None:
+    """Tag names come from GetTagList, in the language asked for."""
+    handler, requests = recorder(json={"response": {"tags": []}})
+
+    answer = asyncio.run(tag_list(transport_for(handler, FakeClock()), language="brazilian"))
+
+    assert requests[0].url.path == "/IStoreService/GetTagList/v1/"
+    assert dict(requests[0].url.params) == {"language": "brazilian"}
+    assert (answer.kind, answer.key) == (Kind.TAGS, "brazilian")
+
+
+def test_a_lookup_without_its_list_is_retried() -> None:
+    """A lookup answer missing its list is a failure, like GetItems without items."""
+    clock = FakeClock()
+    steps = [
+        httpx.Response(200, json={"response": {}}),
+        httpx.Response(200, json={"response": {"tags": []}}),
+    ]
+
+    asyncio.run(tag_list(transport_for(answers(steps), clock)))
+
+    assert clock.sleeps == [10.0]
+
+
+def test_app_genres_ask_appdetails_for_genres_only() -> None:
+    """No endpoint lists genres, so one app's genres are asked from appdetails."""
+    handler, requests = recorder(json={"620": {"success": True, "data": {"genres": []}}})
+
+    answer = asyncio.run(app_genres(transport_for(handler, FakeClock()), 620))
+
+    assert requests[0].url.host == "store.steampowered.com"
+    assert requests[0].url.path == "/api/appdetails"
+    assert dict(requests[0].url.params) == {"appids": "620", "filters": "genres", "l": "english"}
+    assert (answer.kind, answer.key, answer.country) == (Kind.APP_GENRES, "620", "")
+
+
+def test_app_genres_retry_an_answer_that_is_not_json() -> None:
+    """The store's error pages are HTML: they are retried, not archived."""
+    clock = FakeClock()
+    steps = [httpx.Response(200, text="<html>"), httpx.Response(200, json={})]
+
+    asyncio.run(app_genres(transport_for(answers(steps), clock), 620))
+
+    assert clock.sleeps == [10.0]
+
+
+def test_current_players_are_asked_by_appid() -> None:
+    """The player count of one app comes from ISteamUserStats."""
+    handler, requests = recorder(json={"response": {"player_count": 5, "result": 1}})
+
+    answer = asyncio.run(current_players(transport_for(handler, FakeClock()), 570))
+
+    assert requests[0].url.path == "/ISteamUserStats/GetNumberOfCurrentPlayers/v1/"
+    assert dict(requests[0].url.params) == {"appid": "570"}
+    assert (answer.kind, answer.key) == (Kind.CURRENT_PLAYERS, "570")
+
+
+def test_a_404_is_an_answer_for_current_players() -> None:
+    """A 404 means Steam has no figure for the app: an answer, not a failure."""
+    handler, _ = recorder(status=404, json={"response": {"result": 42}})
+
+    answer = asyncio.run(current_players(transport_for(handler, FakeClock()), 12170))
+
+    assert json.loads(answer.body) == {"response": {"result": 42}}

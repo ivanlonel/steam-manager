@@ -15,6 +15,8 @@ if TYPE_CHECKING:
 
 WEB_API: Final = "https://api.steampowered.com"
 """The host of Steam's Web API."""
+STORE: Final = "https://store.steampowered.com"
+"""The host of the store's own pages and their JSON endpoints."""
 STEAM: Final = "steam"
 """The source name of every answer Steam gives."""
 
@@ -46,6 +48,20 @@ def response_answer(
     :return: The answer.
     """
     return Answer(STEAM, kind, key, country, response.text, datetime.now(UTC))
+
+
+def is_json(response: httpx.Response) -> str | None:
+    """
+    Tell whether an answer is JSON, as the store's own endpoints send unless they fail.
+
+    :param response: The answer.
+    :return: ``None`` when it is, else ``"not JSON"``.
+    """
+    try:
+        response.json()
+    except ValueError:
+        return "not JSON"
+    return None
 
 
 def has_response(response: httpx.Response) -> str | None:

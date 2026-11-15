@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING, Final
 from pydantic import JsonValue, TypeAdapter
 
 from steam_manager.answers import Answer, Kind
-from steam_manager.steam.webapi import call, item_answer
+from steam_manager.steam.webapi import STORE, call, is_json, item_answer, response_answer
 
 if TYPE_CHECKING:
     from collections.abc import AsyncIterator, Callable, Iterable, Mapping, Sequence
@@ -49,6 +49,12 @@ QUERY_INTERVAL: Final = 0.5
 """Seconds between listing pages, as the notebooks paused."""
 ITEMS_INTERVAL: Final = 1.0
 """Seconds between ``GetItems`` batches."""
+LOOKUP_INTERVAL: Final = 1.0
+"""Seconds before a lookup, asked once per sync."""
+GENRES_INTERVAL: Final = 1.5
+"""Seconds between two ``appdetails`` requests, as the notebooks paused."""
+PLAYERS_INTERVAL: Final = 0.2
+"""Seconds between two player counts, as the notebooks paused."""
 
 _LOGGER: Final = logging.getLogger(__name__)
 _ITEMS: Final = TypeAdapter(list[dict[str, JsonValue]])
@@ -191,3 +197,78 @@ async def get_items(
             _LOGGER.warning(
                 "GetItems in %s left out %d of %d apps asked", country, len(missing), len(batch)
             )
+
+
+async def store_categories(transport: Transport, *, elanguage: int = 0) -> Answer:
+    """
+    Fetch the names of the store categories, such as single-player.
+
+    :param transport: Sends the request.
+    :param elanguage: Steam's number for the language of the names; 0 is English.
+    :return: The answer, keyed by *elanguage*.
+    """
+    response = await call(
+        transport,
+        "IStoreBrowseService",
+        "GetStoreCategories",
+        interval=LOOKUP_INTERVAL,
+        params={"elanguage": str(elanguage)},
+        check=_requires(["categories"]),
+    )
+    return response_answer(Kind.STORE_CATEGORIES, response, key=str(elanguage))
+
+
+async def tag_list(transport: Transport, *, language: str = "english") -> Answer:
+    """
+    Fetch the names of the tags.
+
+    :param transport: Sends the request.
+    :param language: Steam's name for the language of the names, such as ``english``.
+    :return: The answer, keyed by *language*.
+    """
+    response = await call(
+        transport,
+        "IStoreService",
+        "GetTagList",
+        interval=LOOKUP_INTERVAL,
+        params={"language": language},
+        check=_requires(["tags"]),
+    )
+    return response_answer(Kind.TAGS, response, key=language)
+
+
+async def app_genres(transport: Transport, appid: int, *, language: str = "english") -> Answer:
+    """
+    Fetch one app's genres with their names: no endpoint lists genres by id.
+
+    :param transport: Sends the request.
+    :param appid: An app with a genre whose name is still unknown.
+    :param language: Steam's name for the language of the names, such as ``english``.
+    :return: The ``appdetails`` answer, keyed by *appid*.
+    """
+    response = await transport.get(
+        f"{STORE}/api/appdetails",
+        interval=GENRES_INTERVAL,
+        params={"appids": str(appid), "filters": "genres", "l": language},
+        check=is_json,
+    )
+    return response_answer(Kind.APP_GENRES, response, key=str(appid))
+
+
+async def current_players(transport: Transport, appid: int) -> Answer:
+    """
+    Fetch how many people play one app now.
+
+    :param transport: Sends the request.
+    :param appid: The app.
+    :return: The answer, keyed by *appid*. A 404 is an answer too: Steam has no figure.
+    """
+    response = await call(
+        transport,
+        "ISteamUserStats",
+        "GetNumberOfCurrentPlayers",
+        interval=PLAYERS_INTERVAL,
+        params={"appid": str(appid)},
+        allow={404},
+    )
+    return response_answer(Kind.CURRENT_PLAYERS, response, key=str(appid))
