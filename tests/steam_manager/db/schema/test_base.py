@@ -7,11 +7,14 @@ import pytest
 from sqlalchemy import (
     CheckConstraint,
     Column,
+    ForeignKey,
     ForeignKeyConstraint,
+    Index,
     Integer,
     MetaData,
     Table,
     Text,
+    UniqueConstraint,
     create_engine,
     insert,
     select,
@@ -164,6 +167,49 @@ def test_a_plain_column_for_a_generated_one_is_caught() -> None:
         ),
         f"only in the notebook: {discount} hidden=2",
         f"only declared: {discount} hidden=0",
+    ]
+
+
+def test_a_changed_index_condition_is_caught() -> None:
+    """A partial unique index that covers other rows than the notebook's fails the comparison."""
+    metadata = MetaData()
+    Table("creator", metadata, Column("creator_id", Integer, primary_key=True))
+    credit = Table(
+        "credit",
+        metadata,
+        Column("credit_id", Integer, primary_key=True),
+        Column("name", Text, nullable=False),
+        Column("creator_id", Integer, ForeignKey("creator.creator_id")),
+        UniqueConstraint("name", "creator_id"),
+        sqlite_strict=True,
+    )
+    Index(
+        "credit_without_creator",
+        credit.c.name,
+        unique=True,
+        sqlite_where=credit.c.creator_id.is_not(None),
+    )
+
+    assert differences("credit", metadata=metadata) == [
+        "only in the notebook: credit unique (name) where creator_id IS NULL",
+        "only declared: credit unique (name) where creator_id IS NOT NULL",
+    ]
+
+
+def test_a_default_is_caught() -> None:
+    """A column that fills itself in where the notebook's stays blank fails the comparison."""
+    metadata = MetaData()
+    Table(
+        "tag",
+        metadata,
+        Column("tagid", Integer, primary_key=True),
+        Column("name", Text, server_default="unnamed"),
+        sqlite_strict=True,
+    )
+
+    assert differences("tag", metadata=metadata) == [
+        "only in the notebook: tag.name #1: TEXT notnull=0 pk=0 default=None hidden=0",
+        "only declared: tag.name #1: TEXT notnull=0 pk=0 default='unnamed' hidden=0",
     ]
 
 

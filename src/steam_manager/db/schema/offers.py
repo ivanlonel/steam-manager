@@ -99,7 +99,7 @@ class OfferCategory(SteamBase):
     id: Mapped[int] = mapped_column(primary_key=True)
     """The offer's id."""
     categoryid: Mapped[int] = mapped_column(ForeignKey(StoreCategory.categoryid), primary_key=True)
-    """The category."""
+    """The store category."""
 
 
 class OfferContentDescriptor(SteamBase):
