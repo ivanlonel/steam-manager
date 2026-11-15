@@ -3,7 +3,8 @@
 import asyncio
 import itertools
 import sqlite3
-from collections.abc import Generator
+import time
+from collections.abc import Generator, Mapping
 from contextlib import closing
 from datetime import UTC, datetime, timedelta
 from typing import Final
@@ -216,6 +217,21 @@ def test_another_archive_on_the_file_sees_each_batch(archive: Archive, path: Pat
         assert reader.get("steam", Kind.STORE_ITEM, "620", "BR") == answer()
 
 
+def test_a_sync_writes_while_a_reader_is_mid_stream(archive: Archive, path: Path) -> None:
+    """In WAL mode a writer never waits for a reader, so the web interface can't stall a sync."""
+    archive.put([answer(str(n)) for n in range(1200)])
+
+    with Archive(path) as reader:
+        stream = reader.answers()
+        next(stream)  # the reader now holds its read transaction open
+        started = time.monotonic()
+        archive.put([answer("new")])
+        elapsed = time.monotonic() - started
+        stream.close()
+
+    assert elapsed < 1.0
+
+
 def test_the_archive_works_from_worker_threads(archive: Archive) -> None:
     """The sync calls the archive through asyncio.to_thread, from any worker thread."""
 
@@ -278,10 +294,60 @@ def test_a_corrupt_body_names_its_answer(archive: Archive, path: Path) -> None:
 
     with pytest.raises(CorruptAnswerError, match="store_item 620 BR") as caught:
         archive.get("steam", Kind.STORE_ITEM, "620", "BR")
-    with pytest.raises(CorruptAnswerError):
-        list(archive.answers())
 
     assert (caught.value.source, caught.value.key, caught.value.country) == ("steam", "620", "BR")
+
+
+def damage(path: Path, key: str, change: Mapping[str, str | bytes]) -> None:
+    """
+    Overwrite columns of one archived row, as disk damage or a newer release might.
+
+    :param path: The archive file.
+    :param key: The row's key.
+    :param change: The columns to overwrite, with their new values.
+    """
+    assignments = ", ".join(f"{column} = ?" for column in change)
+    with closing(sqlite3.connect(path)) as connection:
+        connection.execute(
+            f"UPDATE answer SET {assignments} WHERE key = ?",  # noqa: S608  # column names from the test itself
+            [*change.values(), key],
+        )
+        connection.commit()
+
+
+def test_a_damaged_row_is_skipped_by_the_stream(archive: Archive, path: Path) -> None:
+    """The loader reports a damaged answer and carries on: the stream yields the error instead."""
+    archive.put([answer("1"), answer("2"), answer("3")])
+    damage(path, "2", {"body": b"oops"})
+
+    found = list(archive.answers())
+
+    assert [type(each) for each in found] == [Answer, CorruptAnswerError, Answer]
+    assert isinstance(found[1], CorruptAnswerError)
+    assert found[1].key == "2"
+
+
+def test_an_unknown_kind_is_reported_like_damage(archive: Archive, path: Path) -> None:
+    """A kind this release doesn't know, written by a newer one, is skipped rather than fatal."""
+    archive.put([answer("1"), answer("2")])
+    damage(path, "1", {"kind": "owned_games"})
+
+    found = list(archive.answers())
+
+    assert [type(each) for each in found] == [CorruptAnswerError, Answer]
+    assert "owned_games" in str(found[0])
+
+
+def test_a_changed_byte_inside_a_body_is_detected(archive: Archive, path: Path) -> None:
+    """Zstd's checksum catches damage inside a body, not only in its header."""
+    archive.put([answer(body='{"text":"' + "Portal 2 is a puzzle game. " * 200 + '"}')])
+    with closing(sqlite3.connect(path)) as connection:
+        blob = bytearray(connection.execute("SELECT body FROM answer").fetchone()[0])
+    blob[len(blob) // 2] ^= 0x01
+    damage(path, "620", {"body": bytes(blob)})
+
+    with pytest.raises(CorruptAnswerError):
+        archive.get("steam", Kind.STORE_ITEM, "620", "BR")
 
 
 @settings(deadline=None)
