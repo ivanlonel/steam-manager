@@ -26,7 +26,9 @@ repos:
       - id: check-merge-conflict
         args:
           - --assume-in-merge
-      # Renovate's config carries comments, so it is JSONC; no plain JSON file exists yet.
+      - id: check-json
+        exclude: ^\.github/renovate\.json$
+      # Renovate's config carries comments, so it is JSONC.
       - id: check-jsonc
         files: ^\.github/renovate\.json$
         types:

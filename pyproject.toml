@@ -103,9 +103,19 @@ lint.ignore = [
 lint.per-file-ignores."docs/conf.py" = [
   "INP001", # Sphinx loads conf.py by path, not as part of a package
 ]
+lint.per-file-ignores."scripts/*.py" = [
+  "INP001", # Scripts are run by path, not imported
+  "T201",   # A script run by hand reports what it did by printing
+]
 lint.per-file-ignores."tests/**/*.py" = [
   "PLR2004", # Magic values are OK in tests
   "S101",    # assert is a first class citizen in pytest tests
+]
+# pydantic reads a model's field types when it builds the class, so their imports stay real.
+lint.flake8-type-checking.runtime-evaluated-base-classes = [
+  "pydantic.BaseModel",
+  "pydantic.RootModel",
+  "steam_manager.steam.models.base.SteamModel",
 ]
 lint.mccabe.max-complexity = 12  # default 10  # C901
 lint.pylint.max-args = 10  # default 5  # PLR0913
@@ -147,6 +157,13 @@ known_first_party = [ "steam_manager" ]
 [tool.typos]
 default.extend-words.optin = "optin"  # Steam's field names: include_optin_registration_tags
 default.extend-words.CPY = "CPY"  # ruff's flake8-copyright rules: CPY001
+# Steam's field names, spelled as Steam spells them.
+default.extend-words.unvailable = "unvailable"
+default.extend-words.rtime = "rtime"
+default.extend-words.packageid = "packageid"
+default.extend-words.Dota = "Dota"  # the game
+# Recorded answers hold store text in many languages, not this project's prose.
+files.extend-exclude = [ "tests/fixtures/" ]
 
 [tool.mypy]
 disallow_any_generics = true
