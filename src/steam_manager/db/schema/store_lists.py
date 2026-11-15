@@ -110,7 +110,7 @@ class AppSteamAward(SteamBase):
     award_year: Mapped[int | None]
     """The year."""
     title: Mapped[str | None]
-    """The category's name."""
+    """The award category's name."""
 
 
 class AppPurchaseNote(SteamBase):

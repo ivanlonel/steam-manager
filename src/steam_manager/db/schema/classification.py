@@ -1,4 +1,4 @@
-"""The tables that say what an app is: its categories, tags, genres, languages and more."""
+"""The tables that say what an app is: its store categories, tags, genres, languages and more."""
 
 from sqlalchemy import CheckConstraint, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
@@ -17,7 +17,7 @@ class AppCategory(SteamBase):
     appid: Mapped[int] = mapped_column(ForeignKey(App.appid), primary_key=True)
     """The app."""
     categoryid: Mapped[int] = mapped_column(ForeignKey(StoreCategory.categoryid), primary_key=True)
-    """The category."""
+    """The store category."""
 
 
 class AppTag(SteamBase):
