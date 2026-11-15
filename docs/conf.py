@@ -25,6 +25,8 @@ exclude_patterns: Final[list[str]] = ["_build", "superpowers"]
 
 # Unresolved cross-references are warnings, and the build treats warnings as errors.
 nitpicky: Final[bool] = True
+# httpx documents itself with MkDocs, so there is no inventory to link its classes to.
+nitpick_ignore_regex: Final[list[tuple[str, str]]] = [("py:class", r"httpx\..*")]
 
 autodoc_default_options: Final[dict[str, bool]] = {"members": True, "undoc-members": True}
 autodoc_member_order: Final[str] = "bysource"

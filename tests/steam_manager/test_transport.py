@@ -1,14 +1,21 @@
 """Tests for the HTTP transport: pacing, retries, failures in a row and redaction."""
 
 import asyncio
-from typing import override
-lazy from collections.abc import Callable, Sequence
+import logging
+import string
+import traceback
+from typing import Final, override
+from urllib.parse import quote, quote_plus
+lazy from collections.abc import Callable, Coroutine, Sequence
 
 import httpx
 import pytest
+from hypothesis import given, settings
+from hypothesis import strategies as st
 
 from steam_manager.transport import (
     FailureStreakError,
+    FetchError,
     RequestFailedError,
     Transport,
     make_client,
@@ -302,10 +309,15 @@ def test_retry_after_seconds_replace_the_backoff() -> None:
     assert clock.sleeps == [7.0]
 
 
-def test_a_past_retry_after_date_retries_at_once() -> None:
-    """A Retry-After date already past means the request can go again now."""
+@pytest.mark.parametrize(
+    "value",
+    ["Wed, 21 Oct 2015 07:28:00 GMT", "Wed, 21 Oct 2015 07:28:00 -0000"],
+    ids=["GMT", "no zone"],
+)
+def test_a_past_retry_after_date_retries_at_once(value: str) -> None:
+    """A Retry-After date already past, with or without a time zone, means: go again now."""
     clock = FakeClock()
-    transport = transport_for(answers([throttled("Wed, 21 Oct 2015 07:28:00 GMT"), 200]), clock)
+    transport = transport_for(answers([throttled(value), 200]), clock)
 
     asyncio.run(transport.get(URL, interval=0))
 
@@ -482,6 +494,130 @@ def test_cancelling_a_waiting_call_releases_the_host() -> None:
         asyncio.run(cancel_then_fail())
 
     assert caught.value.count == 10
+
+
+SECRETS: Final = st.text(
+    alphabet=string.ascii_letters + string.digits + string.punctuation, min_size=16
+)
+"""Stand-ins for a token, key or cookie: long enough never to occur by chance in a message."""
+
+
+def forms(secret: str) -> set[str]:
+    """
+    List the ways *secret* could appear in a URL or a message.
+
+    :param secret: The secret.
+    :return: The secret as it is and percent-encoded both ways.
+    """
+    return {secret, quote(secret), quote_plus(secret)}
+
+
+class ListHandler(logging.Handler):
+    """Keeps every formatted log record it receives."""
+
+    def __init__(self) -> None:
+        """Receive records of every level."""
+        super().__init__(logging.DEBUG)
+        self.lines: list[str] = []
+        """The formatted records, in order."""
+
+    @override
+    def emit(self, record: logging.LogRecord) -> None:
+        """
+        Keep the formatted *record*.
+
+        :param record: A record logged anywhere in the process.
+        """
+        self.lines.append(self.format(record))
+
+
+def everything_shown(request: Coroutine[object, object, object]) -> str:
+    """
+    Run *request* and gather every text a user could see: the log, and the error it raised.
+
+    :param request: A request to the transport; it may raise :class:`FetchError`.
+    :return: Every log line at any level, then the error's message, repr and traceback.
+    """
+    handler = ListHandler()
+    root = logging.getLogger()
+    level = root.level
+    root.addHandler(handler)
+    root.setLevel(logging.DEBUG)
+    shown: list[str] = []
+    try:
+        asyncio.run(request)
+    except FetchError as error:
+        shown += [str(error), repr(error), "".join(traceback.format_exception(error))]
+    finally:
+        root.removeHandler(handler)
+        root.setLevel(level)
+    return "\n".join([*handler.lines, *shown])
+
+
+@settings(deadline=None)
+@given(secret=SECRETS)
+def test_a_failure_never_shows_the_query_string(secret: str) -> None:
+    """A failed request's message, traceback and log hold no part of its query string."""
+    transport = transport_for(answers([400]), FakeClock())
+
+    shown = everything_shown(transport.get(URL, interval=0, params={"key": secret, secret: "x"}))
+
+    assert "HTTP 400" in shown
+    assert not any(form in shown for form in forms(secret))
+
+
+@settings(deadline=None)
+@given(secret=SECRETS)
+def test_retries_and_successes_never_log_the_query_string(secret: str) -> None:
+    """Retrying and then succeeding logs the endpoint, never its query string."""
+    transport = transport_for(answers([503, 200]), FakeClock())
+
+    shown = everything_shown(transport.get(URL, interval=0, params={"key": secret}))
+
+    assert "retrying" in shown
+    assert not any(form in shown for form in forms(secret))
+
+
+@settings(deadline=None)
+@given(secret=SECRETS)
+def test_a_failure_streak_never_shows_the_query_string(secret: str) -> None:
+    """Stopping after ten failures shows neither the query string nor the failures' URLs."""
+    transport = transport_for(answers([400]), FakeClock())
+
+    async def ten() -> None:
+        for _ in range(9):
+            with pytest.raises(RequestFailedError):
+                await transport.get(URL, interval=0, params={"key": secret})
+        await transport.get(URL, interval=0, params={"key": secret})
+
+    shown = everything_shown(ten())
+
+    assert "in a row" in shown
+    assert not any(form in shown for form in forms(secret))
+
+
+@settings(deadline=None)
+@given(secret=SECRETS)
+def test_secrets_outside_the_query_string_never_show(secret: str) -> None:
+    """A login cookie, a cookie Steam sets and an answer echoing the request never show."""
+
+    def handler(_request: httpx.Request) -> httpx.Response:
+        return httpx.Response(
+            500,
+            headers={"Set-Cookie": f"sessionid={secret}"},
+            content=f'{{"echo": "{secret}"}}'.encode(),
+        )
+
+    clock = FakeClock()
+    client = httpx.AsyncClient(
+        transport=httpx.MockTransport(handler), cookies={"steamLoginSecure": secret}
+    )
+    transport = Transport(client, clock=clock, sleep=clock.sleep)
+
+    shown = everything_shown(transport.get(URL, interval=0))
+
+    assert "HTTP 500 after 6 attempts" in shown
+    assert not any(form in shown for form in forms(secret))
 
 
 def test_make_client_identifies_the_application() -> None:
