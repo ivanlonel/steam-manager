@@ -49,7 +49,9 @@ class ProfileNotFoundError(ValueError):
 
         :param profile: The SteamID64 or profile URL given.
         """
-        super().__init__(f"no Steam profile matches {profile!r}")
+        # The message never shows a query string or fragment: a pasted URL can carry a token.
+        shown = re.split(r"[?#]", profile, maxsplit=1)[0]
+        super().__init__(f"no Steam profile matches {shown!r}")
         self.profile: str = profile
         """The SteamID64 or profile URL given."""
 
