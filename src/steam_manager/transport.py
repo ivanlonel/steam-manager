@@ -143,6 +143,7 @@ class Transport:
         interval: float,
         params: Mapping[str, str] | None = None,
         allow: Collection[int] = (),
+        check: Callable[[httpx.Response], str | None] | None = None,
     ) -> httpx.Response:
         """
         Send a GET request and return its answer.
@@ -151,6 +152,9 @@ class Transport:
         :param interval: The seconds to leave after the previous request to the same host ended.
         :param params: The query string's parameters.
         :param allow: Statuses besides 2xx that are answers rather than failures, such as 404.
+        :param check: Looks at an answer about to be returned and tells why it is a failure
+            after all, such as a 200 without the items asked for, or ``None``. A rejected answer
+            is retried and counted like a server error. It must not raise.
         :return: The answer.
         :raise RequestFailedError: When the answer has another status, or none came.
         :raise FailureStreakError: Instead, when the host has now failed ten requests in a row.
@@ -163,7 +167,7 @@ class Transport:
         async with self._locks.setdefault(host, asyncio.Lock()):
             try:
                 response = await self._send(
-                    request, endpoint, host, interval=interval, allow=allow
+                    request, endpoint, host, interval=interval, allow=allow, check=check
                 )
             except RequestFailedError as failure:
                 count = self._failures_in_a_row.get(host, 0) + 1
@@ -183,6 +187,7 @@ class Transport:
         *,
         interval: float,
         allow: Collection[int],
+        check: Callable[[httpx.Response], str | None] | None,
     ) -> httpx.Response:
         """
         Send *request*, paced and retried, while the caller holds the host's lock.
@@ -192,6 +197,7 @@ class Transport:
         :param host: The host whose lock the caller holds.
         :param interval: The seconds to leave after the previous request to *host* ended.
         :param allow: Statuses besides 2xx that are answers rather than failures.
+        :param check: Tells why an answer about to be returned is a failure, or ``None``.
         :return: The answer.
         :raise RequestFailedError: When the answer has another status, or none came.
         """
@@ -208,9 +214,13 @@ class Transport:
             else:
                 status, reason = response.status_code, f"HTTP {response.status_code}"
                 _LOGGER.debug("%s %s -> %d", request.method, endpoint, status)
-                if response.is_success or status in allow:
+                if not (response.is_success or status in allow):
+                    wait = retry_wait(response, attempt)
+                elif (problem := None if check is None else check(response)) is None:
                     return response
-                wait = retry_wait(response, attempt)
+                else:
+                    reason = f"{reason}, {problem}"
+                    wait = backoff_seconds(attempt)
             finally:
                 self._last_ended[host] = self._clock()
             if wait is not None and wait > MAX_RETRY_AFTER_SECONDS:
