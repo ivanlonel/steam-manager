@@ -4,7 +4,8 @@ import compression.zstd
 from datetime import UTC, datetime, timedelta
 from typing import TYPE_CHECKING, Final, Self
 
-from sqlalchemy import URL, Integer, LargeBinary, Text, create_engine, event, insert, select, text
+from sqlalchemy import URL, Integer, LargeBinary, Text, create_engine, event, select, text
+from sqlalchemy.dialects.sqlite import insert
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 from steam_manager.answers import Answer, Kind
@@ -174,9 +175,9 @@ class Archive:
 
     def put(self, answers: Iterable[Answer]) -> None:
         """
-        Store answers.
+        Store answers, keeping for each key the one fetched last, in one transaction.
 
-        :param answers: The answers.
+        :param answers: The answers; all of them are written, or none.
         :raise ValueError: When an answer's time has no zone.
         """
         rows = [
@@ -191,8 +192,16 @@ class Archive:
             for answer in answers
         ]
         if rows:
+            # Latest means fetched last, not written last: an older answer, such as a Kaggle
+            # import dated by its file, never replaces a newer one. A tie keeps the first.
+            upsert = insert(_ArchivedAnswer)
+            upsert = upsert.on_conflict_do_update(
+                index_elements=["source", "kind", "key", "country"],
+                set_={"fetched_at": upsert.excluded.fetched_at, "body": upsert.excluded.body},
+                where=upsert.excluded.fetched_at > _ArchivedAnswer.fetched_at,
+            )
             with self._engine.begin() as connection:
-                connection.execute(insert(_ArchivedAnswer), rows)
+                connection.execute(upsert, rows)
 
     def get(self, source: str, kind: Kind, key: str, country: str = "") -> Answer | None:
         """
