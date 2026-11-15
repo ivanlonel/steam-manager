@@ -25,6 +25,7 @@ classifiers = [
 # A runtime dependency is declared by the change that first imports it (deptry enforces this).
 dependencies = [
   "httpx~=0.28.1",
+  "pydantic~=2.14.3",
 ]
 urls.Repository = "https://github.com/ivanlonel/steam-manager"
 
