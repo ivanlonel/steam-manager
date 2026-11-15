@@ -32,6 +32,7 @@ autodoc_default_options: Final[dict[str, bool]] = {"members": True, "undoc-membe
 autodoc_member_order: Final[str] = "bysource"
 autosummary_generate: Final[bool] = True
 intersphinx_mapping: Final[dict[str, tuple[str, None]]] = {
+    "pydantic": ("https://docs.pydantic.dev/latest/", None),
     "python": ("https://docs.python.org/3/", None),
 }
 
