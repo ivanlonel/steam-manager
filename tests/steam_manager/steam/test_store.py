@@ -1,0 +1,240 @@
+"""Tests for the store endpoints: the catalog listing, store items and lookups."""
+
+import asyncio
+import json
+from typing import Any
+lazy from collections.abc import AsyncIterator, Callable, Sequence
+
+import httpx
+import pytest
+
+from steam_manager.answers import Answer, Kind
+from steam_manager.steam.store import (
+    FULL_DATA_REQUEST,
+    ListingMismatchError,
+    get_items,
+    list_apps,
+)
+from steam_manager.transport import RequestFailedError
+from tests._fakes import FakeClock, transport_for
+
+
+def collect(answers: AsyncIterator[Answer]) -> list[Answer]:
+    """
+    Run an answer generator to its end.
+
+    :param answers: The generator.
+    :return: Everything it yielded.
+    """
+
+    async def drain() -> list[Answer]:
+        return [answer async for answer in answers]
+
+    return asyncio.run(drain())
+
+
+def query_pages(
+    pages: Sequence[Sequence[int]], total: int
+) -> tuple[Callable[[httpx.Request], httpx.Response], list[Any]]:
+    """
+    Make a handler answering ``Query`` with one page of apps per request.
+
+    :param pages: The ids on each page, in order.
+    :param total: The total Steam reports on every page.
+    :return: The handler and the decoded ``input_json`` of each request.
+    """
+    asked: list[Any] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        asked.append(json.loads(request.url.params["input_json"]))
+        ids = pages[len(asked) - 1]
+        items = [{"id": n, "name": f"App {n}", "type": 0} for n in ids]
+        metadata = {"total_matching_records": total, "start": 0, "count": len(ids)}
+        return httpx.Response(200, json={"response": {"metadata": metadata, "store_items": items}})
+
+    return handler, asked
+
+
+def test_list_apps_asks_ascending_appid_pages_of_a_thousand() -> None:
+    """The listing sorts by appid, since the default sort repeats and skips apps when paged."""
+    handler, asked = query_pages([[10, 20]], total=2)
+
+    collect(list_apps(transport_for(handler, FakeClock()), country="BR"))
+
+    kinds = ("include_games", "include_mods", "include_software")
+    query = {"start": 0, "count": 1000, "sort": 2}
+    assert asked[0] == {
+        "query": query | {"filters": {"type_filters": dict.fromkeys(kinds, True)}},
+        "context": {"language": "english", "country_code": "BR"},
+        "data_request": {"include_reviews": True},
+    }
+
+
+def test_list_apps_pages_until_the_total() -> None:
+    """Pages are asked half a second apart until the reported total is reached."""
+    clock = FakeClock()
+    pages = [range(1000), range(1000, 2000), range(2000, 2500)]
+    handler, asked = query_pages(pages, total=2500)
+
+    found = collect(list_apps(transport_for(handler, clock), country="US", language="brazilian"))
+
+    assert [page["query"]["start"] for page in asked] == [0, 1000, 2000]
+    assert clock.sleeps == pytest.approx([0.5, 0.5])
+    assert len(found) == 2501
+
+
+def test_list_apps_yields_a_light_entry_per_app() -> None:
+    """Each listed app becomes a light entry of its country, keyed by its id."""
+    handler, _ = query_pages([[620]], total=1)
+
+    first = collect(list_apps(transport_for(handler, FakeClock()), country="BR"))[0]
+
+    assert (first.kind, first.key, first.country) == (Kind.STORE_ITEM_LIGHT, "620", "BR")
+    assert json.loads(first.body) == {"id": 620, "name": "App 620", "type": 0}
+
+
+def test_list_apps_drops_repeated_ids() -> None:
+    """An app that shows up on two pages is listed once."""
+    handler, _ = query_pages([range(1000), [999, 1000]], total=1001)
+
+    found = collect(list_apps(transport_for(handler, FakeClock()), country="BR"))
+
+    assert [answer.key for answer in found].count("999") == 1
+
+
+def test_list_apps_ends_with_the_listing() -> None:
+    """The last answer is the listing: which appids the country lists, and its total."""
+    handler, _ = query_pages([[30, 10, 20]], total=3)
+
+    listing = collect(list_apps(transport_for(handler, FakeClock()), country="BR"))[-1]
+
+    assert (listing.kind, listing.key, listing.country) == (Kind.LISTING, "", "BR")
+    assert json.loads(listing.body) == {"total_matching_records": 3, "appids": [10, 20, 30]}
+
+
+def test_a_small_gap_from_the_total_is_accepted() -> None:
+    """Apps appear and vanish while a listing runs, so a gap of 0.1% is fine."""
+    handler, _ = query_pages([range(999), range(999, 1998)], total=2000)
+
+    found = collect(list_apps(transport_for(handler, FakeClock()), country="BR"))
+
+    assert found[-1].kind is Kind.LISTING
+
+
+def test_a_gap_over_a_thousandth_raises_after_yielding() -> None:
+    """A bigger gap means the paging broke: the listing fails, keeping the answers it gave."""
+    handler, _ = query_pages([range(990)], total=1000)
+    found: list[Answer] = []
+
+    async def run() -> None:
+        async for answer in list_apps(transport_for(handler, FakeClock()), country="BR"):
+            found.append(answer)  # noqa: PERF401  # a comprehension loses them when it raises
+
+    with pytest.raises(ListingMismatchError, match="BR") as caught:
+        asyncio.run(run())
+
+    assert (caught.value.unique, caught.value.total) == (990, 1000)
+    assert len(found) == 990
+
+
+def items_handler(
+    respond: Callable[[list[int]], list[dict[str, object]]],
+) -> tuple[Callable[[httpx.Request], httpx.Response], list[Any]]:
+    """
+    Make a handler answering ``GetItems`` with the items *respond* builds for each batch.
+
+    :param respond: Builds the items for the appids asked.
+    :return: The handler and the decoded ``input_json`` of each request.
+    """
+    asked: list[Any] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        body = json.loads(request.url.params["input_json"])
+        asked.append(body)
+        appids = [entry["appid"] for entry in body["ids"]]
+        return httpx.Response(200, json={"response": {"store_items": respond(appids)}})
+
+    return handler, asked
+
+
+def sold(appids: list[int]) -> list[dict[str, object]]:
+    """
+    Answer every asked app as sold, with its id.
+
+    :param appids: The appids asked.
+    :return: One item per appid.
+    """
+    return [{"id": n, "appid": n, "success": 1} for n in appids]
+
+
+def test_get_items_asks_batches_of_a_hundred_with_the_full_request() -> None:
+    """Full entries are asked 100 at a time, a second apart, with every data flag set."""
+    clock = FakeClock()
+    handler, asked = items_handler(sold)
+
+    found = collect(get_items(transport_for(handler, clock), range(250, 0, -1), country="BR"))
+
+    assert [len(batch["ids"]) for batch in asked] == [100, 100, 50]
+    assert asked[0]["ids"][0] == {"appid": 1}  # ascending
+    assert asked[0]["data_request"] == FULL_DATA_REQUEST
+    assert asked[0]["context"] == {"language": "english", "country_code": "BR"}
+    assert clock.sleeps == pytest.approx([1.0, 1.0])
+    assert len(found) == 250
+    assert {answer.kind for answer in found} == {Kind.STORE_ITEM}
+
+
+def test_get_items_keys_by_id_even_when_appid_is_zero() -> None:
+    """Delisted apps come back with appid 0, so the key is their id."""
+    handler, _ = items_handler(lambda appids: [{"id": n, "appid": 0} for n in appids])
+
+    found = collect(get_items(transport_for(handler, FakeClock()), [12170], country="BR"))
+
+    assert [answer.key for answer in found] == ["12170"]
+
+
+def test_get_items_yields_items_not_sold_in_the_country() -> None:
+    """An app the country doesn't sell (success 15) is still an answer: the sync asks elsewhere."""
+    handler, _ = items_handler(lambda appids: [{"id": n, "success": 15} for n in appids])
+
+    found = collect(get_items(transport_for(handler, FakeClock()), [400], country="BR"))
+
+    assert json.loads(found[0].body)["success"] == 15
+
+
+def test_get_items_retries_an_answer_without_items() -> None:
+    """A 200 without store_items is Steam failing a big answer: it is retried."""
+    clock = FakeClock()
+    calls: list[int] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(1)
+        if len(calls) == 1:
+            return httpx.Response(200, json={"response": {}})
+        body = json.loads(request.url.params["input_json"])
+        return httpx.Response(
+            200, json={"response": {"store_items": sold([body["ids"][0]["appid"]])}}
+        )
+
+    found = collect(get_items(transport_for(handler, clock), [620], country="BR"))
+
+    assert [answer.key for answer in found] == ["620"]
+    assert clock.sleeps == [10.0]
+
+
+def test_get_items_fails_naming_the_missing_items() -> None:
+    """When the items never come, the failure says so."""
+
+    def empty(_request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json={"response": {}})
+
+    with pytest.raises(RequestFailedError, match="no store_items"):
+        collect(get_items(transport_for(empty, FakeClock()), [620], country="BR"))
+
+
+def test_get_items_logs_apps_left_out(caplog: pytest.LogCaptureFixture) -> None:
+    """An asked app missing from the answer is logged, so a gap never passes unseen."""
+    handler, _ = items_handler(lambda appids: sold(appids[:1]))
+
+    collect(get_items(transport_for(handler, FakeClock()), [10, 20, 30], country="BR"))
+
+    assert "left out 2 of 3" in caplog.text
