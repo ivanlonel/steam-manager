@@ -4,7 +4,18 @@ from contextlib import closing
 from typing import Final
 
 import pytest
-from sqlalchemy import Column, Integer, MetaData, Table, Text, create_engine, insert, select
+from sqlalchemy import (
+    CheckConstraint,
+    Column,
+    ForeignKeyConstraint,
+    Integer,
+    MetaData,
+    Table,
+    Text,
+    create_engine,
+    insert,
+    select,
+)
 
 from steam_manager.db.schema import Flag, SteamBase
 from tests.steam_manager.db.schema._notebook import build, differences
@@ -61,8 +72,84 @@ def test_a_renamed_column_is_caught() -> None:
     )
 
     assert differences("tag", metadata=metadata) == [
-        "only in the notebook: tag.tagid #0: INTEGER notnull=1 pk=1",
-        "only declared: tag.tag_id #0: INTEGER notnull=1 pk=1",
+        "only in the notebook: tag.tagid #0: INTEGER notnull=1 pk=1 default=None hidden=0",
+        "only declared: tag.tag_id #0: INTEGER notnull=1 pk=1 default=None hidden=0",
+    ]
+
+
+def test_a_changed_check_is_caught() -> None:
+    """A CHECK whose values drift from the notebook's fails the comparison, quoting both."""
+    metadata = MetaData()
+    Table(
+        "app_credit",
+        metadata,
+        Column("appid", Integer, primary_key=True),
+        Column("role", Text, primary_key=True),
+        Column("position", Integer, primary_key=True),
+        Column("credit_id", Integer, nullable=False),
+        CheckConstraint("role IN ('developer', 'publisher', 'franchize')"),
+        sqlite_strict=True,
+        sqlite_with_rowid=False,
+    )
+
+    found = differences("app_credit", metadata=metadata)
+
+    assert (
+        "only in the notebook: app_credit check (role IN ('developer', 'publisher', 'franchise'))"
+        in found
+    )
+    assert (
+        "only declared: app_credit check (role IN ('developer', 'publisher', 'franchize'))"
+        in found
+    )
+
+
+def test_a_plain_column_for_a_generated_one_is_caught() -> None:
+    """A column the notebook computes, declared as one that is stored, fails the comparison."""
+    metadata = MetaData()
+    Table(
+        "offer",
+        metadata,
+        Column("kind", Text, primary_key=True),
+        Column("id", Integer, primary_key=True),
+    )
+    Table(
+        "offer_price",
+        metadata,
+        Column("kind", Text, primary_key=True),
+        Column("id", Integer, primary_key=True),
+        Column("country", Text, primary_key=True),
+        *(
+            Column(name, Integer)
+            for name in (
+                "included_game_count",
+                "final_price_in_cents",
+                "original_price_in_cents",
+                "discount_pct",
+                "price_before_bundle_discount",
+                "bundle_discount_pct",
+                "combined_discount_pct",
+                "renewal_price_in_cents",
+                "user_can_purchase_as_gift",
+                "hide_discount_pct_for_compliance",
+                "price_cannot_be_displayed_as_discount",
+            )
+        ),
+        CheckConstraint("country IN ('BR', 'US')"),
+        ForeignKeyConstraint(["kind", "id"], ["offer.kind", "offer.id"]),
+        sqlite_strict=True,
+        sqlite_with_rowid=False,
+    )
+
+    discount = "offer_price.discount_pct #6: INTEGER notnull=0 pk=0 default=None"
+    assert differences("offer_price", metadata=metadata) == [
+        (
+            "only in the notebook: offer_price generated (CAST(ROUND(100.0 *"
+            " (original_price_in_cents - final_price_in_cents) / original_price_in_cents)"
+            " AS INTEGER))"
+        ),
+        f"only in the notebook: {discount} hidden=2",
+        f"only declared: {discount} hidden=0",
     ]
 
 

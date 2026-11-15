@@ -1,10 +1,11 @@
 """Compare declared tables with the notebook's schema, through what SQLite says about each."""
 
+import re
 import sqlite3
 from contextlib import closing
 from functools import cache
 from pathlib import Path
-from typing import Final
+from typing import TYPE_CHECKING, Final
 
 from sqlalchemy.dialects import sqlite
 from sqlalchemy.schema import CreateIndex, CreateTable
@@ -12,22 +13,86 @@ lazy from sqlalchemy import MetaData
 
 from steam_manager.db.schema import SteamBase
 
+if TYPE_CHECKING:
+    from collections.abc import Iterator
+
 NOTEBOOK_SCHEMA: Final = (
     Path(__file__).parents[3] / "fixtures" / "notebook" / "steam_database_schema.sql"
 )
 """The notebook's DDL, verbatim."""
 
-_COLUMNS: Final = 'SELECT cid, name, type, "notnull" OR pk > 0, pk FROM pragma_table_xinfo(?)'
+_COLUMNS: Final = """
+    SELECT cid, name, type, "notnull" OR pk > 0, pk, dflt_value, hidden FROM pragma_table_xinfo(?)
+"""
 _FOREIGN_KEYS: Final = """
     SELECT "table", group_concat("from", ', ' ORDER BY seq), group_concat("to", ', ' ORDER BY seq)
     FROM pragma_foreign_key_list(?) GROUP BY id
 """
 _UNIQUE_INDEXES: Final = """
-    SELECT group_concat(info.name, ', ' ORDER BY info.seqno), list.partial
+    SELECT group_concat(info.name, ', ' ORDER BY info.seqno),
+        (SELECT sql FROM sqlite_schema WHERE type = 'index' AND name = list.name)
     FROM pragma_index_list(?1) AS list, pragma_index_info(list.name) AS info
     WHERE list."unique" AND list.origin != 'pk' GROUP BY list.name
 """
 _OPTIONS: Final = "SELECT strict, wr FROM pragma_table_list(?)"
+_TABLE_SQL: Final = "SELECT sql FROM sqlite_schema WHERE type = 'table' AND name = ?"
+
+_CLAUSE: Final = re.compile(r"\b(CHECK|GENERATED\s+ALWAYS\s+AS)\s*\(", re.IGNORECASE)
+"""Where a CHECK or a generated column's expression starts, up to its opening parenthesis."""
+_WHERE: Final = re.compile(r"\sWHERE\s", re.IGNORECASE)
+"""What precedes a partial index's condition."""
+
+
+def _normal(sql: str) -> str:
+    """
+    Write an SQL expression one way: single spaces, none inside parentheses.
+
+    :param sql: The expression, as a statement holds it.
+    :return: It, normalized.
+    """
+    return re.sub(r"\s+\)", ")", re.sub(r"\(\s+", "(", " ".join(sql.split())))
+
+
+def _closing(sql: str, start: int) -> int:
+    """
+    Find the parenthesis that closes the one just before *start*.
+
+    :param sql: A statement.
+    :param start: Where the text inside the parentheses begins.
+    :return: Where the closing parenthesis is.
+    :raise ValueError: When it never closes.
+    """
+    depth = 1
+    for position in range(start, len(sql)):
+        depth += {"(": 1, ")": -1}.get(sql[position], 0)
+        if depth == 0:
+            return position
+    message = "unbalanced parentheses"
+    raise ValueError(message)
+
+
+def _clauses(sql: str) -> Iterator[str]:
+    """
+    Yield each CHECK and generated expression of a ``CREATE TABLE`` statement.
+
+    :param sql: The statement, as ``sqlite_schema`` keeps it, comments included.
+    :yield: Lines such as ``"check (role IN ('developer'))"`` or ``"generated (a + b)"``.
+    """
+    sql = re.sub(r"--[^\n]*", "", sql)
+    for match in _CLAUSE.finditer(sql):
+        kind = "check" if match[1].upper() == "CHECK" else "generated"
+        yield f"{kind} ({_normal(sql[match.end() : _closing(sql, match.end())])})"
+
+
+def _condition(sql: str | None) -> str:
+    """
+    Say what a partial index covers.
+
+    :param sql: The index's ``CREATE INDEX`` statement, or ``None`` for one SQLite made.
+    :return: ``" where <condition>"``, or nothing for an index on every row.
+    """
+    parts = _WHERE.split(sql or "", maxsplit=1)
+    return f" where {_normal(parts[1])}" if len(parts) == 2 else ""
 
 
 @cache
@@ -83,20 +148,19 @@ def describe(connection: sqlite3.Connection, table: str) -> set[str]:
     keys = connection.execute(_FOREIGN_KEYS, (table,))
     uniques = connection.execute(_UNIQUE_INDEXES, (table,))
     options = connection.execute(_OPTIONS, (table,))
+    statements = connection.execute(_TABLE_SQL, (table,))
     return {
         *(
-            f"{table}.{name} #{cid}: {type_} notnull={nn} pk={pk}"
-            for cid, name, type_, nn, pk in columns
+            f"{table}.{name} #{cid}: {type_} notnull={nn} pk={pk} default={dflt} hidden={hidden}"
+            for cid, name, type_, nn, pk, dflt, hidden in columns
         ),
         *(f"{table} foreign key ({ours}) -> {parent} ({theirs})" for parent, ours, theirs in keys),
-        *(
-            f"{table} unique ({names}){' partial' if partial else ''}"
-            for names, partial in uniques
-        ),
+        *(f"{table} unique ({names}){_condition(sql)}" for names, sql in uniques),
         *(
             f"{table}: strict={strict} without_rowid={without_rowid}"
             for strict, without_rowid in options
         ),
+        *(f"{table} {clause}" for (sql,) in statements for clause in _clauses(sql)),
     }
 
 

@@ -8,7 +8,10 @@ from tests.steam_manager.db.schema._notebook import differences
 
 ADDED_SINCE_THE_NOTEBOOK: dict[str, list[str]] = {
     "store_category": [
-        "only declared: store_category.show_in_search #8: INTEGER notnull=0 pk=0",
+        (
+            "only declared: store_category.show_in_search #8: INTEGER notnull=0 pk=0"
+            " default=None hidden=0"
+        ),
     ],
 }
 """The columns Steam sends now that the notebook predates."""
