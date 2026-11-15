@@ -1,8 +1,9 @@
 """Tests for the raw archive: the latest answer per source, kind, key and country."""
 
+import asyncio
 import sqlite3
 from contextlib import closing
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from typing import Final
 lazy from collections.abc import Iterator
 lazy from pathlib import Path
@@ -145,3 +146,78 @@ def test_a_naive_time_is_refused(archive: Archive) -> None:
     """A time without a zone would be read back wrong, so it is refused."""
     with pytest.raises(ValueError, match="UTC"):
         archive.put([answer(at=datetime(2026, 11, 15))])  # noqa: DTZ001  # the naive time is the point
+
+
+LATER: Final = AT + timedelta(hours=1)
+"""An hour after :data:`AT`."""
+
+
+def test_a_newer_answer_replaces_the_older(archive: Archive) -> None:
+    """Only the latest answer of a key is kept."""
+    archive.put([answer(body='{"v":1}')])
+    archive.put([answer(body='{"v":2}', at=LATER)])
+
+    found = archive.get("steam", Kind.STORE_ITEM, "620", "BR")
+
+    assert found is not None
+    assert (found.body, found.fetched_at) == ('{"v":2}', LATER)
+
+
+def test_an_older_answer_never_replaces_a_newer(archive: Archive) -> None:
+    """Latest means fetched last: a Kaggle import dated by its file never undoes a fresh fetch."""
+    archive.put([answer(body='{"v":2}', at=LATER)])
+    archive.put([answer(body='{"v":1}')])
+
+    found = archive.get("steam", Kind.STORE_ITEM, "620", "BR")
+
+    assert found is not None
+    assert found.body == '{"v":2}'
+
+
+def test_the_country_and_the_kind_keep_answers_apart(archive: Archive) -> None:
+    """One app's BR entry, US entry and light entry are three answers."""
+    archive.put(
+        [
+            answer(body='{"c":"BR"}'),
+            answer(country="US", body='{"c":"US"}'),
+            answer(kind=Kind.STORE_ITEM_LIGHT, body='{"light":true}'),
+        ]
+    )
+
+    br = archive.get("steam", Kind.STORE_ITEM, "620", "BR")
+    us = archive.get("steam", Kind.STORE_ITEM, "620", "US")
+    light = archive.get("steam", Kind.STORE_ITEM_LIGHT, "620", "BR")
+
+    assert br is not None
+    assert us is not None
+    assert light is not None
+    assert (br.body, us.body, light.body) == ('{"c":"BR"}', '{"c":"US"}', '{"light":true}')
+
+
+def test_a_bad_answer_writes_nothing_of_its_batch(archive: Archive) -> None:
+    """A batch is written whole or not at all, so an interrupted sync leaves no half batch."""
+    naive = datetime(2026, 11, 15)  # noqa: DTZ001  # the naive time is the point
+    batch = [answer("10"), answer("20", at=naive), answer("30")]
+
+    with pytest.raises(ValueError, match="UTC"):
+        archive.put(batch)
+
+    assert archive.get("steam", Kind.STORE_ITEM, "10", "BR") is None
+
+
+def test_another_archive_on_the_file_sees_each_batch(archive: Archive, path: Path) -> None:
+    """The web interface's archive sees what the sync's archive committed, at once."""
+    with Archive(path) as reader:
+        archive.put([answer()])
+
+        assert reader.get("steam", Kind.STORE_ITEM, "620", "BR") == answer()
+
+
+def test_the_archive_works_from_worker_threads(archive: Archive) -> None:
+    """The sync calls the archive through asyncio.to_thread, from any worker thread."""
+
+    async def through_threads() -> Answer | None:
+        await asyncio.to_thread(archive.put, [answer()])
+        return await asyncio.to_thread(archive.get, "steam", Kind.STORE_ITEM, "620", "BR")
+
+    assert asyncio.run(through_threads()) == answer()
