@@ -69,3 +69,13 @@ test *args:
 [group("test")]
 cov-serve port="8080":
     uv run python -m http.server --bind 127.0.0.1 --directory htmlcov {{ port }}
+
+# Build the documentation site into docs/_build/html; any warning fails the build
+[group("docs")]
+docs:
+    uv run --group doc sphinx-build -M html docs docs/_build -j auto -W --keep-going
+
+# Serve the documentation at http://localhost:PORT, to this machine only, rebuilding on every change
+[group("docs")]
+docs-live port="8000":
+    uv run --group doc sphinx-autobuild docs docs/_build/html --host 127.0.0.1 --port {{ port }} --ignore "*/api/generated/*"

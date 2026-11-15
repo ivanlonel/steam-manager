@@ -31,7 +31,7 @@ prek only checks tracked files, so `git add` new files first. The hook configura
 - **Docstrings**: Sphinx style, without `:type:` or `:rtype:` fields.
 - **Dependencies**: [`deptry`](https://deptry.com/) fails on an unused or undeclared one.
 
-The detailed rules are in [`CLAUDE.md`](CLAUDE.md), and the project's vocabulary is in [`GLOSSARY.md`](GLOSSARY.md).
+The detailed rules are in [`CLAUDE.md`](https://github.com/ivanlonel/steam-manager/blob/main/CLAUDE.md), and the project's vocabulary is in [`GLOSSARY.md`](https://github.com/ivanlonel/steam-manager/blob/main/GLOSSARY.md).
 
 ## Tests
 
@@ -43,6 +43,15 @@ just test -k version  # arguments go to pytest
 ```
 
 Branch coverage must stay at or above 90%. Tests that talk to Steam or HowLongToBeat carry the `live` marker and never run unless asked for with `-m live`.
+
+## Documentation
+
+The site is built with [Sphinx](https://www.sphinx-doc.org/) from `docs/`, and any warning fails the build.
+
+```text
+just docs             # build into docs/_build/html
+just docs-live        # serve at http://localhost:8000, rebuilding on every change
+```
 
 ## Pull requests
 

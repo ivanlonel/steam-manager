@@ -1,0 +1,22 @@
+# Sorts the merged pull requests in a release's generated notes, by the labels labeler.yml sets.
+changelog:
+  categories:
+    - title: Features and enhancements 🎉
+      labels:
+        - enhancement
+    - title: Bug fixes 🐛
+      labels:
+        - bug
+    - title: Documentation 📖
+      labels:
+        - documentation
+    - title: Tooling 🔧
+      labels:
+        - ci-cd
+        - tooling
+    - title: Dependencies ⬆️
+      labels:
+        - dependencies
+    - title: Other changes
+      labels:
+        - "*"

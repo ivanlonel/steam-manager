@@ -1,0 +1,162 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":configMigration",
+    "helpers:pinGitHubActionDigests"
+  ],
+  "timezone": "America/Sao_Paulo",
+  "schedule": [
+    // Before 8am every Monday.
+    "* 0-7 * * 1"
+  ],
+  "minimumReleaseAge": "1 day",
+  // Skip releases that drop the Python that requires-python accepts. A bare version, not the
+  // ">=3.15" range Renovate reads from pyproject.toml: pep440 versioning has no subset(), so
+  // strict filtering falls back to matches(), which needs a bare version. Keep it at
+  // requires-python's floor.
+  "constraints": {
+    "python": "3.15"
+  },
+  "constraintsFiltering": "strict",
+  "prHourlyLimit": 5,
+  // Merge automatically once CI passes. Merges are always by rebase.
+  "automerge": true,
+  "automergeStrategy": "rebase",
+  // The pep621 and pre-commit managers are not enabled by default; github-actions is, and is
+  // listed for explicitness.
+  "enabledManagers": [
+    "github-actions",
+    "pep621",
+    "pre-commit"
+  ],
+  // pre-commit support is in beta and requires an explicit opt-in.
+  "pre-commit": {
+    "enabled": true
+  },
+  // A branch that is merely behind main is not rebased: that would only re-run CI, and main's
+  // own push CI covers the combination.
+  "rebaseWhen": "conflicted",
+  // The Post-Renovate Hooks workflow commits onto pep621 and pre-commit branches as
+  // github-actions[bot]. Renovate refuses to rebase a branch carrying a foreign author or
+  // committer, unless that author is listed here. The flip side: Renovate may rebuild such a
+  // branch, dropping that commit for the workflow to re-add, so no pep621 update may change
+  // uv.lock alone (see vulnerabilityAlerts).
+  "gitIgnoredAuthors": [
+    "41898282+github-actions[bot]@users.noreply.github.com"
+  ],
+  // Raise pull requests for known vulnerabilities from osv.dev, independent of the schedule.
+  "osvVulnerabilityAlerts": true,
+  // Security updates default to changing uv.lock alone. Renovate then cannot tell the branch is
+  // current once the Post-Renovate Hooks commit lands, rebuilds it on every run, and the
+  // workflow re-adds the commit: an endless force-push loop. A bumped range avoids it.
+  "vulnerabilityAlerts": {
+    "rangeStrategy": "bump"
+  },
+  // The weekly `uv lock --upgrade` runs in the Post-Renovate Hooks workflow on the weekly
+  // group pull request instead, where sync-with-uv re-pins the hooks in the same commit.
+  // Renovate's own maintenance branch changes uv.lock alone, so it would loop as above.
+  "lockFileMaintenance": {
+    "enabled": false
+  },
+  "packageRules": [
+    {
+      // Never suggest a new Python for the project: that is a deliberate change.
+      "matchDepNames": [
+        "python"
+      ],
+      "enabled": false
+    },
+    {
+      // The hook repositories' revs are sync-with-uv's: it copies each from the tool's version
+      // in uv.lock, so a Renovate pull request would only fight it. The next rule gives back
+      // the repositories whose tool is not in uv.lock.
+      "matchManagers": [
+        "pre-commit"
+      ],
+      "matchDepTypes": [
+        "repository"
+      ],
+      "enabled": false
+    },
+    {
+      // The same for Python additional_dependencies: each carries a `# sync-with-uv` comment,
+      // so it is pinned to its uv.lock version. Go dependencies (actionlint's shellcheck) stay
+      // Renovate's.
+      "matchManagers": [
+        "pre-commit"
+      ],
+      "matchDepTypes": [
+        "pre-commit-python"
+      ],
+      "enabled": false
+    },
+    {
+      // The hook repositories sync-with-uv cannot track: no package of theirs is in uv.lock.
+      // Keep this list aligned with .pre-commit-config.yaml.
+      "matchManagers": [
+        "pre-commit"
+      ],
+      "matchDepTypes": [
+        "repository"
+      ],
+      "matchDepNames": [
+        "gitleaks/gitleaks",
+        "pre-commit/pygrep-hooks",
+        "renovatebot/pre-commit-hooks",
+        "rhysd/actionlint"
+      ],
+      "enabled": true
+    },
+    {
+      "matchManagers": [
+        "pre-commit"
+      ],
+      "addLabels": [
+        "pre-commit"
+      ]
+    },
+    {
+      "matchManagers": [
+        "pep621"
+      ],
+      "addLabels": [
+        "pep621"
+      ]
+    },
+    {
+      // One pull request for the week's action updates. Majors still get their own:
+      // separateMajorMinor outranks groups.
+      "matchManagers": [
+        "github-actions"
+      ],
+      "addLabels": [
+        "github-actions"
+      ],
+      "groupName": "github-actions"
+    },
+    {
+      // pyproject.toml's packages and the hooks pinned from them land together.
+      "matchManagers": [
+        "pep621",
+        "pre-commit"
+      ],
+      "groupName": "pep621 and pre-commit",
+      "groupSlug": "pep621-pre-commit",
+      // Bump the range even when the new version already satisfies it.
+      "rangeStrategy": "bump"
+    },
+    {
+      // prek-action's prek-version input moves with the dev group's prek, in the same pull
+      // request. This rule must come after the github-actions group.
+      "matchManagers": [
+        "github-actions"
+      ],
+      "matchDepNames": [
+        "prek"
+      ],
+      "groupName": "pep621 and pre-commit",
+      "groupSlug": "pep621-pre-commit"
+    }
+  ]
+}

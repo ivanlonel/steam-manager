@@ -1,0 +1,20 @@
+name: "🏷 PR Labeler"
+
+# pull_request_target so pull requests from forks can be labelled too. Safe: the job never
+# checks out or runs the pull request's code, it only reads which files and branch it touches.
+on: # zizmor: ignore[dangerous-triggers]
+  - pull_request_target
+
+jobs:
+  triage:
+    name: "🏷 Label the pull request"
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - uses: actions/labeler@bf12e9b00b37c5c0ca2b87b79b2daf7891dbda13 # v7.0.0
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"

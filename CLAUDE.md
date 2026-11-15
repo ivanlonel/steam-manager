@@ -59,6 +59,7 @@ just lint          # ruff check, pylint src tests (flake8: `just prek flake8`)
 just type-check    # ty check, mypy .
 just test [args]   # uv run pytest [args]; network tests need `-m live`
 just prek [hook]   # every hook on every file, or one hook
+just docs          # Sphinx build of docs/, warnings are errors (what CI runs)
 ```
 
 prek only checks tracked files: `git add` new files before running it.
