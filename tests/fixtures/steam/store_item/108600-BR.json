@@ -1,0 +1,801 @@
+{
+  "item_type": 0,
+  "id": 108600,
+  "success": 1,
+  "visible": true,
+  "name": "Project Zomboid",
+  "store_url_path": "app/108600/Project_Zomboid",
+  "store_url_slug": "Project_Zomboid",
+  "appid": 108600,
+  "type": 0,
+  "is_early_access": true,
+  "included_items": {
+    "included_packages": [
+      {
+        "item_type": 1,
+        "id": 34371,
+        "success": 1,
+        "visible": true,
+        "name": "Project Zomboid",
+        "store_url_path": "app/108600/Project_Zomboid",
+        "store_url_slug": "Project_Zomboid",
+        "appid": 108600,
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          108600
+        ],
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            9,
+            38,
+            39,
+            24,
+            27
+          ],
+          "feature_categoryids": [
+            29,
+            30,
+            44,
+            62
+          ],
+          "controller_categoryids": [
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 34371,
+          "purchase_option_name": "Project Zomboid",
+          "final_price_in_cents": "8399",
+          "formatted_final_price": "R$83,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 44163,
+        "success": 1,
+        "visible": true,
+        "name": "Project Zomboid 4-Pack",
+        "store_url_path": "app/108600/Project_Zomboid",
+        "store_url_slug": "Project_Zomboid_4Pack",
+        "appid": 108600,
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          108600
+        ],
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            9,
+            38,
+            39,
+            24,
+            27
+          ],
+          "feature_categoryids": [
+            29,
+            30,
+            44,
+            62
+          ],
+          "controller_categoryids": [
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 44163,
+          "purchase_option_name": "Project Zomboid 4-Pack",
+          "final_price_in_cents": "23499",
+          "formatted_final_price": "R$234,99",
+          "user_can_purchase_as_gift": false,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        },
+        "purchase_description_bbcode": "Get one copy for yourself and give the other three to friends!"
+      }
+    ]
+  },
+  "content_descriptorids": [
+    2,
+    5
+  ],
+  "tagids": [
+    1662,
+    1659,
+    1695,
+    3859,
+    1100689,
+    3810,
+    3835,
+    1685,
+    1702,
+    1643,
+    492,
+    599,
+    122,
+    3978,
+    4175,
+    5851,
+    4182,
+    3871,
+    21,
+    493
+  ],
+  "categories": {
+    "supported_player_categoryids": [
+      2,
+      1,
+      49,
+      36,
+      9,
+      38,
+      39,
+      24,
+      27
+    ],
+    "feature_categoryids": [
+      29,
+      30,
+      44,
+      62
+    ],
+    "controller_categoryids": [
+      18
+    ]
+  },
+  "reviews": {
+    "summary_filtered": {
+      "review_count": 374388,
+      "percent_positive": 94,
+      "review_score": 8,
+      "review_score_label": "Very Positive"
+    },
+    "summary_language_specific": {
+      "review_count": 162455,
+      "percent_positive": 93,
+      "review_score": 8,
+      "review_score_label": "Very Positive"
+    }
+  },
+  "basic_info": {
+    "short_description": "Project Zomboid is the ultimate in zombie survival. \r\nAlone or in MP: you loot, build, craft, fight, farm and fish in a struggle to survive. A hardcore RPG skillset, a vast map, massively customisable sandbox and a cute tutorial raccoon await the unwary. \r\nSo how will you die? All it takes is a bite..",
+    "publishers": [
+      {
+        "name": "The Indie Stone"
+      }
+    ],
+    "developers": [
+      {
+        "name": "The Indie Stone"
+      }
+    ],
+    "capsule_headline": "#msg_early_access_now_available"
+  },
+  "tags": [
+    {
+      "tagid": 1662,
+      "weight": 1222
+    },
+    {
+      "tagid": 1659,
+      "weight": 986
+    },
+    {
+      "tagid": 1695,
+      "weight": 838
+    },
+    {
+      "tagid": 3859,
+      "weight": 742
+    },
+    {
+      "tagid": 1100689,
+      "weight": 727
+    },
+    {
+      "tagid": 3810,
+      "weight": 623
+    },
+    {
+      "tagid": 3835,
+      "weight": 528
+    },
+    {
+      "tagid": 1685,
+      "weight": 501
+    },
+    {
+      "tagid": 1702,
+      "weight": 427
+    },
+    {
+      "tagid": 1643,
+      "weight": 400
+    },
+    {
+      "tagid": 492,
+      "weight": 370
+    },
+    {
+      "tagid": 599,
+      "weight": 365
+    },
+    {
+      "tagid": 122,
+      "weight": 362
+    },
+    {
+      "tagid": 3978,
+      "weight": 354
+    },
+    {
+      "tagid": 4175,
+      "weight": 319
+    },
+    {
+      "tagid": 5851,
+      "weight": 300
+    },
+    {
+      "tagid": 4182,
+      "weight": 274
+    },
+    {
+      "tagid": 3871,
+      "weight": 236
+    },
+    {
+      "tagid": 21,
+      "weight": 216
+    },
+    {
+      "tagid": 493,
+      "weight": 200
+    }
+  ],
+  "assets": {
+    "asset_url_format": "steam/apps/108600/${FILENAME}?t=1794338497",
+    "main_capsule": "capsule_616x353.jpg",
+    "small_capsule": "capsule_231x87.jpg",
+    "header": "header.jpg",
+    "hero_capsule": "hero_capsule.jpg",
+    "library_capsule": "library_600x900.jpg",
+    "library_capsule_2x": "library_600x900_2x.jpg",
+    "library_hero": "library_hero.jpg",
+    "community_icon": "2bd4642ae337e378e7b04a19d19683425c5f81a4",
+    "page_background_path": "app/108600?t=1794338497",
+    "last_modified": 1794338497
+  },
+  "release": {
+    "steam_release_date": 1383930960,
+    "original_release_date": 1383897600,
+    "is_early_access": true
+  },
+  "platforms": {
+    "windows": true,
+    "mac": true,
+    "steamos_linux": true,
+    "vr_support": {},
+    "steam_deck_compat_category": 3,
+    "steam_os_compat_category": 2,
+    "steam_frame_compat_category": 3,
+    "steam_machine_compat_category": 3
+  },
+  "game_rating": {
+    "rating": "14",
+    "descriptors": [
+      "violence"
+    ],
+    "agency": 10,
+    "banned": false,
+    "esrb_online_music_not_rated": false,
+    "esrb_online_interactions_not_rated": false,
+    "survey_interactive_elements": [
+      4
+    ],
+    "required_age": 0,
+    "use_age_gate": false,
+    "agency_rating": 184,
+    "image_url": "public/shared/images/game_ratings/DEJUS/14.png"
+  },
+  "best_purchase_option": {
+    "packageid": 34371,
+    "purchase_option_name": "Project Zomboid",
+    "final_price_in_cents": "8399",
+    "formatted_final_price": "R$83,99",
+    "user_can_purchase_as_gift": true,
+    "hide_discount_pct_for_compliance": false,
+    "included_game_count": 1,
+    "must_purchase_as_set": false,
+    "package_group": "default",
+    "price_cannot_be_displayed_as_discount": false
+  },
+  "purchase_options": [
+    {
+      "packageid": 34371,
+      "purchase_option_name": "Project Zomboid",
+      "final_price_in_cents": "8399",
+      "formatted_final_price": "R$83,99",
+      "user_can_purchase_as_gift": true,
+      "hide_discount_pct_for_compliance": false,
+      "included_game_count": 1,
+      "must_purchase_as_set": false,
+      "package_group": "default",
+      "price_cannot_be_displayed_as_discount": false
+    },
+    {
+      "packageid": 44163,
+      "purchase_option_name": "Project Zomboid 4-Pack",
+      "final_price_in_cents": "23499",
+      "formatted_final_price": "R$234,99",
+      "user_can_purchase_as_gift": false,
+      "hide_discount_pct_for_compliance": false,
+      "included_game_count": 1,
+      "must_purchase_as_set": false,
+      "package_group": "default",
+      "price_cannot_be_displayed_as_discount": false
+    }
+  ],
+  "screenshots": {
+    "all_ages_screenshots": [
+      {
+        "filename": "steam/apps/108600/e0dd37d69051f7da85896d11027ab018d23893fa/ss_e0dd37d69051f7da85896d11027ab018d23893fa.jpg?t=1794338497",
+        "ordinal": 1
+      },
+      {
+        "filename": "steam/apps/108600/d9df2102dd12526700b15660bc5ec8f039dc8742/ss_d9df2102dd12526700b15660bc5ec8f039dc8742.jpg?t=1794338497",
+        "ordinal": 2
+      },
+      {
+        "filename": "steam/apps/108600/4c8860818ac52c685bbe0988aa137d52bad4aac5/ss_4c8860818ac52c685bbe0988aa137d52bad4aac5.jpg?t=1794338497",
+        "ordinal": 3
+      },
+      {
+        "filename": "steam/apps/108600/ss_eb1862af5109e4658e2538d897cbd16b87ad1818.jpg?t=1794338497",
+        "ordinal": 4
+      },
+      {
+        "filename": "steam/apps/108600/ss_507e952789822b69868d768e1e4476946f37b1fb.jpg?t=1794338497",
+        "ordinal": 5
+      },
+      {
+        "filename": "steam/apps/108600/ss_eca8be032b3f5508bf5bea74cfbc823a4df047ce.jpg?t=1794338497",
+        "ordinal": 6
+      },
+      {
+        "filename": "steam/apps/108600/ss_0dc0cb896202ecfa344a0af981b695f2349317e1.jpg?t=1794338497",
+        "ordinal": 7
+      },
+      {
+        "filename": "steam/apps/108600/ss_d80677c526a1c9494a7147189e52fbf438f0a9ca.jpg?t=1794338497",
+        "ordinal": 8
+      }
+    ]
+  },
+  "trailers": {
+    "highlights": [
+      {
+        "trailer_name": "Build 42 Zomboid Trailer",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1785324122",
+        "trailer_category": 0,
+        "microtrailer": [
+          {
+            "filename": "108600/619982392/141cfd121ea068a87c023951bdbfee87ca524de1/1785320937/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "108600/619982392/141cfd121ea068a87c023951bdbfee87ca524de1/1785320937/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "108600/619982392/141cfd121ea068a87c023951bdbfee87ca524de1/1785320937/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "108600/619982392/141cfd121ea068a87c023951bdbfee87ca524de1/1785320937/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "108600/619982392/141cfd121ea068a87c023951bdbfee87ca524de1/1785320937/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "257387571/7413640d5700fc7020002682b958233c04463d0e/movie_600x337.jpg",
+        "screenshot_full": "257387571/7413640d5700fc7020002682b958233c04463d0e/movie_full.jpg",
+        "trailer_base_id": 1267152,
+        "all_ages": true,
+        "screenshot_small": "257387571/7413640d5700fc7020002682b958233c04463d0e/movie_232x130.jpg",
+        "trailer_id": 619982392
+      },
+      {
+        "trailer_name": "Build 42 Map Trailer",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1785324123",
+        "trailer_category": 0,
+        "microtrailer": [
+          {
+            "filename": "108600/1068764969/0b5bcb57cecb7b05c21f23de1ea92a8287c343e7/1785321988/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "108600/1068764969/0b5bcb57cecb7b05c21f23de1ea92a8287c343e7/1785321988/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "108600/1068764969/0b5bcb57cecb7b05c21f23de1ea92a8287c343e7/1785321988/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "108600/1068764969/0b5bcb57cecb7b05c21f23de1ea92a8287c343e7/1785321988/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "108600/1068764969/0b5bcb57cecb7b05c21f23de1ea92a8287c343e7/1785321988/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "257387576/319e56e0fdf699518dfa5661e79b103fc8f12ad7/movie_600x337.jpg",
+        "screenshot_full": "257387576/319e56e0fdf699518dfa5661e79b103fc8f12ad7/movie_full.jpg",
+        "trailer_base_id": 1267161,
+        "all_ages": true,
+        "screenshot_small": "257387576/319e56e0fdf699518dfa5661e79b103fc8f12ad7/movie_232x130.jpg",
+        "trailer_id": 1068764969
+      }
+    ]
+  },
+  "supported_languages": [
+    {
+      "elanguage": 0,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 2,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 3,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 1,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 5,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 13,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 14,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 18,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 16,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 12,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 11,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 8,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 21,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 10,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 6,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 22,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 15,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 4,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 9,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 7,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 26,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 19,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 30,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 27,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    }
+  ],
+  "full_description_bbcode": "[p]Project Zomboid is an open-ended zombie-infested sandbox. It asks one simple question – how will you die? [/p][p]In the towns within the Knox Event Exclusion Zone our survivors must loot houses, build defences and do their utmost to delay their inevitable death day by day. No help is coming. Continued survival relies on cunning, luck, and the ability to evade a relentless horde... [/p][p][/p][h2][b]Current Features[/b][/h2][list][*][p]Hardcore Sandbox Zombie Survival Game with a focus on realistic survival.[/p][/*][*][p]Online multiplayer survival with persistent player-run servers.[/p][/*][*][p]Hundreds of zombies with swarm mechanics and in-depth visual and hearing systems.[/p][/*][*][p]Full line of sight system and real-time lighting, sound and visibility mechanics. Get spotted? Fire a gun? You’re in trouble…[/p][/*][*][p]Absolutely vast, and growing, map that’s loosely based on real world Kentucky. A huge area in which you explore, loot and set up your fortress.[/p][/*][*][p]Vehicles with full physics, and deep and realistic gameplay mechanics.[/p][/*][*][p]Tools and items can be used to craft weapons, barricade and cook. Build zombie-proof forts by chopping trees, sawing wood and scavenging supplies.[/p][/*][*][p]Deal with depression, boredom, hunger, thirst and illness while trying to survive.[/p][/*][*][p]Day turns to night. The electricity falters. Hordes migrate. Winter draws in. Nature gradually starts to take over.[/p][/*][*][p]Farming, fishing, carpentry, cooking, trapping, character customisation, skills and perks that develop based on what you do in-game.[/p][/*][*][p]Proper zombies that don’t run. (Unless you tell them to in the sandbox menu).[/p][/*][*][p]Atmospheric dynamic music that matches your Knox Event adventure.[/p][/*][*][p]Imaginative Challenge scenarios, on top of our regular Outbreak, Rising, Apocalypse and nightmarish Extinction modes.[/p][/*][*][p]Local split-screen co-op.[/p][/*][*][p]Full, open and powerful Lua modding support.[/p][/*][*][p]Xbox Controller Gamepad support on Windows. (Other gamepads can be set up manually)[/p][/*][/list][p][/p][h2][b]Planned Features[/b][/h2][list][*][p]The return of Kate and Baldspot, the initial story-driven stars of the Project Zomboid tech demo. [/p][/*][*][p]In-depth and varied NPC encounters driven in a persistent world, powered by a metagame system that turns each play-through into your very own zombie survival movie with emergent narrative gameplay.[/p][/*][*][p]Constant expansion/overhaul of the countryside, towns and city that have been ravaged by the Knox Event[/p][/*][*][p]More items, crafting recipes, weapons and gameplay systems.[/p][/*][*][p]Steam Achievements support.[/p][/*][/list][p]\r\n[/p]",
+  "assets_without_overrides": {
+    "asset_url_format": "steam/apps/108600/${FILENAME}?t=1794338497",
+    "main_capsule": "capsule_616x353.jpg",
+    "small_capsule": "capsule_231x87.jpg",
+    "header": "header.jpg",
+    "hero_capsule": "hero_capsule.jpg",
+    "library_capsule": "library_600x900.jpg",
+    "library_capsule_2x": "library_600x900_2x.jpg",
+    "library_hero": "library_hero.jpg",
+    "community_icon": "2bd4642ae337e378e7b04a19d19683425c5f81a4",
+    "page_background_path": "app/108600?t=1794338497",
+    "last_modified": 1794338497
+  },
+  "links": [
+    {
+      "link_type": 5,
+      "url": "https://discord.gg/theindiestone?proof=e1f513c0374d1118"
+    },
+    {
+      "link_type": 20,
+      "url": "https://bsky.app/profile/theindiestone.bsky.social"
+    },
+    {
+      "link_type": 21,
+      "url": "https://mastodon.social/@theindiestone"
+    },
+    {
+      "link_type": 10,
+      "url": "https://www.reddit.com/r/projectzomboid"
+    }
+  ],
+  "package_groups": [
+    {
+      "name": "default"
+    },
+    {
+      "name": "subscriptions",
+      "display_type": 1
+    }
+  ],
+  "extra_details": {
+    "vetted": true,
+    "eula": [
+      {
+        "name": "Project Zomboid EULA",
+        "url": "https://store.steampowered.com//eula/108600_eula_1"
+      }
+    ],
+    "interactive_elements": [
+      4
+    ],
+    "early_access": {
+      "why_bbcode": "Project Zomboid is a much more ambitious game than we could ever have hoped to fund\r\nourselves. It has grown massively over the years, and it’s been a roller-coaster, and we are now in an exciting stage of development with a passionate team, and an overall very positive reaction from the Steam community.\r\n\r\nWe hope you will join us, but if not we understand. If you're not ready to jump in yet, then please wait until after future updates, or consider us when we release from Early Access.\r\n\r\n[b]How often do we update the community?[/b]\r\n\r\nWe post development newsletters that are published on our site, on Steam, and via our mailing list. These detail what we've been up to, often with sneak peeks of upcoming features, future plans, and videos. Though the time between these has differed over the course of development, consistently updating the community on how development is going has always been a major part of how we do things.\r\n\r\n[b]How often do we update?[/b]\r\n\r\nDuring Project Zomboid’s long history there have been periods where updates have been too spread out. In recent times, however, we have hired, restructured and built new internal pipelines to address this - and intend to improve service greatly in future.\r\n\r\nYou can see all our public build content, and the dates of release, on the PZ Wiki.\r\n\r\nWhenever a new build is ready for public testing we open our Unstable beta – where the community can play and report balance and bug issues. The updates to this are, generally, monthly.\r\n\r\nSome features, particularly NPCs, have taken a very long time to implement. This is largely\r\nout of our commitment to getting them right, not disappointing on release, and ensuring that underlying gameplay systems and code infrastructure is ready for them.\r\n\r\nWork on the game, including on unannounced features and/or the systems they are reliant on, is always happening - but is not always presentable or interesting enough to go into detail about.\r\n\r\nProject Zomboid also has significant modding support. We release our dev tools, and there is full unrestricted Lua modding access. This has led to the creation of one of the most vibrant and exciting Steam Workshops currently on the platform, which new players are bound to enjoy once should they ever want a change from vanilla Zomboid.\r\n\r\n[b]What is required for 1.0?[/b]\r\n\r\nProject Zomboid will continue to evolve throughout Early Access. Our goal for 1.0 is not simply to add more content, but to deliver a deeper, more polished survival experience built on the systems players already enjoy.\r\n\r\nMajor areas of development include NPC survivors with relationships and emergent stories, the return of our original characters Kate and Baldspot, continued expansion of the Knox Event Exclusion Zone, and improvements to existing systems such as the user interface and gameplay mechanics.\r\n\r\nWe avoid ETAs because these features are ambitious, and we want to ensure they are delivered properly rather than rushed. \r\n\r\n[b]What about after 1.0?[/b]\r\n\r\nReaching 1.0 will mark the completion of our Early Access journey, but our commitment to Project Zomboid and its community will continue beyond release. We plan to support the game with further improvements and updates as long as ongoing development remains viable and meaningful for both the team and players.",
+      "how_long_bbcode": "Once we feel we have fulfilled everything we outlined at the very start of the project, and the game is sufficiently polished and bug free, we will launch the game as 1.0 and leave Early Access. As underlined above, we avoid ETAs because our goals are ambitious and we want to ensure they are delivered to the best of our abilities.",
+      "full_version_bbcode": "The full version of Project Zomboid will, most likely, be the same as the final Early Access version - however it’s possible that there might be content additions also.",
+      "current_state_bbcode": "The game is already very far through development and, as evidenced by our reviews, we also have many 1000+ hour players. There is a lot of content to enjoy in the game and we firmly and proudly believe it to be worth its current price as it stands.\r\n\r\nPlease consider reading some reviews if you are still unsure about the content of the game, its current state, its past, or its future.",
+      "pricing_bbcode": "After significant updates during Early Access we have raised the price slightly, and it will also likely be more expensive once we hit 1.0. However, we always intend to price the game fairly and reasonably when compared to other titles on the market.",
+      "community_bbcode": "The community has always been central to Project Zomboid, and always will be. We are always listening for player sentiment, and to the best of our abilities will react in kind.",
+      "description_bbcode": "[b]Hello Survivor, and welcome to the Project Zomboid Early Access launch![/b]\n\nWe’re a game that’s in heavy active development, so when we were considering our appearance on Steam Early Access we thought it vital that we provide potential buyers with as much information as possible about the current state of our game.\n\nSometimes with alpha funded games people don’t know what they’re jumping into until they’ve bought the game, and annoying compatibility issues can spring from the woodwork after download.\n\nTo do our best to avoid this we’re launching with a playable demo you can try out first – in which a pre-made character’s fate is already sealed by a zombie bite. It’s our way of making sure that you’ll be satisfied with your purchase, and so you can be sure that a game in alpha (that’s due some extra optimization work in future) runs at an acceptable lick on your machine if it’s of a lower spec.\n\nPlease make sure to check out some of our regular YouTubers’ guides and opinions on the game. (We specifically asked this lot to cover both the pros and cons of our game and its development, but it goes without saying that they already enjoy playing it!)\n\nFinally, we’re on Twitter (@theindiestone) and our website and forums can be found at www.projectzomboid.com. Here you’ll find the development updates that we blog every Monday in our ‘Mondoid’ updates.\n\nIf, after all this, you’re up for jumping into Project Zomboid, then thanks for the support – and good luck in your gruelling battle against an inevitable death!"
+    },
+    "links_and_info": {
+      "website": "https://www.projectzomboid.com",
+      "genreids": [
+        70,
+        23,
+        3,
+        28
+      ]
+    },
+    "points_shop_eligible": true,
+    "system_requirements": {
+      "platforms": [
+        {
+          "platform": 1,
+          "minimum": {
+            "legacy_bbcode": "[list]\r\n[*][b]OS:[/b] Windows 10 / 11 - 64 Bit\r\n\t[/*][*]64bit OS required\r\n\t[/*][*][b]Processor:[/b] Intel 2.77GHz Quad-core\r\n\t[/*][*][b]Memory:[/b] 8Gb Ram\r\n\t[/*][*][b]Hard Disk Space:[/b] 10Gb\r\n\t[/*][*][b]Video Card:[/b] Dedicated graphics card with 4 GB of VRAM minimum, OpenGL 2.1 and GLSL 1.2 support (generally 2012 or newer)\r\n        [/*][*][b]Sound:[/b] FMOD compatible sound card\t\r\n[/*][/list]"
+          }
+        },
+        {
+          "platform": 2,
+          "minimum": {
+            "legacy_bbcode": "[list]\r\n[*][b]OS:[/b] OS X 10.15, or later.\r\n\t[/*][*]64bit OS required\r\n\t[/*][*][b]Processor:[/b] Intel x86 / Apple silicon\r\n\t[/*][*][b]Memory:[/b] 8Gb Ram\r\n\t[/*][*][b]Hard Disk Space:[/b] 10Gb\r\n\t[/*][*][b]Video Card:[/b] AMD or Intel Integrated (nVidia on Mac not compatible)\r\n        [/*][*][b]Sound:[/b] FMOD compatible sound card\t\r\n[/*][/list]"
+          }
+        },
+        {
+          "platform": 3,
+          "minimum": {
+            "legacy_bbcode": "[list]\r\n\t[*]64bit OS required\r\n\t[/*][*][b]Processor:[/b] Intel 2.77GHz Quad-core\r\n        [/*][*][b]Ubuntu LTS 16.04/Steam Machine. Requires Libgcc 6 or higher[/b]\r\n\t[/*][*][b]Memory:[/b] 8Gb Ram\r\n\t[/*][*][b]Hard Disk Space:[/b] 10Gb\r\n\t[/*][*][b]Video Card:[/b] Dedicated graphics card with 4 GB of VRAM minimum, OpenGL 2.1 and GLSL 1.2 support (generally 2012 or newer)\r\n        [/*][*][b]Sound:[/b] FMOD compatible sound card\t\r\n[/*][/list]"
+          }
+        }
+      ]
+    },
+    "has_community_hub": true,
+    "hardware_compatibility": {
+      "steam_deck_tests": [
+        {
+          "display_type": 4,
+          "loc_token": "#SteamDeckVerified_TestResult_DefaultControllerConfigFullyFunctional"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamDeckVerified_TestResult_ControllerGlyphsMatchDeckDevice"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamDeckVerified_TestResult_InterfaceTextIsLegible"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamDeckVerified_TestResult_DefaultConfigurationIsPerformant"
+        }
+      ],
+      "steam_os_tests": [
+        {
+          "display_type": 3,
+          "loc_token": "#SteamOS_TestResult_GameStartupFunctional"
+        }
+      ],
+      "steam_machine_tests": [
+        {
+          "display_type": 4,
+          "loc_token": "#SteamMachine_TestResult_DefaultControllerConfigFullyFunctional"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamMachine_TestResult_ControllerGlyphsMatchDevice"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamMachine_TestResult_DefaultConfigurationIsPerformant"
+        }
+      ],
+      "steam_frame_tests": [
+        {
+          "display_type": 4,
+          "loc_token": "#SteamFrame_TestResult_DefaultControllerConfigFullyFunctional"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamFrame_TestResult_ControllerGlyphsMatchDevice"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamFrame_TestResult_InterfaceTextIsLegible"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamFrame_TestResult_DefaultConfigurationIsPerformant"
+        }
+      ]
+    }
+  }
+}

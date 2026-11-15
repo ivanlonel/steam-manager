@@ -1,0 +1,969 @@
+{
+  "item_type": 0,
+  "id": 570,
+  "success": 1,
+  "visible": true,
+  "name": "Dota 2",
+  "store_url_path": "app/570/Dota_2",
+  "store_url_slug": "Dota_2",
+  "appid": 570,
+  "type": 0,
+  "is_free": true,
+  "included_items": {
+    "included_apps": [
+      {
+        "item_type": 0,
+        "id": 1241930,
+        "success": 1,
+        "visible": true,
+        "name": "The Dota 2 Official Soundtrack",
+        "store_url_path": "app/1241930/The_Dota_2_Official_Soundtrack",
+        "store_url_slug": "The_Dota_2_Official_Soundtrack",
+        "appid": 1241930,
+        "type": 11,
+        "related_items": {
+          "parent_appid": 570
+        },
+        "categories": {
+          "feature_categoryids": [
+            50
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 431132,
+          "purchase_option_name": "The Dota 2 Official Soundtrack",
+          "final_price_in_cents": "3399",
+          "formatted_final_price": "R$33,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 652720,
+        "success": 1,
+        "visible": true,
+        "name": "The Dota 2 Remixes EP",
+        "store_url_path": "app/652720/The_Dota_2_Remixes_EP",
+        "store_url_slug": "The_Dota_2_Remixes_EP",
+        "appid": 652720,
+        "type": 11,
+        "is_free": true,
+        "related_items": {
+          "parent_appid": 570
+        },
+        "categories": {
+          "feature_categoryids": [
+            50
+          ]
+        }
+      }
+    ],
+    "included_packages": [
+      {
+        "item_type": 1,
+        "id": 431132,
+        "success": 1,
+        "visible": true,
+        "name": "The Dota 2 Official Soundtrack",
+        "store_url_path": "app/1241930/The_Dota_2_Official_Soundtrack",
+        "store_url_slug": "The_Dota_2_Official_Soundtrack",
+        "appid": 1241930,
+        "type": 11,
+        "included_types": [
+          11
+        ],
+        "included_appids": [
+          1241930
+        ],
+        "categories": {
+          "feature_categoryids": [
+            50
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 431132,
+          "purchase_option_name": "The Dota 2 Official Soundtrack",
+          "final_price_in_cents": "3399",
+          "formatted_final_price": "R$33,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      }
+    ],
+    "included_creators": [
+      {
+        "item_type": 5,
+        "id": 4,
+        "success": 1,
+        "visible": true,
+        "name": "Valve",
+        "store_url_path": "developer/valve",
+        "store_url_slug": "valve",
+        "game_count": 31
+      },
+      {
+        "item_type": 5,
+        "id": 40102679,
+        "success": 1,
+        "visible": true,
+        "name": "Dota",
+        "store_url_path": "developer/Dota",
+        "store_url_slug": "Dota",
+        "game_count": 3
+      }
+    ]
+  },
+  "content_descriptorids": [
+    5
+  ],
+  "tagids": [
+    113,
+    1718,
+    3859,
+    9,
+    5055,
+    5711,
+    3878,
+    19,
+    3843,
+    1775,
+    4026,
+    1685,
+    1676,
+    122,
+    1645,
+    1684,
+    4747,
+    4711,
+    4231,
+    599
+  ],
+  "categories": {
+    "supported_player_categoryids": [
+      1,
+      9
+    ],
+    "feature_categoryids": [
+      29,
+      30,
+      40,
+      35,
+      66,
+      67,
+      68,
+      8,
+      63
+    ]
+  },
+  "reviews": {
+    "summary_filtered": {
+      "review_count": 2814930,
+      "percent_positive": 80,
+      "review_score": 8,
+      "review_score_label": "Very Positive"
+    },
+    "summary_language_specific": {
+      "review_count": 843949,
+      "percent_positive": 87,
+      "review_score": 8,
+      "review_score_label": "Very Positive"
+    },
+    "counts_all_purchases": true
+  },
+  "basic_info": {
+    "short_description": "Every day, millions of players worldwide enter battle as one of over a hundred Dota heroes. And no matter if it's their 10th hour of play or 1,000th, there's always something new to discover. With regular updates that ensure a constant evolution of gameplay, features, and heroes, Dota 2 has taken on a life of its own.",
+    "publishers": [
+      {
+        "name": "Valve",
+        "creator_clan_account_id": 4
+      }
+    ],
+    "developers": [
+      {
+        "name": "Valve",
+        "creator_clan_account_id": 4
+      }
+    ],
+    "franchises": [
+      {
+        "name": "Dota",
+        "creator_clan_account_id": 40102679
+      }
+    ]
+  },
+  "tags": [
+    {
+      "tagid": 113,
+      "weight": 3007
+    },
+    {
+      "tagid": 1718,
+      "weight": 1019
+    },
+    {
+      "tagid": 3859,
+      "weight": 778
+    },
+    {
+      "tagid": 9,
+      "weight": 723
+    },
+    {
+      "tagid": 5055,
+      "weight": 598
+    },
+    {
+      "tagid": 5711,
+      "weight": 554
+    },
+    {
+      "tagid": 3878,
+      "weight": 422
+    },
+    {
+      "tagid": 19,
+      "weight": 401
+    },
+    {
+      "tagid": 3843,
+      "weight": 378
+    },
+    {
+      "tagid": 1775,
+      "weight": 308
+    },
+    {
+      "tagid": 4026,
+      "weight": 276
+    },
+    {
+      "tagid": 1685,
+      "weight": 221
+    },
+    {
+      "tagid": 1676,
+      "weight": 210
+    },
+    {
+      "tagid": 122,
+      "weight": 194
+    },
+    {
+      "tagid": 1645,
+      "weight": 193
+    },
+    {
+      "tagid": 1684,
+      "weight": 191
+    },
+    {
+      "tagid": 4747,
+      "weight": 150
+    },
+    {
+      "tagid": 4711,
+      "weight": 140
+    },
+    {
+      "tagid": 4231,
+      "weight": 125
+    },
+    {
+      "tagid": 599,
+      "weight": 101
+    }
+  ],
+  "assets": {
+    "asset_url_format": "steam/apps/570/${FILENAME}?t=1791407503",
+    "main_capsule": "capsule_616x353.jpg",
+    "small_capsule": "capsule_231x87.jpg",
+    "header": "header.jpg",
+    "header_2x": "header_2x.jpg",
+    "page_background": "page_bg_generated_v6b.jpg",
+    "hero_capsule": "hero_capsule.jpg",
+    "library_capsule": "6cddc26cb124bd87d3fbacd58cd83ba33e4cb0e7/library_capsule.jpg",
+    "library_capsule_2x": "6cddc26cb124bd87d3fbacd58cd83ba33e4cb0e7/library_capsule_2x.jpg",
+    "library_hero": "0e4a18e7b53d1d4d68bba65969919e6a85920b04/library_hero.jpg",
+    "library_hero_2x": "0e4a18e7b53d1d4d68bba65969919e6a85920b04/library_hero_2x.jpg",
+    "community_icon": "48eb825bb93787945065b460bdc109e395384ebf",
+    "page_background_path": "app/570?t=1791407503",
+    "raw_page_background": "page_bg_raw.jpg",
+    "last_modified": 1791407503
+  },
+  "release": {
+    "steam_release_date": 1373389200,
+    "original_release_date": 0
+  },
+  "platforms": {
+    "windows": true,
+    "mac": true,
+    "steamos_linux": true,
+    "vr_support": {},
+    "steam_deck_compat_category": 2,
+    "steam_os_compat_category": 2,
+    "steam_frame_compat_category": 0,
+    "steam_machine_compat_category": 2
+  },
+  "game_rating": {
+    "rating": "18",
+    "descriptors": [
+      "Drogas lícitas",
+      "Medo"
+    ],
+    "agency": 10,
+    "banned": false,
+    "esrb_online_music_not_rated": false,
+    "esrb_online_interactions_not_rated": false,
+    "survey_interactive_elements": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "required_age": 0,
+    "use_age_gate": false,
+    "content_survey_notes": "Dota 2 includes fantasy violence, use of alcohol, and mild partial nudity.",
+    "agency_rating": 186,
+    "image_url": "public/shared/images/game_ratings/DEJUS/18.png"
+  },
+  "screenshots": {
+    "all_ages_screenshots": [
+      {
+        "filename": "steam/apps/570/ss_ad8eee787704745ccdecdfde3a5cd2733704898d.jpg?t=1791407503",
+        "ordinal": 1
+      },
+      {
+        "filename": "steam/apps/570/ss_7ab506679d42bfc0c0e40639887176494e0466d9.jpg?t=1791407503",
+        "ordinal": 2
+      },
+      {
+        "filename": "steam/apps/570/ss_c9118375a2400278590f29a3537769c986ef6e39.jpg?t=1791407503",
+        "ordinal": 3
+      },
+      {
+        "filename": "steam/apps/570/ss_f9ebafedaf2d5cfb80ef1f74baa18eb08cad6494.jpg?t=1791407503",
+        "ordinal": 4
+      },
+      {
+        "filename": "steam/apps/570/ss_27b6345f22243bd6b885cc64c5cda74e4bd9c3e8.jpg?t=1791407503",
+        "ordinal": 5
+      },
+      {
+        "filename": "steam/apps/570/ss_b33a65678dc71cc98df4890e22a89601ee56a918.jpg?t=1791407503",
+        "ordinal": 6
+      },
+      {
+        "filename": "steam/apps/570/ss_d0f973ce376ca5b6c08e081cb035e86ced105fa9.jpg?t=1791407503",
+        "ordinal": 7
+      },
+      {
+        "filename": "steam/apps/570/ss_1f3b5f5ccf8b159294914c3fe028128a787304b6.jpg?t=1791407503",
+        "ordinal": 8
+      },
+      {
+        "filename": "steam/apps/570/ss_e0a92f15a6631a8186df79182d0fe28b5e37d8cb.jpg?t=1791407503",
+        "ordinal": 9
+      },
+      {
+        "filename": "steam/apps/570/ss_86d675fdc73ba10462abb8f5ece7791c5047072c.jpg?t=1791407503",
+        "ordinal": 10
+      }
+    ]
+  },
+  "trailers": {
+    "highlights": [
+      {
+        "trailer_name": "Dota 2 - Join the Battle",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1762820639",
+        "trailer_category": 0,
+        "microtrailer": [
+          {
+            "filename": "570/116737/313addee2092d0bd6f538d164610061ea8bbe79c/1749859757/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "570/116737/313addee2092d0bd6f538d164610061ea8bbe79c/1749859757/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "570/116737/313addee2092d0bd6f538d164610061ea8bbe79c/1749859757/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "570/116737/313addee2092d0bd6f538d164610061ea8bbe79c/1749859757/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "570/116737/313addee2092d0bd6f538d164610061ea8bbe79c/1749859757/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "256692021/movie.293x165.jpg",
+        "screenshot_full": "256692021/movie_full.jpg",
+        "trailer_base_id": 116737,
+        "all_ages": true,
+        "screenshot_small": "256692021/movie.184x123.jpg",
+        "trailer_id": 116737
+      },
+      {
+        "trailer_name": "Dota 2 - Sizzle Reel",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1762820641",
+        "trailer_category": 0,
+        "microtrailer": [
+          {
+            "filename": "570/343440/a4bddad5bacce0e8395f7458ef4d8d9bad3efca9/1749859790/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "570/343440/a4bddad5bacce0e8395f7458ef4d8d9bad3efca9/1749859790/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "570/343440/a4bddad5bacce0e8395f7458ef4d8d9bad3efca9/1749859790/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "570/343440/a4bddad5bacce0e8395f7458ef4d8d9bad3efca9/1749859790/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "570/343440/a4bddad5bacce0e8395f7458ef4d8d9bad3efca9/1749859790/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "256819789/movie.293x165.jpg",
+        "screenshot_full": "256819789/movie_full.jpg",
+        "trailer_base_id": 343440,
+        "all_ages": true,
+        "screenshot_small": "256819789/movie.184x123.jpg",
+        "trailer_id": 343440
+      }
+    ],
+    "other_trailers": [
+      {
+        "trailer_name": "Dota 2 - The Greeviling",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1762820644",
+        "trailer_category": 0,
+        "microtrailer": [
+          {
+            "filename": "570/10127/a886b09aeea73e11d5c7305afa4e68698976808c/1749859753/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "570/10127/a886b09aeea73e11d5c7305afa4e68698976808c/1749859753/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "570/10127/a886b09aeea73e11d5c7305afa4e68698976808c/1749859753/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "570/10127/a886b09aeea73e11d5c7305afa4e68698976808c/1749859753/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "570/10127/a886b09aeea73e11d5c7305afa4e68698976808c/1749859753/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "2028243/movie.293x165.jpg",
+        "trailer_base_id": 10127,
+        "all_ages": true,
+        "screenshot_small": "2028243/movie.184x123.jpg",
+        "trailer_id": 10127
+      },
+      {
+        "trailer_name": "Dota 2 Gamescom Trailer",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1762820645",
+        "trailer_category": 0,
+        "microtrailer": [
+          {
+            "filename": "570/5608/1f6692ca2b124c7ebdbea6933d1503172d53efd1/1749859891/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "570/5608/1f6692ca2b124c7ebdbea6933d1503172d53efd1/1749859891/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "570/5608/1f6692ca2b124c7ebdbea6933d1503172d53efd1/1749859891/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "570/5608/1f6692ca2b124c7ebdbea6933d1503172d53efd1/1749859891/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "570/5608/1f6692ca2b124c7ebdbea6933d1503172d53efd1/1749859891/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "81026/movie.293x165.jpg",
+        "trailer_base_id": 5608,
+        "all_ages": true,
+        "screenshot_small": "81026/movie.184x123.jpg",
+        "trailer_id": 5608
+      },
+      {
+        "trailer_name": "Dota 2 Reborn - Custom Games Are Here",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1762820647",
+        "trailer_category": 0,
+        "microtrailer": [
+          {
+            "filename": "570/38097/c214c04b3ebc010db5db67457efc38b5a994d901/1749859753/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "570/38097/c214c04b3ebc010db5db67457efc38b5a994d901/1749859753/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "570/38097/c214c04b3ebc010db5db67457efc38b5a994d901/1749859753/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "570/38097/c214c04b3ebc010db5db67457efc38b5a994d901/1749859753/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "570/38097/c214c04b3ebc010db5db67457efc38b5a994d901/1749859753/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "2040250/movie.293x165.jpg",
+        "screenshot_full": "2040250/movie_full.jpg",
+        "trailer_base_id": 38097,
+        "all_ages": true,
+        "screenshot_small": "2040250/movie.184x123.jpg",
+        "trailer_id": 38097
+      }
+    ]
+  },
+  "supported_languages": [
+    {
+      "elanguage": 23,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 19,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 13,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 14,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 0,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": true,
+      "subtitles": false
+    },
+    {
+      "elanguage": 15,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 2,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 1,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 24,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 18,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 3,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 10,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 4,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": true,
+      "subtitles": false
+    },
+    {
+      "elanguage": 16,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 12,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 11,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 22,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 20,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 8,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 6,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": true,
+      "subtitles": false
+    },
+    {
+      "elanguage": 5,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 17,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 9,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 7,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 21,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 26,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 27,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 28,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    }
+  ],
+  "full_description_bbcode": "[b]The most-played game on Steam.[/b]\r\nEvery day, millions of players worldwide enter battle as one of over a hundred Dota heroes. And no matter if it's their 10th hour of play or 1,000th, there's always something new to discover. With regular updates that ensure a constant evolution of gameplay, features, and heroes, Dota 2 has truly taken on a life of its own.\r\n\r\n[b]One Battlefield. Infinite Possibilities.[/b]\r\nWhen it comes to diversity of heroes, abilities, and powerful items, Dota boasts an endless array—no two games are the same. Any hero can fill multiple roles, and there's an abundance of items to help meet the needs of each game. Dota doesn't provide limitations on how to play, it empowers you to express your own style.\r\n\r\n[b]All heroes are free.[/b]\r\nCompetitive balance is Dota's crown jewel, and to ensure everyone is playing on an even field, the core content of the game—like the vast pool of heroes—is available to all players. Fans can collect cosmetics for heroes and fun add-ons for the world they inhabit, but everything you need to play is already included before you join your first match.\r\n\r\n[b]Bring your friends and party up.[/b]\r\nDota is deep, and constantly evolving, but it's never too late to join. \r\nLearn the ropes playing co-op vs. bots. Sharpen your skills in the hero demo mode. Jump into the behavior- and skill-based matchmaking system that ensures you'll \r\nbe matched with the right players each game.",
+  "assets_without_overrides": {
+    "asset_url_format": "steam/apps/570/${FILENAME}?t=1791407503",
+    "main_capsule": "capsule_616x353.jpg",
+    "small_capsule": "capsule_231x87.jpg",
+    "header": "header.jpg",
+    "header_2x": "header_2x.jpg",
+    "page_background": "page_bg_generated_v6b.jpg",
+    "hero_capsule": "hero_capsule.jpg",
+    "library_capsule": "6cddc26cb124bd87d3fbacd58cd83ba33e4cb0e7/library_capsule.jpg",
+    "library_capsule_2x": "6cddc26cb124bd87d3fbacd58cd83ba33e4cb0e7/library_capsule_2x.jpg",
+    "library_hero": "0e4a18e7b53d1d4d68bba65969919e6a85920b04/library_hero.jpg",
+    "library_hero_2x": "0e4a18e7b53d1d4d68bba65969919e6a85920b04/library_hero_2x.jpg",
+    "community_icon": "48eb825bb93787945065b460bdc109e395384ebf",
+    "page_background_path": "app/570?t=1791407503",
+    "raw_page_background": "page_bg_raw.jpg",
+    "last_modified": 1791407503
+  },
+  "package_groups": [
+    {
+      "name": "default"
+    },
+    {
+      "name": "subscriptions"
+    }
+  ],
+  "extra_details": {
+    "vetted": true,
+    "anticheat": {
+      "name": "VAC (Valve Anti-Cheat)",
+      "name_loc": "#Store_AntiCheat_Type_vac"
+    },
+    "interactive_elements": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "content_survey_notes": "Dota 2 includes fantasy violence, use of alcohol, and mild partial nudity.",
+    "press_review": [
+      {
+        "quote": "A modern multiplayer masterpiece.",
+        "score": "9.5/10",
+        "site": "Destructoid",
+        "url": "https://www.destructoid.com/review-dota-2-258506.phtml"
+      },
+      {
+        "quote": "Once you start to learn its secrets, there’s a wild and exciting variety of play here that’s unmatched, even by its peers.",
+        "score": "9.4/10",
+        "site": "IGN",
+        "url": "http://www.ign.com/articles/2013/07/24/dota-2-review"
+      },
+      {
+        "quote": "Dota 2 is possibly the only competitive free-to-play game that is totally uncompromised by its business model.",
+        "score": "90/100",
+        "site": "PC Gamer",
+        "url": "http://www.pcgamer.com/dota-2-review-2/"
+      }
+    ],
+    "early_access": {
+      "description_bbcode": "Dota 2 is a Free to Play game that will be officially launching this Summer.\n\n\nAt this point we don't really think of Dota 2 as a beta, but we also aren't ready for everyone to show up and start playing just yet. We are constantly updating the game with new heroes, bug fixes, and new features. We've still got work to do before we can support the number of players who've shown interest in Dota 2. Right now we're working on expanding our server infrastructure, which is the primary bottleneck.\n\n\nPurchasing an Early Access pass will allow you join the Dota 2 community and help build the game. The more people we have generating ideas and providing feedback, the better Dota 2 will become. In addition, every single feature is avaliable to you and none of the items purchased or progress made will be lost or reset once the game is available for everyone."
+    },
+    "links_and_info": {
+      "website": "http://www.dota2.com/",
+      "genreids": [
+        37,
+        1,
+        2
+      ]
+    },
+    "points_shop_eligible": true,
+    "metacritic": {
+      "score": 90,
+      "url": "https://www.metacritic.com/game/pc/dota-2?ftag=MCD-06-10aaa1f"
+    },
+    "system_requirements": {
+      "platforms": [
+        {
+          "platform": 1,
+          "minimum": {
+            "os_version": "Windows 7 or newer",
+            "os_version_unsupported": true,
+            "processor": "Dual core from Intel or AMD at 2.8 GHz",
+            "memory": {
+              "amount": "4",
+              "units": "GB"
+            },
+            "graphics": "NVIDIA GeForce 8600/9600GT, ATI/AMD Radeon HD2600/3600",
+            "directx": "11",
+            "broadband": true,
+            "storage": {
+              "amount": "60",
+              "units": "GB"
+            },
+            "sound_card": "DirectX Compatible"
+          },
+          "unsupported_os_note": 1
+        },
+        {
+          "platform": 2,
+          "minimum": {
+            "os_version": "macOS 10.15 or newer",
+            "processor": "Dual core from Intel",
+            "memory": {
+              "amount": "4",
+              "units": "GB"
+            },
+            "graphics": "Metal-capable GPU (AMD GCN-based GPU or newer, NVIDIA Kepler-based GPU or newer, Intel HD 4000 or newer)",
+            "broadband": true,
+            "storage": {
+              "amount": "60",
+              "units": "GB"
+            }
+          }
+        },
+        {
+          "platform": 3,
+          "minimum": {
+            "os_version": "Ubuntu 12.04 or newer",
+            "processor": "Dual core from Intel or AMD at 2.8 GHz",
+            "memory": {
+              "amount": "4",
+              "units": "GB"
+            },
+            "graphics": "AMD GCN+, NVIDIA Kepler+, or Intel HD 5000-series or newer",
+            "broadband": true,
+            "storage": {
+              "amount": "60",
+              "units": "GB"
+            },
+            "sound_card": "OpenAL Compatible Sound Card"
+          }
+        }
+      ]
+    },
+    "has_community_hub": true,
+    "hardware_compatibility": {
+      "steam_deck_tests": [
+        {
+          "display_type": 3,
+          "loc_token": "#SteamDeckVerified_TestResult_ControllerGlyphsDoNotMatchDeckDevice"
+        },
+        {
+          "display_type": 3,
+          "loc_token": "#SteamDeckVerified_TestResult_TextInputDoesNotAutomaticallyInvokesKeyboard"
+        },
+        {
+          "display_type": 3,
+          "loc_token": "#SteamDeckVerified_TestResult_InterfaceTextIsNotLegible"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamDeckVerified_TestResult_DefaultControllerConfigFullyFunctional"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamDeckVerified_TestResult_DefaultConfigurationIsPerformant"
+        },
+        {
+          "display_type": 1,
+          "loc_token": "#SteamDeckVerified_TestResult_ExternalControllersNotSupportedPrimaryPlayer"
+        }
+      ],
+      "steam_os_tests": [
+        {
+          "display_type": 3,
+          "loc_token": "#SteamOS_TestResult_GameStartupFunctional"
+        },
+        {
+          "display_type": 1,
+          "loc_token": "#SteamOS_TestResult_TextInputDoesNotAutomaticallyInvokesKeyboard"
+        },
+        {
+          "display_type": 1,
+          "loc_token": "#SteamOS_TestResult_ExternalControllersNotSupportedPrimaryPlayer"
+        }
+      ],
+      "steam_machine_tests": [
+        {
+          "display_type": 3,
+          "loc_token": "#SteamMachine_TestResult_ControllerGlyphsDoNotMatchDevice"
+        },
+        {
+          "display_type": 3,
+          "loc_token": "#SteamMachine_TestResult_TextInputDoesNotAutomaticallyInvokesKeyboard"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamMachine_TestResult_DefaultControllerConfigFullyFunctional"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamMachine_TestResult_DefaultConfigurationIsPerformant"
+        }
+      ]
+    },
+    "dlc_for_purchase": {
+      "dlc": [
+        {
+          "appid": 1241930,
+          "packageid": 431132
+        },
+        {
+          "appid": 652720
+        }
+      ],
+      "dlc_count": 2,
+      "formatted_total_price": "R$33,99"
+    }
+  }
+}

@@ -1,0 +1,5267 @@
+{
+  "item_type": 0,
+  "id": 2073850,
+  "success": 1,
+  "visible": true,
+  "name": "THE FINALS",
+  "store_url_path": "app/2073850/THE_FINALS",
+  "store_url_slug": "THE_FINALS",
+  "appid": 2073850,
+  "type": 0,
+  "is_free": true,
+  "included_items": {
+    "included_apps": [
+      {
+        "item_type": 0,
+        "id": 5258280,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Season 12 Ultimate Battle Pass Bundle",
+        "store_url_path": "app/5258280/THE_FINALS_Season_12_Ultimate_Battle_Pass_Bundle",
+        "store_url_slug": "THE_FINALS_Season_12_Ultimate_Battle_Pass_Bundle",
+        "appid": 5258280,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1818491,
+          "purchase_option_name": "THE FINALS - Season 12 Ultimate Battle Pass Bundle",
+          "final_price_in_cents": "15900",
+          "formatted_final_price": "R$159,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 4124770,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - New Contestant Pack",
+        "store_url_path": "app/4124770/THE_FINALS_New_Contestant_Pack",
+        "store_url_slug": "THE_FINALS_New_Contestant_Pack",
+        "appid": 4124770,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1445267,
+          "purchase_option_name": "THE FINALS - New Contestant Pack",
+          "final_price_in_cents": "4199",
+          "formatted_final_price": "R$41,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 5258290,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Season 12 Starter Pack",
+        "store_url_path": "app/5258290/THE_FINALS_Season_12_Starter_Pack",
+        "store_url_slug": "THE_FINALS_Season_12_Starter_Pack",
+        "appid": 5258290,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1818494,
+          "purchase_option_name": "THE FINALS - Season 12 Starter Pack",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 5258310,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Dead Certain Set",
+        "store_url_path": "app/5258310/THE_FINALS_Dead_Certain_Set",
+        "store_url_slug": "THE_FINALS_Dead_Certain_Set",
+        "appid": 5258310,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1818500,
+          "purchase_option_name": "THE FINALS - Dead Certain Set",
+          "final_price_in_cents": "25900",
+          "formatted_final_price": "R$259,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 5258300,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Bog Standard Set",
+        "store_url_path": "app/5258300/THE_FINALS_Bog_Standard_Set",
+        "store_url_slug": "THE_FINALS_Bog_Standard_Set",
+        "appid": 5258300,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1818497,
+          "purchase_option_name": "THE FINALS - Bog Standard Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 5397360,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Aimerz+ TGM26",
+        "store_url_path": "app/5397360/THE_FINALS_Aimerz_TGM26",
+        "store_url_slug": "THE_FINALS_Aimerz_TGM26",
+        "appid": 5397360,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863638,
+          "purchase_option_name": "THE FINALS - Aimerz+ TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 5397370,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Alliance TGM26",
+        "store_url_path": "app/5397370/THE_FINALS_Alliance_TGM26",
+        "store_url_slug": "THE_FINALS_Alliance_TGM26",
+        "appid": 5397370,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863641,
+          "purchase_option_name": "THE FINALS - Alliance TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 5397390,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Elevate TGM26",
+        "store_url_path": "app/5397390/THE_FINALS_Elevate_TGM26",
+        "store_url_slug": "THE_FINALS_Elevate_TGM26",
+        "appid": 5397390,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863647,
+          "purchase_option_name": "THE FINALS - Elevate TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 5397400,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - ENVY TGM26",
+        "store_url_path": "app/5397400/THE_FINALS_ENVY_TGM26",
+        "store_url_slug": "THE_FINALS_ENVY_TGM26",
+        "appid": 5397400,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863650,
+          "purchase_option_name": "THE FINALS - ENVY TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 5397410,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Five Fears TGM26",
+        "store_url_path": "app/5397410/THE_FINALS_Five_Fears_TGM26",
+        "store_url_slug": "THE_FINALS_Five_Fears_TGM26",
+        "appid": 5397410,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863653,
+          "purchase_option_name": "THE FINALS - Five Fears TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 5397420,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - FYR TGM26",
+        "store_url_path": "app/5397420/THE_FINALS_FYR_TGM26",
+        "store_url_slug": "THE_FINALS_FYR_TGM26",
+        "appid": 5397420,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863656,
+          "purchase_option_name": "THE FINALS - FYR TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 5397430,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - KCP TGM26",
+        "store_url_path": "app/5397430/THE_FINALS_KCP_TGM26",
+        "store_url_slug": "THE_FINALS_KCP_TGM26",
+        "appid": 5397430,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863659,
+          "purchase_option_name": "THE FINALS - KCP TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 5397440,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - KingZero TGM26",
+        "store_url_path": "app/5397440/THE_FINALS_KingZero_TGM26",
+        "store_url_slug": "THE_FINALS_KingZero_TGM26",
+        "appid": 5397440,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863662,
+          "purchase_option_name": "THE FINALS - KingZero TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 5397450,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Luminon TGM26",
+        "store_url_path": "app/5397450/THE_FINALS_Luminon_TGM26",
+        "store_url_slug": "THE_FINALS_Luminon_TGM26",
+        "appid": 5397450,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863665,
+          "purchase_option_name": "THE FINALS - Luminon TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 5397460,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Moon Theory TGM26",
+        "store_url_path": "app/5397460/THE_FINALS_Moon_Theory_TGM26",
+        "store_url_slug": "THE_FINALS_Moon_Theory_TGM26",
+        "appid": 5397460,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863668,
+          "purchase_option_name": "THE FINALS - Moon Theory TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 5397470,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Nfinite TGM26",
+        "store_url_path": "app/5397470/THE_FINALS_Nfinite_TGM26",
+        "store_url_slug": "THE_FINALS_Nfinite_TGM26",
+        "appid": 5397470,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863671,
+          "purchase_option_name": "THE FINALS - Nfinite TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 5397480,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - NTMR TGM26",
+        "store_url_path": "app/5397480/THE_FINALS_NTMR_TGM26",
+        "store_url_slug": "THE_FINALS_NTMR_TGM26",
+        "appid": 5397480,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863674,
+          "purchase_option_name": "THE FINALS - NTMR TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 5397490,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - RAD TGM26",
+        "store_url_path": "app/5397490/THE_FINALS_RAD_TGM26",
+        "store_url_slug": "THE_FINALS_RAD_TGM26",
+        "appid": 5397490,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863677,
+          "purchase_option_name": "THE FINALS - RAD TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 5397500,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Take Flyte TGM26",
+        "store_url_path": "app/5397500/THE_FINALS_Take_Flyte_TGM26",
+        "store_url_slug": "THE_FINALS_Take_Flyte_TGM26",
+        "appid": 5397500,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863680,
+          "purchase_option_name": "THE FINALS - Take Flyte TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 5397520,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Vanguard TGM26",
+        "store_url_path": "app/5397520/THE_FINALS_Vanguard_TGM26",
+        "store_url_slug": "THE_FINALS_Vanguard_TGM26",
+        "appid": 5397520,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863686,
+          "purchase_option_name": "THE FINALS - Vanguard TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 5397380,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Ape Squad TGM26",
+        "store_url_path": "app/5397380/THE_FINALS_Ape_Squad_TGM26",
+        "store_url_slug": "THE_FINALS_Ape_Squad_TGM26",
+        "appid": 5397380,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863644,
+          "purchase_option_name": "THE FINALS - Ape Squad TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 5107950,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Silent Cypher Set",
+        "store_url_path": "app/5107950/THE_FINALS_Silent_Cypher_Set",
+        "store_url_slug": "THE_FINALS_Silent_Cypher_Set",
+        "appid": 5107950,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1769391,
+          "purchase_option_name": "THE FINALS - Silent Cypher Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 5006510,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Sugar Shocker Set",
+        "store_url_path": "app/5006510/THE_FINALS_Sugar_Shocker_Set",
+        "store_url_slug": "THE_FINALS_Sugar_Shocker_Set",
+        "appid": 5006510,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1736497,
+          "purchase_option_name": "THE FINALS - Sugar Shocker Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 5006520,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Sugar Crasher Set",
+        "store_url_path": "app/5006520/THE_FINALS_Sugar_Crasher_Set",
+        "store_url_slug": "THE_FINALS_Sugar_Crasher_Set",
+        "appid": 5006520,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1736500,
+          "purchase_option_name": "THE FINALS - Sugar Crasher Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 4835420,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - FUNKOMATIC 2000 Set",
+        "store_url_path": "app/4835420/THE_FINALS_FUNKOMATIC_2000_Set",
+        "store_url_slug": "THE_FINALS_FUNKOMATIC_2000_Set",
+        "appid": 4835420,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1679934,
+          "purchase_option_name": "THE FINALS - FUNKOMATIC 2000 Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 4652630,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Data Crusader Set",
+        "store_url_path": "app/4652630/THE_FINALS_Data_Crusader_Set",
+        "store_url_slug": "THE_FINALS_Data_Crusader_Set",
+        "appid": 4652630,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1620039,
+          "purchase_option_name": "THE FINALS - Data Crusader Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 4599390,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Crown That Remains Set",
+        "store_url_path": "app/4599390/THE_FINALS_Crown_That_Remains_Set",
+        "store_url_slug": "THE_FINALS_Crown_That_Remains_Set",
+        "appid": 4599390,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1602759,
+          "purchase_option_name": "THE FINALS - Crown That Remains Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 4406660,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Morrígan's Call Set",
+        "store_url_path": "app/4406660/THE_FINALS_Morrígans_Call_Set",
+        "store_url_slug": "THE_FINALS_Morrígans_Call_Set",
+        "appid": 4406660,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1539011,
+          "purchase_option_name": "THE FINALS - Morrígan's Call Set",
+          "final_price_in_cents": "10695",
+          "formatted_final_price": "R$106,95",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 4271490,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Glitch Prowler Set",
+        "store_url_path": "app/4271490/THE_FINALS_Glitch_Prowler_Set",
+        "store_url_slug": "THE_FINALS_Glitch_Prowler_Set",
+        "appid": 4271490,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1494622,
+          "purchase_option_name": "THE FINALS - Glitch Prowler Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 4167860,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Project Hú Set",
+        "store_url_path": "app/4167860/THE_FINALS_Project_Hú_Set",
+        "store_url_slug": "THE_FINALS_Project_Hú_Set",
+        "appid": 4167860,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1460129,
+          "purchase_option_name": "THE FINALS - Project Hú Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 4197310,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Year 1 Deluxe Edition",
+        "store_url_path": "app/4197310/THE_FINALS_Year_1_Deluxe_Edition",
+        "store_url_slug": "THE_FINALS_Year_1_Deluxe_Edition",
+        "appid": 4197310,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 4062430,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - The Apothecarion Set",
+        "store_url_path": "app/4062430/THE_FINALS_The_Apothecarion_Set",
+        "store_url_slug": "THE_FINALS_The_Apothecarion_Set",
+        "appid": 4062430,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1424602,
+          "purchase_option_name": "THE FINALS - The Apothecarion Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 4077560,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - The Chirurgeon Set",
+        "store_url_path": "app/4077560/THE_FINALS_The_Chirurgeon_Set",
+        "store_url_slug": "THE_FINALS_The_Chirurgeon_Set",
+        "appid": 4077560,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1429525,
+          "purchase_option_name": "THE FINALS - The Chirurgeon Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3964990,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Depth Charger Set",
+        "store_url_path": "app/3964990/THE_FINALS_Depth_Charger_Set",
+        "store_url_slug": "THE_FINALS_Depth_Charger_Set",
+        "appid": 3964990,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1392275,
+          "purchase_option_name": "THE FINALS - Depth Charger Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3841760,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Lotus Reaper Set",
+        "store_url_path": "app/3841760/THE_FINALS_Lotus_Reaper_Set",
+        "store_url_slug": "THE_FINALS_Lotus_Reaper_Set",
+        "appid": 3841760,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1350909,
+          "purchase_option_name": "THE FINALS - Lotus Reaper Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3741380,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Ops Override Set",
+        "store_url_path": "app/3741380/THE_FINALS_Ops_Override_Set",
+        "store_url_slug": "THE_FINALS_Ops_Override_Set",
+        "appid": 3741380,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1316945,
+          "purchase_option_name": "THE FINALS - Ops Override Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3620110,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Zero-G Menace Set",
+        "store_url_path": "app/3620110/THE_FINALS_ZeroG_Menace_Set",
+        "store_url_slug": "THE_FINALS_ZeroG_Menace_Set",
+        "appid": 3620110,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1276368,
+          "purchase_option_name": "THE FINALS - Zero-G Menace Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3519910,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Wavereaver Set",
+        "store_url_path": "app/3519910/THE_FINALS_Wavereaver_Set",
+        "store_url_slug": "THE_FINALS_Wavereaver_Set",
+        "appid": 3519910,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1242637,
+          "purchase_option_name": "THE FINALS - Wavereaver Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3080260,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Metro Drifter Set",
+        "store_url_path": "app/3080260/THE_FINALS_Metro_Drifter_Set",
+        "store_url_slug": "THE_FINALS_Metro_Drifter_Set",
+        "appid": 3080260,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1094423,
+          "purchase_option_name": "THE FINALS - Metro Drifter Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3288070,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Seas The Day Set",
+        "store_url_path": "app/3288070/THE_FINALS_Seas_The_Day_Set",
+        "store_url_slug": "THE_FINALS_Seas_The_Day_Set",
+        "appid": 3288070,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1164633,
+          "purchase_option_name": "THE FINALS - Seas The Day Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3225070,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Hedge Hunter Set",
+        "store_url_path": "app/3225070/THE_FINALS_Hedge_Hunter_Set",
+        "store_url_slug": "THE_FINALS_Hedge_Hunter_Set",
+        "appid": 3225070,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1143243,
+          "purchase_option_name": "THE FINALS - Hedge Hunter Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3411130,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - IVADA Cataclysm Set",
+        "store_url_path": "app/3411130/THE_FINALS_IVADA_Cataclysm_Set",
+        "store_url_slug": "THE_FINALS_IVADA_Cataclysm_Set",
+        "appid": 3411130,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1206530,
+          "purchase_option_name": "THE FINALS - IVADA Cataclysm Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 2897810,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Bank Rabbit Set",
+        "store_url_path": "app/2897810/THE_FINALS_Bank_Rabbit_Set",
+        "store_url_slug": "THE_FINALS_Bank_Rabbit_Set",
+        "appid": 2897810,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1032885,
+          "purchase_option_name": "THE FINALS - Bank Rabbit Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3348080,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Permafang Prowler Set",
+        "store_url_path": "app/3348080/THE_FINALS_Permafang_Prowler_Set",
+        "store_url_slug": "THE_FINALS_Permafang_Prowler_Set",
+        "appid": 3348080,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1185051,
+          "purchase_option_name": "THE FINALS - Permafang Prowler Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3668920,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Eyecaster Pack",
+        "store_url_path": "app/3668920/THE_FINALS_Eyecaster_Pack",
+        "store_url_slug": "THE_FINALS_Eyecaster_Pack",
+        "appid": 3668920,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1292470,
+          "purchase_option_name": "THE FINALS - Eyecaster Pack",
+          "final_price_in_cents": "2599",
+          "formatted_final_price": "R$25,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3211950,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Örf Tactical Pack",
+        "store_url_path": "app/3211950/THE_FINALS_Örf_Tactical_Pack",
+        "store_url_slug": "THE_FINALS_Örf_Tactical_Pack",
+        "appid": 3211950,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 2073850
+        },
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1138754,
+          "purchase_option_name": "THE FINALS - Örf Tactical Pack",
+          "final_price_in_cents": "2599",
+          "formatted_final_price": "R$25,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      }
+    ],
+    "included_packages": [
+      {
+        "item_type": 1,
+        "id": 1470014,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Year 1 Deluxe Edition",
+        "store_url_path": "app/2073850/THE_FINALS",
+        "store_url_slug": "THE_FINALS_Year_1_Deluxe_Edition",
+        "appid": 2073850,
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          2073850
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1470014,
+          "purchase_option_name": "THE FINALS - Year 1 Deluxe Edition",
+          "final_price_in_cents": "20900",
+          "formatted_final_price": "R$209,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1818491,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Season 12 Ultimate Battle Pass Bundle",
+        "store_url_path": "app/5258280/THE_FINALS_Season_12_Ultimate_Battle_Pass_Bundle",
+        "store_url_slug": "THE_FINALS_Season_12_Ultimate_Battle_Pass_Bundle",
+        "appid": 5258280,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          5258280
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1818491,
+          "purchase_option_name": "THE FINALS - Season 12 Ultimate Battle Pass Bundle",
+          "final_price_in_cents": "15900",
+          "formatted_final_price": "R$159,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1445267,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - New Contestant Pack",
+        "store_url_path": "app/4124770/THE_FINALS_New_Contestant_Pack",
+        "store_url_slug": "THE_FINALS_New_Contestant_Pack",
+        "appid": 4124770,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          4124770
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1445267,
+          "purchase_option_name": "THE FINALS - New Contestant Pack",
+          "final_price_in_cents": "4199",
+          "formatted_final_price": "R$41,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1818494,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Season 12 Starter Pack",
+        "store_url_path": "app/5258290/THE_FINALS_Season_12_Starter_Pack",
+        "store_url_slug": "THE_FINALS_Season_12_Starter_Pack",
+        "appid": 5258290,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          5258290
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1818494,
+          "purchase_option_name": "THE FINALS - Season 12 Starter Pack",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1818500,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Dead Certain Set",
+        "store_url_path": "app/5258310/THE_FINALS_Dead_Certain_Set",
+        "store_url_slug": "THE_FINALS_Dead_Certain_Set",
+        "appid": 5258310,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          5258310
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1818500,
+          "purchase_option_name": "THE FINALS - Dead Certain Set",
+          "final_price_in_cents": "25900",
+          "formatted_final_price": "R$259,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1818497,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Bog Standard Set",
+        "store_url_path": "app/5258300/THE_FINALS_Bog_Standard_Set",
+        "store_url_slug": "THE_FINALS_Bog_Standard_Set",
+        "appid": 5258300,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          5258300
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1818497,
+          "purchase_option_name": "THE FINALS - Bog Standard Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1863638,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Aimerz+ TGM26",
+        "store_url_path": "app/5397360/THE_FINALS_Aimerz_TGM26",
+        "store_url_slug": "THE_FINALS_Aimerz_TGM26",
+        "appid": 5397360,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          5397360
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863638,
+          "purchase_option_name": "THE FINALS - Aimerz+ TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1863641,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Alliance TGM26",
+        "store_url_path": "app/5397370/THE_FINALS_Alliance_TGM26",
+        "store_url_slug": "THE_FINALS_Alliance_TGM26",
+        "appid": 5397370,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          5397370
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863641,
+          "purchase_option_name": "THE FINALS - Alliance TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1863647,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Elevate TGM26",
+        "store_url_path": "app/5397390/THE_FINALS_Elevate_TGM26",
+        "store_url_slug": "THE_FINALS_Elevate_TGM26",
+        "appid": 5397390,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          5397390
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863647,
+          "purchase_option_name": "THE FINALS - Elevate TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1863650,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - ENVY TGM26",
+        "store_url_path": "app/5397400/THE_FINALS_ENVY_TGM26",
+        "store_url_slug": "THE_FINALS_ENVY_TGM26",
+        "appid": 5397400,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          5397400
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863650,
+          "purchase_option_name": "THE FINALS - ENVY TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1863653,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Five Fears TGM26",
+        "store_url_path": "app/5397410/THE_FINALS_Five_Fears_TGM26",
+        "store_url_slug": "THE_FINALS_Five_Fears_TGM26",
+        "appid": 5397410,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          5397410
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863653,
+          "purchase_option_name": "THE FINALS - Five Fears TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1863656,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - FYR TGM26",
+        "store_url_path": "app/5397420/THE_FINALS_FYR_TGM26",
+        "store_url_slug": "THE_FINALS_FYR_TGM26",
+        "appid": 5397420,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          5397420
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863656,
+          "purchase_option_name": "THE FINALS - FYR TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1863659,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - KCP TGM26",
+        "store_url_path": "app/5397430/THE_FINALS_KCP_TGM26",
+        "store_url_slug": "THE_FINALS_KCP_TGM26",
+        "appid": 5397430,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          5397430
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863659,
+          "purchase_option_name": "THE FINALS - KCP TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1863662,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - KingZero TGM26",
+        "store_url_path": "app/5397440/THE_FINALS_KingZero_TGM26",
+        "store_url_slug": "THE_FINALS_KingZero_TGM26",
+        "appid": 5397440,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          5397440
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863662,
+          "purchase_option_name": "THE FINALS - KingZero TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1863665,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Luminon TGM26",
+        "store_url_path": "app/5397450/THE_FINALS_Luminon_TGM26",
+        "store_url_slug": "THE_FINALS_Luminon_TGM26",
+        "appid": 5397450,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          5397450
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863665,
+          "purchase_option_name": "THE FINALS - Luminon TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1863668,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Moon Theory TGM26",
+        "store_url_path": "app/5397460/THE_FINALS_Moon_Theory_TGM26",
+        "store_url_slug": "THE_FINALS_Moon_Theory_TGM26",
+        "appid": 5397460,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          5397460
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863668,
+          "purchase_option_name": "THE FINALS - Moon Theory TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1863671,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Nfinite TGM26",
+        "store_url_path": "app/5397470/THE_FINALS_Nfinite_TGM26",
+        "store_url_slug": "THE_FINALS_Nfinite_TGM26",
+        "appid": 5397470,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          5397470
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863671,
+          "purchase_option_name": "THE FINALS - Nfinite TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1863674,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - NTMR TGM26",
+        "store_url_path": "app/5397480/THE_FINALS_NTMR_TGM26",
+        "store_url_slug": "THE_FINALS_NTMR_TGM26",
+        "appid": 5397480,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          5397480
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863674,
+          "purchase_option_name": "THE FINALS - NTMR TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1863677,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - RAD TGM26",
+        "store_url_path": "app/5397490/THE_FINALS_RAD_TGM26",
+        "store_url_slug": "THE_FINALS_RAD_TGM26",
+        "appid": 5397490,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          5397490
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863677,
+          "purchase_option_name": "THE FINALS - RAD TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1863680,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Take Flyte TGM26",
+        "store_url_path": "app/5397500/THE_FINALS_Take_Flyte_TGM26",
+        "store_url_slug": "THE_FINALS_Take_Flyte_TGM26",
+        "appid": 5397500,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          5397500
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863680,
+          "purchase_option_name": "THE FINALS - Take Flyte TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1863686,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Vanguard TGM26",
+        "store_url_path": "app/5397520/THE_FINALS_Vanguard_TGM26",
+        "store_url_slug": "THE_FINALS_Vanguard_TGM26",
+        "appid": 5397520,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          5397520
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863686,
+          "purchase_option_name": "THE FINALS - Vanguard TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1863644,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Ape Squad TGM26",
+        "store_url_path": "app/5397380/THE_FINALS_Ape_Squad_TGM26",
+        "store_url_slug": "THE_FINALS_Ape_Squad_TGM26",
+        "appid": 5397380,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          5397380
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1863644,
+          "purchase_option_name": "THE FINALS - Ape Squad TGM26",
+          "final_price_in_cents": "5199",
+          "formatted_final_price": "R$51,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1769391,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Silent Cypher Set",
+        "store_url_path": "app/5107950/THE_FINALS_Silent_Cypher_Set",
+        "store_url_slug": "THE_FINALS_Silent_Cypher_Set",
+        "appid": 5107950,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          5107950
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1769391,
+          "purchase_option_name": "THE FINALS - Silent Cypher Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1736497,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Sugar Shocker Set",
+        "store_url_path": "app/5006510/THE_FINALS_Sugar_Shocker_Set",
+        "store_url_slug": "THE_FINALS_Sugar_Shocker_Set",
+        "appid": 5006510,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          5006510
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1736497,
+          "purchase_option_name": "THE FINALS - Sugar Shocker Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1736500,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Sugar Crasher Set",
+        "store_url_path": "app/5006520/THE_FINALS_Sugar_Crasher_Set",
+        "store_url_slug": "THE_FINALS_Sugar_Crasher_Set",
+        "appid": 5006520,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          5006520
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1736500,
+          "purchase_option_name": "THE FINALS - Sugar Crasher Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1679934,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - FUNKOMATIC 2000 Set",
+        "store_url_path": "app/4835420/THE_FINALS_FUNKOMATIC_2000_Set",
+        "store_url_slug": "THE_FINALS_FUNKOMATIC_2000_Set",
+        "appid": 4835420,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          4835420
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1679934,
+          "purchase_option_name": "THE FINALS - FUNKOMATIC 2000 Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1620039,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Data Crusader Set",
+        "store_url_path": "app/4652630/THE_FINALS_Data_Crusader_Set",
+        "store_url_slug": "THE_FINALS_Data_Crusader_Set",
+        "appid": 4652630,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          4652630
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1620039,
+          "purchase_option_name": "THE FINALS - Data Crusader Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1602759,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Crown That Remains Set",
+        "store_url_path": "app/4599390/THE_FINALS_Crown_That_Remains_Set",
+        "store_url_slug": "THE_FINALS_Crown_That_Remains_Set",
+        "appid": 4599390,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          4599390
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1602759,
+          "purchase_option_name": "THE FINALS - Crown That Remains Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1539011,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Morrígan's Call Set",
+        "store_url_path": "app/4406660/THE_FINALS_Morrígans_Call_Set",
+        "store_url_slug": "THE_FINALS_Morrígans_Call_Set",
+        "appid": 4406660,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          4406660
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1539011,
+          "purchase_option_name": "THE FINALS - Morrígan's Call Set",
+          "final_price_in_cents": "10695",
+          "formatted_final_price": "R$106,95",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1494622,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Glitch Prowler Set",
+        "store_url_path": "app/4271490/THE_FINALS_Glitch_Prowler_Set",
+        "store_url_slug": "THE_FINALS_Glitch_Prowler_Set",
+        "appid": 4271490,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          4271490
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1494622,
+          "purchase_option_name": "THE FINALS - Glitch Prowler Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1460129,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Project Hú Set",
+        "store_url_path": "app/4167860/THE_FINALS_Project_Hú_Set",
+        "store_url_slug": "THE_FINALS_Project_Hú_Set",
+        "appid": 4167860,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          4167860
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1460129,
+          "purchase_option_name": "THE FINALS - Project Hú Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1424602,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - The Apothecarion Set",
+        "store_url_path": "app/4062430/THE_FINALS_The_Apothecarion_Set",
+        "store_url_slug": "THE_FINALS_The_Apothecarion_Set",
+        "appid": 4062430,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          4062430
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1424602,
+          "purchase_option_name": "THE FINALS - The Apothecarion Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1429525,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - The Chirurgeon Set",
+        "store_url_path": "app/4077560/THE_FINALS_The_Chirurgeon_Set",
+        "store_url_slug": "THE_FINALS_The_Chirurgeon_Set",
+        "appid": 4077560,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          4077560
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1429525,
+          "purchase_option_name": "THE FINALS - The Chirurgeon Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1392275,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Depth Charger Set",
+        "store_url_path": "app/3964990/THE_FINALS_Depth_Charger_Set",
+        "store_url_slug": "THE_FINALS_Depth_Charger_Set",
+        "appid": 3964990,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3964990
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1392275,
+          "purchase_option_name": "THE FINALS - Depth Charger Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1350909,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Lotus Reaper Set",
+        "store_url_path": "app/3841760/THE_FINALS_Lotus_Reaper_Set",
+        "store_url_slug": "THE_FINALS_Lotus_Reaper_Set",
+        "appid": 3841760,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3841760
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1350909,
+          "purchase_option_name": "THE FINALS - Lotus Reaper Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1316945,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Ops Override Set",
+        "store_url_path": "app/3741380/THE_FINALS_Ops_Override_Set",
+        "store_url_slug": "THE_FINALS_Ops_Override_Set",
+        "appid": 3741380,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3741380
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1316945,
+          "purchase_option_name": "THE FINALS - Ops Override Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1276368,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Zero-G Menace Set",
+        "store_url_path": "app/3620110/THE_FINALS_ZeroG_Menace_Set",
+        "store_url_slug": "THE_FINALS_ZeroG_Menace_Set",
+        "appid": 3620110,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3620110
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1276368,
+          "purchase_option_name": "THE FINALS - Zero-G Menace Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1242637,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Wavereaver Set",
+        "store_url_path": "app/3519910/THE_FINALS_Wavereaver_Set",
+        "store_url_slug": "THE_FINALS_Wavereaver_Set",
+        "appid": 3519910,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3519910
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1242637,
+          "purchase_option_name": "THE FINALS - Wavereaver Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1094423,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Metro Drifter Set",
+        "store_url_path": "app/3080260/THE_FINALS_Metro_Drifter_Set",
+        "store_url_slug": "THE_FINALS_Metro_Drifter_Set",
+        "appid": 3080260,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3080260
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1094423,
+          "purchase_option_name": "THE FINALS - Metro Drifter Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1164633,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Seas The Day Set",
+        "store_url_path": "app/3288070/THE_FINALS_Seas_The_Day_Set",
+        "store_url_slug": "THE_FINALS_Seas_The_Day_Set",
+        "appid": 3288070,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3288070
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1164633,
+          "purchase_option_name": "THE FINALS - Seas The Day Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1143243,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Hedge Hunter Set",
+        "store_url_path": "app/3225070/THE_FINALS_Hedge_Hunter_Set",
+        "store_url_slug": "THE_FINALS_Hedge_Hunter_Set",
+        "appid": 3225070,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3225070
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1143243,
+          "purchase_option_name": "THE FINALS - Hedge Hunter Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1206530,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - IVADA Cataclysm Set",
+        "store_url_path": "app/3411130/THE_FINALS_IVADA_Cataclysm_Set",
+        "store_url_slug": "THE_FINALS_IVADA_Cataclysm_Set",
+        "appid": 3411130,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3411130
+        ],
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1206530,
+          "purchase_option_name": "THE FINALS - IVADA Cataclysm Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1032885,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Bank Rabbit Set",
+        "store_url_path": "app/2897810/THE_FINALS_Bank_Rabbit_Set",
+        "store_url_slug": "THE_FINALS_Bank_Rabbit_Set",
+        "appid": 2897810,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          2897810
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1032885,
+          "purchase_option_name": "THE FINALS - Bank Rabbit Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1185051,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Permafang Prowler Set",
+        "store_url_path": "app/3348080/THE_FINALS_Permafang_Prowler_Set",
+        "store_url_slug": "THE_FINALS_Permafang_Prowler_Set",
+        "appid": 3348080,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3348080
+        ],
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1185051,
+          "purchase_option_name": "THE FINALS - Permafang Prowler Set",
+          "final_price_in_cents": "9900",
+          "formatted_final_price": "R$99,00",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1292470,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Eyecaster Pack",
+        "store_url_path": "app/3668920/THE_FINALS_Eyecaster_Pack",
+        "store_url_slug": "THE_FINALS_Eyecaster_Pack",
+        "appid": 3668920,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3668920
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1292470,
+          "purchase_option_name": "THE FINALS - Eyecaster Pack",
+          "final_price_in_cents": "2599",
+          "formatted_final_price": "R$25,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1138754,
+        "success": 1,
+        "visible": true,
+        "name": "THE FINALS - Örf Tactical Pack",
+        "store_url_path": "app/3211950/THE_FINALS_Örf_Tactical_Pack",
+        "store_url_slug": "THE_FINALS_Örf_Tactical_Pack",
+        "appid": 3211950,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3211950
+        ],
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            35
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1138754,
+          "purchase_option_name": "THE FINALS - Örf Tactical Pack",
+          "final_price_in_cents": "2599",
+          "formatted_final_price": "R$25,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      }
+    ]
+  },
+  "tagids": [
+    5363,
+    113,
+    1663,
+    3859,
+    1774,
+    1775,
+    5711,
+    3878,
+    19,
+    3839,
+    5547,
+    1708,
+    4747,
+    3843,
+    3993,
+    1685,
+    4155,
+    4166,
+    4175,
+    176981
+  ],
+  "categories": {
+    "supported_player_categoryids": [
+      1,
+      49,
+      36,
+      9,
+      38,
+      27
+    ],
+    "feature_categoryids": [
+      22,
+      35,
+      62
+    ],
+    "controller_categoryids": [
+      28,
+      55,
+      56,
+      57,
+      58
+    ]
+  },
+  "reviews": {
+    "summary_filtered": {
+      "review_count": 280737,
+      "percent_positive": 78,
+      "review_score": 6,
+      "review_score_label": "Mostly Positive"
+    },
+    "summary_language_specific": {
+      "review_count": 160995,
+      "percent_positive": 80,
+      "review_score": 8,
+      "review_score_label": "Very Positive"
+    },
+    "counts_all_purchases": true
+  },
+  "basic_info": {
+    "short_description": "THE FINALS is the ultimate free-to-play FPS Game Show. Compete across fast-paced Modes and stunning Arenas, with unparalleled, unscripted destruction that turns the environment into your greatest Weapon. Steal the Show!",
+    "publishers": [
+      {
+        "name": "Embark Studios"
+      }
+    ],
+    "developers": [
+      {
+        "name": "Embark Studios"
+      }
+    ]
+  },
+  "tags": [
+    {
+      "tagid": 5363,
+      "weight": 785
+    },
+    {
+      "tagid": 113,
+      "weight": 596
+    },
+    {
+      "tagid": 1663,
+      "weight": 563
+    },
+    {
+      "tagid": 3859,
+      "weight": 558
+    },
+    {
+      "tagid": 1774,
+      "weight": 543
+    },
+    {
+      "tagid": 1775,
+      "weight": 514
+    },
+    {
+      "tagid": 5711,
+      "weight": 509
+    },
+    {
+      "tagid": 3878,
+      "weight": 505
+    },
+    {
+      "tagid": 19,
+      "weight": 491
+    },
+    {
+      "tagid": 3839,
+      "weight": 484
+    },
+    {
+      "tagid": 5547,
+      "weight": 476
+    },
+    {
+      "tagid": 1708,
+      "weight": 465
+    },
+    {
+      "tagid": 4747,
+      "weight": 464
+    },
+    {
+      "tagid": 3843,
+      "weight": 450
+    },
+    {
+      "tagid": 3993,
+      "weight": 448
+    },
+    {
+      "tagid": 1685,
+      "weight": 446
+    },
+    {
+      "tagid": 4155,
+      "weight": 444
+    },
+    {
+      "tagid": 4166,
+      "weight": 434
+    },
+    {
+      "tagid": 4175,
+      "weight": 409
+    },
+    {
+      "tagid": 176981,
+      "weight": 405
+    }
+  ],
+  "assets": {
+    "asset_url_format": "steam/apps/2073850/${FILENAME}?t=1794480042",
+    "main_capsule": "0048d02ed92d8c2aa38af578ddec7510ece8d034/capsule_616x353.jpg",
+    "main_capsule_2x": "0048d02ed92d8c2aa38af578ddec7510ece8d034/capsule_616x353_2x.jpg",
+    "small_capsule": "f68c29ce93dd6eedf9d3c71c26a122e87a1c14c3/capsule_231x87.jpg",
+    "small_capsule_2x": "f68c29ce93dd6eedf9d3c71c26a122e87a1c14c3/capsule_231x87_2x.jpg",
+    "header": "4b0efa1275c8cedc030209eb174af726a5ca1776/header.jpg",
+    "header_2x": "4b0efa1275c8cedc030209eb174af726a5ca1776/header_2x.jpg",
+    "page_background": "2c889e20844be13f811bf1568e34022b0eb051c0/page_bg_v6.jpg",
+    "hero_capsule": "a0605df8ab24a56ae2d306e18914ca011fffad38/hero_capsule.jpg",
+    "hero_capsule_2x": "a0605df8ab24a56ae2d306e18914ca011fffad38/hero_capsule_2x.jpg",
+    "library_capsule": "bde08dae07fcb40376bd6c8bf8c17887e91f0072/library_capsule.jpg",
+    "library_capsule_2x": "bde08dae07fcb40376bd6c8bf8c17887e91f0072/library_capsule_2x.jpg",
+    "library_hero": "7f774fde78b0c485c6b61dfea87783fea5aa77c5/library_hero.jpg",
+    "library_hero_2x": "7f774fde78b0c485c6b61dfea87783fea5aa77c5/library_hero_2x.jpg",
+    "community_icon": "9532db560dca3b4982f4af3f5981b6b2ce2a6909",
+    "page_background_path": "app/2073850?t=1794480042",
+    "raw_page_background": "2c889e20844be13f811bf1568e34022b0eb051c0/page_bg_raw.jpg",
+    "edition_comparison": "3b2d4e62855558e70e039886a206d3785e7eb1f4/edition_comparision.png",
+    "last_modified": 1794480042
+  },
+  "release": {
+    "steam_release_date": 1702007340
+  },
+  "platforms": {
+    "windows": true,
+    "vr_support": {},
+    "steam_deck_compat_category": 2,
+    "steam_os_compat_category": 2,
+    "steam_frame_compat_category": 1,
+    "steam_machine_compat_category": 2
+  },
+  "game_rating": {
+    "rating": "14",
+    "descriptors": [
+      "Violência"
+    ],
+    "agency": 10,
+    "banned": false,
+    "esrb_online_music_not_rated": false,
+    "esrb_online_interactions_not_rated": false,
+    "survey_interactive_elements": [
+      1,
+      4
+    ],
+    "required_age": 0,
+    "use_age_gate": false,
+    "agency_rating": 184,
+    "image_url": "public/shared/images/game_ratings/DEJUS/14.png"
+  },
+  "purchase_options": [
+    {
+      "packageid": 1470014,
+      "purchase_option_name": "THE FINALS - Year 1 Deluxe Edition",
+      "final_price_in_cents": "20900",
+      "formatted_final_price": "R$209,00",
+      "user_can_purchase_as_gift": true,
+      "hide_discount_pct_for_compliance": false,
+      "included_game_count": 1,
+      "must_purchase_as_set": false,
+      "package_group": "default",
+      "is_edition": true,
+      "price_cannot_be_displayed_as_discount": false
+    }
+  ],
+  "screenshots": {
+    "all_ages_screenshots": [
+      {
+        "filename": "steam/apps/2073850/ab9d20c9d3f8f81b744d3a3826645268f781ab91/ss_ab9d20c9d3f8f81b744d3a3826645268f781ab91.jpg?t=1794480042",
+        "ordinal": 1
+      },
+      {
+        "filename": "steam/apps/2073850/4eca994ca6e1fb80094407b2a172f3d64269bea4/ss_4eca994ca6e1fb80094407b2a172f3d64269bea4.jpg?t=1794480042",
+        "ordinal": 2
+      },
+      {
+        "filename": "steam/apps/2073850/a68fbbac0318c9fa01330f564b83a14feafcbf44/ss_a68fbbac0318c9fa01330f564b83a14feafcbf44.jpg?t=1794480042",
+        "ordinal": 3
+      },
+      {
+        "filename": "steam/apps/2073850/4c29090e4c91ae9559edd0cad0a9f612b6c57b7b/ss_4c29090e4c91ae9559edd0cad0a9f612b6c57b7b.jpg?t=1794480042",
+        "ordinal": 4
+      },
+      {
+        "filename": "steam/apps/2073850/48d61ea5d5336f21676957223212fcc32d49c3bc/ss_48d61ea5d5336f21676957223212fcc32d49c3bc.jpg?t=1794480042",
+        "ordinal": 5
+      },
+      {
+        "filename": "steam/apps/2073850/39ca1734f5c96ca9ce9ca26010a77d7bb9dd3b1e/ss_39ca1734f5c96ca9ce9ca26010a77d7bb9dd3b1e.jpg?t=1794480042",
+        "ordinal": 6
+      }
+    ]
+  },
+  "trailers": {
+    "highlights": [
+      {
+        "trailer_name": "THE FINALS - Gameplay Trailer",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1792501372",
+        "trailer_category": 1,
+        "microtrailer": [
+          {
+            "filename": "2073850/892482080/d82cc439879e79bf7998410599dcf285dc664a49/1792491875/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "2073850/892482080/d82cc439879e79bf7998410599dcf285dc664a49/1792491875/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "2073850/892482080/d82cc439879e79bf7998410599dcf285dc664a49/1792491875/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "2073850/892482080/d82cc439879e79bf7998410599dcf285dc664a49/1792491875/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "2073850/892482080/d82cc439879e79bf7998410599dcf285dc664a49/1792491875/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "257470601/78baec94bf077b443dff76c850df2f2a71aa9958/movie_600x337.jpg",
+        "screenshot_full": "257470601/78baec94bf077b443dff76c850df2f2a71aa9958/movie_full.jpg",
+        "trailer_base_id": 1394877,
+        "all_ages": true,
+        "screenshot_small": "257470601/78baec94bf077b443dff76c850df2f2a71aa9958/movie_232x130.jpg",
+        "trailer_id": 892482080
+      }
+    ]
+  },
+  "supported_languages": [
+    {
+      "elanguage": 0,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": true,
+      "subtitles": true
+    },
+    {
+      "elanguage": 2,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 1,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 5,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 10,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 4,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 22,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 6,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 7,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 12,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 21,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    }
+  ],
+  "full_description_bbcode": "[p]THE FINALS is the ultimate free-to-play FPS Game Show. Become a Contestant in a spectacular virtual competition where fast-paced team action meets unparalleled, unscripted destruction. Fight for fame, fans, and fortune across stunning Arenas where the environment is your greatest weapon.[/p][p][/p][p][b]THE WORLD'S GREATEST GAME SHOW[/b][/p][p]Compete across stunning Arenas, from Monaco to Seoul and Kyoto. With roaring crowds and dynamic commentary, the show's hosts react to the action as it unfolds, calling out your Contestant name and celebrating your biggest plays. Every match feels like a live broadcast, with you at the center of the show.[/p][p][/p][p][b]TEAM UP ACROSS MULTIPLE MODES[/b][/p][p]Experience Cashout, THE FINALS' signature 3v3v3 mode: open vaults, collect cash, and deposit it while rival teams fight to steal your payout. Jump into 5v5 Team Deathmatch for fast respawns and nonstop action, attack or defend in 8v8 Point Break, or fight for control in 5v5 Power Shift.[/p][p][/p][p]Prefer to go solo? Face 11 Contestants in Solo Showdown, battling through different mini-modes until one remains.[/p][p]\r\n[b]THE BEST UNSCRIPTED DESTRUCTION[/b]\r\nPhysics-driven destruction reacts to your actions, not a predetermined sequence. Blast through walls, collapse floors, and bring entire buildings down. Experience spectacular chain reactions as structures crash into neighboring buildings, all brought to life with stunning next-gen graphics. Turn the environment into your greatest weapon.[/p][p]\r\n[b]LIGHT, MEDIUM, HEAVY. YOUR PLAYSTYLE.[/b][/p][p]Choose Light for speed and stealth, Medium for versatile combat and team support, or Heavy for firepower and demolition. Each build offers unique weapons, gadgets, and abilities. Disguise yourself as a trash can, revive teammates, or charge through walls. Experiment with your loadout and outsmart your rivals.[/p][p][/p][p][b]CLIMB THE RANKS. MAKE A NAME FOR YOURSELF.[/b]\r\nTest your skills in Ranked and rise through World Tour. Sign with a major Sponsor and represent their brand in the Arena. Meet your Handler, complete Challenges to earn Fans and free rewards, and uncover the stories and secrets behind the Game Show's biggest names.[/p][p][/p][p][b]ALWAYS SOMETHING NEW[/b][/p][p]Every season brings major updates, with new Arenas, weapons, gadgets, game modes, and features that keep the competition fresh and the gameplay evolving.[/p][p][/p][p][b]STEAL THE SHOW.[/b][/p]",
+  "assets_without_overrides": {
+    "asset_url_format": "steam/apps/2073850/${FILENAME}?t=1794480042",
+    "main_capsule": "0048d02ed92d8c2aa38af578ddec7510ece8d034/capsule_616x353.jpg",
+    "main_capsule_2x": "0048d02ed92d8c2aa38af578ddec7510ece8d034/capsule_616x353_2x.jpg",
+    "small_capsule": "f68c29ce93dd6eedf9d3c71c26a122e87a1c14c3/capsule_231x87.jpg",
+    "small_capsule_2x": "f68c29ce93dd6eedf9d3c71c26a122e87a1c14c3/capsule_231x87_2x.jpg",
+    "header": "4b0efa1275c8cedc030209eb174af726a5ca1776/header.jpg",
+    "header_2x": "4b0efa1275c8cedc030209eb174af726a5ca1776/header_2x.jpg",
+    "page_background": "2c889e20844be13f811bf1568e34022b0eb051c0/page_bg_v6.jpg",
+    "hero_capsule": "a0605df8ab24a56ae2d306e18914ca011fffad38/hero_capsule.jpg",
+    "hero_capsule_2x": "a0605df8ab24a56ae2d306e18914ca011fffad38/hero_capsule_2x.jpg",
+    "library_capsule": "bde08dae07fcb40376bd6c8bf8c17887e91f0072/library_capsule.jpg",
+    "library_capsule_2x": "bde08dae07fcb40376bd6c8bf8c17887e91f0072/library_capsule_2x.jpg",
+    "library_hero": "7f774fde78b0c485c6b61dfea87783fea5aa77c5/library_hero.jpg",
+    "library_hero_2x": "7f774fde78b0c485c6b61dfea87783fea5aa77c5/library_hero_2x.jpg",
+    "community_icon": "9532db560dca3b4982f4af3f5981b6b2ce2a6909",
+    "page_background_path": "app/2073850?t=1794480042",
+    "raw_page_background": "2c889e20844be13f811bf1568e34022b0eb051c0/page_bg_raw.jpg",
+    "edition_comparison": "3b2d4e62855558e70e039886a206d3785e7eb1f4/edition_comparision.png",
+    "last_modified": 1794480042
+  },
+  "links": [
+    {
+      "link_type": 1,
+      "url": "https://www.youtube.com/channel/UCEqzN3PRSCrxYq5tUwYJaPw/"
+    },
+    {
+      "link_type": 5,
+      "url": "https://discord.gg/thefinals"
+    }
+  ],
+  "package_groups": [
+    {
+      "name": "default"
+    },
+    {
+      "name": "subscriptions",
+      "display_type": 1
+    }
+  ],
+  "extra_details": {
+    "vetted": true,
+    "controller_wizard_complete": true,
+    "user_account_third_party": "Embark ID",
+    "user_account_third_party_link_to_steam": true,
+    "anticheat": {
+      "kernel_mode": true,
+      "name": "Denuvo",
+      "name_loc": "#Store_AntiCheat_Type_denuvo"
+    },
+    "eula": [
+      {
+        "name": "The Finals EULA",
+        "url": "https://store.steampowered.com//eula/2073850_eula_0"
+      }
+    ],
+    "section": [
+      {
+        "label": "THE FINALS  - Year 1 Deluxe Edition",
+        "content_bbcode": "[p][img src=\"{STEAM_APP_IMAGE}/extras/715ec56556c551378e4da7b5b571c118.avif\" width=\"1024\" height=\"766\" avif=\"{STEAM_APP_IMAGE}/extras/715ec56556c551378e4da7b5b571c118.avif\" fromclient=1][/img][/p]"
+      }
+    ],
+    "legal_notice_bbcode": "THE FINALS © 2022-2026 Embark Studios AB. THE FINALS and EMBARK trademarks and logos are trademarks or registered trademarks of Embark Studios AB. NEXON trademark and logo are trademarks or registered trademarks of NXC Corporation.",
+    "interactive_elements": [
+      1,
+      4
+    ],
+    "content_survey_ai_notes": "During the development process, we may use procedural- and AI-based tools to assist with content creation. In all such cases, the final product reflects the creativity and expression of our own development team. Examples include voiceover audio where we utilize text-to-speech tools to e.g. generate the audio of our in-game commentators Scotty & June.",
+    "press_review": [
+      {
+        "quote": "In a year of groundbreaking video game releases, The Finals is yet another highlight",
+        "score": "9/10",
+        "site": "Game Informer",
+        "url": "https://www.gameinformer.com/review/the-finals/appetite-for-destruction"
+      },
+      {
+        "quote": "The Finals is a fresh and exciting take on team based PVP shooters, featuring some of the best environmental destruction in any FPS",
+        "score": "8/10",
+        "site": "IGN",
+        "url": "https://nordic.ign.com/the-finals/76499/review/the-finals-review-in-progress"
+      },
+      {
+        "quote": "The Finals stands out amongst its contemporaries thanks to its thrilling destruction, fast-paced gunplay, and anomalous approach to familiar objectives",
+        "score": "8/10",
+        "site": "Game Spot",
+        "url": "https://www.gamespot.com/reviews/the-finals-review-an-explosive-game-show/1900-6418164/"
+      }
+    ],
+    "links_and_info": {
+      "website": "https://www.reachthefinals.com/",
+      "genreids": [
+        37,
+        1
+      ],
+      "achievements_visible": true,
+      "achievement_count": 50
+    },
+    "system_requirements": {
+      "platforms": [
+        {
+          "platform": 1,
+          "minimum": {
+            "os_version": "Windows 10 or later 64-bit (latest update)",
+            "processor": "Intel Core i5-6600K or AMD Ryzen R5 1600 processor",
+            "memory": {
+              "amount": "12",
+              "units": "GB"
+            },
+            "graphics": "NVIDIA GeForce GTX 1050 Ti or AMD Radeon RX 580",
+            "directx": "12"
+          },
+          "recommended": {
+            "os_version": "Windows 10 or later 64-bit (latest update)",
+            "processor": "Intel Core i5-9600K or AMD Ryzen 5 3600 processor",
+            "memory": {
+              "amount": "16",
+              "units": "GB"
+            },
+            "graphics": "NVIDIA GeForce RTX 2070 or AMD Radeon RX 5700 XT",
+            "directx": "12"
+          }
+        }
+      ]
+    },
+    "has_community_hub": true,
+    "hardware_compatibility": {
+      "steam_deck_tests": [
+        {
+          "display_type": 3,
+          "loc_token": "#SteamDeckVerified_TestResult_TextInputDoesNotAutomaticallyInvokesKeyboard"
+        },
+        {
+          "display_type": 3,
+          "loc_token": "#SteamDeckVerified_TestResult_InterfaceTextIsNotLegible"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamDeckVerified_TestResult_DefaultControllerConfigFullyFunctional"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamDeckVerified_TestResult_ControllerGlyphsMatchDeckDevice"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamDeckVerified_TestResult_DefaultConfigurationIsPerformant"
+        },
+        {
+          "display_type": 1,
+          "loc_token": "#SteamDeckVerified_TestResult_ExternalControllersNotSupportedPrimaryPlayer"
+        }
+      ],
+      "steam_os_tests": [
+        {
+          "display_type": 3,
+          "loc_token": "#SteamOS_TestResult_GameStartupFunctional"
+        },
+        {
+          "display_type": 1,
+          "loc_token": "#SteamOS_TestResult_TextInputDoesNotAutomaticallyInvokesKeyboard"
+        },
+        {
+          "display_type": 1,
+          "loc_token": "#SteamOS_TestResult_ExternalControllersNotSupportedPrimaryPlayer"
+        }
+      ],
+      "steam_machine_tests": [
+        {
+          "display_type": 3,
+          "loc_token": "#SteamMachine_TestResult_TextInputDoesNotAutomaticallyInvokesKeyboard"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamMachine_TestResult_DefaultControllerConfigFullyFunctional"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamMachine_TestResult_ControllerGlyphsMatchDevice"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamMachine_TestResult_DefaultConfigurationIsPerformant"
+        }
+      ],
+      "steam_frame_tests": [
+        {
+          "display_type": 2,
+          "loc_token": "#SteamFrame_TestResult_SteamOSDoesNotSupport"
+        }
+      ]
+    },
+    "dlc_for_purchase": {
+      "dlc": [
+        {
+          "appid": 5258280,
+          "packageid": 1818491,
+          "highlight_reason": 3
+        },
+        {
+          "appid": 4124770,
+          "packageid": 1445267
+        },
+        {
+          "appid": 5258290,
+          "packageid": 1818494
+        },
+        {
+          "appid": 5258310,
+          "packageid": 1818500
+        },
+        {
+          "appid": 5258300,
+          "packageid": 1818497
+        },
+        {
+          "appid": 5397360,
+          "packageid": 1863638
+        },
+        {
+          "appid": 5397370,
+          "packageid": 1863641
+        },
+        {
+          "appid": 5397390,
+          "packageid": 1863647
+        },
+        {
+          "appid": 5397400,
+          "packageid": 1863650
+        },
+        {
+          "appid": 5397410,
+          "packageid": 1863653
+        },
+        {
+          "appid": 5397420,
+          "packageid": 1863656
+        },
+        {
+          "appid": 5397430,
+          "packageid": 1863659
+        },
+        {
+          "appid": 5397440,
+          "packageid": 1863662
+        },
+        {
+          "appid": 5397450,
+          "packageid": 1863665
+        },
+        {
+          "appid": 5397460,
+          "packageid": 1863668
+        },
+        {
+          "appid": 5397470,
+          "packageid": 1863671
+        },
+        {
+          "appid": 5397480,
+          "packageid": 1863674
+        },
+        {
+          "appid": 5397490,
+          "packageid": 1863677
+        },
+        {
+          "appid": 5397500,
+          "packageid": 1863680
+        },
+        {
+          "appid": 5397520,
+          "packageid": 1863686
+        },
+        {
+          "appid": 5397380,
+          "packageid": 1863644
+        },
+        {
+          "appid": 5107950,
+          "packageid": 1769391
+        },
+        {
+          "appid": 5006510,
+          "packageid": 1736497
+        },
+        {
+          "appid": 5006520,
+          "packageid": 1736500
+        },
+        {
+          "appid": 4835420,
+          "packageid": 1679934
+        },
+        {
+          "appid": 4652630,
+          "packageid": 1620039
+        },
+        {
+          "appid": 4599390,
+          "packageid": 1602759
+        },
+        {
+          "appid": 4406660,
+          "packageid": 1539011
+        },
+        {
+          "appid": 4271490,
+          "packageid": 1494622
+        },
+        {
+          "appid": 4167860,
+          "packageid": 1460129
+        },
+        {
+          "appid": 4197310
+        },
+        {
+          "appid": 4062430,
+          "packageid": 1424602
+        },
+        {
+          "appid": 4077560,
+          "packageid": 1429525
+        },
+        {
+          "appid": 3964990,
+          "packageid": 1392275
+        },
+        {
+          "appid": 3841760,
+          "packageid": 1350909
+        },
+        {
+          "appid": 3741380,
+          "packageid": 1316945
+        },
+        {
+          "appid": 3620110,
+          "packageid": 1276368
+        },
+        {
+          "appid": 3519910,
+          "packageid": 1242637
+        },
+        {
+          "appid": 3080260,
+          "packageid": 1094423
+        },
+        {
+          "appid": 3288070,
+          "packageid": 1164633
+        },
+        {
+          "appid": 3225070,
+          "packageid": 1143243
+        },
+        {
+          "appid": 3411130,
+          "packageid": 1206530,
+          "content_descriptorids": [
+            2,
+            5
+          ]
+        },
+        {
+          "appid": 2897810,
+          "packageid": 1032885
+        },
+        {
+          "appid": 3348080,
+          "packageid": 1185051,
+          "content_descriptorids": [
+            2,
+            5
+          ]
+        },
+        {
+          "appid": 3668920,
+          "packageid": 1292470
+        },
+        {
+          "appid": 3211950,
+          "packageid": 1138754,
+          "content_descriptorids": [
+            2,
+            5
+          ]
+        }
+      ],
+      "dlc_count": 46,
+      "formatted_total_price": "R$3.680,75"
+    }
+  }
+}

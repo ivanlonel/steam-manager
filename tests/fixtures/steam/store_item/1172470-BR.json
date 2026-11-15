@@ -1,0 +1,643 @@
+{
+  "item_type": 0,
+  "id": 1172470,
+  "success": 1,
+  "visible": true,
+  "name": "Apex Legends™",
+  "store_url_path": "app/1172470/Apex_Legends",
+  "store_url_slug": "Apex_Legends",
+  "appid": 1172470,
+  "type": 0,
+  "is_free": true,
+  "included_items": {
+    "included_creators": [
+      {
+        "item_type": 5,
+        "id": 36135791,
+        "success": 1,
+        "visible": true,
+        "name": "Electronic Arts",
+        "store_url_path": "developer/EA",
+        "store_url_slug": "EA",
+        "game_count": 203
+      },
+      {
+        "item_type": 5,
+        "id": 37913704,
+        "success": 1,
+        "visible": true,
+        "name": "Respawn",
+        "store_url_path": "developer/respawn",
+        "store_url_slug": "respawn",
+        "game_count": 5
+      }
+    ]
+  },
+  "tagids": [
+    113,
+    3859,
+    176981,
+    1663,
+    1774,
+    3839,
+    1775,
+    19,
+    620519,
+    5711,
+    1708,
+    3942,
+    1685,
+    4236,
+    1662,
+    4747,
+    4136,
+    4115,
+    3854,
+    4145
+  ],
+  "categories": {
+    "supported_player_categoryids": [
+      1,
+      49,
+      36,
+      9,
+      38
+    ],
+    "feature_categoryids": [
+      22,
+      29,
+      35,
+      72,
+      74
+    ],
+    "controller_categoryids": [
+      28,
+      55,
+      57,
+      58
+    ]
+  },
+  "reviews": {
+    "summary_filtered": {
+      "review_count": 1078128,
+      "percent_positive": 67,
+      "review_score": 5,
+      "review_score_label": "Mixed"
+    },
+    "summary_language_specific": {
+      "review_count": 453713,
+      "percent_positive": 76,
+      "review_score": 6,
+      "review_score_label": "Mostly Positive"
+    },
+    "counts_all_purchases": true
+  },
+  "basic_info": {
+    "short_description": "Apex Legends is the award-winning, free-to-play Hero Shooter from Respawn Entertainment. Master an ever-growing roster of legendary characters with powerful abilities, and experience strategic squad play and innovative gameplay in the next evolution of Hero Shooter and Battle Royale.",
+    "publishers": [
+      {
+        "name": "Electronic Arts",
+        "creator_clan_account_id": 36135791
+      }
+    ],
+    "developers": [
+      {
+        "name": "Respawn",
+        "creator_clan_account_id": 37913704
+      }
+    ],
+    "franchises": [
+      {
+        "name": "Apex Legends"
+      }
+    ]
+  },
+  "tags": [
+    {
+      "tagid": 113,
+      "weight": 1349
+    },
+    {
+      "tagid": 3859,
+      "weight": 891
+    },
+    {
+      "tagid": 176981,
+      "weight": 886
+    },
+    {
+      "tagid": 1663,
+      "weight": 868
+    },
+    {
+      "tagid": 1774,
+      "weight": 816
+    },
+    {
+      "tagid": 3839,
+      "weight": 640
+    },
+    {
+      "tagid": 1775,
+      "weight": 558
+    },
+    {
+      "tagid": 19,
+      "weight": 490
+    },
+    {
+      "tagid": 620519,
+      "weight": 457
+    },
+    {
+      "tagid": 5711,
+      "weight": 426
+    },
+    {
+      "tagid": 1708,
+      "weight": 322
+    },
+    {
+      "tagid": 3942,
+      "weight": 295
+    },
+    {
+      "tagid": 1685,
+      "weight": 291
+    },
+    {
+      "tagid": 4236,
+      "weight": 289
+    },
+    {
+      "tagid": 1662,
+      "weight": 286
+    },
+    {
+      "tagid": 4747,
+      "weight": 273
+    },
+    {
+      "tagid": 4136,
+      "weight": 258
+    },
+    {
+      "tagid": 4115,
+      "weight": 214
+    },
+    {
+      "tagid": 3854,
+      "weight": 209
+    },
+    {
+      "tagid": 4145,
+      "weight": 172
+    }
+  ],
+  "assets": {
+    "asset_url_format": "steam/apps/1172470/${FILENAME}?t=1794339458",
+    "main_capsule": "31401d14b58e11e064fbdad0bab9f37f9ba46f41/capsule_616x353_alt_assets_7.jpg",
+    "main_capsule_2x": "31401d14b58e11e064fbdad0bab9f37f9ba46f41/capsule_616x353_alt_assets_7_2x.jpg",
+    "small_capsule": "0f7e056bbc3fb645cfd812a0154ebf3d53ef47f1/capsule_231x87_alt_assets_7.jpg",
+    "small_capsule_2x": "0f7e056bbc3fb645cfd812a0154ebf3d53ef47f1/capsule_231x87_alt_assets_7_2x.jpg",
+    "header": "dc5c390e9a273a7248f75c1b2d59987f6179323c/header_alt_assets_7.jpg",
+    "header_2x": "dc5c390e9a273a7248f75c1b2d59987f6179323c/header_alt_assets_7_2x.jpg",
+    "page_background": "16d10d528954b357b64fa7e2e7fa11b988b22563/page_bg_v6.jpg",
+    "hero_capsule": "b5169bebca35166bb120a46ffcfc01dc4eac3533/hero_capsule_alt_assets_7.jpg",
+    "hero_capsule_2x": "b5169bebca35166bb120a46ffcfc01dc4eac3533/hero_capsule_alt_assets_7_2x.jpg",
+    "library_capsule": "b727d513ccbd272e35095089837d386176c59a97/library_capsule.jpg",
+    "library_capsule_2x": "b727d513ccbd272e35095089837d386176c59a97/library_capsule_2x.jpg",
+    "library_hero": "b9cb4783b9794eaa62020945f7caaf3cf822da20/library_hero.jpg",
+    "library_hero_2x": "b9cb4783b9794eaa62020945f7caaf3cf822da20/library_hero_2x.jpg",
+    "community_icon": "8986dd626da56db5f3fe09bc1b8871739de8b00d",
+    "page_background_path": "app/1172470?t=1794339458",
+    "raw_page_background": "16d10d528954b357b64fa7e2e7fa11b988b22563/page_bg_raw.jpg",
+    "last_modified": 1794339458
+  },
+  "release": {
+    "steam_release_date": 1604548800,
+    "original_release_date": 0
+  },
+  "platforms": {
+    "windows": true,
+    "vr_support": {},
+    "steam_deck_compat_category": 1,
+    "steam_os_compat_category": 1,
+    "steam_frame_compat_category": 1,
+    "steam_machine_compat_category": 1
+  },
+  "game_rating": {
+    "rating": "18",
+    "descriptors": [
+      "Violência (Violence)"
+    ],
+    "agency": 10,
+    "banned": false,
+    "esrb_online_music_not_rated": false,
+    "esrb_online_interactions_not_rated": false,
+    "survey_interactive_elements": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "required_age": 0,
+    "use_age_gate": false,
+    "agency_rating": 186,
+    "image_url": "public/shared/images/game_ratings/DEJUS/18.png"
+  },
+  "screenshots": {
+    "all_ages_screenshots": [
+      {
+        "filename": "steam/apps/1172470/61bab081f3fdc1373da42fa962497ed2ea760890/ss_61bab081f3fdc1373da42fa962497ed2ea760890.jpg?t=1794339458",
+        "ordinal": 1
+      },
+      {
+        "filename": "steam/apps/1172470/51c8778e7d61d7834436c2e68084b17243711505/ss_51c8778e7d61d7834436c2e68084b17243711505.jpg?t=1794339458",
+        "ordinal": 2
+      },
+      {
+        "filename": "steam/apps/1172470/f591a8185a61079f0d43ef2a59002f00ef496ffd/ss_f591a8185a61079f0d43ef2a59002f00ef496ffd.jpg?t=1794339458",
+        "ordinal": 3
+      },
+      {
+        "filename": "steam/apps/1172470/756eb71fa6a7f567f132d26c8bfea5c2ff0dee0d/ss_756eb71fa6a7f567f132d26c8bfea5c2ff0dee0d.jpg?t=1794339458",
+        "ordinal": 4
+      },
+      {
+        "filename": "steam/apps/1172470/990eed82d89b5c403168804b6b891cb7acc93426/ss_990eed82d89b5c403168804b6b891cb7acc93426.jpg?t=1794339458",
+        "ordinal": 5
+      }
+    ]
+  },
+  "trailers": {
+    "highlights": [
+      {
+        "trailer_name": "Apex Legends: Cipher Gameplay Trailer WW ",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1793731323",
+        "trailer_category": 0,
+        "microtrailer": [
+          {
+            "filename": "1172470/756891131/fee6a815b821b7a2d21ecba7f994564efe82cd12/1793730568/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "1172470/756891131/fee6a815b821b7a2d21ecba7f994564efe82cd12/1793730568/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "1172470/756891131/fee6a815b821b7a2d21ecba7f994564efe82cd12/1793730568/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "1172470/756891131/fee6a815b821b7a2d21ecba7f994564efe82cd12/1793730568/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "1172470/756891131/fee6a815b821b7a2d21ecba7f994564efe82cd12/1793730568/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "257490366/86ee0f323b7713eeb7986636e76e9a6b1dc6c77a/movie_600x337.jpg",
+        "screenshot_full": "257490366/86ee0f323b7713eeb7986636e76e9a6b1dc6c77a/movie_full.jpg",
+        "trailer_base_id": 1422572,
+        "all_ages": true,
+        "screenshot_small": "257490366/86ee0f323b7713eeb7986636e76e9a6b1dc6c77a/movie_232x130.jpg",
+        "trailer_id": 756891131
+      },
+      {
+        "trailer_name": " Apex Legends | Godzilla Event WW  ",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1793909599",
+        "trailer_category": 0,
+        "microtrailer": [
+          {
+            "filename": "1172470/1429282216/e7434292c17a2dff41596f424153e240c903b7e8/1793908351/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "1172470/1429282216/e7434292c17a2dff41596f424153e240c903b7e8/1793908351/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "1172470/1429282216/e7434292c17a2dff41596f424153e240c903b7e8/1793908351/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "1172470/1429282216/e7434292c17a2dff41596f424153e240c903b7e8/1793908351/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "1172470/1429282216/e7434292c17a2dff41596f424153e240c903b7e8/1793908351/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "257493721/203ab16d439981c24e636795c919e7d4976ccb37/movie_600x337.jpg",
+        "screenshot_full": "257493721/203ab16d439981c24e636795c919e7d4976ccb37/movie_full.jpg",
+        "trailer_base_id": 1427177,
+        "all_ages": true,
+        "screenshot_small": "257493721/203ab16d439981c24e636795c919e7d4976ccb37/movie_232x130.jpg",
+        "trailer_id": 1429282216
+      }
+    ]
+  },
+  "supported_languages": [
+    {
+      "elanguage": 0,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": true,
+      "subtitles": false
+    },
+    {
+      "elanguage": 2,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": true,
+      "subtitles": false
+    },
+    {
+      "elanguage": 3,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": true,
+      "subtitles": false
+    },
+    {
+      "elanguage": 1,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": true,
+      "subtitles": false
+    },
+    {
+      "elanguage": 5,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": true,
+      "subtitles": false
+    },
+    {
+      "elanguage": 10,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": true,
+      "subtitles": false
+    },
+    {
+      "elanguage": 4,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": true,
+      "subtitles": false
+    },
+    {
+      "elanguage": 12,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": true,
+      "subtitles": false
+    },
+    {
+      "elanguage": 22,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 8,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": true,
+      "subtitles": false
+    },
+    {
+      "elanguage": 6,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": true,
+      "subtitles": false
+    },
+    {
+      "elanguage": 7,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 27,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    },
+    {
+      "elanguage": 25,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": false
+    }
+  ],
+  "full_description_bbcode": "Conquer with character in Apex Legends, a free-to-play* Hero shooter where legendary characters with powerful abilities team up to battle for fame & fortune on the fringes of the Frontier.\r\n\r\nMaster an ever-growing roster of diverse Legends, deep-tactical squad play, and bold, new innovations that go beyond the Battle Royale experience — all within a rugged world where anything goes. Welcome to the next evolution of Hero Shooter.\r\n\r\n[b]KEY FEATURES[/b]\r\n[img src=\"{STEAM_APP_IMAGE}/extras/d411a4f81aae75f3d639ca2c241b84b9.avif\" width=\"610\" height=\"2884\" avif=\"{STEAM_APP_IMAGE}/extras/d411a4f81aae75f3d639ca2c241b84b9.avif\" fromclient=1][/img]\r\n\r\nThis game includes optional in-game purchases of virtual currency that can be used to acquire virtual in-game items, including a random selection of virtual in-game items.\r\n\r\nNote that any unused Apex Coins will expire 180 days after the first date in which they are acquired or purchased. The oldest Apex Coins that are subject to expiration in your balance will always be used first when using them to make in-game purchases.\r\n\r\nApex Packs purchase is not available in Belgium.",
+  "assets_without_overrides": {
+    "asset_url_format": "steam/apps/1172470/${FILENAME}?t=1794339458",
+    "main_capsule": "c8ea539414b719b955aa29f848b0fc4bba4dc867/capsule_616x353.jpg",
+    "main_capsule_2x": "c8ea539414b719b955aa29f848b0fc4bba4dc867/capsule_616x353_2x.jpg",
+    "small_capsule": "9fbf2ae1cf580d02297a15b2bc9bf3f5b4ad7701/capsule_231x87.jpg",
+    "small_capsule_2x": "9fbf2ae1cf580d02297a15b2bc9bf3f5b4ad7701/capsule_231x87_2x.jpg",
+    "header": "4219c147f1e094297c726d537518babba7f3ae2d/header.jpg",
+    "header_2x": "4219c147f1e094297c726d537518babba7f3ae2d/header_2x.jpg",
+    "page_background": "16d10d528954b357b64fa7e2e7fa11b988b22563/page_bg_v6.jpg",
+    "hero_capsule": "ba300e50da0af0c03b45d31702c60e325873a2c8/hero_capsule.jpg",
+    "hero_capsule_2x": "ba300e50da0af0c03b45d31702c60e325873a2c8/hero_capsule_2x.jpg",
+    "library_capsule": "b727d513ccbd272e35095089837d386176c59a97/library_capsule.jpg",
+    "library_capsule_2x": "b727d513ccbd272e35095089837d386176c59a97/library_capsule_2x.jpg",
+    "library_hero": "b9cb4783b9794eaa62020945f7caaf3cf822da20/library_hero.jpg",
+    "library_hero_2x": "b9cb4783b9794eaa62020945f7caaf3cf822da20/library_hero_2x.jpg",
+    "community_icon": "8986dd626da56db5f3fe09bc1b8871739de8b00d",
+    "page_background_path": "app/1172470?t=1794339458",
+    "raw_page_background": "16d10d528954b357b64fa7e2e7fa11b988b22563/page_bg_raw.jpg",
+    "last_modified": 1794339458
+  },
+  "links": [
+    {
+      "link_type": 5,
+      "url": "https://discord.com/invite/apexlegends"
+    },
+    {
+      "link_type": 2,
+      "url": "https://www.facebook.com/playapex/"
+    },
+    {
+      "link_type": 11,
+      "url": "https://www.instagram.com/playapex/"
+    },
+    {
+      "link_type": 14,
+      "url": "https://www.tiktok.com/@playapex"
+    },
+    {
+      "link_type": 10,
+      "url": "https://www.reddit.com/r/apexlegends/"
+    }
+  ],
+  "package_groups": [
+    {
+      "name": "default"
+    },
+    {
+      "name": "subscriptions",
+      "display_type": 1
+    },
+    {
+      "name": "ApexLegendsVC",
+      "heading": "Apex Legends - VC",
+      "display_type": 1,
+      "dropdown_title": "Buy Apex Legends - VC",
+      "dropdown_description_bbcode": "Click [url=http://store.steampowered.com/app/3323520/ fromclient=1]HERE[/url] for more information."
+    }
+  ],
+  "extra_details": {
+    "vetted": true,
+    "controller_wizard_complete": true,
+    "user_account_third_party": "EA Account",
+    "user_account_third_party_link_to_steam": true,
+    "anticheat": {
+      "kernel_mode": true
+    },
+    "eula": [
+      {
+        "name": "Apex Legends EULA",
+        "url": "https://store.steampowered.com//eula/1172470_eula_1"
+      }
+    ],
+    "section": [
+      {
+        "label": "Apex Legends: Cipher",
+        "content_bbcode": "[img src=\"{STEAM_APP_IMAGE}/extras/00f049967dcfba0875aa65b9b5ea615e.avif\" big_src=\"{STEAM_APP_IMAGE}/extras_big/00f049967dcfba0875aa65b9b5ea615e.avif\" width=\"1560\" height=\"2258\" avif=\"{STEAM_APP_IMAGE}/extras/00f049967dcfba0875aa65b9b5ea615e.avif\" fromclient=1][/img]"
+      }
+    ],
+    "legal_notice_bbcode": "Germany, Austria, and Switzerland only: EA’S PRIVACY & COOKIE POLICY (privacy.ea.com/de) APPLIES. \r\nOther EU, United Kingdom, Norway, Iceland, Andorra, Bosnia and Herzegovina, Georgia, Kosovo, Macedonia (FYROM), Moldova, Monaco, Montenegro, San Marino, Serbia, Turkey, Vatican City (Holy See), Liechtenstein only: ACKNOWLEDGEMENT OF EA's PRIVACY & COOKIE POLICY (privacy.ea.com) REQUIRED TO PLAY. \r\nAll other residents: ACCEPTANCE OF EA PRIVACY & COOKIE POLICY (privacy.ea.com) REQUIRED TO PLAY. \r\n\r\nINTERNET CONNECTION; EA ACCOUNT; STEAM ACCOUNT; ACCEPTANCE OF EA USER AGREEMENT (terms.ea.com) REQUIRED TO PLAY. YOU MUST LINK YOUR EA AND STEAM ACCOUNTS TO PLAY; EA WILL SHARE YOUR ACCOUNT ID AND INDIVIDUAL GAME AND PLAY RECORDS WITH STEAM TO VALIDATE YOUR PURCHASE AND/OR REFUND REQUEST. ACCESS TO SOFTWARE CONTENT IS LIMITED TO ONE EA & ONE STEAM ACCOUNT & IS NON-TRANSFERABLE AFTER PURCHASE. YOU MAY NEED TO BE 13+ or 16+ TO REGISTER FOR AN EA ACCOUNT (AGE MAY VARY, SEE [url=http://o.ea.com/ea/child-access]http://o.ea.com/ea/child-access[/url] FOR DETAILS). SOME CONTENT MAY REQUIRE GAMEPLAY TO UNLOCK. CONTENT UPDATES MAY BE DOWNLOADED AUTOMATICALLY, REQUIRE ADDITIONAL STORAGE, AND INCUR BANDWIDTH USAGE FEES. EA MAY PROVIDE CERTAIN FREE INCREMENTAL CONTENT &/OR UPDATES. EA MAY RETIRE ONLINE FEATURES AFTER 30 DAYS NOTICE POSTED ON [url=http://ea.com/service-updates]ea.com/service-updates.[/url]\r\n\r\nEA User Agreement: [url=http://terms.ea.com/de]terms.ea.com/de[/url] for German residents and [url=http://terms.ea.com]terms.ea.com[/url] for all other residents\r\nEA Privacy & Cookie Policy: [url=http://privacy.ea.com/de]privacy.ea.com/de[/url] for German residents and [url=http://privacy.ea.com]privacy.ea.com[/url] for all other residents",
+    "interactive_elements": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "press_review": [
+      {
+        "quote": "The champion of Battle Royales.",
+        "score": "9/10",
+        "site": "GameSpot",
+        "url": "https://www.gamespot.com/games/apex-legends/reviews/"
+      },
+      {
+        "quote": "The best Battle Royale game.",
+        "score": "5/5",
+        "site": "GamesRadar+",
+        "url": "https://www.gamesradar.com/apex-legends-review/"
+      },
+      {
+        "quote": "Free, friendly, and consistently fun.  It's the best Battle Royale game available today.",
+        "score": "93/100",
+        "site": "PC Gamer",
+        "url": "https://www.pcgamer.com/apex-legends-review/"
+      }
+    ],
+    "partner_awards_bbcode": "[img src=\"{STEAM_APP_IMAGE}/extras/127e2d3d1d6a6ba4139397ac435527c8.avif\" width=\"275\" height=\"814\" avif=\"{STEAM_APP_IMAGE}/extras/127e2d3d1d6a6ba4139397ac435527c8.avif\" fromclient=1][/img]",
+    "links_and_info": {
+      "website": "https://www.ea.com/games/apex-legends",
+      "genreids": [
+        1,
+        25,
+        37
+      ],
+      "achievements_visible": true,
+      "achievement_count": 12
+    },
+    "points_shop_eligible": true,
+    "metacritic": {
+      "score": 88,
+      "url": "https://www.metacritic.com/game/pc/apex-legends?ftag=MCD-06-10aaa1f"
+    },
+    "system_requirements": {
+      "platforms": [
+        {
+          "platform": 1,
+          "minimum": {
+            "os_version": "64-bit Windows 10",
+            "processor": "AMD FX 4350 or Equivalent, Intel Core i3 6300 or Equivalent",
+            "memory": {
+              "amount": "6",
+              "units": "GB"
+            },
+            "graphics": "AMD Radeon™ HD 7790 (2 GB), NVIDIA GeForce® GTX 950",
+            "directx": "12",
+            "broadband": true,
+            "storage": {
+              "amount": "75",
+              "units": "GB"
+            },
+            "notes": "~3.8GB for 1 localized language"
+          },
+          "recommended": {
+            "os_version": "64-bit Windows 10",
+            "processor": "Ryzen 5 CPU or Equivalent",
+            "memory": {
+              "amount": "8",
+              "units": "GB"
+            },
+            "graphics": "AMD Radeon™ R9 290, NVIDIA GeForce® GTX 970",
+            "directx": "12",
+            "broadband": true,
+            "storage": {
+              "amount": "75",
+              "units": "GB"
+            },
+            "notes": "~3.8GB for 1 localized language"
+          },
+          "requires_64bit": true
+        }
+      ]
+    },
+    "has_community_hub": true,
+    "sale_pages": [
+      {
+        "clan_account_id": 38516650,
+        "event_gid": "681890308606133982"
+      }
+    ],
+    "hardware_compatibility": {
+      "steam_deck_tests": [
+        {
+          "display_type": 2,
+          "loc_token": "#SteamDeckVerified_TestResult_UnsupportedAntiCheat_Other"
+        }
+      ],
+      "steam_os_tests": [
+        {
+          "display_type": 2,
+          "loc_token": "#SteamOS_TestResult_UnsupportedAntiCheat_Other"
+        }
+      ],
+      "steam_machine_tests": [
+        {
+          "display_type": 2,
+          "loc_token": "#SteamMachine_TestResult_UnsupportedAntiCheat_Other"
+        }
+      ],
+      "steam_frame_tests": [
+        {
+          "display_type": 2,
+          "loc_token": "#SteamFrame_TestResult_UnsupportedAntiCheatConfiguration"
+        }
+      ]
+    }
+  }
+}

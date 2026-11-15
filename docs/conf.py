@@ -31,6 +31,8 @@ nitpick_ignore_regex: Final[list[tuple[str, str]]] = [("py:class", r"httpx\..*")
 autodoc_default_options: Final[dict[str, bool]] = {"members": True, "undoc-members": True}
 autodoc_member_order: Final[str] = "bysource"
 autosummary_generate: Final[bool] = True
+# Honour a module's __all__ where it has one (models/lookups.py keeps pydantic's names out).
+autosummary_ignore_module_all: Final[bool] = False
 intersphinx_mapping: Final[dict[str, tuple[str, None]]] = {
     "pydantic": ("https://docs.pydantic.dev/latest/", None),
     "python": ("https://docs.python.org/3/", None),

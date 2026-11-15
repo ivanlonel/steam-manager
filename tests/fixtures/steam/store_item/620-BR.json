@@ -1,0 +1,3387 @@
+{
+  "item_type": 0,
+  "id": 620,
+  "success": 1,
+  "visible": true,
+  "name": "Portal 2",
+  "store_url_path": "app/620/Portal_2",
+  "store_url_slug": "Portal_2",
+  "appid": 620,
+  "type": 0,
+  "included_items": {
+    "included_apps": [
+      {
+        "item_type": 0,
+        "id": 104600,
+        "success": 1,
+        "visible": true,
+        "name": "Portal 2 - The Final Hours",
+        "store_url_path": "app/104600/Portal_2_The_Final_Hours",
+        "store_url_slug": "Portal_2_The_Final_Hours",
+        "appid": 104600,
+        "type": 0,
+        "categories": {
+          "supported_player_categoryids": [
+            2
+          ],
+          "feature_categoryids": [
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 8187,
+          "purchase_option_name": "Portal 2 - The Final Hours",
+          "final_price_in_cents": "449",
+          "formatted_final_price": "R$4,49",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 400,
+        "success": 1,
+        "visible": true,
+        "name": "Portal",
+        "store_url_path": "app/400/Portal",
+        "store_url_slug": "Portal",
+        "appid": 400,
+        "type": 0,
+        "related_items": {
+          "demo_appid": [
+            410
+          ],
+          "demos": [
+            {
+              "appid": 410,
+              "show_above_purchase": true
+            }
+          ]
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2
+          ],
+          "feature_categoryids": [
+            22,
+            13,
+            65,
+            67,
+            68,
+            69,
+            70,
+            79,
+            17,
+            16,
+            14,
+            41,
+            42,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58,
+            59
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 515,
+          "purchase_option_name": "Portal",
+          "final_price_in_cents": "3399",
+          "formatted_final_price": "R$33,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 240,
+        "success": 1,
+        "visible": true,
+        "name": "Counter-Strike: Source",
+        "store_url_path": "app/240/CounterStrike_Source",
+        "store_url_slug": "CounterStrike_Source",
+        "appid": 240,
+        "type": 0,
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            23,
+            8,
+            15,
+            16,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 37,
+          "purchase_option_name": "Counter-Strike: Source",
+          "final_price_in_cents": "3399",
+          "formatted_final_price": "R$33,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 10,
+        "success": 1,
+        "visible": true,
+        "name": "Counter-Strike",
+        "store_url_path": "app/10/CounterStrike",
+        "store_url_slug": "CounterStrike",
+        "appid": 10,
+        "type": 0,
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            37
+          ],
+          "feature_categoryids": [
+            66,
+            68,
+            69,
+            75,
+            8,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 7,
+          "purchase_option_name": "Counter-Strike: Condition Zero",
+          "final_price_in_cents": "3399",
+          "formatted_final_price": "R$33,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 2,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 80,
+        "success": 1,
+        "visible": true,
+        "name": "Counter-Strike: Condition Zero",
+        "store_url_path": "app/80/CounterStrike_Condition_Zero",
+        "store_url_slug": "CounterStrike_Condition_Zero",
+        "appid": 80,
+        "type": 0,
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1
+          ],
+          "feature_categoryids": [
+            66,
+            68,
+            69,
+            78,
+            8,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 7,
+          "purchase_option_name": "Counter-Strike: Condition Zero",
+          "final_price_in_cents": "3399",
+          "formatted_final_price": "R$33,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 2,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 300,
+        "success": 1,
+        "visible": true,
+        "name": "Day of Defeat: Source",
+        "store_url_path": "app/300/Day_of_Defeat_Source",
+        "store_url_slug": "Day_of_Defeat_Source",
+        "appid": 300,
+        "type": 0,
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            66,
+            67,
+            68,
+            69,
+            70,
+            78,
+            8,
+            15,
+            16,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 25,
+          "purchase_option_name": "Day of Defeat: Source",
+          "final_price_in_cents": "3399",
+          "formatted_final_price": "R$33,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 30,
+        "success": 1,
+        "visible": true,
+        "name": "Day of Defeat",
+        "store_url_path": "app/30/Day_of_Defeat",
+        "store_url_slug": "Day_of_Defeat",
+        "appid": 30,
+        "type": 0,
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1
+          ],
+          "feature_categoryids": [
+            66,
+            67,
+            68,
+            69,
+            8,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 30,
+          "purchase_option_name": "Day of Defeat",
+          "final_price_in_cents": "1799",
+          "formatted_final_price": "R$17,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 40,
+        "success": 1,
+        "visible": true,
+        "name": "Deathmatch Classic",
+        "store_url_path": "app/40/Deathmatch_Classic",
+        "store_url_slug": "Deathmatch_Classic",
+        "appid": 40,
+        "type": 0,
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            37
+          ],
+          "feature_categoryids": [
+            66,
+            68,
+            69,
+            75,
+            8,
+            44,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 31,
+          "purchase_option_name": "Deathmatch Classic",
+          "final_price_in_cents": "1799",
+          "formatted_final_price": "R$17,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 70,
+        "success": 1,
+        "visible": true,
+        "name": "Half-Life",
+        "store_url_path": "app/70/HalfLife",
+        "store_url_slug": "HalfLife",
+        "appid": 70,
+        "type": 0,
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36
+          ],
+          "feature_categoryids": [
+            66,
+            68,
+            69,
+            74,
+            75,
+            78,
+            79,
+            23,
+            8,
+            41,
+            42,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 34,
+          "purchase_option_name": "Half-Life",
+          "final_price_in_cents": "3399",
+          "formatted_final_price": "R$33,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 280,
+        "success": 1,
+        "visible": true,
+        "name": "Half-Life: Source",
+        "store_url_path": "app/280/HalfLife_Source",
+        "store_url_slug": "HalfLife_Source",
+        "appid": 280,
+        "type": 0,
+        "categories": {
+          "supported_player_categoryids": [
+            2
+          ],
+          "feature_categoryids": [
+            44,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 38,
+          "purchase_option_name": "Half-Life 1: Source",
+          "final_price_in_cents": "3399",
+          "formatted_final_price": "R$33,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 2,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        },
+        "unlisted": true
+      },
+      {
+        "item_type": 0,
+        "id": 360,
+        "success": 1,
+        "visible": true,
+        "name": "Half-Life Deathmatch: Source",
+        "store_url_path": "app/360/HalfLife_Deathmatch_Source",
+        "store_url_slug": "HalfLife_Deathmatch_Source",
+        "appid": 360,
+        "type": 0,
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1
+          ],
+          "feature_categoryids": [
+            67,
+            68,
+            69,
+            70,
+            74,
+            8,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 38,
+          "purchase_option_name": "Half-Life 1: Source",
+          "final_price_in_cents": "3399",
+          "formatted_final_price": "R$33,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 2,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 50,
+        "success": 1,
+        "visible": true,
+        "name": "Half-Life: Opposing Force",
+        "store_url_path": "app/50/HalfLife_Opposing_Force",
+        "store_url_slug": "HalfLife_Opposing_Force",
+        "appid": 50,
+        "type": 0,
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1
+          ],
+          "feature_categoryids": [
+            68,
+            74,
+            78,
+            79,
+            8,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 32,
+          "purchase_option_name": "Half-Life: Opposing Force",
+          "final_price_in_cents": "1799",
+          "formatted_final_price": "R$17,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 130,
+        "success": 1,
+        "visible": true,
+        "name": "Half-Life: Blue Shift",
+        "store_url_path": "app/130/HalfLife_Blue_Shift",
+        "store_url_slug": "HalfLife_Blue_Shift",
+        "appid": 130,
+        "type": 0,
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2
+          ],
+          "feature_categoryids": [
+            68,
+            74,
+            78,
+            79,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 35,
+          "purchase_option_name": "Half-Life: Blue Shift",
+          "final_price_in_cents": "1799",
+          "formatted_final_price": "R$17,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 220,
+        "success": 1,
+        "visible": true,
+        "name": "Half-Life 2",
+        "store_url_path": "app/220/HalfLife_2",
+        "store_url_slug": "HalfLife_2",
+        "appid": 220,
+        "type": 0,
+        "related_items": {
+          "demo_appid": [
+            219
+          ],
+          "demos": [
+            {
+              "appid": 219,
+              "show_above_purchase": true
+            }
+          ]
+        },
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            13,
+            30,
+            65,
+            67,
+            68,
+            69,
+            70,
+            74,
+            78,
+            79,
+            23,
+            16,
+            14,
+            41,
+            42,
+            44,
+            62,
+            63
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58,
+            59
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 36,
+          "purchase_option_name": "Half-Life 2",
+          "final_price_in_cents": "3399",
+          "formatted_final_price": "R$33,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 500,
+        "success": 1,
+        "visible": true,
+        "name": "Left 4 Dead",
+        "store_url_path": "app/500/Left_4_Dead",
+        "store_url_slug": "Left_4_Dead",
+        "appid": 500,
+        "type": 0,
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            9
+          ],
+          "feature_categoryids": [
+            22,
+            13,
+            66,
+            67,
+            68,
+            69,
+            70,
+            78,
+            23,
+            8,
+            15,
+            25,
+            16,
+            14,
+            43,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1053,
+          "purchase_option_name": "Left 4 Dead",
+          "final_price_in_cents": "3399",
+          "formatted_final_price": "R$33,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 550,
+        "success": 1,
+        "visible": true,
+        "name": "Left 4 Dead 2",
+        "store_url_path": "app/550/Left_4_Dead_2",
+        "store_url_slug": "Left_4_Dead_2",
+        "appid": 550,
+        "type": 0,
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            9,
+            38
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            13,
+            30,
+            66,
+            67,
+            68,
+            69,
+            70,
+            74,
+            78,
+            23,
+            8,
+            15,
+            16,
+            14,
+            41,
+            42,
+            43,
+            44,
+            62,
+            63
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58,
+            59
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 2481,
+          "purchase_option_name": "Left 4 Dead 2",
+          "final_price_in_cents": "3399",
+          "formatted_final_price": "R$33,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 60,
+        "success": 1,
+        "visible": true,
+        "name": "Ricochet",
+        "store_url_path": "app/60/Ricochet",
+        "store_url_slug": "Ricochet",
+        "appid": 60,
+        "type": 0,
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36
+          ],
+          "feature_categoryids": [
+            68,
+            69,
+            75,
+            8,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 33,
+          "purchase_option_name": "Ricochet",
+          "final_price_in_cents": "1799",
+          "formatted_final_price": "R$17,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 20,
+        "success": 1,
+        "visible": true,
+        "name": "Team Fortress Classic",
+        "store_url_path": "app/20/Team_Fortress_Classic",
+        "store_url_slug": "Team_Fortress_Classic",
+        "appid": 20,
+        "type": 0,
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            37
+          ],
+          "feature_categoryids": [
+            68,
+            69,
+            75,
+            8,
+            44,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 29,
+          "purchase_option_name": "Team Fortress Classic",
+          "final_price_in_cents": "1799",
+          "formatted_final_price": "R$17,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 323180,
+        "success": 1,
+        "visible": true,
+        "name": "Portal 2 Soundtrack",
+        "store_url_path": "app/323180/Portal_2_Soundtrack",
+        "store_url_slug": "Portal_2_Soundtrack",
+        "appid": 323180,
+        "type": 11,
+        "is_free": true,
+        "related_items": {
+          "parent_appid": 620
+        },
+        "categories": {
+          "feature_categoryids": [
+            50
+          ]
+        }
+      }
+    ],
+    "included_packages": [
+      {
+        "item_type": 1,
+        "id": 7877,
+        "success": 1,
+        "visible": true,
+        "name": "Portal 2",
+        "store_url_path": "app/620/Portal_2",
+        "store_url_slug": "Portal_2",
+        "appid": 620,
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          620
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            9,
+            38,
+            39,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            13,
+            30,
+            51,
+            67,
+            68,
+            69,
+            70,
+            74,
+            79,
+            23,
+            15,
+            17,
+            14,
+            41,
+            42,
+            43,
+            44,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58,
+            59
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 7877,
+          "purchase_option_name": "Portal 2",
+          "final_price_in_cents": "3399",
+          "formatted_final_price": "R$33,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 8187,
+        "success": 1,
+        "visible": true,
+        "name": "Portal 2 - The Final Hours",
+        "store_url_path": "app/104600/Portal_2_The_Final_Hours",
+        "store_url_slug": "Portal_2_The_Final_Hours",
+        "appid": 104600,
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          104600
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2
+          ],
+          "feature_categoryids": [
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 8187,
+          "purchase_option_name": "Portal 2 - The Final Hours",
+          "final_price_in_cents": "449",
+          "formatted_final_price": "R$4,49",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        },
+        "purchase_description_bbcode": "[url=http://store.steampowered.com/app/104600/ fromclient=1]Portal 2 - The Final Hours[/url] is a digital book that takes you deep within the top-secret offices of Valve for an unvarnished look at the creative process behind Portal 2. [b]Now with a free bonus chapter added![/b]"
+      },
+      {
+        "item_type": 1,
+        "id": 515,
+        "success": 1,
+        "visible": true,
+        "name": "Portal",
+        "store_url_path": "app/400/Portal",
+        "store_url_slug": "Portal",
+        "appid": 400,
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          400
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2
+          ],
+          "feature_categoryids": [
+            22,
+            13,
+            65,
+            67,
+            68,
+            69,
+            70,
+            79,
+            17,
+            16,
+            14,
+            41,
+            42,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58,
+            59
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 515,
+          "purchase_option_name": "Portal",
+          "final_price_in_cents": "3399",
+          "formatted_final_price": "R$33,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 520,
+        "success": 15,
+        "visible": false,
+        "name": "",
+        "store_url_path": "sub/520/",
+        "store_url_slug": ""
+      },
+      {
+        "item_type": 1,
+        "id": 37,
+        "success": 1,
+        "visible": true,
+        "name": "Counter-Strike: Source",
+        "store_url_path": "app/240/CounterStrike_Source",
+        "store_url_slug": "CounterStrike_Source",
+        "appid": 240,
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          240
+        ],
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            23,
+            8,
+            15,
+            16,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 37,
+          "purchase_option_name": "Counter-Strike: Source",
+          "final_price_in_cents": "3399",
+          "formatted_final_price": "R$33,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 7,
+        "success": 1,
+        "visible": true,
+        "name": "Counter-Strike: Condition Zero",
+        "store_url_path": "sub/7/",
+        "store_url_slug": "CounterStrike_Condition_Zero",
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          10,
+          80
+        ],
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37
+          ],
+          "feature_categoryids": [
+            66,
+            68,
+            69,
+            75,
+            78,
+            8,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 7,
+          "purchase_option_name": "Counter-Strike: Condition Zero",
+          "final_price_in_cents": "3399",
+          "formatted_final_price": "R$33,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 2,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 25,
+        "success": 1,
+        "visible": true,
+        "name": "Day of Defeat: Source",
+        "store_url_path": "app/300/Day_of_Defeat_Source",
+        "store_url_slug": "Day_of_Defeat_Source",
+        "appid": 300,
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          300
+        ],
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            66,
+            67,
+            68,
+            69,
+            70,
+            78,
+            8,
+            15,
+            16,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 25,
+          "purchase_option_name": "Day of Defeat: Source",
+          "final_price_in_cents": "3399",
+          "formatted_final_price": "R$33,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 30,
+        "success": 1,
+        "visible": true,
+        "name": "Day of Defeat",
+        "store_url_path": "app/30/Day_of_Defeat",
+        "store_url_slug": "Day_of_Defeat",
+        "appid": 30,
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          30
+        ],
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1
+          ],
+          "feature_categoryids": [
+            66,
+            67,
+            68,
+            69,
+            8,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 30,
+          "purchase_option_name": "Day of Defeat",
+          "final_price_in_cents": "1799",
+          "formatted_final_price": "R$17,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 31,
+        "success": 1,
+        "visible": true,
+        "name": "Deathmatch Classic",
+        "store_url_path": "app/40/Deathmatch_Classic",
+        "store_url_slug": "Deathmatch_Classic",
+        "appid": 40,
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          40
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            37
+          ],
+          "feature_categoryids": [
+            66,
+            68,
+            69,
+            75,
+            8,
+            44,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 31,
+          "purchase_option_name": "Deathmatch Classic",
+          "final_price_in_cents": "1799",
+          "formatted_final_price": "R$17,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 34,
+        "success": 1,
+        "visible": true,
+        "name": "Half-Life",
+        "store_url_path": "app/70/HalfLife",
+        "store_url_slug": "HalfLife",
+        "appid": 70,
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          70
+        ],
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36
+          ],
+          "feature_categoryids": [
+            66,
+            68,
+            69,
+            74,
+            75,
+            78,
+            79,
+            23,
+            8,
+            41,
+            42,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 34,
+          "purchase_option_name": "Half-Life",
+          "final_price_in_cents": "3399",
+          "formatted_final_price": "R$33,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 38,
+        "success": 1,
+        "visible": true,
+        "name": "Half-Life 1: Source",
+        "store_url_path": "sub/38/",
+        "store_url_slug": "HalfLife_1_Source",
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          280,
+          360
+        ],
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1
+          ],
+          "feature_categoryids": [
+            67,
+            68,
+            69,
+            70,
+            74,
+            8,
+            44,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 38,
+          "purchase_option_name": "Half-Life 1: Source",
+          "final_price_in_cents": "3399",
+          "formatted_final_price": "R$33,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 2,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 32,
+        "success": 1,
+        "visible": true,
+        "name": "Half-Life: Opposing Force",
+        "store_url_path": "app/50/HalfLife_Opposing_Force",
+        "store_url_slug": "HalfLife_Opposing_Force",
+        "appid": 50,
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          50
+        ],
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1
+          ],
+          "feature_categoryids": [
+            68,
+            74,
+            78,
+            79,
+            8,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 32,
+          "purchase_option_name": "Half-Life: Opposing Force",
+          "final_price_in_cents": "1799",
+          "formatted_final_price": "R$17,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 35,
+        "success": 1,
+        "visible": true,
+        "name": "Half-Life: Blue Shift",
+        "store_url_path": "app/130/HalfLife_Blue_Shift",
+        "store_url_slug": "HalfLife_Blue_Shift",
+        "appid": 130,
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          130
+        ],
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2
+          ],
+          "feature_categoryids": [
+            68,
+            74,
+            78,
+            79,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 35,
+          "purchase_option_name": "Half-Life: Blue Shift",
+          "final_price_in_cents": "1799",
+          "formatted_final_price": "R$17,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 36,
+        "success": 1,
+        "visible": true,
+        "name": "Half-Life 2",
+        "store_url_path": "app/220/HalfLife_2",
+        "store_url_slug": "HalfLife_2",
+        "appid": 220,
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          220
+        ],
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            13,
+            30,
+            65,
+            67,
+            68,
+            69,
+            70,
+            74,
+            78,
+            79,
+            23,
+            16,
+            14,
+            41,
+            42,
+            44,
+            62,
+            63
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58,
+            59
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 36,
+          "purchase_option_name": "Half-Life 2",
+          "final_price_in_cents": "3399",
+          "formatted_final_price": "R$33,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 79,
+        "success": 15,
+        "visible": false,
+        "name": "",
+        "store_url_path": "sub/79/",
+        "store_url_slug": ""
+      },
+      {
+        "item_type": 1,
+        "id": 516,
+        "success": 15,
+        "visible": false,
+        "name": "",
+        "store_url_path": "sub/516/",
+        "store_url_slug": ""
+      },
+      {
+        "item_type": 1,
+        "id": 1053,
+        "success": 1,
+        "visible": true,
+        "name": "Left 4 Dead",
+        "store_url_path": "app/500/Left_4_Dead",
+        "store_url_slug": "Left_4_Dead",
+        "appid": 500,
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          500
+        ],
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            9
+          ],
+          "feature_categoryids": [
+            22,
+            13,
+            66,
+            67,
+            68,
+            69,
+            70,
+            78,
+            23,
+            8,
+            15,
+            25,
+            16,
+            14,
+            43,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1053,
+          "purchase_option_name": "Left 4 Dead",
+          "final_price_in_cents": "3399",
+          "formatted_final_price": "R$33,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1054,
+        "success": 15,
+        "visible": false,
+        "unvailable_for_country_restriction": true,
+        "name": "Left 4 Dead",
+        "store_url_path": "app/500/Left_4_Dead",
+        "store_url_slug": "Left_4_Dead",
+        "appid": 500
+      },
+      {
+        "item_type": 1,
+        "id": 2481,
+        "success": 1,
+        "visible": true,
+        "name": "Left 4 Dead 2",
+        "store_url_path": "app/550/Left_4_Dead_2",
+        "store_url_slug": "Left_4_Dead_2",
+        "appid": 550,
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          550
+        ],
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            9,
+            38
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            13,
+            30,
+            66,
+            67,
+            68,
+            69,
+            70,
+            74,
+            78,
+            23,
+            8,
+            15,
+            16,
+            14,
+            41,
+            42,
+            43,
+            44,
+            62,
+            63
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58,
+            59
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 2481,
+          "purchase_option_name": "Left 4 Dead 2",
+          "final_price_in_cents": "3399",
+          "formatted_final_price": "R$33,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 2482,
+        "success": 15,
+        "visible": false,
+        "unvailable_for_country_restriction": true,
+        "name": "Left 4 Dead 2 (DE)",
+        "store_url_path": "app/550/Left_4_Dead_2",
+        "store_url_slug": "Left_4_Dead_2_DE",
+        "appid": 550
+      },
+      {
+        "item_type": 1,
+        "id": 2489,
+        "success": 15,
+        "visible": false,
+        "unvailable_for_country_restriction": true,
+        "name": "Left 4 Dead 2",
+        "store_url_path": "app/550/Left_4_Dead_2",
+        "store_url_slug": "Left_4_Dead_2",
+        "appid": 550
+      },
+      {
+        "item_type": 1,
+        "id": 33,
+        "success": 1,
+        "visible": true,
+        "name": "Ricochet",
+        "store_url_path": "app/60/Ricochet",
+        "store_url_slug": "Ricochet",
+        "appid": 60,
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          60
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36
+          ],
+          "feature_categoryids": [
+            68,
+            69,
+            75,
+            8,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 33,
+          "purchase_option_name": "Ricochet",
+          "final_price_in_cents": "1799",
+          "formatted_final_price": "R$17,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 29,
+        "success": 1,
+        "visible": true,
+        "name": "Team Fortress Classic",
+        "store_url_path": "app/20/Team_Fortress_Classic",
+        "store_url_slug": "Team_Fortress_Classic",
+        "appid": 20,
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          20
+        ],
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            37
+          ],
+          "feature_categoryids": [
+            68,
+            69,
+            75,
+            8,
+            44,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 29,
+          "purchase_option_name": "Team Fortress Classic",
+          "final_price_in_cents": "1799",
+          "formatted_final_price": "R$17,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 50873,
+        "success": 1,
+        "visible": true,
+        "name": "Portal 2 Soundtrack",
+        "store_url_path": "app/323180/Portal_2_Soundtrack",
+        "store_url_slug": "Portal_2_Soundtrack",
+        "appid": 323180,
+        "type": 11,
+        "included_types": [
+          11
+        ],
+        "included_appids": [
+          323180
+        ],
+        "categories": {
+          "feature_categoryids": [
+            50
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 50873,
+          "purchase_option_name": "Portal 2 Soundtrack",
+          "final_price_in_cents": "0",
+          "formatted_final_price": "R$0,00",
+          "user_can_purchase_as_gift": false,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false,
+          "is_free_license": true
+        }
+      }
+    ],
+    "included_bundles": [
+      {
+        "item_type": 2,
+        "id": 234,
+        "success": 1,
+        "visible": true,
+        "name": "Portal Bundle",
+        "store_url_path": "bundle/234/Portal_Bundle",
+        "store_url_slug": "Portal_Bundle",
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          400,
+          620
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            9,
+            38,
+            39,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            13,
+            30,
+            51,
+            65,
+            67,
+            68,
+            69,
+            70,
+            74,
+            79,
+            23,
+            15,
+            17,
+            16,
+            14,
+            41,
+            42,
+            43,
+            44,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58,
+            59
+          ]
+        },
+        "best_purchase_option": {
+          "bundleid": 234,
+          "purchase_option_name": "Portal Bundle",
+          "final_price_in_cents": "5098",
+          "formatted_final_price": "R$50,98",
+          "bundle_discount_pct": 25,
+          "price_before_bundle_discount": "6798",
+          "formatted_price_before_bundle_discount": "R$67,98",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 2,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false,
+          "combined_discount_pct": 25
+        }
+      },
+      {
+        "item_type": 2,
+        "id": 232,
+        "success": 1,
+        "visible": true,
+        "name": "Valve Complete Pack",
+        "store_url_path": "bundle/232/Valve_Complete_Pack",
+        "store_url_slug": "Valve_Complete_Pack",
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          10,
+          20,
+          30,
+          40,
+          50,
+          60,
+          70,
+          80,
+          130,
+          220,
+          240,
+          280,
+          300,
+          360,
+          400,
+          500,
+          550,
+          620
+        ],
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            9,
+            38,
+            39,
+            24,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            13,
+            30,
+            51,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            74,
+            75,
+            78,
+            79,
+            23,
+            8,
+            15,
+            25,
+            17,
+            16,
+            14,
+            41,
+            42,
+            43,
+            44,
+            62,
+            63
+          ],
+          "controller_categoryids": [
+            28,
+            55,
+            56,
+            57,
+            58,
+            59
+          ]
+        },
+        "best_purchase_option": {
+          "bundleid": 232,
+          "purchase_option_name": "Valve Complete Pack",
+          "final_price_in_cents": "40304",
+          "formatted_final_price": "R$403,04",
+          "bundle_discount_pct": 10,
+          "price_before_bundle_discount": "44784",
+          "formatted_price_before_bundle_discount": "R$447,84",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 20,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false,
+          "combined_discount_pct": 10
+        }
+      }
+    ],
+    "included_creators": [
+      {
+        "item_type": 5,
+        "id": 4,
+        "success": 1,
+        "visible": true,
+        "name": "Valve",
+        "store_url_path": "developer/valve",
+        "store_url_slug": "valve",
+        "game_count": 31
+      },
+      {
+        "item_type": 5,
+        "id": 6857257,
+        "success": 1,
+        "visible": true,
+        "name": "Geoff Keighley",
+        "store_url_path": "curator/6857257",
+        "store_url_slug": "",
+        "game_count": 4
+      },
+      {
+        "item_type": 5,
+        "id": 33078398,
+        "success": 1,
+        "visible": true,
+        "name": "Half-Life",
+        "store_url_path": "developer/Half-Life",
+        "store_url_slug": "Half-Life",
+        "game_count": 6
+      }
+    ]
+  },
+  "tagids": [
+    4182,
+    1625,
+    1664,
+    3839,
+    5923,
+    1742,
+    5537,
+    4136,
+    7208,
+    5395,
+    1685,
+    4106,
+    19,
+    1663,
+    3968,
+    3942,
+    8122,
+    5794,
+    1719,
+    4166
+  ],
+  "categories": {
+    "supported_player_categoryids": [
+      2,
+      1,
+      9,
+      38,
+      39,
+      24
+    ],
+    "feature_categoryids": [
+      22,
+      29,
+      13,
+      30,
+      51,
+      67,
+      68,
+      69,
+      70,
+      74,
+      79,
+      23,
+      15,
+      17,
+      14,
+      41,
+      42,
+      43,
+      44,
+      62
+    ],
+    "controller_categoryids": [
+      28,
+      55,
+      56,
+      57,
+      58,
+      59
+    ]
+  },
+  "reviews": {
+    "summary_filtered": {
+      "review_count": 393082,
+      "percent_positive": 98,
+      "review_score": 9,
+      "review_score_label": "Overwhelmingly Positive"
+    },
+    "summary_language_specific": {
+      "review_count": 175001,
+      "percent_positive": 98,
+      "review_score": 9,
+      "review_score_label": "Overwhelmingly Positive"
+    }
+  },
+  "basic_info": {
+    "short_description": "The \"Perpetual Testing Initiative\" has been expanded to allow you to design co-op puzzles for you and your friends!",
+    "publishers": [
+      {
+        "name": "Valve",
+        "creator_clan_account_id": 4
+      }
+    ],
+    "developers": [
+      {
+        "name": "Valve",
+        "creator_clan_account_id": 4
+      }
+    ],
+    "franchises": [
+      {
+        "name": "Portal"
+      }
+    ]
+  },
+  "tags": [
+    {
+      "tagid": 4182,
+      "weight": 604
+    },
+    {
+      "tagid": 1625,
+      "weight": 587
+    },
+    {
+      "tagid": 1664,
+      "weight": 586
+    },
+    {
+      "tagid": 3839,
+      "weight": 560
+    },
+    {
+      "tagid": 5923,
+      "weight": 557
+    },
+    {
+      "tagid": 1742,
+      "weight": 555
+    },
+    {
+      "tagid": 5537,
+      "weight": 549
+    },
+    {
+      "tagid": 4136,
+      "weight": 542
+    },
+    {
+      "tagid": 7208,
+      "weight": 538
+    },
+    {
+      "tagid": 5395,
+      "weight": 531
+    },
+    {
+      "tagid": 1685,
+      "weight": 518
+    },
+    {
+      "tagid": 4106,
+      "weight": 517
+    },
+    {
+      "tagid": 19,
+      "weight": 512
+    },
+    {
+      "tagid": 1663,
+      "weight": 512
+    },
+    {
+      "tagid": 3968,
+      "weight": 403
+    },
+    {
+      "tagid": 3942,
+      "weight": 391
+    },
+    {
+      "tagid": 8122,
+      "weight": 386
+    },
+    {
+      "tagid": 5794,
+      "weight": 382
+    },
+    {
+      "tagid": 1719,
+      "weight": 381
+    },
+    {
+      "tagid": 4166,
+      "weight": 378
+    }
+  ],
+  "assets": {
+    "asset_url_format": "steam/apps/620/${FILENAME}?t=1790187113",
+    "main_capsule": "02b755eb0cf5f41c1838a99c9a353ebce32a88cd/capsule_616x353.jpg",
+    "main_capsule_2x": "02b755eb0cf5f41c1838a99c9a353ebce32a88cd/capsule_616x353_2x.jpg",
+    "small_capsule": "bd23943dcd0280aa2cdc066e2f86d2185cfd4cce/capsule_231x87.jpg",
+    "small_capsule_2x": "bd23943dcd0280aa2cdc066e2f86d2185cfd4cce/capsule_231x87_2x.jpg",
+    "header": "faffc0f560786e2f05104a8d2fac837c6969bf13/header.jpg",
+    "header_2x": "faffc0f560786e2f05104a8d2fac837c6969bf13/header_2x.jpg",
+    "hero_capsule": "9a8ae9bb0b85f125bd956024f86f30a3aeb799e8/hero_capsule.jpg",
+    "hero_capsule_2x": "9a8ae9bb0b85f125bd956024f86f30a3aeb799e8/hero_capsule_2x.jpg",
+    "library_capsule": "library_600x900.jpg",
+    "library_capsule_2x": "library_600x900_2x.jpg",
+    "library_hero": "a58588d857b8683f8065e55f97ab82ad8a945c51/library_hero.jpg",
+    "library_hero_2x": "a58588d857b8683f8065e55f97ab82ad8a945c51/library_hero_2x.jpg",
+    "community_icon": "25a5a16b2423bf7487ac5340b5b0948cef48c5f8",
+    "page_background_path": "app/620?t=1790187113",
+    "last_modified": 1790187113
+  },
+  "release": {
+    "steam_release_date": 1303186800
+  },
+  "platforms": {
+    "windows": true,
+    "steamos_linux": true,
+    "vr_support": {},
+    "steam_deck_compat_category": 3,
+    "steam_os_compat_category": 2,
+    "steam_frame_compat_category": 3,
+    "steam_machine_compat_category": 3
+  },
+  "game_rating": {
+    "rating": "12",
+    "descriptors": [
+      "Linguagem imprópria"
+    ],
+    "agency": 10,
+    "banned": false,
+    "esrb_online_music_not_rated": false,
+    "esrb_online_interactions_not_rated": false,
+    "survey_interactive_elements": [
+      4
+    ],
+    "required_age": 0,
+    "use_age_gate": false,
+    "agency_rating": 183,
+    "image_url": "public/shared/images/game_ratings/DEJUS/12.png"
+  },
+  "best_purchase_option": {
+    "packageid": 7877,
+    "purchase_option_name": "Portal 2",
+    "final_price_in_cents": "3399",
+    "formatted_final_price": "R$33,99",
+    "user_can_purchase_as_gift": true,
+    "hide_discount_pct_for_compliance": false,
+    "included_game_count": 1,
+    "must_purchase_as_set": false,
+    "package_group": "default",
+    "price_cannot_be_displayed_as_discount": false
+  },
+  "purchase_options": [
+    {
+      "packageid": 7877,
+      "purchase_option_name": "Portal 2",
+      "final_price_in_cents": "3399",
+      "formatted_final_price": "R$33,99",
+      "user_can_purchase_as_gift": true,
+      "hide_discount_pct_for_compliance": false,
+      "included_game_count": 1,
+      "must_purchase_as_set": false,
+      "package_group": "default",
+      "price_cannot_be_displayed_as_discount": false
+    },
+    {
+      "packageid": 8187,
+      "purchase_option_name": "Portal 2 - The Final Hours",
+      "final_price_in_cents": "449",
+      "formatted_final_price": "R$4,49",
+      "user_can_purchase_as_gift": true,
+      "hide_discount_pct_for_compliance": false,
+      "included_game_count": 1,
+      "must_purchase_as_set": false,
+      "package_group": "default",
+      "price_cannot_be_displayed_as_discount": false
+    },
+    {
+      "bundleid": 234,
+      "purchase_option_name": "Portal Bundle",
+      "final_price_in_cents": "5098",
+      "formatted_final_price": "R$50,98",
+      "bundle_discount_pct": 25,
+      "price_before_bundle_discount": "6798",
+      "formatted_price_before_bundle_discount": "R$67,98",
+      "user_can_purchase_as_gift": true,
+      "hide_discount_pct_for_compliance": false,
+      "included_game_count": 2,
+      "must_purchase_as_set": false,
+      "package_group": "default",
+      "price_cannot_be_displayed_as_discount": false,
+      "combined_discount_pct": 25
+    },
+    {
+      "bundleid": 232,
+      "purchase_option_name": "Valve Complete Pack",
+      "final_price_in_cents": "40304",
+      "formatted_final_price": "R$403,04",
+      "bundle_discount_pct": 10,
+      "price_before_bundle_discount": "44784",
+      "formatted_price_before_bundle_discount": "R$447,84",
+      "user_can_purchase_as_gift": true,
+      "hide_discount_pct_for_compliance": false,
+      "included_game_count": 20,
+      "must_purchase_as_set": false,
+      "package_group": "default",
+      "price_cannot_be_displayed_as_discount": false,
+      "combined_discount_pct": 10
+    }
+  ],
+  "screenshots": {
+    "all_ages_screenshots": [
+      {
+        "filename": "steam/apps/620/ss_f3f6787d74739d3b2ec8a484b5c994b3d31ef325.jpg?t=1790187113",
+        "ordinal": 1
+      },
+      {
+        "filename": "steam/apps/620/ss_6a4f5afdaa98402de9cf0b59fed27bab3256a6f4.jpg?t=1790187113",
+        "ordinal": 2
+      },
+      {
+        "filename": "steam/apps/620/ss_0cdd90fafc160b52d08b303d205f9fd4e83cf164.jpg?t=1790187113",
+        "ordinal": 3
+      },
+      {
+        "filename": "steam/apps/620/ss_ec35a739b4b33270eb170d9e561c5b016cba50a6.jpg?t=1790187113",
+        "ordinal": 4
+      },
+      {
+        "filename": "steam/apps/620/ss_3d13161104a04603a0524536770c5f74626db4c0.jpg?t=1790187113",
+        "ordinal": 5
+      },
+      {
+        "filename": "steam/apps/620/ss_8a772608d29ffd56ac013d2ac7c4388b96e87a21.jpg?t=1790187113",
+        "ordinal": 6
+      },
+      {
+        "filename": "steam/apps/620/ss_358127df30a766a1516ad139083c2bcec3fe0975.jpg?t=1790187113",
+        "ordinal": 7
+      },
+      {
+        "filename": "steam/apps/620/ss_410c7955c3cc8ca4a5e3c81daa214f534c9aabc8.jpg?t=1790187113",
+        "ordinal": 8
+      },
+      {
+        "filename": "steam/apps/620/ss_0e16bceacb6616a5ca4bc4ba4d28c7a0d06b671c.jpg?t=1790187113",
+        "ordinal": 9
+      },
+      {
+        "filename": "steam/apps/620/ss_d8f172249d6e89999c3692bf2c380921f197fd82.jpg?t=1790187113",
+        "ordinal": 10
+      },
+      {
+        "filename": "steam/apps/620/ss_fe9782ea3b43ef7af37b18e0a5c5f7bdc9c21f12.jpg?t=1790187113",
+        "ordinal": 11
+      },
+      {
+        "filename": "steam/apps/620/ss_3858536cbc0a07dfbe36e8f87b3f08bf3be45e54.jpg?t=1790187113",
+        "ordinal": 12
+      }
+    ]
+  },
+  "trailers": {
+    "highlights": [
+      {
+        "trailer_name": "Portal 2 E3 Demo (Excursion Funnels)",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1682715616",
+        "trailer_category": 1,
+        "microtrailer": [
+          {
+            "filename": "620/3746/0f4bee66d490b637707ac4fca3e850f2cc2d3b2a/1750108721/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "620/3746/0f4bee66d490b637707ac4fca3e850f2cc2d3b2a/1750108721/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "620/3746/0f4bee66d490b637707ac4fca3e850f2cc2d3b2a/1750108721/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "620/3746/0f4bee66d490b637707ac4fca3e850f2cc2d3b2a/1750108721/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "620/3746/0f4bee66d490b637707ac4fca3e850f2cc2d3b2a/1750108721/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "5787/movie.293x165.jpg",
+        "trailer_base_id": 3746,
+        "all_ages": true,
+        "screenshot_small": "5787/movie.184x123.jpg",
+        "trailer_id": 3746
+      }
+    ],
+    "other_trailers": [
+      {
+        "trailer_name": "Portal 2 Remix Trailer",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1683129612",
+        "trailer_category": 3,
+        "microtrailer": [
+          {
+            "filename": "620/5096/2bbd128dd4e1d90aa6f688fb91e6665a301f48c5/1750108756/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "620/5096/2bbd128dd4e1d90aa6f688fb91e6665a301f48c5/1750108756/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "620/5096/2bbd128dd4e1d90aa6f688fb91e6665a301f48c5/1750108756/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "620/5096/2bbd128dd4e1d90aa6f688fb91e6665a301f48c5/1750108756/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "620/5096/2bbd128dd4e1d90aa6f688fb91e6665a301f48c5/1750108756/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "80822/movie.293x165.jpg",
+        "trailer_base_id": 5096,
+        "all_ages": true,
+        "screenshot_small": "80822/movie.184x123.jpg",
+        "trailer_id": 5096
+      },
+      {
+        "trailer_name": "Portal 2 - Perpetual Testing Initiative",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1682715589",
+        "trailer_category": 2,
+        "microtrailer": [
+          {
+            "filename": "620/7495/c992fec9601198bd42fc3563a62c932b8dc032cb/1750108756/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "620/7495/c992fec9601198bd42fc3563a62c932b8dc032cb/1750108756/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "620/7495/c992fec9601198bd42fc3563a62c932b8dc032cb/1750108756/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "620/7495/c992fec9601198bd42fc3563a62c932b8dc032cb/1750108756/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "620/7495/c992fec9601198bd42fc3563a62c932b8dc032cb/1750108756/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "81613/movie.293x165.jpg",
+        "trailer_base_id": 7495,
+        "all_ages": true,
+        "screenshot_small": "81613/movie.184x123.jpg",
+        "trailer_id": 7495
+      },
+      {
+        "trailer_name": "Portal 2 Co-op Trailer",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1682715596",
+        "trailer_category": 3,
+        "microtrailer": [
+          {
+            "filename": "620/4105/75674acd6517bf86cad79034131dc7853c2967cb/1750109925/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "620/4105/75674acd6517bf86cad79034131dc7853c2967cb/1750109925/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "620/4105/75674acd6517bf86cad79034131dc7853c2967cb/1750109925/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "620/4105/75674acd6517bf86cad79034131dc7853c2967cb/1750109925/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "620/4105/75674acd6517bf86cad79034131dc7853c2967cb/1750109925/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "5926/movie.293x165.jpg",
+        "trailer_base_id": 4105,
+        "all_ages": true,
+        "screenshot_small": "5926/movie.184x123.jpg",
+        "trailer_id": 4105
+      },
+      {
+        "trailer_name": "Portal 2 Teaser",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1682715602",
+        "trailer_category": 2,
+        "microtrailer": [
+          {
+            "filename": "620/3670/be99f50a782b0258dcf3d6b0d0d3d24c28da0568/1750108717/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "620/3670/be99f50a782b0258dcf3d6b0d0d3d24c28da0568/1750108717/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "620/3670/be99f50a782b0258dcf3d6b0d0d3d24c28da0568/1750108717/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "620/3670/be99f50a782b0258dcf3d6b0d0d3d24c28da0568/1750108717/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "620/3670/be99f50a782b0258dcf3d6b0d0d3d24c28da0568/1750108717/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "5739/movie.293x165.jpg",
+        "trailer_base_id": 3670,
+        "all_ages": true,
+        "screenshot_small": "5739/movie.184x123.jpg",
+        "trailer_id": 3670
+      },
+      {
+        "trailer_name": "Portal 2 E3 Demo (Wheatley)",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1682715609",
+        "trailer_category": 3,
+        "microtrailer": [
+          {
+            "filename": "620/3745/63ba44a28c34bc7600e0dbe3e863f343b331b983/1750108718/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "620/3745/63ba44a28c34bc7600e0dbe3e863f343b331b983/1750108718/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "620/3745/63ba44a28c34bc7600e0dbe3e863f343b331b983/1750108718/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "620/3745/63ba44a28c34bc7600e0dbe3e863f343b331b983/1750108718/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "620/3745/63ba44a28c34bc7600e0dbe3e863f343b331b983/1750108718/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "5786/movie.293x165.jpg",
+        "trailer_base_id": 3745,
+        "all_ages": true,
+        "screenshot_small": "5786/movie.184x123.jpg",
+        "trailer_id": 3745
+      },
+      {
+        "trailer_name": "Portal 2 E3 Demo (Pneumatic Diversity Vents)",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1682715623",
+        "trailer_category": 1,
+        "microtrailer": [
+          {
+            "filename": "620/3749/a0aa2429b0a7e059c7b036574c4285f046251bb3/1750108721/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "620/3749/a0aa2429b0a7e059c7b036574c4285f046251bb3/1750108721/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "620/3749/a0aa2429b0a7e059c7b036574c4285f046251bb3/1750108721/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "620/3749/a0aa2429b0a7e059c7b036574c4285f046251bb3/1750108721/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "620/3749/a0aa2429b0a7e059c7b036574c4285f046251bb3/1750108721/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "5790/movie.293x165.jpg",
+        "trailer_base_id": 3749,
+        "all_ages": true,
+        "screenshot_small": "5790/movie.184x123.jpg",
+        "trailer_id": 3749
+      },
+      {
+        "trailer_name": "Portal 2 E3 Demo (Faith Plates)",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1682715630",
+        "trailer_category": 3,
+        "microtrailer": [
+          {
+            "filename": "620/3747/4ddba80177b8b5387e36958b993aadacc9d0d4c8/1750108721/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "620/3747/4ddba80177b8b5387e36958b993aadacc9d0d4c8/1750108721/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "620/3747/4ddba80177b8b5387e36958b993aadacc9d0d4c8/1750108721/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "620/3747/4ddba80177b8b5387e36958b993aadacc9d0d4c8/1750108721/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "620/3747/4ddba80177b8b5387e36958b993aadacc9d0d4c8/1750108721/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "5788/movie.293x165.jpg",
+        "trailer_base_id": 3747,
+        "all_ages": true,
+        "screenshot_small": "5788/movie.184x123.jpg",
+        "trailer_id": 3747
+      },
+      {
+        "trailer_name": "Portal 2 E3 Demo (Thermal Discouragement Beams)",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1682715637",
+        "trailer_category": 1,
+        "microtrailer": [
+          {
+            "filename": "620/3748/2ff801b8dba88c611c053aea3576ffc70700da96/1750108721/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "620/3748/2ff801b8dba88c611c053aea3576ffc70700da96/1750108721/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "620/3748/2ff801b8dba88c611c053aea3576ffc70700da96/1750108721/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "620/3748/2ff801b8dba88c611c053aea3576ffc70700da96/1750108721/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "620/3748/2ff801b8dba88c611c053aea3576ffc70700da96/1750108721/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "5789/movie.293x165.jpg",
+        "trailer_base_id": 3748,
+        "all_ages": true,
+        "screenshot_small": "5789/movie.184x123.jpg",
+        "trailer_id": 3748
+      },
+      {
+        "trailer_name": "Portal 2 E3 Demo (Repulsion Gel)",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1682715644",
+        "trailer_category": 1,
+        "microtrailer": [
+          {
+            "filename": "620/3750/40b9aa66ff85c9d149c72bfd38520ee2fce7b00d/1750108726/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "620/3750/40b9aa66ff85c9d149c72bfd38520ee2fce7b00d/1750108726/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "620/3750/40b9aa66ff85c9d149c72bfd38520ee2fce7b00d/1750108726/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "620/3750/40b9aa66ff85c9d149c72bfd38520ee2fce7b00d/1750108726/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "620/3750/40b9aa66ff85c9d149c72bfd38520ee2fce7b00d/1750108726/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "5791/movie.293x165.jpg",
+        "trailer_base_id": 3750,
+        "all_ages": true,
+        "screenshot_small": "5791/movie.184x123.jpg",
+        "trailer_id": 3750
+      },
+      {
+        "trailer_name": "Portal 2 E3 Demo (Propulsion Gel)",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1682715651",
+        "trailer_category": 1,
+        "microtrailer": [
+          {
+            "filename": "620/3763/c8dd66b86402917be8f783d66288f276f3ce4459/1750108727/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "620/3763/c8dd66b86402917be8f783d66288f276f3ce4459/1750108727/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "620/3763/c8dd66b86402917be8f783d66288f276f3ce4459/1750108727/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "620/3763/c8dd66b86402917be8f783d66288f276f3ce4459/1750108727/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "620/3763/c8dd66b86402917be8f783d66288f276f3ce4459/1750108727/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "5795/movie.293x165.jpg",
+        "trailer_base_id": 3763,
+        "all_ages": true,
+        "screenshot_small": "5795/movie.184x123.jpg",
+        "trailer_id": 3763
+      },
+      {
+        "trailer_name": "Portal 2: Valentine's Day",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1682715658",
+        "trailer_category": 3,
+        "microtrailer": [
+          {
+            "filename": "620/4706/4f2ca3296dd667ad639d0090d1fb44007c0bda38/1750108787/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "620/4706/4f2ca3296dd667ad639d0090d1fb44007c0bda38/1750108787/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "620/4706/4f2ca3296dd667ad639d0090d1fb44007c0bda38/1750108787/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "620/4706/4f2ca3296dd667ad639d0090d1fb44007c0bda38/1750108787/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "620/4706/4f2ca3296dd667ad639d0090d1fb44007c0bda38/1750108787/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "80633/movie.293x165.jpg",
+        "trailer_base_id": 4706,
+        "all_ages": true,
+        "screenshot_small": "80633/movie.184x123.jpg",
+        "trailer_id": 4706
+      },
+      {
+        "trailer_name": "Portal 2 - Panels Short (English)",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1682715665",
+        "trailer_category": 3,
+        "microtrailer": [
+          {
+            "filename": "620/4902/9daf4787a3f8d4779526ac59a5a3bc58a65d822f/1750108740/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "620/4902/9daf4787a3f8d4779526ac59a5a3bc58a65d822f/1750108740/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "620/4902/9daf4787a3f8d4779526ac59a5a3bc58a65d822f/1750108740/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "620/4902/9daf4787a3f8d4779526ac59a5a3bc58a65d822f/1750108740/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "620/4902/9daf4787a3f8d4779526ac59a5a3bc58a65d822f/1750108740/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "80739/movie.293x165.jpg",
+        "trailer_base_id": 4902,
+        "all_ages": true,
+        "screenshot_small": "80739/movie.184x123.jpg",
+        "trailer_id": 4902
+      },
+      {
+        "trailer_name": "Portal 2 - Bot Trust Short (English)",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1682715692",
+        "trailer_category": 3,
+        "microtrailer": [
+          {
+            "filename": "620/4934/a2674b45b26de979b85c76a3704fa055eada90a2/1750108755/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "620/4934/a2674b45b26de979b85c76a3704fa055eada90a2/1750108755/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "620/4934/a2674b45b26de979b85c76a3704fa055eada90a2/1750108755/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "620/4934/a2674b45b26de979b85c76a3704fa055eada90a2/1750108755/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "620/4934/a2674b45b26de979b85c76a3704fa055eada90a2/1750108755/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "80747/movie.293x165.jpg",
+        "trailer_base_id": 4934,
+        "all_ages": true,
+        "screenshot_small": "80747/movie.184x123.jpg",
+        "trailer_id": 4934
+      },
+      {
+        "trailer_name": "Portal 2 - Turrets (English)",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1682715720",
+        "trailer_category": 3,
+        "microtrailer": [
+          {
+            "filename": "620/4971/b727f5d233494afd55752c6e189b6e8b539d8480/1750108756/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "620/4971/b727f5d233494afd55752c6e189b6e8b539d8480/1750108756/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "620/4971/b727f5d233494afd55752c6e189b6e8b539d8480/1750108756/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "620/4971/b727f5d233494afd55752c6e189b6e8b539d8480/1750108756/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "620/4971/b727f5d233494afd55752c6e189b6e8b539d8480/1750108756/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "80752/movie.293x165.jpg",
+        "trailer_base_id": 4971,
+        "all_ages": true,
+        "screenshot_small": "80752/movie.184x123.jpg",
+        "trailer_id": 4971
+      },
+      {
+        "trailer_name": "Portal 2 - Boots Short (English)",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1682715769",
+        "trailer_category": 3,
+        "microtrailer": [
+          {
+            "filename": "620/4984/037490e46a3b8e5467ccab354f85f4e623c99ee8/1750108756/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "620/4984/037490e46a3b8e5467ccab354f85f4e623c99ee8/1750108756/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "620/4984/037490e46a3b8e5467ccab354f85f4e623c99ee8/1750108756/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "620/4984/037490e46a3b8e5467ccab354f85f4e623c99ee8/1750108756/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "620/4984/037490e46a3b8e5467ccab354f85f4e623c99ee8/1750108756/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "80762/movie.293x165.jpg",
+        "trailer_base_id": 4984,
+        "all_ages": true,
+        "screenshot_small": "80762/movie.184x123.jpg",
+        "trailer_id": 4984
+      },
+      {
+        "trailer_name": "Portal 2 - Launch TV Ad",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1682715776",
+        "trailer_category": 3,
+        "microtrailer": [
+          {
+            "filename": "620/5015/c3d24a03d62be83014d25e01999174f2d010e430/1750108756/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "620/5015/c3d24a03d62be83014d25e01999174f2d010e430/1750108756/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "620/5015/c3d24a03d62be83014d25e01999174f2d010e430/1750108756/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "620/5015/c3d24a03d62be83014d25e01999174f2d010e430/1750108756/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "620/5015/c3d24a03d62be83014d25e01999174f2d010e430/1750108756/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "80788/movie.293x165.jpg",
+        "trailer_base_id": 5015,
+        "all_ages": true,
+        "screenshot_small": "80788/movie.184x123.jpg",
+        "trailer_id": 5015
+      }
+    ]
+  },
+  "supported_languages": [
+    {
+      "elanguage": 0,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": true,
+      "subtitles": true
+    },
+    {
+      "elanguage": 2,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": true,
+      "subtitles": true
+    },
+    {
+      "elanguage": 1,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": true,
+      "subtitles": true
+    },
+    {
+      "elanguage": 5,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": true,
+      "subtitles": true
+    },
+    {
+      "elanguage": 19,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 13,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 14,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 15,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 18,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 3,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 10,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 4,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 16,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 12,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 11,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 20,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 8,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": true,
+      "subtitles": true
+    },
+    {
+      "elanguage": 6,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 17,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 9,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 7,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 21,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 23,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 24,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 22,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 27,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 26,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    }
+  ],
+  "full_description_bbcode": "Portal 2 draws from the award-winning formula of innovative gameplay, story, and music that earned the original Portal over 70 industry accolades and created a cult following.\r\n\r\n\t\t\t\t\t\t\t\t\t\tThe single-player portion of Portal 2 introduces a cast of dynamic new characters, a host of fresh puzzle elements, and a much larger set of devious test chambers. Players will explore never-before-seen areas of the Aperture Science Labs and be reunited with GLaDOS, the occasionally murderous computer companion who guided them through the original game.\r\n\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\tThe game’s two-player cooperative mode features its own entirely separate campaign with a unique story, test chambers, and two new player characters. This new mode forces players to reconsider everything they thought they knew about portals. Success will require them to not just act cooperatively, but to think cooperatively.\r\n\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t[b]Product Features[/b]\r\n\t\t\t\t\t\t\t\t\t\t[list][*][b]Extensive single player:[/b] Featuring next generation gameplay and a wildly-engrossing story.\r\n\t\t\t\t\t\t\t\t\t\t[/*][*][b]Complete two-person co-op:[/b] Multiplayer game featuring its own dedicated story, characters, and gameplay.\r\n\t\t\t\t\t\t\t\t\t\t[/*][*][b]Advanced physics:[/b] Allows for the creation of a whole new range of interesting challenges, producing a much larger but not harder game.\r\n\t\t\t\t\t\t\t\t\t\t[/*][*][b]Original music.[/b]\r\n\t\t\t\t\t\t\t\t\t\t[/*][*][b]Massive sequel:[/b] The original Portal was named 2007's Game of the Year by over 30 publications worldwide. \r\n\t\t\t\t\t\t\t\t\t\t[/*][*][b]Editing Tools:[/b] Portal 2 editing tools will be included.\r\n\t\t\t\t\t\t\t\t\t\t[/*][/list]",
+  "assets_without_overrides": {
+    "asset_url_format": "steam/apps/620/${FILENAME}?t=1790187113",
+    "main_capsule": "02b755eb0cf5f41c1838a99c9a353ebce32a88cd/capsule_616x353.jpg",
+    "main_capsule_2x": "02b755eb0cf5f41c1838a99c9a353ebce32a88cd/capsule_616x353_2x.jpg",
+    "small_capsule": "bd23943dcd0280aa2cdc066e2f86d2185cfd4cce/capsule_231x87.jpg",
+    "small_capsule_2x": "bd23943dcd0280aa2cdc066e2f86d2185cfd4cce/capsule_231x87_2x.jpg",
+    "header": "faffc0f560786e2f05104a8d2fac837c6969bf13/header.jpg",
+    "header_2x": "faffc0f560786e2f05104a8d2fac837c6969bf13/header_2x.jpg",
+    "hero_capsule": "9a8ae9bb0b85f125bd956024f86f30a3aeb799e8/hero_capsule.jpg",
+    "hero_capsule_2x": "9a8ae9bb0b85f125bd956024f86f30a3aeb799e8/hero_capsule_2x.jpg",
+    "library_capsule": "library_600x900.jpg",
+    "library_capsule_2x": "library_600x900_2x.jpg",
+    "library_hero": "a58588d857b8683f8065e55f97ab82ad8a945c51/library_hero.jpg",
+    "library_hero_2x": "a58588d857b8683f8065e55f97ab82ad8a945c51/library_hero_2x.jpg",
+    "community_icon": "25a5a16b2423bf7487ac5340b5b0948cef48c5f8",
+    "page_background_path": "app/620?t=1790187113",
+    "last_modified": 1790187113
+  },
+  "package_groups": [
+    {
+      "name": "default"
+    },
+    {
+      "name": "subscriptions",
+      "display_type": 1
+    }
+  ],
+  "extra_details": {
+    "vetted": true,
+    "controller_wizard_complete": true,
+    "interactive_elements": [
+      4
+    ],
+    "links_and_info": {
+      "website": "http://www.thinkwithportals.com/",
+      "genreids": [
+        1,
+        25
+      ],
+      "achievements_visible": true,
+      "achievement_count": 51
+    },
+    "points_shop_eligible": true,
+    "metacritic": {
+      "score": 95,
+      "url": "https://www.metacritic.com/game/pc/portal-2?ftag=MCD-06-10aaa1f"
+    },
+    "system_requirements": {
+      "platforms": [
+        {
+          "platform": 1,
+          "minimum": {
+            "os_version": "Windows 7 / Vista / XP",
+            "os_version_unsupported": true,
+            "processor": "3.0 GHz P4, Dual Core 2.0 (or higher) or AMD64X2 (or higher)",
+            "memory": {
+              "amount": "2",
+              "units": "GB"
+            },
+            "graphics": "Video card must be 128 MB or more and with support for Pixel Shader 2.0b (ATI Radeon X800 or higher / NVIDIA GeForce 7600 or higher / Intel HD Graphics 2000 or higher).",
+            "directx": "9.0c",
+            "storage": {
+              "amount": "8",
+              "units": "GB"
+            },
+            "sound_card": "DirectX 9.0c compatible"
+          },
+          "unsupported_os_note": 1
+        },
+        {
+          "platform": 3,
+          "minimum": {
+            "os_version": "Ubuntu 12.04",
+            "processor": "Dual core from Intel or AMD at 2.8 GHz",
+            "memory": {
+              "amount": "2",
+              "units": "GB"
+            },
+            "graphics": "nVidia GeForce 8600/9600GT, ATI/AMD Radeon HD2600/3600 (Graphic Drivers: nVidia 310, AMD 12.11), OpenGL 2.1",
+            "storage": {
+              "amount": "8",
+              "units": "GB"
+            },
+            "sound_card": "OpenAL Compatible Sound Card"
+          }
+        }
+      ]
+    },
+    "has_community_hub": true,
+    "hardware_compatibility": {
+      "steam_deck_tests": [
+        {
+          "display_type": 4,
+          "loc_token": "#SteamDeckVerified_TestResult_DefaultControllerConfigFullyFunctional"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamDeckVerified_TestResult_ControllerGlyphsMatchDeckDevice"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamDeckVerified_TestResult_InterfaceTextIsLegible"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamDeckVerified_TestResult_DefaultConfigurationIsPerformant"
+        }
+      ],
+      "steam_os_tests": [
+        {
+          "display_type": 3,
+          "loc_token": "#SteamOS_TestResult_GameStartupFunctional"
+        }
+      ],
+      "steam_machine_tests": [
+        {
+          "display_type": 4,
+          "loc_token": "#SteamMachine_TestResult_DefaultControllerConfigFullyFunctional"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamMachine_TestResult_ControllerGlyphsMatchDevice"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamMachine_TestResult_DefaultConfigurationIsPerformant"
+        }
+      ],
+      "steam_frame_tests": [
+        {
+          "display_type": 4,
+          "loc_token": "#SteamFrame_TestResult_DefaultControllerConfigFullyFunctional"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamFrame_TestResult_ControllerGlyphsMatchDevice"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamFrame_TestResult_InterfaceTextIsLegible"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamFrame_TestResult_DefaultConfigurationIsPerformant"
+        }
+      ]
+    },
+    "dlc_for_purchase": {
+      "dlc": [
+        {
+          "appid": 323180,
+          "packageid": 50873,
+          "highlight_reason": 4
+        }
+      ],
+      "dlc_count": 1
+    }
+  }
+}

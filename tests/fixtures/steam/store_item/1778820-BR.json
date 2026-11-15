@@ -1,0 +1,3548 @@
+{
+  "item_type": 0,
+  "id": 1778820,
+  "success": 1,
+  "visible": true,
+  "name": "TEKKEN 8",
+  "store_url_path": "app/1778820/TEKKEN_8",
+  "store_url_slug": "TEKKEN_8",
+  "appid": 1778820,
+  "type": 0,
+  "related_items": {
+    "demo_appid": [
+      2524440
+    ],
+    "demos": [
+      {
+        "appid": 2524440,
+        "show_above_purchase": true
+      }
+    ]
+  },
+  "included_items": {
+    "included_apps": [
+      {
+        "item_type": 0,
+        "id": 2524440,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - DEMO",
+        "store_url_path": "app/2524440/TEKKEN_8_DEMO",
+        "store_url_slug": "TEKKEN_8_DEMO",
+        "appid": 2524440,
+        "type": 1,
+        "is_free": true,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            37,
+            24
+          ]
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 4536150,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Roger Jr.",
+        "store_url_path": "app/4536150/TEKKEN_8_Roger_Jr",
+        "store_url_slug": "TEKKEN_8_Roger_Jr",
+        "appid": 4536150,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 4536140,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Bob",
+        "store_url_path": "app/4536140/TEKKEN_8_Bob",
+        "store_url_slug": "TEKKEN_8_Bob",
+        "appid": 4536140,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1581868,
+          "purchase_option_name": "TEKKEN 8 - Bob",
+          "final_price_in_cents": "3550",
+          "formatted_final_price": "R$35,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 4129110,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Season 3 Pass",
+        "store_url_path": "app/4129110/TEKKEN_8_Season_3_Pass",
+        "store_url_slug": "TEKKEN_8_Season_3_Pass",
+        "appid": 4129110,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1446849,
+          "purchase_option_name": "TEKKEN 8 - Season 3 Pass",
+          "final_price_in_cents": "15490",
+          "formatted_final_price": "R$154,90",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 4129100,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Kunimitsu",
+        "store_url_path": "app/4129100/TEKKEN_8_Kunimitsu",
+        "store_url_slug": "TEKKEN_8_Kunimitsu",
+        "appid": 4129100,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1446846,
+          "purchase_option_name": "TEKKEN 8 - Kunimitsu",
+          "final_price_in_cents": "3550",
+          "formatted_final_price": "R$35,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3417270,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Season 2 Character & Stage Pass",
+        "store_url_path": "app/3417270/TEKKEN_8_Season_2_Character_Stage_Pass",
+        "store_url_slug": "TEKKEN_8_Season_2_Character_Stage_Pass",
+        "appid": 3417270,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1208610,
+          "purchase_option_name": "TEKKEN 8 - Season 2 Character & Stage Pass",
+          "final_price_in_cents": "17690",
+          "formatted_final_price": "R$176,90",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3417250,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Season 2 Character Pass",
+        "store_url_path": "app/3417250/TEKKEN_8_Season_2_Character_Pass",
+        "store_url_slug": "TEKKEN_8_Season_2_Character_Pass",
+        "appid": 3417250,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1208603,
+          "purchase_option_name": "TEKKEN 8 - Season 2 Character Pass",
+          "final_price_in_cents": "13250",
+          "formatted_final_price": "R$132,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 4001560,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Miary Zo",
+        "store_url_path": "app/4001560/TEKKEN_8_Miary_Zo",
+        "store_url_slug": "TEKKEN_8_Miary_Zo",
+        "appid": 4001560,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1404271,
+          "purchase_option_name": "TEKKEN 8 - Miary Zo",
+          "final_price_in_cents": "3550",
+          "formatted_final_price": "R$35,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 4001570,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - BAOBAB HORIZON",
+        "store_url_path": "app/4001570/TEKKEN_8_BAOBAB_HORIZON",
+        "store_url_slug": "TEKKEN_8_BAOBAB_HORIZON",
+        "appid": 4001570,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1404274,
+          "purchase_option_name": "TEKKEN 8 - BAOBAB HORIZON",
+          "final_price_in_cents": "2250",
+          "formatted_final_price": "R$22,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3775990,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Armor King",
+        "store_url_path": "app/3775990/TEKKEN_8_Armor_King",
+        "store_url_slug": "TEKKEN_8_Armor_King",
+        "appid": 3775990,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1328429,
+          "purchase_option_name": "TEKKEN 8 - Armor King",
+          "final_price_in_cents": "3550",
+          "formatted_final_price": "R$35,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3564540,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Fahkumram",
+        "store_url_path": "app/3564540/TEKKEN_8_Fahkumram",
+        "store_url_slug": "TEKKEN_8_Fahkumram",
+        "appid": 3564540,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1257770,
+          "purchase_option_name": "TEKKEN 8 - Fahkumram",
+          "final_price_in_cents": "3550",
+          "formatted_final_price": "R$35,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3564550,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - PAC-PIXELS",
+        "store_url_path": "app/3564550/TEKKEN_8_PACPIXELS",
+        "store_url_slug": "TEKKEN_8_PACPIXELS",
+        "appid": 3564550,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1257773,
+          "purchase_option_name": "TEKKEN 8 - PAC-PIXELS",
+          "final_price_in_cents": "2250",
+          "formatted_final_price": "R$22,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3417000,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Anna Williams",
+        "store_url_path": "app/3417000/TEKKEN_8_Anna_Williams",
+        "store_url_slug": "TEKKEN_8_Anna_Williams",
+        "appid": 3417000,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1208520,
+          "purchase_option_name": "TEKKEN 8 - Anna Williams",
+          "final_price_in_cents": "3550",
+          "formatted_final_price": "R$35,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3417240,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Season 1 Character & Stage Pass",
+        "store_url_path": "app/3417240/TEKKEN_8_Season_1_Character_Stage_Pass",
+        "store_url_slug": "TEKKEN_8_Season_1_Character_Stage_Pass",
+        "appid": 3417240,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1208600,
+          "purchase_option_name": "TEKKEN 8 - Season 1 Character & Stage Pass",
+          "final_price_in_cents": "17690",
+          "formatted_final_price": "R$176,90",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3417230,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Season 1 Character Pass",
+        "store_url_path": "app/3417230/TEKKEN_8_Season_1_Character_Pass",
+        "store_url_slug": "TEKKEN_8_Season_1_Character_Pass",
+        "appid": 3417230,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1208597,
+          "purchase_option_name": "TEKKEN 8 - Season 1 Character Pass",
+          "final_price_in_cents": "13250",
+          "formatted_final_price": "R$132,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 2732280,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Eddy Gordo",
+        "store_url_path": "app/2732280/TEKKEN_8_Eddy_Gordo",
+        "store_url_slug": "TEKKEN_8_Eddy_Gordo",
+        "appid": 2732280,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 977772,
+          "purchase_option_name": "TEKKEN 8 - Eddy Gordo",
+          "final_price_in_cents": "3550",
+          "formatted_final_price": "R$35,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 2891170,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Lidia Sobieska",
+        "store_url_path": "app/2891170/TEKKEN_8_Lidia_Sobieska",
+        "store_url_slug": "TEKKEN_8_Lidia_Sobieska",
+        "appid": 2891170,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1030717,
+          "purchase_option_name": "TEKKEN 8 - Lidia Sobieska",
+          "final_price_in_cents": "3550",
+          "formatted_final_price": "R$35,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3024980,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Heihachi Mishima",
+        "store_url_path": "app/3024980/TEKKEN_8_Heihachi_Mishima",
+        "store_url_slug": "TEKKEN_8_Heihachi_Mishima",
+        "appid": 3024980,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1075668,
+          "purchase_option_name": "TEKKEN 8 - Heihachi Mishima",
+          "final_price_in_cents": "3550",
+          "formatted_final_price": "R$35,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3303020,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Collaboration Set Clive Rosfield & PHOENIX GATE (FINAL FANTASY series)",
+        "store_url_path": "app/3303020/TEKKEN_8_Collaboration_Set_Clive_Rosfield_PHOENIX_GATE_FINAL_FANTASY_series",
+        "store_url_slug": "TEKKEN_8_Collaboration_Set_Clive_Rosfield_PHOENIX_GATE_FINAL_FANTASY_series",
+        "appid": 3303020,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1169805,
+          "purchase_option_name": "TEKKEN 8 - Collaboration Set Clive Rosfield & PHOENIX GATE (FINAL FANTASY series)",
+          "final_price_in_cents": "4450",
+          "formatted_final_price": "R$44,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3145880,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Clive Rosfield (FINAL FANTASY series)",
+        "store_url_path": "app/3145880/TEKKEN_8_Clive_Rosfield_FINAL_FANTASY_series",
+        "store_url_slug": "TEKKEN_8_Clive_Rosfield_FINAL_FANTASY_series",
+        "appid": 3145880,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1116791,
+          "purchase_option_name": "TEKKEN 8 - Clive Rosfield (FINAL FANTASY series)",
+          "final_price_in_cents": "3550",
+          "formatted_final_price": "R$35,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3025000,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - GENMAJI TEMPLE",
+        "store_url_path": "app/3025000/TEKKEN_8_GENMAJI_TEMPLE",
+        "store_url_slug": "TEKKEN_8_GENMAJI_TEMPLE",
+        "appid": 3025000,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1075675,
+          "purchase_option_name": "TEKKEN 8 - GENMAJI TEMPLE",
+          "final_price_in_cents": "2250",
+          "formatted_final_price": "R$22,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3145890,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - PHOENIX GATE  (FINAL FANTASY series)",
+        "store_url_path": "app/3145890/TEKKEN_8_PHOENIX_GATE_FINAL_FANTASY_series",
+        "store_url_slug": "TEKKEN_8_PHOENIX_GATE_FINAL_FANTASY_series",
+        "appid": 3145890,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1116794,
+          "purchase_option_name": "TEKKEN 8 - PHOENIX GATE (FINAL FANTASY series)",
+          "final_price_in_cents": "2250",
+          "formatted_final_price": "R$22,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 3417280,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Customization Item Pack",
+        "store_url_path": "app/3417280/TEKKEN_8_Customization_Item_Pack",
+        "store_url_slug": "TEKKEN_8_Customization_Item_Pack",
+        "appid": 3417280,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1208613,
+          "purchase_option_name": "TEKKEN 8 - Customization Item Pack",
+          "final_price_in_cents": "4450",
+          "formatted_final_price": "R$44,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 2512940,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Avatar Costume: Paul Phoenix Set",
+        "store_url_path": "app/2512940/TEKKEN_8_Avatar_Costume_Paul_Phoenix_Set",
+        "store_url_slug": "TEKKEN_8_Avatar_Costume_Paul_Phoenix_Set",
+        "appid": 2512940,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 903514,
+          "purchase_option_name": "TEKKEN 8 - Avatar Costume: Paul Phoenix Set",
+          "final_price_in_cents": "1350",
+          "formatted_final_price": "R$13,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 2518100,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Avatar Skin: Tetsujin",
+        "store_url_path": "app/2518100/TEKKEN_8_Avatar_Skin_Tetsujin",
+        "store_url_slug": "TEKKEN_8_Avatar_Skin_Tetsujin",
+        "appid": 2518100,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 905198,
+          "purchase_option_name": "TEKKEN 8 - Avatar Skin: Tetsujin",
+          "final_price_in_cents": "2250",
+          "formatted_final_price": "R$22,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 0,
+        "id": 2518110,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Avatar Skin: Mokujin",
+        "store_url_path": "app/2518110/TEKKEN_8_Avatar_Skin_Mokujin",
+        "store_url_slug": "TEKKEN_8_Avatar_Skin_Mokujin",
+        "appid": 2518110,
+        "type": 4,
+        "related_items": {
+          "parent_appid": 1778820
+        },
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 905201,
+          "purchase_option_name": "TEKKEN 8 - Avatar Skin: Mokujin",
+          "final_price_in_cents": "2250",
+          "formatted_final_price": "R$22,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      }
+    ],
+    "included_packages": [
+      {
+        "item_type": 1,
+        "id": 912716,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8",
+        "store_url_path": "app/1778820/TEKKEN_8",
+        "store_url_slug": "TEKKEN_8",
+        "appid": 1778820,
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          1778820
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 912716,
+          "purchase_option_name": "TEKKEN 8",
+          "final_price_in_cents": "17690",
+          "formatted_final_price": "R$176,90",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1262248,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 Advanced Edition",
+        "store_url_path": "app/1778820/TEKKEN_8",
+        "store_url_slug": "TEKKEN_8_Advanced_Edition",
+        "appid": 1778820,
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          1778820
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1262248,
+          "purchase_option_name": "TEKKEN 8 Advanced Edition",
+          "final_price_in_cents": "22090",
+          "formatted_final_price": "R$220,90",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1262249,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 Season 2 Deluxe Edition",
+        "store_url_path": "app/1778820/TEKKEN_8",
+        "store_url_slug": "TEKKEN_8_Season_2_Deluxe_Edition",
+        "appid": 1778820,
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          1778820
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1262249,
+          "purchase_option_name": "TEKKEN 8 Season 2 Deluxe Edition",
+          "final_price_in_cents": "35350",
+          "formatted_final_price": "R$353,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1262250,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 Season 2 Ultimate Edition",
+        "store_url_path": "app/1778820/TEKKEN_8",
+        "store_url_slug": "TEKKEN_8_Season_2_Ultimate_Edition",
+        "appid": 1778820,
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          1778820
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1262250,
+          "purchase_option_name": "TEKKEN 8 Season 2 Ultimate Edition",
+          "final_price_in_cents": "39750",
+          "formatted_final_price": "R$397,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1581868,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Bob",
+        "store_url_path": "app/4536140/TEKKEN_8_Bob",
+        "store_url_slug": "TEKKEN_8_Bob",
+        "appid": 4536140,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          4536140
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1581868,
+          "purchase_option_name": "TEKKEN 8 - Bob",
+          "final_price_in_cents": "3550",
+          "formatted_final_price": "R$35,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1446849,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Season 3 Pass",
+        "store_url_path": "app/4129110/TEKKEN_8_Season_3_Pass",
+        "store_url_slug": "TEKKEN_8_Season_3_Pass",
+        "appid": 4129110,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          4129110
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1446849,
+          "purchase_option_name": "TEKKEN 8 - Season 3 Pass",
+          "final_price_in_cents": "15490",
+          "formatted_final_price": "R$154,90",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1446846,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Kunimitsu",
+        "store_url_path": "app/4129100/TEKKEN_8_Kunimitsu",
+        "store_url_slug": "TEKKEN_8_Kunimitsu",
+        "appid": 4129100,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          4129100
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1446846,
+          "purchase_option_name": "TEKKEN 8 - Kunimitsu",
+          "final_price_in_cents": "3550",
+          "formatted_final_price": "R$35,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1208610,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Season 2 Character & Stage Pass",
+        "store_url_path": "app/3417270/TEKKEN_8_Season_2_Character_Stage_Pass",
+        "store_url_slug": "TEKKEN_8_Season_2_Character_Stage_Pass",
+        "appid": 3417270,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3417270
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1208610,
+          "purchase_option_name": "TEKKEN 8 - Season 2 Character & Stage Pass",
+          "final_price_in_cents": "17690",
+          "formatted_final_price": "R$176,90",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1208603,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Season 2 Character Pass",
+        "store_url_path": "app/3417250/TEKKEN_8_Season_2_Character_Pass",
+        "store_url_slug": "TEKKEN_8_Season_2_Character_Pass",
+        "appid": 3417250,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3417250
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1208603,
+          "purchase_option_name": "TEKKEN 8 - Season 2 Character Pass",
+          "final_price_in_cents": "13250",
+          "formatted_final_price": "R$132,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1404271,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Miary Zo",
+        "store_url_path": "app/4001560/TEKKEN_8_Miary_Zo",
+        "store_url_slug": "TEKKEN_8_Miary_Zo",
+        "appid": 4001560,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          4001560
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1404271,
+          "purchase_option_name": "TEKKEN 8 - Miary Zo",
+          "final_price_in_cents": "3550",
+          "formatted_final_price": "R$35,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1404274,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - BAOBAB HORIZON",
+        "store_url_path": "app/4001570/TEKKEN_8_BAOBAB_HORIZON",
+        "store_url_slug": "TEKKEN_8_BAOBAB_HORIZON",
+        "appid": 4001570,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          4001570
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1404274,
+          "purchase_option_name": "TEKKEN 8 - BAOBAB HORIZON",
+          "final_price_in_cents": "2250",
+          "formatted_final_price": "R$22,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1328429,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Armor King",
+        "store_url_path": "app/3775990/TEKKEN_8_Armor_King",
+        "store_url_slug": "TEKKEN_8_Armor_King",
+        "appid": 3775990,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3775990
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1328429,
+          "purchase_option_name": "TEKKEN 8 - Armor King",
+          "final_price_in_cents": "3550",
+          "formatted_final_price": "R$35,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1257770,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Fahkumram",
+        "store_url_path": "app/3564540/TEKKEN_8_Fahkumram",
+        "store_url_slug": "TEKKEN_8_Fahkumram",
+        "appid": 3564540,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3564540
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1257770,
+          "purchase_option_name": "TEKKEN 8 - Fahkumram",
+          "final_price_in_cents": "3550",
+          "formatted_final_price": "R$35,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1257773,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - PAC-PIXELS",
+        "store_url_path": "app/3564550/TEKKEN_8_PACPIXELS",
+        "store_url_slug": "TEKKEN_8_PACPIXELS",
+        "appid": 3564550,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3564550
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1257773,
+          "purchase_option_name": "TEKKEN 8 - PAC-PIXELS",
+          "final_price_in_cents": "2250",
+          "formatted_final_price": "R$22,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1208520,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Anna Williams",
+        "store_url_path": "app/3417000/TEKKEN_8_Anna_Williams",
+        "store_url_slug": "TEKKEN_8_Anna_Williams",
+        "appid": 3417000,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3417000
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1208520,
+          "purchase_option_name": "TEKKEN 8 - Anna Williams",
+          "final_price_in_cents": "3550",
+          "formatted_final_price": "R$35,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1208600,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Season 1 Character & Stage Pass",
+        "store_url_path": "app/3417240/TEKKEN_8_Season_1_Character_Stage_Pass",
+        "store_url_slug": "TEKKEN_8_Season_1_Character_Stage_Pass",
+        "appid": 3417240,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3417240
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1208600,
+          "purchase_option_name": "TEKKEN 8 - Season 1 Character & Stage Pass",
+          "final_price_in_cents": "17690",
+          "formatted_final_price": "R$176,90",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1208597,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Season 1 Character Pass",
+        "store_url_path": "app/3417230/TEKKEN_8_Season_1_Character_Pass",
+        "store_url_slug": "TEKKEN_8_Season_1_Character_Pass",
+        "appid": 3417230,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3417230
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1208597,
+          "purchase_option_name": "TEKKEN 8 - Season 1 Character Pass",
+          "final_price_in_cents": "13250",
+          "formatted_final_price": "R$132,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 977772,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Eddy Gordo",
+        "store_url_path": "app/2732280/TEKKEN_8_Eddy_Gordo",
+        "store_url_slug": "TEKKEN_8_Eddy_Gordo",
+        "appid": 2732280,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          2732280
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 977772,
+          "purchase_option_name": "TEKKEN 8 - Eddy Gordo",
+          "final_price_in_cents": "3550",
+          "formatted_final_price": "R$35,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1030717,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Lidia Sobieska",
+        "store_url_path": "app/2891170/TEKKEN_8_Lidia_Sobieska",
+        "store_url_slug": "TEKKEN_8_Lidia_Sobieska",
+        "appid": 2891170,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          2891170
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1030717,
+          "purchase_option_name": "TEKKEN 8 - Lidia Sobieska",
+          "final_price_in_cents": "3550",
+          "formatted_final_price": "R$35,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1075668,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Heihachi Mishima",
+        "store_url_path": "app/3024980/TEKKEN_8_Heihachi_Mishima",
+        "store_url_slug": "TEKKEN_8_Heihachi_Mishima",
+        "appid": 3024980,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3024980
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1075668,
+          "purchase_option_name": "TEKKEN 8 - Heihachi Mishima",
+          "final_price_in_cents": "3550",
+          "formatted_final_price": "R$35,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1169805,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Collaboration Set Clive Rosfield & PHOENIX GATE (FINAL FANTASY series)",
+        "store_url_path": "app/3303020/TEKKEN_8_Collaboration_Set_Clive_Rosfield_PHOENIX_GATE_FINAL_FANTASY_series",
+        "store_url_slug": "TEKKEN_8_Collaboration_Set_Clive_Rosfield_PHOENIX_GATE_FINAL_FANTASY_series",
+        "appid": 3303020,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3303020
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1169805,
+          "purchase_option_name": "TEKKEN 8 - Collaboration Set Clive Rosfield & PHOENIX GATE (FINAL FANTASY series)",
+          "final_price_in_cents": "4450",
+          "formatted_final_price": "R$44,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1116791,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Clive Rosfield (FINAL FANTASY series)",
+        "store_url_path": "app/3145880/TEKKEN_8_Clive_Rosfield_FINAL_FANTASY_series",
+        "store_url_slug": "TEKKEN_8_Clive_Rosfield_FINAL_FANTASY_series",
+        "appid": 3145880,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3145880
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1116791,
+          "purchase_option_name": "TEKKEN 8 - Clive Rosfield (FINAL FANTASY series)",
+          "final_price_in_cents": "3550",
+          "formatted_final_price": "R$35,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1075675,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - GENMAJI TEMPLE",
+        "store_url_path": "app/3025000/TEKKEN_8_GENMAJI_TEMPLE",
+        "store_url_slug": "TEKKEN_8_GENMAJI_TEMPLE",
+        "appid": 3025000,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3025000
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1075675,
+          "purchase_option_name": "TEKKEN 8 - GENMAJI TEMPLE",
+          "final_price_in_cents": "2250",
+          "formatted_final_price": "R$22,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1116794,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - PHOENIX GATE (FINAL FANTASY series)",
+        "store_url_path": "app/3145890/TEKKEN_8_PHOENIX_GATE_FINAL_FANTASY_series",
+        "store_url_slug": "TEKKEN_8_PHOENIX_GATE_FINAL_FANTASY_series",
+        "appid": 3145890,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3145890
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1116794,
+          "purchase_option_name": "TEKKEN 8 - PHOENIX GATE (FINAL FANTASY series)",
+          "final_price_in_cents": "2250",
+          "formatted_final_price": "R$22,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 1208613,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Customization Item Pack",
+        "store_url_path": "app/3417280/TEKKEN_8_Customization_Item_Pack",
+        "store_url_slug": "TEKKEN_8_Customization_Item_Pack",
+        "appid": 3417280,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          3417280
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ],
+          "controller_categoryids": [
+            55,
+            56,
+            57,
+            58,
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 1208613,
+          "purchase_option_name": "TEKKEN 8 - Customization Item Pack",
+          "final_price_in_cents": "4450",
+          "formatted_final_price": "R$44,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 903514,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Avatar Costume: Paul Phoenix Set",
+        "store_url_path": "app/2512940/TEKKEN_8_Avatar_Costume_Paul_Phoenix_Set",
+        "store_url_slug": "TEKKEN_8_Avatar_Costume_Paul_Phoenix_Set",
+        "appid": 2512940,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          2512940
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 903514,
+          "purchase_option_name": "TEKKEN 8 - Avatar Costume: Paul Phoenix Set",
+          "final_price_in_cents": "1350",
+          "formatted_final_price": "R$13,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 905198,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Avatar Skin: Tetsujin",
+        "store_url_path": "app/2518100/TEKKEN_8_Avatar_Skin_Tetsujin",
+        "store_url_slug": "TEKKEN_8_Avatar_Skin_Tetsujin",
+        "appid": 2518100,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          2518100
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 905198,
+          "purchase_option_name": "TEKKEN 8 - Avatar Skin: Tetsujin",
+          "final_price_in_cents": "2250",
+          "formatted_final_price": "R$22,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 905201,
+        "success": 1,
+        "visible": true,
+        "name": "TEKKEN 8 - Avatar Skin: Mokujin",
+        "store_url_path": "app/2518110/TEKKEN_8_Avatar_Skin_Mokujin",
+        "store_url_slug": "TEKKEN_8_Avatar_Skin_Mokujin",
+        "appid": 2518110,
+        "type": 4,
+        "included_types": [
+          4
+        ],
+        "included_appids": [
+          2518110
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2,
+            1,
+            49,
+            36,
+            37,
+            24
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 905201,
+          "purchase_option_name": "TEKKEN 8 - Avatar Skin: Mokujin",
+          "final_price_in_cents": "2250",
+          "formatted_final_price": "R$22,50",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      }
+    ],
+    "included_creators": [
+      {
+        "item_type": 5,
+        "id": 33042543,
+        "success": 1,
+        "visible": true,
+        "name": "Bandai Namco Entertainment",
+        "store_url_path": "developer/BANDAINAMCO",
+        "store_url_slug": "BANDAINAMCO",
+        "game_count": 169
+      }
+    ]
+  },
+  "tagids": [
+    1743,
+    6506,
+    3859,
+    19,
+    7368,
+    1775,
+    5055,
+    1773,
+    4182,
+    3878,
+    4747,
+    16250,
+    6915,
+    12095,
+    4085,
+    7481,
+    1756,
+    4026,
+    597,
+    6650
+  ],
+  "categories": {
+    "supported_player_categoryids": [
+      2,
+      1,
+      49,
+      36,
+      37,
+      24
+    ],
+    "feature_categoryids": [
+      22,
+      29,
+      23,
+      62
+    ],
+    "controller_categoryids": [
+      55,
+      56,
+      57,
+      58,
+      18
+    ]
+  },
+  "reviews": {
+    "summary_filtered": {
+      "review_count": 46786,
+      "percent_positive": 56,
+      "review_score": 5,
+      "review_score_label": "Mixed"
+    },
+    "summary_unfiltered": {
+      "review_count": 48280,
+      "percent_positive": 55,
+      "review_score": 5,
+      "review_score_label": "Mixed"
+    },
+    "summary_language_specific": {
+      "review_count": 27863,
+      "percent_positive": 59,
+      "review_score": 5,
+      "review_score_label": "Mixed"
+    }
+  },
+  "basic_info": {
+    "short_description": "TEKKEN 8 is the latest addition to the TEKKEN series, the pinnacle of 3D fighting games. Join the fight with over 32 characters and bear witness to the next installment in this epic saga. Get ready for the biggest and best TEKKEN game ever made!",
+    "publishers": [
+      {
+        "name": "Bandai Namco Entertainment",
+        "creator_clan_account_id": 33042543
+      }
+    ],
+    "developers": [
+      {
+        "name": "Bandai Namco Studios Inc."
+      }
+    ],
+    "franchises": [
+      {
+        "name": "TEKKEN"
+      }
+    ]
+  },
+  "tags": [
+    {
+      "tagid": 1743,
+      "weight": 1231
+    },
+    {
+      "tagid": 6506,
+      "weight": 914
+    },
+    {
+      "tagid": 3859,
+      "weight": 835
+    },
+    {
+      "tagid": 19,
+      "weight": 799
+    },
+    {
+      "tagid": 7368,
+      "weight": 737
+    },
+    {
+      "tagid": 1775,
+      "weight": 701
+    },
+    {
+      "tagid": 5055,
+      "weight": 655
+    },
+    {
+      "tagid": 1773,
+      "weight": 626
+    },
+    {
+      "tagid": 4182,
+      "weight": 482
+    },
+    {
+      "tagid": 3878,
+      "weight": 388
+    },
+    {
+      "tagid": 4747,
+      "weight": 359
+    },
+    {
+      "tagid": 16250,
+      "weight": 352
+    },
+    {
+      "tagid": 6915,
+      "weight": 309
+    },
+    {
+      "tagid": 12095,
+      "weight": 295
+    },
+    {
+      "tagid": 4085,
+      "weight": 241
+    },
+    {
+      "tagid": 7481,
+      "weight": 233
+    },
+    {
+      "tagid": 1756,
+      "weight": 230
+    },
+    {
+      "tagid": 4026,
+      "weight": 226
+    },
+    {
+      "tagid": 597,
+      "weight": 215
+    },
+    {
+      "tagid": 6650,
+      "weight": 161
+    }
+  ],
+  "assets": {
+    "asset_url_format": "steam/apps/1778820/${FILENAME}?t=1794438159",
+    "main_capsule": "capsule_616x353.jpg",
+    "small_capsule": "capsule_231x87.jpg",
+    "header": "bb40124a525d6146a7c1ee4848bf3a14aa716224/header.jpg",
+    "header_2x": "bb40124a525d6146a7c1ee4848bf3a14aa716224/header_2x.jpg",
+    "page_background": "page_bg_generated_v6b.jpg",
+    "hero_capsule": "hero_capsule.jpg",
+    "library_capsule": "library_600x900.jpg",
+    "library_capsule_2x": "library_600x900_2x.jpg",
+    "library_hero": "library_hero.jpg",
+    "library_hero_2x": "library_hero_2x.jpg",
+    "community_icon": "379f0bd7dcf0b6b20bd9041ddfaba05fdaa77a6e",
+    "page_background_path": "app/1778820?t=1794438159",
+    "raw_page_background": "page_bg_raw.jpg",
+    "edition_comparison": "7840dfeda6fa16abb9ef2b8b0eb851a78dff4f5a/edition_comparision.png",
+    "last_modified": 1794438159
+  },
+  "release": {
+    "steam_release_date": 1706223600
+  },
+  "platforms": {
+    "windows": true,
+    "vr_support": {},
+    "steam_deck_compat_category": 2,
+    "steam_os_compat_category": 2,
+    "steam_frame_compat_category": 1,
+    "steam_machine_compat_category": 2
+  },
+  "game_rating": {
+    "rating": "14",
+    "descriptors": [
+      "Violência",
+      "Compras on-line"
+    ],
+    "agency": 10,
+    "banned": false,
+    "esrb_online_music_not_rated": false,
+    "esrb_online_interactions_not_rated": false,
+    "survey_interactive_elements": [
+      4
+    ],
+    "required_age": 0,
+    "use_age_gate": false,
+    "agency_rating": 0,
+    "image_url": "public/shared/images/game_ratings/DEJUS/14.png"
+  },
+  "best_purchase_option": {
+    "packageid": 912716,
+    "purchase_option_name": "TEKKEN 8",
+    "final_price_in_cents": "17690",
+    "formatted_final_price": "R$176,90",
+    "user_can_purchase_as_gift": true,
+    "hide_discount_pct_for_compliance": false,
+    "included_game_count": 1,
+    "must_purchase_as_set": false,
+    "package_group": "default",
+    "price_cannot_be_displayed_as_discount": false
+  },
+  "purchase_options": [
+    {
+      "packageid": 912716,
+      "purchase_option_name": "TEKKEN 8",
+      "final_price_in_cents": "17690",
+      "formatted_final_price": "R$176,90",
+      "user_can_purchase_as_gift": true,
+      "hide_discount_pct_for_compliance": false,
+      "included_game_count": 1,
+      "must_purchase_as_set": false,
+      "package_group": "default",
+      "is_edition": true,
+      "price_cannot_be_displayed_as_discount": false
+    },
+    {
+      "packageid": 1262248,
+      "purchase_option_name": "TEKKEN 8 Advanced Edition",
+      "final_price_in_cents": "22090",
+      "formatted_final_price": "R$220,90",
+      "user_can_purchase_as_gift": true,
+      "hide_discount_pct_for_compliance": false,
+      "included_game_count": 1,
+      "must_purchase_as_set": false,
+      "package_group": "default",
+      "is_edition": true,
+      "price_cannot_be_displayed_as_discount": false
+    },
+    {
+      "packageid": 1262249,
+      "purchase_option_name": "TEKKEN 8 Season 2 Deluxe Edition",
+      "final_price_in_cents": "35350",
+      "formatted_final_price": "R$353,50",
+      "user_can_purchase_as_gift": true,
+      "hide_discount_pct_for_compliance": false,
+      "included_game_count": 1,
+      "must_purchase_as_set": false,
+      "package_group": "default",
+      "is_edition": true,
+      "price_cannot_be_displayed_as_discount": false
+    },
+    {
+      "packageid": 1262250,
+      "purchase_option_name": "TEKKEN 8 Season 2 Ultimate Edition",
+      "final_price_in_cents": "39750",
+      "formatted_final_price": "R$397,50",
+      "user_can_purchase_as_gift": true,
+      "hide_discount_pct_for_compliance": false,
+      "included_game_count": 1,
+      "must_purchase_as_set": false,
+      "package_group": "default",
+      "is_edition": true,
+      "price_cannot_be_displayed_as_discount": false
+    }
+  ],
+  "screenshots": {
+    "all_ages_screenshots": [
+      {
+        "filename": "steam/apps/1778820/ss_62e6ec252bc1a641e8e42dba07f23631d5da85e6.jpg?t=1794438159",
+        "ordinal": 1
+      },
+      {
+        "filename": "steam/apps/1778820/ss_99dabe34abc0f92adc39d7099908c9540be7eb3f.jpg?t=1794438159",
+        "ordinal": 2
+      },
+      {
+        "filename": "steam/apps/1778820/ss_bbd38a5fe748ec966cbc85ffcd4931f0f2da8ffd.jpg?t=1794438159",
+        "ordinal": 3
+      },
+      {
+        "filename": "steam/apps/1778820/ss_7c55021d3ba8e4f14c6d9dbea9f19d9b7665d5f0.jpg?t=1794438159",
+        "ordinal": 4
+      },
+      {
+        "filename": "steam/apps/1778820/ss_3128df5768cf9fe7ea7b21096cddaf07279ba0bd.jpg?t=1794438159",
+        "ordinal": 5
+      },
+      {
+        "filename": "steam/apps/1778820/ss_5115ee8e47dda957a648a1fedb5325c7b49ec898.jpg?t=1794438159",
+        "ordinal": 6
+      },
+      {
+        "filename": "steam/apps/1778820/ss_b0b4c57e786656b4232b9ec51f3e04f73e88d843.jpg?t=1794438159",
+        "ordinal": 7
+      },
+      {
+        "filename": "steam/apps/1778820/ss_853e5ffd8d75e9b5aa171e0b332d026866e1b5af.jpg?t=1794438159",
+        "ordinal": 8
+      },
+      {
+        "filename": "steam/apps/1778820/ss_8ea8cca4e1f3d0adef3826fb9146b196240a4da0.jpg?t=1794438159",
+        "ordinal": 9
+      },
+      {
+        "filename": "steam/apps/1778820/ss_c1c0d6535d7a610ec655e9b8f3d1cae877375a7e.jpg?t=1794438159",
+        "ordinal": 10
+      }
+    ]
+  },
+  "trailers": {
+    "highlights": [
+      {
+        "trailer_name": "TEKKEN 8 - Launch Trailer",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1706773935",
+        "trailer_category": 3,
+        "microtrailer": [
+          {
+            "filename": "1778820/657043/d90e339a0e506351363d7a2ab934b0451f371855/1750735222/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "1778820/657043/d90e339a0e506351363d7a2ab934b0451f371855/1750735222/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "1778820/657043/d90e339a0e506351363d7a2ab934b0451f371855/1750735222/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "1778820/657043/d90e339a0e506351363d7a2ab934b0451f371855/1750735222/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "1778820/657043/d90e339a0e506351363d7a2ab934b0451f371855/1750735222/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "256997821/movie.293x165.jpg",
+        "screenshot_full": "256997821/movie_full.jpg",
+        "trailer_base_id": 657043,
+        "all_ages": true,
+        "screenshot_small": "256997821/movie.184x123.jpg",
+        "trailer_id": 657043
+      },
+      {
+        "trailer_name": "TEKKEN 8 - Story Trailer",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1743463696",
+        "trailer_category": 3,
+        "microtrailer": [
+          {
+            "filename": "1778820/858672/212f59a0eb8c9c09a1351ab2956e1ead9aa223e5/1750735263/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "1778820/858672/212f59a0eb8c9c09a1351ab2956e1ead9aa223e5/1750735263/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "1778820/858672/212f59a0eb8c9c09a1351ab2956e1ead9aa223e5/1750735263/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "1778820/858672/212f59a0eb8c9c09a1351ab2956e1ead9aa223e5/1750735263/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "1778820/858672/212f59a0eb8c9c09a1351ab2956e1ead9aa223e5/1750735263/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "257119090/9478903597aa40b8f1449f1bc950876b0e437273/movie_600x337.jpg",
+        "screenshot_full": "257119090/9478903597aa40b8f1449f1bc950876b0e437273/movie_full.jpg",
+        "trailer_base_id": 858672,
+        "all_ages": true,
+        "screenshot_small": "257119090/9478903597aa40b8f1449f1bc950876b0e437273/movie_232x130.jpg",
+        "trailer_id": 858672
+      },
+      {
+        "trailer_name": "TEKKEN 8 - Gamescom Trailer",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1706773956",
+        "trailer_category": 2,
+        "microtrailer": [
+          {
+            "filename": "1778820/613848/dcde8725076d5f2242062e1d62efd930f7cb0f7f/1750735107/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "1778820/613848/dcde8725076d5f2242062e1d62efd930f7cb0f7f/1750735107/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "1778820/613848/dcde8725076d5f2242062e1d62efd930f7cb0f7f/1750735107/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "1778820/613848/dcde8725076d5f2242062e1d62efd930f7cb0f7f/1750735107/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "1778820/613848/dcde8725076d5f2242062e1d62efd930f7cb0f7f/1750735107/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "256973102/movie.293x165.jpg",
+        "screenshot_full": "256973102/movie_full.jpg",
+        "trailer_base_id": 613848,
+        "all_ages": true,
+        "screenshot_small": "256973102/movie.184x123.jpg",
+        "trailer_id": 613848
+      },
+      {
+        "trailer_name": "TEKKEN 8 - Teaser Trailer",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1692734615",
+        "trailer_category": 2,
+        "microtrailer": [
+          {
+            "filename": "1778820/593105/3fe1a2a88a025ab389ea8491251a887c9d417fe8/1750735025/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "1778820/593105/3fe1a2a88a025ab389ea8491251a887c9d417fe8/1750735025/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "1778820/593105/3fe1a2a88a025ab389ea8491251a887c9d417fe8/1750735025/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "1778820/593105/3fe1a2a88a025ab389ea8491251a887c9d417fe8/1750735025/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "1778820/593105/3fe1a2a88a025ab389ea8491251a887c9d417fe8/1750735025/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "256961349/movie.293x165.jpg",
+        "screenshot_full": "256961349/movie_full.jpg",
+        "trailer_base_id": 593105,
+        "all_ages": true,
+        "screenshot_small": "256961349/movie.184x123.jpg",
+        "trailer_id": 593105
+      }
+    ]
+  },
+  "supported_languages": [
+    {
+      "elanguage": 0,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": true,
+      "subtitles": true
+    },
+    {
+      "elanguage": 2,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 3,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 1,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 5,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 25,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 10,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 4,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 22,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 6,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 7,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 12,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 8,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 9,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 27,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    }
+  ],
+  "full_description_bbcode": "TEKKEN 8 is the latest addition to the TEKKEN series, which celebrated its 30th anniversary in 2025, and has now sold over 59 million units worldwide.\r\n[img src=\"{STEAM_APP_IMAGE}/extras/54afa5dfca9d7ac2811dc725f00a9c6a.poster.avif\" poster=\"{STEAM_APP_IMAGE}/extras/54afa5dfca9d7ac2811dc725f00a9c6a.poster.avif\" width=\"780\" height=\"250\" webm=\"{STEAM_APP_IMAGE}/extras/54afa5dfca9d7ac2811dc725f00a9c6a.webm\" mp4=\"{STEAM_APP_IMAGE}/extras/54afa5dfca9d7ac2811dc725f00a9c6a.mp4\" fromclient=1][/img]\r\n\r\nThe game features a rich roster of over 32 characters with meticulously detailed high-resolution models that push modern hardware to its limits. Experience exciting battles with new battle features like Heat, or get yourself out of tough situations with powerful ultimate moves known as Rage Arts. With the new control system, Special Style, you can perform powerful combos with just a simple button, making the game even more accessible to newcomers.\r\n[img src=\"{STEAM_APP_IMAGE}/extras/2cc7dfd2bf6f4feb0697b15284d9e91d.poster.avif\" poster=\"{STEAM_APP_IMAGE}/extras/2cc7dfd2bf6f4feb0697b15284d9e91d.poster.avif\" width=\"780\" height=\"250\" webm=\"{STEAM_APP_IMAGE}/extras/2cc7dfd2bf6f4feb0697b15284d9e91d.webm\" mp4=\"{STEAM_APP_IMAGE}/extras/2cc7dfd2bf6f4feb0697b15284d9e91d.mp4\" fromclient=1][/img]\r\n\r\nThere are many ways to enjoy TEKKEN 8. Become immersed in the longest ongoing storyline in video game history with single-player story mode or fully express yourself with character customization. Create your avatar and take on various arcade challenges or visit the interactive online lobby to face off against players from around the world. And with online battle modes like Ranked Match, you can jump straight into the action.\r\n[img src=\"{STEAM_APP_IMAGE}/extras/5b8f2693373aef28f73e02e59ea65af5.poster.avif\" poster=\"{STEAM_APP_IMAGE}/extras/5b8f2693373aef28f73e02e59ea65af5.poster.avif\" width=\"780\" height=\"250\" webm=\"{STEAM_APP_IMAGE}/extras/5b8f2693373aef28f73e02e59ea65af5.webm\" mp4=\"{STEAM_APP_IMAGE}/extras/5b8f2693373aef28f73e02e59ea65af5.mp4\" fromclient=1][/img]\r\n\r\nWant to improve your skills? You can fight against your own or other players' Ghosts that learn a player's fighting style using AI technology. Plus, you can check out battle replays to receive tips and develop new tactics.\r\n[img src=\"{STEAM_APP_IMAGE}/extras/a258d087456f705e9b2182ff7ea1ac78.poster.avif\" poster=\"{STEAM_APP_IMAGE}/extras/a258d087456f705e9b2182ff7ea1ac78.poster.avif\" width=\"780\" height=\"250\" webm=\"{STEAM_APP_IMAGE}/extras/a258d087456f705e9b2182ff7ea1ac78.webm\" mp4=\"{STEAM_APP_IMAGE}/extras/a258d087456f705e9b2182ff7ea1ac78.mp4\" fromclient=1][/img]",
+  "assets_without_overrides": {
+    "asset_url_format": "steam/apps/1778820/${FILENAME}?t=1794438159",
+    "main_capsule": "capsule_616x353.jpg",
+    "small_capsule": "capsule_231x87.jpg",
+    "header": "bb40124a525d6146a7c1ee4848bf3a14aa716224/header.jpg",
+    "header_2x": "bb40124a525d6146a7c1ee4848bf3a14aa716224/header_2x.jpg",
+    "page_background": "page_bg_generated_v6b.jpg",
+    "hero_capsule": "hero_capsule.jpg",
+    "library_capsule": "library_600x900.jpg",
+    "library_capsule_2x": "library_600x900_2x.jpg",
+    "library_hero": "library_hero.jpg",
+    "library_hero_2x": "library_hero_2x.jpg",
+    "community_icon": "379f0bd7dcf0b6b20bd9041ddfaba05fdaa77a6e",
+    "page_background_path": "app/1778820?t=1794438159",
+    "raw_page_background": "page_bg_raw.jpg",
+    "edition_comparison": "7840dfeda6fa16abb9ef2b8b0eb851a78dff4f5a/edition_comparision.png",
+    "last_modified": 1794438159
+  },
+  "links": [
+    {
+      "link_type": 5,
+      "url": "https://discord.com/invite/tekkenofficial"
+    }
+  ],
+  "package_groups": [
+    {
+      "name": "default"
+    },
+    {
+      "name": "subscriptions",
+      "display_type": 1
+    }
+  ],
+  "extra_details": {
+    "vetted": true,
+    "controller_wizard_complete": true,
+    "eula": [
+      {
+        "name": "TEKKEN 8 EULA",
+        "url": "https://store.steampowered.com//eula/1778820_eula_0"
+      }
+    ],
+    "section": [
+      {
+        "label": "Comparison Chart",
+        "content_bbcode": "[img src=\"{STEAM_APP_IMAGE}/extras/a6c7570cd33c86a820e8a88321b3d1c3.avif\" big_src=\"{STEAM_APP_IMAGE}/extras_big/a6c7570cd33c86a820e8a88321b3d1c3.webp\" width=\"1560\" height=\"878\" avif=\"{STEAM_APP_IMAGE}/extras/a6c7570cd33c86a820e8a88321b3d1c3.avif\" fromclient=1][/img]"
+      },
+      {
+        "label": "TEKKEN 8 Advanced Edition",
+        "content_bbcode": "[img src=\"{STEAM_APP_IMAGE}/extras/9fa0a8c74b340be63558826c486ececf.avif\" big_src=\"{STEAM_APP_IMAGE}/extras_big/9fa0a8c74b340be63558826c486ececf.webp\" width=\"1560\" height=\"878\" avif=\"{STEAM_APP_IMAGE}/extras/9fa0a8c74b340be63558826c486ececf.avif\" fromclient=1][/img]\r\nThe Advanced Edition includes:\r\n• TEKKEN 8\r\n• 3 Additional playable characters \r\n- Eddy\r\n- Lidia\r\n- Heihachi"
+      },
+      {
+        "label": "TEKKEN 8 Season 2 Deluxe Edition",
+        "content_bbcode": "[img src=\"{STEAM_APP_IMAGE}/extras/50e036ea9fe863d9fbcc8e0b49d26827.avif\" width=\"1280\" height=\"720\" avif=\"{STEAM_APP_IMAGE}/extras/50e036ea9fe863d9fbcc8e0b49d26827.avif\" fromclient=1][/img]\r\n*This edition does not contain additional content for TEKKEN 8 Season 3.\r\n*TEKKEN 8 Season 3 additional content can be purchased with the following product:\r\n- Season 3 Pass\r\n\r\nThe Season 2 Deluxe Edition includes:\r\n• TEKKEN 8\r\n• 8 Additional playable characters\r\n- Eddy\r\n- Lidia\r\n- Heihachi\r\n- Clive\r\n- Anna\r\n- Fahkumram\r\n- Armor King\r\n- Miary Zo"
+      },
+      {
+        "label": "TEKKEN 8 Season 2 Ultimate Edition",
+        "content_bbcode": "[img src=\"{STEAM_APP_IMAGE}/extras/479aa7b9c2d5bf6f96720a1492cbb054.avif\" width=\"1280\" height=\"720\" avif=\"{STEAM_APP_IMAGE}/extras/479aa7b9c2d5bf6f96720a1492cbb054.avif\" fromclient=1][/img]\r\n*This edition does not contain additional content for TEKKEN 8 Season 3.\r\n*TEKKEN 8 Season 3 additional content can be purchased with the following product:\r\n- Season 3 Pass\r\n\r\nThe Season 2 Ultimate Edition includes:\r\n• TEKKEN 8\r\n• 8 Additional playable characters \r\n- Eddy\r\n- Lidia\r\n- Heihachi\r\n- Clive\r\n- Anna\r\n- Fahkumram\r\n- Armor King\r\n- Miary Zo\r\n• 4 Additional battle stages\r\n- GENMAJI TEMPLE\r\n- PHOENIX GATE\r\n- PAC-PIXELS\r\n- BAOBAB HORIZON\r\n• Character Costume: Gold Suit Pack\r\n• Avatar Costume: Classic TEKKEN T-Shirt Set\r\n• 4 Avatar Skins"
+      }
+    ],
+    "legal_notice_bbcode": "TEKKEN™8 & ©Bandai Namco Entertainment Inc.",
+    "interactive_elements": [
+      4
+    ],
+    "partner_awards_bbcode": "[img src=\"{STEAM_APP_IMAGE}/extras/5d459784d994a55b39e97cdbe9bbbaf8.avif\" big_src=\"{STEAM_APP_IMAGE}/extras_big/5d459784d994a55b39e97cdbe9bbbaf8.avif\" width=\"800\" height=\"800\" avif=\"{STEAM_APP_IMAGE}/extras/5d459784d994a55b39e97cdbe9bbbaf8.avif\" fromclient=1][/img]\r\n[img src=\"{STEAM_APP_IMAGE}/extras/ea6b9d45902bf71339b76c7fac72ef89.avif\" width=\"800\" height=\"805\" avif=\"{STEAM_APP_IMAGE}/extras/ea6b9d45902bf71339b76c7fac72ef89.avif\" fromclient=1][/img]\r\n[img src=\"{STEAM_APP_IMAGE}/extras/52b96ac01f13bd0b3ac61eccd29b2e0d.avif\" big_src=\"{STEAM_APP_IMAGE}/extras_big/52b96ac01f13bd0b3ac61eccd29b2e0d.avif\" width=\"800\" height=\"494\" avif=\"{STEAM_APP_IMAGE}/extras/52b96ac01f13bd0b3ac61eccd29b2e0d.avif\" fromclient=1][/img]\r\n[img src=\"{STEAM_APP_IMAGE}/extras/e4ab25e60415b1a6cc8554c18a13ed0e.avif\" big_src=\"{STEAM_APP_IMAGE}/extras_big/e4ab25e60415b1a6cc8554c18a13ed0e.avif\" width=\"800\" height=\"800\" avif=\"{STEAM_APP_IMAGE}/extras/e4ab25e60415b1a6cc8554c18a13ed0e.avif\" fromclient=1][/img]",
+    "links_and_info": {
+      "website": "https://tk8.tekken-official.jp/",
+      "genreids": [
+        1
+      ],
+      "achievements_visible": true,
+      "achievement_count": 47
+    },
+    "points_shop_eligible": true,
+    "metacritic": {
+      "score": 91,
+      "url": "https://www.metacritic.com/game/pc/tekken-8?ftag=MCD-06-10aaa1f"
+    },
+    "system_requirements": {
+      "platforms": [
+        {
+          "platform": 1,
+          "minimum": {
+            "os_version": "Windows 10 64-Bit",
+            "processor": "Intel Core i5-6600K/AMD Ryzen 5 1600",
+            "memory": {
+              "amount": "8",
+              "units": "GB"
+            },
+            "graphics": "Nvidia GeForce GTX 1050Ti/AMD Radeon R9 380X",
+            "directx": "12",
+            "broadband": true,
+            "storage": {
+              "amount": "100",
+              "units": "GB"
+            },
+            "sound_card": "DirectX compatible soundcard/Onboard chipset",
+            "notes": "*\"FPS (frame rate/second): Stable over 60\" is guaranteed and selected under the graphic settings by default when the game is launched for the first time.*Frame rate may drop when other applications are running in the background.*Please note that minimum and recommended specifications are subjected to changes without notice."
+          },
+          "recommended": {
+            "os_version": "Windows 10 64-Bit",
+            "processor": "Intel Core i7-7700K/AMD Ryzen 5 2600",
+            "memory": {
+              "amount": "16",
+              "units": "GB"
+            },
+            "graphics": "Nvidia GeForce RTX 2070/AMD Radeon RX 5700 XT",
+            "directx": "12",
+            "broadband": true,
+            "storage": {
+              "amount": "100",
+              "units": "GB"
+            },
+            "sound_card": "DirectX compatible soundcard/Onboard chipset",
+            "notes": "*\"FPS (frame rate/second): Stable over 60\" is guaranteed and selected under the graphic settings by default when the game is launched for the first time.*Frame rate may drop when other applications are running in the background.*Please note that minimum and recommended specifications are subjected to changes without notice."
+          },
+          "requires_64bit": true
+        }
+      ]
+    },
+    "has_community_hub": true,
+    "hardware_compatibility": {
+      "steam_deck_tests": [
+        {
+          "display_type": 3,
+          "loc_token": "#SteamDeckVerified_TestResult_TextInputDoesNotAutomaticallyInvokesKeyboard"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamDeckVerified_TestResult_DefaultControllerConfigFullyFunctional"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamDeckVerified_TestResult_ControllerGlyphsMatchDeckDevice"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamDeckVerified_TestResult_InterfaceTextIsLegible"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamDeckVerified_TestResult_DefaultConfigurationIsPerformant"
+        }
+      ],
+      "steam_os_tests": [
+        {
+          "display_type": 3,
+          "loc_token": "#SteamOS_TestResult_GameStartupFunctional"
+        },
+        {
+          "display_type": 1,
+          "loc_token": "#SteamOS_TestResult_TextInputDoesNotAutomaticallyInvokesKeyboard"
+        }
+      ],
+      "steam_machine_tests": [
+        {
+          "display_type": 3,
+          "loc_token": "#SteamMachine_TestResult_TextInputDoesNotAutomaticallyInvokesKeyboard"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamMachine_TestResult_DefaultControllerConfigFullyFunctional"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamMachine_TestResult_ControllerGlyphsMatchDevice"
+        },
+        {
+          "display_type": 4,
+          "loc_token": "#SteamMachine_TestResult_DefaultConfigurationIsPerformant"
+        }
+      ],
+      "steam_frame_tests": [
+        {
+          "display_type": 2,
+          "loc_token": "#SteamFrame_TestResult_UnsupportedGraphicsPerformance"
+        }
+      ]
+    },
+    "dlc_for_purchase": {
+      "dlc": [
+        {
+          "appid": 4536150,
+          "highlight_reason": 1
+        },
+        {
+          "appid": 4536140,
+          "packageid": 1581868
+        },
+        {
+          "appid": 4129110,
+          "packageid": 1446849
+        },
+        {
+          "appid": 4129100,
+          "packageid": 1446846
+        },
+        {
+          "appid": 3417270,
+          "packageid": 1208610
+        },
+        {
+          "appid": 3417250,
+          "packageid": 1208603
+        },
+        {
+          "appid": 4001560,
+          "packageid": 1404271
+        },
+        {
+          "appid": 4001570,
+          "packageid": 1404274
+        },
+        {
+          "appid": 3775990,
+          "packageid": 1328429
+        },
+        {
+          "appid": 3564540,
+          "packageid": 1257770
+        },
+        {
+          "appid": 3564550,
+          "packageid": 1257773
+        },
+        {
+          "appid": 3417000,
+          "packageid": 1208520
+        },
+        {
+          "appid": 3417240,
+          "packageid": 1208600
+        },
+        {
+          "appid": 3417230,
+          "packageid": 1208597
+        },
+        {
+          "appid": 2732280,
+          "packageid": 977772
+        },
+        {
+          "appid": 2891170,
+          "packageid": 1030717
+        },
+        {
+          "appid": 3024980,
+          "packageid": 1075668
+        },
+        {
+          "appid": 3303020,
+          "packageid": 1169805
+        },
+        {
+          "appid": 3145880,
+          "packageid": 1116791
+        },
+        {
+          "appid": 3025000,
+          "packageid": 1075675
+        },
+        {
+          "appid": 3145890,
+          "packageid": 1116794
+        },
+        {
+          "appid": 3417280,
+          "packageid": 1208613
+        },
+        {
+          "appid": 2512940,
+          "packageid": 903514
+        },
+        {
+          "appid": 2518100,
+          "packageid": 905198
+        },
+        {
+          "appid": 2518110,
+          "packageid": 905201
+        }
+      ],
+      "dlc_count": 25,
+      "formatted_total_price": "R$1.366,20"
+    }
+  }
+}

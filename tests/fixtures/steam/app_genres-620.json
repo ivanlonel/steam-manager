@@ -1,0 +1,17 @@
+{
+  "620": {
+    "success": true,
+    "data": {
+      "genres": [
+        {
+          "id": "1",
+          "description": "Action"
+        },
+        {
+          "id": "25",
+          "description": "Adventure"
+        }
+      ]
+    }
+  }
+}

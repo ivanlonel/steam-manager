@@ -10,7 +10,7 @@ from steam_manager.answers import Answer, Kind
 from steam_manager.steam.webapi import STORE, call, is_json, item_answer, response_answer
 
 if TYPE_CHECKING:
-    from collections.abc import AsyncIterator, Callable, Iterable, Mapping, Sequence
+    from collections.abc import AsyncGenerator, Callable, Iterable, Mapping, Sequence
 
     import httpx
 
@@ -108,7 +108,7 @@ def _store_items(response: httpx.Response) -> list[dict[str, JsonValue]]:
 
 async def list_apps(
     transport: Transport, *, country: str, language: str = "english"
-) -> AsyncIterator[Answer]:
+) -> AsyncGenerator[Answer]:
     """
     List every game, mod and software a store sells, as light entries and then the listing.
 
@@ -163,7 +163,7 @@ async def list_apps(
 
 async def get_items(
     transport: Transport, appids: Iterable[int], *, country: str, language: str = "english"
-) -> AsyncIterator[Answer]:
+) -> AsyncGenerator[Answer]:
     """
     Fetch full entries, 100 apps per request, keyed by each app's id.
 
