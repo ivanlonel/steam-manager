@@ -43,11 +43,15 @@ jobs:
       # Stands in for Renovate's lock file maintenance (disabled in renovate.json): its branch
       # changes only uv.lock, so Renovate would rebuild it on every run once this job had
       # committed to it. The weekly group branch also bumps pyproject.toml, so the refresh can
-      # sit in this job's commit, where sync-with-uv re-pins every hook to it. Releases younger
-      # than a day are skipped (`exclude-newer` in pyproject.toml), as Renovate skips them.
+      # sit in this job's commit, where sync-with-uv re-pins every hook to it. Like Renovate's
+      # minimumReleaseAge, it skips releases younger than a day; local upgrades don't. uv.lock
+      # records the cutoff, which would fail every later `--locked` run, so a plain `uv lock`
+      # removes it again, keeping the versions just chosen.
       - name: Refresh uv.lock (weekly group pull request only)
         if: github.head_ref == 'renovate/pep621-pre-commit'
-        run: uv lock --upgrade
+        run: |
+          uv lock --upgrade --exclude-newer "1 day"
+          uv lock
 
       # sync-with-uv copies the versions in uv.lock into .pre-commit-config.yaml, then
       # pyproject-fmt tidies what Renovate wrote. Each runs twice: the first pass may fail

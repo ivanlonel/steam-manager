@@ -84,10 +84,6 @@ hook = [
 
 [tool.uv]
 required-version = ">=0.13"
-# Every lock, the weekly `uv lock --upgrade` included, skips releases younger than a day, as
-# Renovate's minimumReleaseAge does. Set here, not per command: uv.lock records it, and a lock
-# made without it fails `--locked`.
-exclude-newer = "1 day"
 
 [tool.ruff]
 required-version = ">=0.17"
