@@ -59,3 +59,11 @@ just docs-live        # serve at http://localhost:8000, rebuilding on every chan
 - Keep each pull request self-contained and, where possible, under 150,000 diff characters.
 - Don't open drafts: the automated reviewer skips them.
 - Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/). Pull requests are merged by rebase.
+
+## Maintainer setup
+
+What a fork, or the repository itself, needs once, outside the files:
+
+- **Renovate**: give the [Renovate app](https://github.com/apps/renovate) access to the repository. Its configuration is `.github/renovate.json`.
+- **`RENOVATE_TOKEN`** secret: a fine-grained personal access token for this repository only, with *Contents: read and write*. The Post-Renovate Hooks workflow pushes with it, because a push with the workflow's own token would not start CI.
+- **Pages**: *Settings → Pages → Source: GitHub Actions*.
