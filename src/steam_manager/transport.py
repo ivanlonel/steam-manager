@@ -1,7 +1,10 @@
 """Send the application's HTTP requests: paced per host, retried, and never showing a secret."""
 
 import asyncio
+import email.utils
+import logging
 import time
+from datetime import UTC, datetime
 from typing import TYPE_CHECKING, Final
 
 import httpx
@@ -13,6 +16,18 @@ if TYPE_CHECKING:
 
 TIMEOUT_SECONDS: Final = 120.0
 """How long connecting, sending or reading may take before an attempt fails."""
+MAX_RETRIES: Final = 5
+"""Retries after the first attempt, as in the notebooks' ``Retry(total=5)``."""
+FIRST_BACKOFF_SECONDS: Final = 10.0
+"""The wait before the first retry when the server gives no ``Retry-After``; it then doubles."""
+MAX_BACKOFF_SECONDS: Final = 120.0
+"""The longest wait between two attempts when the server gives no ``Retry-After``."""
+MAX_RETRY_AFTER_SECONDS: Final = 300.0
+"""A ``Retry-After`` longer than this fails the request instead of stalling the sync."""
+RETRYABLE_ERRORS: Final = (httpx.TimeoutException, httpx.NetworkError, httpx.RemoteProtocolError)
+"""Network errors a later attempt can get past; any other httpx error fails at once."""
+
+_LOGGER: Final = logging.getLogger(__name__)
 
 
 class FetchError(Exception):
@@ -117,7 +132,7 @@ class Transport:
         allow: Collection[int],
     ) -> httpx.Response:
         """
-        Send *request* once the host's interval has passed, holding the host's lock.
+        Send *request*, paced and retried, while the caller holds the host's lock.
 
         :param request: The request to send.
         :param endpoint: The request's URL without its query string.
@@ -127,28 +142,94 @@ class Transport:
         :return: The answer.
         :raise RequestFailedError: When the answer has another status, or none came.
         """
+        attempt = 0
+        while True:
+            attempt += 1
+            await self._pace(host, interval)
+            # The httpx exception never leaves this method: its message holds the full URL.
+            try:
+                response = await self._client.send(request)
+            except httpx.HTTPError as error:
+                status, reason = None, type(error).__name__
+                wait = backoff_seconds(attempt) if isinstance(error, RETRYABLE_ERRORS) else None
+            else:
+                status, reason = response.status_code, f"HTTP {response.status_code}"
+                if response.is_success or status in allow:
+                    return response
+                wait = retry_wait(response, attempt)
+            finally:
+                self._last_ended[host] = self._clock()
+            if wait is None or attempt > MAX_RETRIES:
+                raise RequestFailedError(
+                    request.method, endpoint, status=status, reason=reason, attempts=attempt
+                )
+            _LOGGER.warning(
+                "%s %s: %s, retrying in %.0f s (%d of %d)",
+                request.method,
+                endpoint,
+                reason,
+                wait,
+                attempt,
+                MAX_RETRIES,
+            )
+            await self._sleep(wait)
+
+    async def _pace(self, host: str, interval: float) -> None:
+        """
+        Wait until *interval* seconds have passed since the previous request to *host* ended.
+
+        :param host: The host about to be asked.
+        :param interval: The seconds to leave between that answer and this request.
+        """
         if host in self._last_ended:
             wait = self._last_ended[host] + interval - self._clock()
             if wait > 0:
                 await self._sleep(wait)
-        try:
-            response = await self._client.send(request)
-        except httpx.HTTPError as error:
-            # From None: the httpx exception's message holds the full URL.
-            raise RequestFailedError(
-                request.method, endpoint, status=None, reason=type(error).__name__, attempts=1
-            ) from None
-        finally:
-            self._last_ended[host] = self._clock()
-        if response.is_success or response.status_code in allow:
-            return response
-        raise RequestFailedError(
-            request.method,
-            endpoint,
-            status=response.status_code,
-            reason=f"HTTP {response.status_code}",
-            attempts=1,
-        )
+
+
+def backoff_seconds(attempt: int) -> float:
+    """
+    Tell how long to wait after failed attempt number *attempt* when the server says nothing.
+
+    :param attempt: The attempt that failed, counting from 1.
+    :return: 10 seconds, doubling with each attempt, at most 120.
+    """
+    return min(FIRST_BACKOFF_SECONDS * 2.0 ** (attempt - 1), MAX_BACKOFF_SECONDS)
+
+
+def retry_after_seconds(value: str) -> float | None:
+    """
+    Read a ``Retry-After`` header: a number of seconds, or an HTTP date.
+
+    :param value: The header's value.
+    :return: The seconds to wait (0 for a date already past), or ``None`` when it is neither.
+    """
+    if value.isdecimal():
+        return float(value)
+    try:
+        when = email.utils.parsedate_to_datetime(value)
+    except TypeError, ValueError:
+        return None
+    if when.tzinfo is None:
+        when = when.replace(tzinfo=UTC)
+    return max(0.0, (when - datetime.now(UTC)).total_seconds())
+
+
+def retry_wait(response: httpx.Response, attempt: int) -> float | None:
+    """
+    Tell how long to wait before retrying after *response*, or that retrying is pointless.
+
+    :param response: An answer that is neither a success nor allowed.
+    :param attempt: The attempt that got it, counting from 1.
+    :return: The seconds to wait, or ``None`` when the request must fail now.
+    """
+    if response.status_code != httpx.codes.TOO_MANY_REQUESTS and not response.is_server_error:
+        return None
+    header = response.headers.get("Retry-After")
+    asked = None if header is None else retry_after_seconds(header)
+    if asked is None:
+        return backoff_seconds(attempt)
+    return asked if asked <= MAX_RETRY_AFTER_SECONDS else None
 
 
 def make_client() -> httpx.AsyncClient:

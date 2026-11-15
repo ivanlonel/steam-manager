@@ -1,7 +1,7 @@
 """Tests for the HTTP transport: pacing, retries, failures in a row and redaction."""
 
 import asyncio
-lazy from collections.abc import Callable
+lazy from collections.abc import Callable, Sequence
 
 import httpx
 import pytest
@@ -224,6 +224,147 @@ def test_a_redirect_is_a_failure_and_is_not_followed() -> None:
 
     assert caught.value.status == 302
     assert len(calls) == 1
+
+
+type Step = int | httpx.Response | type[httpx.RequestError]
+"""One answer of :func:`answers`: a status, a whole response, or a network error to raise."""
+
+
+def answers(steps: Sequence[Step]) -> Callable[[httpx.Request], httpx.Response]:
+    """
+    Make a handler that answers each request with the next step, repeating the last one.
+
+    :param steps: The answers, in order.
+    :return: The handler.
+    """
+    remaining = list(steps)
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        step = remaining.pop(0) if len(remaining) > 1 else remaining[0]
+        if isinstance(step, httpx.Response):
+            return step
+        if isinstance(step, int):
+            return httpx.Response(step)
+        message = "a simulated network error"
+        raise step(message, request=request)
+
+    return handler
+
+
+def throttled(retry_after: str) -> httpx.Response:
+    """
+    Build a 429 answer carrying *retry_after*.
+
+    :param retry_after: The ``Retry-After`` header's value.
+    :return: The answer.
+    """
+    return httpx.Response(429, headers={"Retry-After": retry_after})
+
+
+@pytest.mark.parametrize("status", [429, 500, 502, 503, 504])
+def test_a_retryable_status_is_retried(status: int) -> None:
+    """Throttling and server errors are retried after the first backoff of ten seconds."""
+    clock = FakeClock()
+    transport = transport_for(answers([status, 200]), clock)
+
+    response = asyncio.run(transport.get(URL, interval=0))
+
+    assert response.status_code == 200
+    assert clock.sleeps == [10.0]
+
+
+def test_the_backoff_doubles_up_to_two_minutes() -> None:
+    """Five retries wait 10, 20, 40, 80 and 120 seconds, then the request fails."""
+    clock = FakeClock()
+    transport = transport_for(answers([503]), clock)
+
+    with pytest.raises(RequestFailedError) as caught:
+        asyncio.run(transport.get(URL, interval=0))
+
+    assert caught.value.attempts == 6
+    assert str(caught.value) == f"GET {URL} failed: HTTP 503 after 6 attempts"
+    assert clock.sleeps == [10.0, 20.0, 40.0, 80.0, 120.0]
+
+
+def test_retry_after_seconds_replace_the_backoff() -> None:
+    """A Retry-After in seconds is the wait, instead of the backoff."""
+    clock = FakeClock()
+    transport = transport_for(answers([throttled("7"), 200]), clock)
+
+    asyncio.run(transport.get(URL, interval=0))
+
+    assert clock.sleeps == [7.0]
+
+
+def test_a_past_retry_after_date_retries_at_once() -> None:
+    """A Retry-After date already past means the request can go again now."""
+    clock = FakeClock()
+    transport = transport_for(answers([throttled("Wed, 21 Oct 2015 07:28:00 GMT"), 200]), clock)
+
+    asyncio.run(transport.get(URL, interval=0))
+
+    assert clock.sleeps == [0.0]
+
+
+@pytest.mark.parametrize("value", ["301", "Fri, 01 Jan 2100 00:00:00 GMT"])
+def test_a_retry_after_over_five_minutes_fails_without_waiting(value: str) -> None:
+    """A server asking for a long pause gets it: the request fails instead of stalling the sync."""
+    clock = FakeClock()
+    transport = transport_for(answers([throttled(value), 200]), clock)
+
+    with pytest.raises(RequestFailedError) as caught:
+        asyncio.run(transport.get(URL, interval=0))
+
+    assert caught.value.status == 429
+    assert caught.value.attempts == 1
+    assert not clock.sleeps
+
+
+@pytest.mark.parametrize("value", ["soon", "-5", ""])
+def test_a_malformed_retry_after_falls_back_to_the_backoff(value: str) -> None:
+    """A Retry-After that is neither seconds nor a date is ignored."""
+    clock = FakeClock()
+    transport = transport_for(answers([throttled(value), 200]), clock)
+
+    asyncio.run(transport.get(URL, interval=0))
+
+    assert clock.sleeps == [10.0]
+
+
+@pytest.mark.parametrize(
+    "error", [httpx.ConnectError, httpx.ReadTimeout, httpx.RemoteProtocolError]
+)
+def test_a_network_error_is_retried(error: type[httpx.RequestError]) -> None:
+    """A refused connection, a timeout or a dropped connection is retried."""
+    transport = transport_for(answers([error, 200]), FakeClock())
+
+    response = asyncio.run(transport.get(URL, interval=0))
+
+    assert response.status_code == 200
+
+
+def test_a_network_error_that_never_clears_fails_naming_its_type() -> None:
+    """When the network never answers, the failure has no status and names the error's type."""
+    transport = transport_for(answers([httpx.ConnectError]), FakeClock())
+
+    with pytest.raises(RequestFailedError) as caught:
+        asyncio.run(transport.get(URL, interval=0))
+
+    assert caught.value.status is None
+    assert caught.value.reason == "ConnectError"
+    assert caught.value.attempts == 6
+
+
+def test_another_httpx_error_fails_at_once() -> None:
+    """An error that a retry can't fix, such as an unsupported protocol, isn't retried."""
+    clock = FakeClock()
+    transport = transport_for(answers([httpx.UnsupportedProtocol]), clock)
+
+    with pytest.raises(RequestFailedError) as caught:
+        asyncio.run(transport.get(URL, interval=0))
+
+    assert caught.value.attempts == 1
+    assert not clock.sleeps
 
 
 def test_make_client_identifies_the_application() -> None:
