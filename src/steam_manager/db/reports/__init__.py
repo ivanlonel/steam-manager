@@ -10,14 +10,22 @@ from typing import TYPE_CHECKING
 
 from sqlalchemy.schema import CreateView, DropView
 
-from steam_manager.db.reports import followed, games, scores, store_columns
+from steam_manager.db.reports import followed, games, scores, store_columns, wishlist
 
 if TYPE_CHECKING:
     from sqlalchemy import Engine
 
     from steam_manager.db.reports.scores import Report
 
-__all__ = ["create_views", "followed", "games", "reports", "scores", "store_columns"]
+__all__ = [
+    "create_views",
+    "followed",
+    "games",
+    "reports",
+    "scores",
+    "store_columns",
+    "wishlist",
+]
 
 
 def reports(*, home_country: str) -> dict[str, Report]:
@@ -30,6 +38,7 @@ def reports(*, home_country: str) -> dict[str, Report]:
     return {
         "v_app_scores": scores.app_scores(),
         "v_games": games.games(home_country),
+        "v_wishlist": wishlist.wishlist(home_country),
         "v_followed": followed.followed(home_country),
     }
 
