@@ -15,3 +15,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Raw archive: the latest answer per source, kind, key and country, compressed, in a per-profile SQLite file.
 - Database schema, part 1: lookups, apps, classification and credits, as the notebooks have them, dropped and recreated empty whenever their schema changes.
 - Database schema, part 2: relations, offers, media, store lists, requirements, reviews, the wishlist and followed apps.
+- Reports: app scores, games, the wishlist and followed apps, computed by the application and written into the database as views.
