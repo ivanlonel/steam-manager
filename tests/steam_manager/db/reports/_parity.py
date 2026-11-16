@@ -162,12 +162,17 @@ def mismatches(
 
 def _same(expected: object, actual: object) -> bool:
     """
-    Say whether two values are equal, floats within :data:`TOLERANCE`.
+    Say whether two values are equal and of one type, floats within :data:`TOLERANCE`.
+
+    The type counts, so an integer column that came out as a float, or text as a number, is a
+    difference.
 
     :param expected: The notebook's value.
     :param actual: The report's value.
     :return: Whether they match.
     """
+    if type(expected) is not type(actual):
+        return False
     if isinstance(expected, float) and isinstance(actual, float):
         return math.isclose(expected, actual, rel_tol=TOLERANCE, abs_tol=TOLERANCE)
     return expected == actual

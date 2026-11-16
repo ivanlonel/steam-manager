@@ -21,8 +21,9 @@ def games(home_country: str) -> Report:
     """
     Build the games report: one row per app with review totals, ordered by appid.
 
-    The price is the home country's only, so a price in another currency never shows. The
-    account's columns arrive with sign-in: owned, ignored and the tracking status.
+    The price shows only for apps the home store described, in its currency, as the notebook
+    showed only Brazilian prices. The account's columns arrive with sign-in: owned, ignored and
+    the tracking status.
 
     :param home_country: The profile's home country.
     :return: The query behind ``v_games``.
@@ -56,7 +57,12 @@ def games(home_country: str) -> Report:
         .outerjoin(best, and_(best.appid == totals.appid, best.is_best.is_(True)))
         .outerjoin(
             price,
-            and_(price.kind == best.kind, price.id == best.id, price.country == home_country),
+            and_(
+                price.kind == best.kind,
+                price.id == best.id,
+                price.country == home_country,
+                app.store_country == home_country,
+            ),
         )
         .order_by(totals.appid)
     )

@@ -1,8 +1,10 @@
 """Tests for writing the reports into the database as views."""
 
+import sqlite3
+from contextlib import closing
 from typing import TYPE_CHECKING
 
-from sqlalchemy import inspect
+from sqlalchemy import URL, create_engine, inspect
 
 from steam_manager.db.engine import open_database
 from steam_manager.db.reports import create_views, reports
@@ -42,3 +44,21 @@ def test_views_are_replaced_and_others_kept(tmp_path: Path) -> None:
     engine.dispose()
     assert "bayes_avg" in scores
     assert "v_mine" in views
+
+
+def test_current_views_are_left_without_writing(tmp_path: Path) -> None:
+    """Opening a database during a sync's write doesn't wait for it: current views stay as is."""
+    path = tmp_path / "steam.sqlite"
+    engine = open_database(path)
+    SteamBase.metadata.create_all(engine)
+    create_views(engine, home_country="BR")
+    engine.dispose()
+    impatient = create_engine(
+        URL.create("sqlite", database=str(path)), connect_args={"timeout": 0}
+    )
+
+    with closing(sqlite3.connect(path)) as sync:
+        sync.execute("BEGIN IMMEDIATE")
+        create_views(impatient, home_country="BR")
+        sync.rollback()
+    impatient.dispose()

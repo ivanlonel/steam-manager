@@ -1,11 +1,21 @@
 """Tests for opening the profile database."""
 
+import sqlite3
 lazy from pathlib import Path
 
 import pytest
 from sqlalchemy import exc, text
 
 from steam_manager.db.engine import open_database
+
+
+def test_an_old_sqlite_is_refused(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """The reports need SQLite 3.44; an older one is named, not left to fail on a statement."""
+    monkeypatch.setattr(sqlite3, "sqlite_version_info", (3, 40, 1))
+    monkeypatch.setattr(sqlite3, "sqlite_version", "3.40.1")
+
+    with pytest.raises(RuntimeError, match=r"SQLite 3\.40\.1 .* 3\.44"):
+        open_database(tmp_path / "steam.sqlite")
 
 
 def test_the_database_runs_in_wal_mode(tmp_path: Path) -> None:

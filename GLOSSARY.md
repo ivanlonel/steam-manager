@@ -36,7 +36,7 @@ _Avoid_: Reload, regenerate, reindex
 **Report**:
 A named table of results over the database, such as the games or the wishlist, which the
 application computes and also writes into the database as a view.
-_Avoid_: View (for the report itself), tab, query
+_Avoid_: View (for the report itself), tab
 
 ### Store data
 

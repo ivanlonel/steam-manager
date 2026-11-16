@@ -307,6 +307,8 @@ The builder's calls:
   recording the Steam schema only once the rebuild commits, or by keeping the loader's
   progress inside the Steam tables, so it is dropped with them.
 - The database runs in WAL mode so it can be read while a sync writes.
+- It needs SQLite 3.44 or newer, since the reports order rows inside aggregates. Opening it with
+  an older SQLite fails with a message naming both versions (builder's call).
 
 ### Reports
 
@@ -316,7 +318,7 @@ The owner's decisions (2026-11-16):
   Each one is also written into the database as a `v_*` view of the same name, with the home
   country filled in, so other SQLite tools see it.
 - The reports keep the notebooks' view columns, except that the store categories are one list
-  column, `store_categories`, instead of one column per category.
+  column, `store_categories`, instead of one column per store category.
 - An app the home store didn't describe shows the describing store's data, named in
   `store_country`, and every price blank, in every report.
 - `v_wishlist` has no `recommended_sort_order`: it ranked by the owner's own wishlist
@@ -326,13 +328,16 @@ The owner's decisions (2026-11-16):
 
 The builder's calls:
 
-- Views hold no data, so they are dropped and written again whenever the database is opened,
-  and views of other names are left alone.
+- Each open compares every view with its report and rewrites only those that differ, after an
+  upgrade or a change of home country. A current view is only read, so opening the database
+  while a sync writes never waits for the sync's lock. Views of other names are left alone.
 - Each report is checked against the notebook's own view SQL (cell 7, run with no categories)
   on the same rows: the same columns in order after the owner's changes, and the same values
   where the home store described the app.
-- Prices join on the home country only, which is how a price in another currency never
-  appears.
+- A price shows only for an app the home store described, and only the home country's: the
+  price joins on both, as the notebook's `v_games` showed Brazilian prices only. A bundle's
+  price at home can belong to an offer that doesn't hold the app there, so an app another store
+  described never borrows it.
 
 ### Loader
 
@@ -342,8 +347,10 @@ The builder's calls:
 - When several answers describe the same app, the most complete one wins: a full entry from the
   home country, then from a fallback country in list order, then from any other country (an
   imported Kaggle record, for a profile outside Brazil and the US), then a light entry, then the
-  short record nested inside another app. Within one rank the most recently fetched answer wins,
-  whichever source it came from (builder's call).
+  short record nested inside another app, each of these two in the same country order. Within
+  one rank and country the most recently fetched answer wins, whichever source it came from
+  (builder's calls: the country order for light entries and short records makes an app the home
+  store describes count as described by it, so the reports show its home price).
 - A price is always stored under the country it was quoted in. The reports show the home
   country's prices only, so a price in another currency is never mistaken for a local one: a
   profile outside Brazil that imports the Kaggle catalog gets names, tags, reviews and

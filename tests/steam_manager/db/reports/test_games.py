@@ -2,7 +2,7 @@
 
 from typing import TYPE_CHECKING, Final
 
-from sqlalchemy import insert, text
+from sqlalchemy import insert, text, update
 
 from steam_manager.db.engine import open_database
 from steam_manager.db.reports import create_views
@@ -11,6 +11,7 @@ from steam_manager.db.schema.apps import App
 from steam_manager.db.schema.offers import AppOffer, Offer, OfferPrice
 from steam_manager.db.schema.reviews import AppReviewTotal
 from tests.steam_manager.db.reports._parity import mismatches, notebook_view, report_view
+from tests.steam_manager.db.reports._samples import FALLBACK_WITH_HOME_PRICE
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -160,8 +161,20 @@ def test_a_price_from_another_country_never_shows(tmp_path: Path) -> None:
     assert row["price"] is None
 
 
+def test_a_home_price_never_shows_on_an_app_another_store_described(tmp_path: Path) -> None:
+    """An app the US store described has no price, even if its offer has a Brazilian one."""
+    (row,) = report_view(tmp_path, "v_games", FALLBACK_WITH_HOME_PRICE).rows
+
+    assert row["price"] is None
+
+
 def test_a_new_home_country_replaces_the_views(tmp_path: Path) -> None:
-    """Writing the views again for another home country shows that country's price."""
+    """
+    Writing the views again for another home country shows that country's price.
+
+    The rebuild a new home country brings has the loader pick that country's answer, so the
+    app's describing store changes with it.
+    """
     engine = open_database(tmp_path / "steam.sqlite")
     SteamBase.metadata.create_all(engine)
     sample = _priced(620, "BR", {"BR": (3699, 3699), "US": (999, 999)})
@@ -171,6 +184,8 @@ def test_a_new_home_country_replaces_the_views(tmp_path: Path) -> None:
 
     prices = []
     for country in ("BR", "US"):
+        with engine.begin() as connection:
+            connection.execute(update(App).values(store_country=country))
         create_views(engine, home_country=country)
         with engine.connect() as connection:
             prices.append(connection.scalar(text("SELECT price FROM v_games")))
