@@ -95,6 +95,7 @@ def catalog_columns(store: Store, home_country: str) -> dict[str, SQLColumnExpre
                 OfferDiscount.kind == o.kind,
                 OfferDiscount.id == o.id,
                 OfferDiscount.country == home_country,
+                a.store_country == home_country,
             ),
         ),
         "recurrence_info.packageid": x.renewal_id,

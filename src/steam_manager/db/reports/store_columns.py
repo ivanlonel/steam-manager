@@ -2,8 +2,9 @@
 The store columns the wishlist and followed reports share, as the notebook's sheet tabs have them.
 
 Each column keeps its tab's name, dotted ones such as ``vr_support.vrhmd`` included, and lists
-are JSON, blank when empty, as the CSVs the tabs came from had them. Prices come from the home
-country only: an app another store described shows that store's data and no price.
+are JSON, blank when empty, as the CSVs the tabs came from had them. Prices show only for apps
+the home store described, and only in its currency: an app another store described shows that
+store's data and no price, even when its offer has a price at home.
 """
 
 from dataclasses import dataclass
@@ -103,7 +104,7 @@ class Store:  # pylint: disable=too-many-instance-attributes
 
         :param columns: The report's columns.
         :param listed: The list's alias (``w``).
-        :param home_country: The profile's home country, the only one whose prices join.
+        :param home_country: The profile's home country: prices join for apps it described.
         :return: The report's query.
         """
         app, best = self.app, self.best
@@ -132,6 +133,7 @@ class Store:  # pylint: disable=too-many-instance-attributes
                     self.price.kind == best.kind,
                     self.price.id == best.id,
                     self.price.country == home_country,
+                    app.store_country == home_country,
                 ),
             )
             .outerjoin(self.totals, self.totals.appid == self.listed.appid)
@@ -365,7 +367,7 @@ def store_columns(store: Store, home_country: str) -> dict[str, SQLColumnExpress
 
     :param store: The report's aliases.
     :param home_country: The profile's home country.
-    :return: The columns, the store categories last, where the tabs had one per category.
+    :return: The columns, the store categories last, where the tabs had one per store category.
     """
     a, t, o, x, p = store.app, store.text, store.best, store.offer, store.price
     f, lang, u = store.filtered, store.language, store.unfiltered

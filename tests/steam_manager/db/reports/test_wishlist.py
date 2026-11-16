@@ -3,7 +3,7 @@
 from typing import TYPE_CHECKING, Final
 
 from tests.steam_manager.db.reports._parity import mismatches, notebook_view, report_view
-from tests.steam_manager.db.reports.test_followed import FALLBACK_ONLY, FULL_GAME
+from tests.steam_manager.db.reports._samples import FALLBACK_ONLY, FULL_GAME
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -58,9 +58,7 @@ def test_wishlist_matches_the_notebook_on_the_same_rows(tmp_path: Path) -> None:
 
 def test_a_fallback_app_shows_its_store_but_no_price(tmp_path: Path) -> None:
     """A wishlisted app only the US store described shows its data, not sold at home, unpriced."""
-    sample = {**FALLBACK_ONLY, "wishlist_item": [{"appid": 10, "position": 1}]}
-
-    (row,) = report_view(tmp_path, "v_wishlist", sample).rows
+    (row,) = report_view(tmp_path, "v_wishlist", FALLBACK_ONLY).rows
 
     assert (row["store_country"], row["success"], row["review_count"]) == ("US", 1, 900)
     assert row["unvailable_for_country_restriction"] == 1
