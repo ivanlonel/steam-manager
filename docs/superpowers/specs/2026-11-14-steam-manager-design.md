@@ -137,7 +137,7 @@ plus the archive, rather than rebuilding everything on each run.
 ### Exports
 
 CSV, JSON, TSV and JSON Lines in the core; Parquet and Excel behind optional install extras.
-Any table or view can be exported. The web interface adds a button that copies TSV.
+Any table or report can be exported. The web interface adds a button that copies TSV.
 
 ### Later milestones
 
@@ -170,7 +170,7 @@ steam-manager catalog fetch --full          # every listed app as a full entry; 
 steam-manager catalog import <folder>       # Kaggle steam-games files
 steam-manager rebuild                       # replay the archive through the loader
 steam-manager status                        # what is archived, how old, what is stale
-steam-manager export <table or view> --format csv|tsv|json|jsonl|parquet|xlsx [--output FILE]
+steam-manager export <table or report> --format csv|tsv|json|jsonl|parquet|xlsx [--output FILE]
 steam-manager db path | check               # where the database is; integrity and foreign keys
 ```
 
@@ -275,8 +275,7 @@ The builder's calls:
 - The schema keeps the notebooks' table and column names wherever the concept is unchanged
   (`steam-database.ipynb`, cell 2), so completeness can be checked mechanically against a
   notebook-built file. It is declared with SQLAlchemy Declarative classes using `STRICT`,
-  `WITHOUT ROWID`, generated columns and partial indexes; views use SQLAlchemy 2.1's
-  `CreateView`.
+  `WITHOUT ROWID`, generated columns and partial indexes.
 - Changes from the notebooks' schema: no check restricting countries to BR and US; Steam's
   `formatted_*` price strings are stored instead of derived (the derivation only worked for two
   currencies), as four columns appended to `offer_price` after the notebook's own (builder's
@@ -291,7 +290,7 @@ The builder's calls:
   them (builder's calls).
 - Milestone 1 creates the lookup, app, classification, credit, relation, offer, media,
   requirement and review tables, `wishlist_item`, `followed_app`, the HowLongToBeat tables and
-  the views `v_app_scores`, `v_games`, `v_wishlist` and `v_followed`. It also creates the store
+  the reports `v_app_scores`, `v_games`, `v_wishlist` and `v_followed`. It also creates the store
   page's other lists (links, licence agreements, press quotes, sections, sale pages, Steam
   Awards, purchase notes and sign-up options), which every full entry sends (builder's call).
   `wishlist_item` and `followed_app` come from archived answers, so they are Steam tables. Tables
@@ -309,6 +308,32 @@ The builder's calls:
   progress inside the Steam tables, so it is dropped with them.
 - The database runs in WAL mode so it can be read while a sync writes.
 
+### Reports
+
+The owner's decisions (2026-11-16):
+
+- A **report** is a SQLAlchemy query the application runs with the profile's home country.
+  Each one is also written into the database as a `v_*` view of the same name, with the home
+  country filled in, so other SQLite tools see it.
+- The reports keep the notebooks' view columns, except that the store categories are one list
+  column, `store_categories`, instead of one column per category.
+- An app the home store didn't describe shows the describing store's data, named in
+  `store_country`, and every price blank, in every report.
+- `v_wishlist` has no `recommended_sort_order`: it ranked by the owner's own wishlist
+  category, and milestone 6's saved rankings replace it.
+- `v_games` gains `owned`, `ignored` and the tracking status with their data in milestone 2,
+  and never `on_notion`, which names the owner's personal Notion database.
+
+The builder's calls:
+
+- Views hold no data, so they are dropped and written again whenever the database is opened,
+  and views of other names are left alone.
+- Each report is checked against the notebook's own view SQL (cell 7, run with no categories)
+  on the same rows: the same columns in order after the owner's changes, and the same values
+  where the home store described the app.
+- Prices join on the home country only, which is how a price in another currency never
+  appears.
+
 ### Loader
 
 - Input: archived answers. Output: rows. It never touches the network.
@@ -319,8 +344,8 @@ The builder's calls:
   imported Kaggle record, for a profile outside Brazil and the US), then a light entry, then the
   short record nested inside another app. Within one rank the most recently fetched answer wins,
   whichever source it came from (builder's call).
-- A price is always stored under the country it was quoted in. `v_games.price` shows the home
-  country's price only, so a price in another currency is never mistaken for a local one: a
+- A price is always stored under the country it was quoted in. The reports show the home
+  country's prices only, so a price in another currency is never mistaken for a local one: a
   profile outside Brazil that imports the Kaggle catalog gets names, tags, reviews and
   descriptions for every app, and prices only for what it has fetched itself (builder's call,
   following the notebooks' rule for dollar prices).
@@ -336,8 +361,8 @@ The builder's calls:
 - Up to 100 reviews, the positive count is `ceil(percent * count / 100)`, exact because Steam
   truncates the percentage. Above 100 it is a midpoint estimate until the exact count is
   fetched, and a flag says which.
-- The Bayes average and the Wilson lower bound (99% confidence) are computed in views from the
-  totals, with the prior taken from every rated app in the database.
+- The Bayes average and the Wilson lower bound (99% confidence) are computed in the reports from
+  the totals, with the prior taken from every rated app in the database.
 
 ### Sync
 

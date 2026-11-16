@@ -160,6 +160,7 @@ known_first_party = [ "steam_manager" ]
 [tool.typos]
 default.extend-words.optin = "optin"  # Steam's field names: include_optin_registration_tags
 default.extend-words.CPY = "CPY"  # ruff's flake8-copyright rules: CPY001
+default.extend-words.IIF = "IIF"  # SQLite's conditional function, which the notebooks' SQL uses
 # Steam's field names, spelled as Steam spells them.
 default.extend-words.unvailable = "unvailable"
 default.extend-words.rtime = "rtime"
