@@ -10,25 +10,27 @@ from typing import TYPE_CHECKING
 
 from sqlalchemy.schema import CreateView, DropView
 
-from steam_manager.db.reports import scores
-from steam_manager.db.reports.scores import app_scores
+from steam_manager.db.reports import games, scores
 
 if TYPE_CHECKING:
     from sqlalchemy import Engine
 
     from steam_manager.db.reports.scores import Report
 
-__all__ = ["create_views", "reports", "scores"]
+__all__ = ["create_views", "games", "reports", "scores"]
 
 
-def reports(*, home_country: str) -> dict[str, Report]:  # noqa: ARG001  # the next reports take it
+def reports(*, home_country: str) -> dict[str, Report]:
     """
     Build every report for one profile.
 
     :param home_country: The profile's home country, whose prices the reports show.
     :return: Each report's query, by the name of its view.
     """
-    return {"v_app_scores": app_scores()}
+    return {
+        "v_app_scores": scores.app_scores(),
+        "v_games": games.games(home_country),
+    }
 
 
 def create_views(engine: Engine, *, home_country: str) -> None:
