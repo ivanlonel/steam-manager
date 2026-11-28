@@ -21,6 +21,10 @@ type Columns = dict[str, object]
 """Values of one row, by column name."""
 
 
+class MalformedAnswerError(ValueError):
+    """An answer lacks a value its rows need: Steam's answer is at fault, not the loader."""
+
+
 class Rows:
     """Rows to write, per table, each checked against the table's columns as it is added."""
 
@@ -35,8 +39,9 @@ class Rows:
 
         :param table: The table the row goes to.
         :param \*\*values: The row's values, by column name.
-        :raise ValueError: When a column isn't the table's, or is one SQLite generates; or when
-            a column that can't be blank is, which makes the answer malformed.
+        :raise ValueError: When a column isn't the table's, or is one SQLite generates: a bug.
+        :raise MalformedAnswerError: When a column that can't be blank is, even a key SQLite
+            would number: the answer is malformed.
         """
         declared = cast("Table", table.__table__)
         name = declared.name
@@ -50,12 +55,10 @@ class Rows:
         if missing := [
             column.name
             for column in declared.columns
-            if not column.nullable
-            and column is not declared.autoincrement_column
-            and values.get(column.name) is None
+            if not column.nullable and values.get(column.name) is None
         ]:
             message = f"{name} needs {', '.join(missing)}"
-            raise ValueError(message)
+            raise MalformedAnswerError(message)
         self.tables[name].append(values)
 
     def extend(self, other: Rows) -> None:

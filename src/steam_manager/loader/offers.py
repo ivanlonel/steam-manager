@@ -11,10 +11,12 @@ from steam_manager.db.schema.offers import (
     OfferDiscount,
     OfferPrice,
 )
-from steam_manager.loader.rows import iso
+from steam_manager.loader.rows import MalformedAnswerError, iso
 from steam_manager.steam.models.offers import RecurrenceInfo
 
 if TYPE_CHECKING:
+    from collections.abc import Collection
+
     from steam_manager.loader.rows import Findings, Rows
     from steam_manager.steam.models.offers import PurchaseOption
     from steam_manager.steam.models.store_item import Categories, IncludedOffer
@@ -43,6 +45,7 @@ SHORT_RECORD_FIELDS: Final = (
 """The fields the short record of an offer or a creator page starts with."""
 
 _ITEM_TYPES: Final = {"package": 1, "bundle": 2}
+_SHORT_RECORD_CALLER: Final = ("package_group",)
 
 type OfferKey = tuple[str, int]
 """An offer's kind and id."""
@@ -87,21 +90,28 @@ def category_ids(categories: Categories | None, path: str, findings: Findings) -
 
 
 def purchase_option(
-    option: PurchaseOption, path: str, country: str, rows: Rows, findings: Findings
+    option: PurchaseOption,
+    path: str,
+    country: str,
+    rows: Rows,
+    findings: Findings,
+    *,
+    caller: Collection[str] = ("package_group", "is_edition"),
 ) -> OfferKey:
     """
     Turn a way to buy an app into its offer, its price in *country* and its discounts.
 
     ``package_group`` and ``is_edition`` describe the option on one app's page, so the caller
-    stores them with that app.
+    stores them with that app; an option in a short record belongs to no page.
 
     :param option: The option.
     :param path: Where it sits in the answer, such as ``purchase_options[]``.
     :param country: The store country that quoted it.
     :param rows: Where the rows go.
     :param findings: Where fields nothing stores and derived values that differ are counted.
+    :param caller: The fields the caller stores or checks itself.
     :return: The offer's kind and id.
-    :raise ValueError: When the option names neither a package nor a bundle.
+    :raise MalformedAnswerError: When the option names neither a package nor a bundle.
     """
     if option.packageid is not None:
         key: OfferKey = ("package", option.packageid)
@@ -109,7 +119,7 @@ def purchase_option(
         key = ("bundle", option.bundleid)
     else:
         message = f"{path} names neither a package nor a bundle"
-        raise ValueError(message)
+        raise MalformedAnswerError(message)
     kind, id_ = key
     findings.same(
         "offer_price.discount_pct",
@@ -185,9 +195,8 @@ def purchase_option(
         {
             "packageid",
             "bundleid",
+            *caller,
             "purchase_option_name",
-            "package_group",  # the caller's
-            "is_edition",  # the caller's
             "must_purchase_as_set",
             "included_game_count",
             "is_free_license",
@@ -229,11 +238,11 @@ def included_offer(
     :param rows: Where the rows go.
     :param findings: Where fields nothing stores and derived values that differ are counted.
     :param kind: ``package`` or ``bundle``.
-    :raise ValueError: When the record has no id.
+    :raise MalformedAnswerError: When the short record has no id.
     """
     if item.id is None:
         message = f"{path} has no id"
-        raise ValueError(message)
+        raise MalformedAnswerError(message)
     findings.same("offer.item_type", item.item_type, _ITEM_TYPES[kind])
     findings.same("offer.visible", item.visible, item.success == 1)
     for appid in item.included_appids:
@@ -242,16 +251,18 @@ def included_offer(
         rows.add(OfferCategory, kind=kind, id=item.id, categoryid=categoryid)
     for descriptor in item.content_descriptorids:
         rows.add(OfferContentDescriptor, kind=kind, id=item.id, descriptorid=descriptor)
-    best = item.best_purchase_option
-    best_kind, best_id = (
-        purchase_option(best, f"{path}.best_purchase_option", country, rows, findings)
-        if best
-        else (None, None)
-    )
-    if item.self_purchase_option:
-        purchase_option(
-            item.self_purchase_option, f"{path}.self_purchase_option", country, rows, findings
+    best_kind, best_id = None, None
+    for name in ("best_purchase_option", "self_purchase_option"):
+        option = getattr(item, name)
+        if option is None:
+            continue
+        # A short record's options belong to no app's page: their group is "default".
+        findings.same("included_offer.package_group", option.package_group or "default", "default")
+        key = purchase_option(
+            option, f"{path}.{name}", country, rows, findings, caller=_SHORT_RECORD_CALLER
         )
+        if name == "best_purchase_option":
+            best_kind, best_id = key
     rows.add(
         Offer,
         kind=kind,

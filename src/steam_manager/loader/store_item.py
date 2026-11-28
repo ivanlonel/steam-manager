@@ -62,7 +62,15 @@ from steam_manager.loader.offers import (
     included_offer,
     purchase_option,
 )
-from steam_manager.loader.rows import Findings, Rows, iso, join, positioned, read_columns
+from steam_manager.loader.rows import (
+    Findings,
+    MalformedAnswerError,
+    Rows,
+    iso,
+    join,
+    positioned,
+    read_columns,
+)
 
 if TYPE_CHECKING:
     from collections.abc import Mapping, Sequence
@@ -203,8 +211,8 @@ def describe(
     :param category_types: Each store category's list, by id, to check the item's lists.
     :param path: Where the item sits in its answer: ``""``, or the place of a short record.
     :return: Its rows and findings, its credits and the short records it holds.
-    :raise ValueError: When the item lacks a value a row needs, such as a credit's name: the
-        answer is malformed.
+    :raise MalformedAnswerError: When the item lacks a value a row needs, such as a credit's
+        name.
     """
     appid = item.id
     found = Described(item)
@@ -425,7 +433,7 @@ def _basic_info(appid: int, basic: BasicInfo | None, at: str, found: Described) 
     :param at: Where it sits in the answer.
     :param found: What the item becomes; its credits, rows and findings grow.
     :return: The ``app_text`` columns ``short_description`` and ``capsule_headline``.
-    :raise ValueError: When a credit has no name.
+    :raise MalformedAnswerError: When a credit has no name.
     """
     if basic is None:
         return {}
@@ -436,7 +444,7 @@ def _basic_info(appid: int, basic: BasicInfo | None, at: str, found: Described) 
             findings.rest(credit, where, {"name", "creator_clan_account_id"})
             if credit.name is None:
                 message = f"{where} has no name"
-                raise ValueError(message)
+                raise MalformedAnswerError(message)
             found.credits.append(
                 CreditRef(role, position, credit.name, credit.creator_clan_account_id or None)
             )
@@ -706,7 +714,7 @@ def _included(
     :param country: The store country that sent them.
     :param found: What the item becomes; its rows and findings grow.
     :return: The short records of other apps, loaded only where nothing better describes them.
-    :raise ValueError: When a record has no id.
+    :raise MalformedAnswerError: When a short record has no id.
     """
     if included is None:
         return ()
@@ -740,11 +748,11 @@ def _creator(creator: IncludedCreator, at: str, rows: Rows, findings: Findings) 
     :param at: Where it sits in the answer.
     :param rows: Where the row goes.
     :param findings: Where fields nothing stores and derived values that differ are counted.
-    :raise ValueError: When the record has no id.
+    :raise MalformedAnswerError: When the short record has no id.
     """
     if creator.id is None:
         message = f"{at} has no id"
-        raise ValueError(message)
+        raise MalformedAnswerError(message)
     findings.same("creator.item_type", creator.item_type, 5)
     findings.same("creator.visible", creator.visible, creator.success == 1)
     rows.add(

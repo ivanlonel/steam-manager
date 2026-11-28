@@ -4,11 +4,10 @@ from collections import Counter
 
 import pytest
 
-from steam_manager.db.schema.creators import Credit
 from steam_manager.db.schema.lookups import Tag
-from steam_manager.db.schema.media import AppScreenshot
+from steam_manager.db.schema.media import AppScreenshot, Trailer
 from steam_manager.db.schema.offers import OfferPrice
-from steam_manager.loader.rows import Findings, Rows, iso
+from steam_manager.loader.rows import Findings, MalformedAnswerError, Rows, iso
 from steam_manager.steam.models.details import Metacritic
 
 
@@ -34,8 +33,10 @@ def test_rows_extend_other_rows() -> None:
 
 def test_a_row_for_a_missing_column_is_refused() -> None:
     """A column the table lacks fails where it is written, naming the table and the column."""
-    with pytest.raises(ValueError, match=r"tag has no column label"):
+    with pytest.raises(ValueError, match=r"tag has no column label") as raised:
         Rows().add(Tag, tagid=9, label="Strategy")
+
+    assert not isinstance(raised.value, MalformedAnswerError)  # a bug, not Steam's answer
 
 
 def test_a_generated_column_is_refused() -> None:
@@ -46,18 +47,16 @@ def test_a_generated_column_is_refused() -> None:
 
 def test_a_row_without_a_required_value_is_refused() -> None:
     """A blank Steam sent for a column that can't be blank makes the answer malformed, at once."""
-    with pytest.raises(ValueError, match=r"app_screenshot needs filename"):
+    with pytest.raises(MalformedAnswerError, match=r"app_screenshot needs filename"):
         Rows().add(AppScreenshot, appid=620, is_mature=False, ordinal=0, filename=None)
-    with pytest.raises(ValueError, match=r"app_screenshot needs ordinal, filename"):
+    with pytest.raises(MalformedAnswerError, match=r"app_screenshot needs ordinal, filename"):
         Rows().add(AppScreenshot, appid=620, is_mature=False)
 
 
-def test_a_key_sqlite_numbers_may_be_left_out() -> None:
-    """A credit's id is SQLite's to give."""
-    rows = Rows()
-    rows.add(Credit, name="Valve")
-
-    assert rows.tables == {"credit": [{"name": "Valve"}]}
+def test_a_blank_key_is_refused_where_sqlite_would_number_it() -> None:
+    """SQLite would invent an id for a blank INTEGER PRIMARY KEY; a trailer has Steam's own."""
+    with pytest.raises(MalformedAnswerError, match=r"trailer needs trailer_base_id"):
+        Rows().add(Trailer, trailer_id=1)
 
 
 def test_rest_counts_fields_left_unused() -> None:
