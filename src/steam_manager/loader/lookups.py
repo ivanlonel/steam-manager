@@ -4,7 +4,7 @@ from types import MappingProxyType
 from typing import TYPE_CHECKING, Final
 
 from steam_manager.db.schema.lookups import Genre, Language, StoreCategory, Tag
-from steam_manager.loader.rows import read_columns
+from steam_manager.loader.rows import MalformedAnswerError, read_columns
 
 if TYPE_CHECKING:
     from collections.abc import Mapping
@@ -120,7 +120,7 @@ def genres(answer: AppDetailsGenresAnswer, rows: Rows, findings: Findings) -> No
     :param answer: The answer, a part per appid asked.
     :param rows: Where the rows go.
     :param findings: Where fields nothing stores are counted.
-    :raise ValueError: When a genre has no id.
+    :raise MalformedAnswerError: When a genre has no id.
     """
     for part in answer.root.values():
         findings.rest(part, "app_genres.*", {"success", "data"})
@@ -130,5 +130,5 @@ def genres(answer: AppDetailsGenresAnswer, rows: Rows, findings: Findings) -> No
             findings.rest(genre, "app_genres.*.data.genres[]", {"id", "description"})
             if genre.id is None:
                 message = "app_genres.*.data.genres[] has no id"
-                raise ValueError(message)
+                raise MalformedAnswerError(message)
             rows.add(Genre, genreid=int(genre.id), name=genre.description)
