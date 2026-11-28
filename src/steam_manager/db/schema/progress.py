@@ -1,5 +1,5 @@
 """
-The loader's progress: which archived answers the Steam tables reflect.
+The loader's progress: which archived answers, ranked for which countries, the tables reflect.
 
 It is a Steam table itself, so a schema change drops it with the tables it describes, and the
 next load fills them again from the whole archive.
@@ -26,3 +26,15 @@ class LoadedAnswer(SteamBase):
     """The store country it was asked in, or ``""``."""
     fetched_at: Mapped[str]
     """When it was fetched, as ISO 8601 text to the microsecond: an answer fetched since is new."""
+
+
+class LoadedCountry(SteamBase):
+    """A country the Steam tables were ranked for, in the profile's order: home first."""
+
+    __tablename__ = "loaded_country"
+    __table_args__ = STRICT_WITHOUT_ROWID
+
+    position: Mapped[int] = mapped_column(primary_key=True)
+    """Its place in the profile's list; 0 is the home country."""
+    country: Mapped[str]
+    """The store country."""

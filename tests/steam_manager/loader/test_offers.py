@@ -256,3 +256,29 @@ def test_an_included_offers_option_reports_what_no_page_stores() -> None:
 
     assert findings.unknown == Counter({"included_packages[].best_purchase_option.is_edition": 1})
     assert findings.mismatches["included_offer.package_group"] == 1
+
+
+def test_an_option_replaces_its_discounts_even_with_none() -> None:
+    """A price without discounts ends the discounts an earlier answer gave it."""
+    rows = Rows()
+
+    purchase_option(option(final_price_in_cents=999), "o", "BR", rows, Findings())
+
+    assert rows.replaced["offer_discount"] == {("package", 7, "BR")}
+    assert "offer_discount" not in rows.tables
+
+
+def test_an_included_offer_replaces_its_apps_categories_and_descriptors() -> None:
+    """An offer's short record replaces its apps in the country, categories and descriptors."""
+    rows = Rows()
+    package = IncludedOffer.model_validate(
+        {"id": 7, "item_type": 1, "visible": True, "success": 1}
+    )
+
+    included_offer(package, "included_packages[]", "BR", rows, Findings(), kind="package")
+
+    assert rows.replaced == {
+        "offer_app": {("package", 7, "BR")},
+        "offer_category": {("package", 7)},
+        "offer_content_descriptor": {("package", 7)},
+    }

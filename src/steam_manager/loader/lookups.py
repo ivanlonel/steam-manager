@@ -120,7 +120,7 @@ def genres(answer: AppDetailsGenresAnswer, rows: Rows, findings: Findings) -> No
     :param answer: The answer, a part per appid asked.
     :param rows: Where the rows go.
     :param findings: Where fields nothing stores are counted.
-    :raise MalformedAnswerError: When a genre has no id.
+    :raise MalformedAnswerError: When a genre has no id, or one that isn't a number.
     """
     for part in answer.root.values():
         findings.rest(part, "app_genres.*", {"success", "data"})
@@ -131,4 +131,9 @@ def genres(answer: AppDetailsGenresAnswer, rows: Rows, findings: Findings) -> No
             if genre.id is None:
                 message = "app_genres.*.data.genres[] has no id"
                 raise MalformedAnswerError(message)
-            rows.add(Genre, genreid=int(genre.id), name=genre.description)
+            try:
+                genreid = int(genre.id)
+            except ValueError:
+                message = "app_genres.*.data.genres[] has an id that isn't a number"
+                raise MalformedAnswerError(message) from None
+            rows.add(Genre, genreid=genreid, name=genre.description)

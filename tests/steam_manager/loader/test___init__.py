@@ -24,7 +24,7 @@ from steam_manager.loader import write as writing
 from tests.steam_manager.loader._archive import AT, changed, damage, put, recorded
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping
+    from collections.abc import Mapping, Sequence
     from pathlib import Path
 
     from sqlalchemy import Engine
@@ -650,3 +650,76 @@ def test_a_malformed_short_record_is_skipped(archive: Archive, engine: Engine) -
     assert "neither a package nor a bundle" in report.malformed[0].reason
     assert named(engine)[620] == ("Portal 2", "BR", 1)
     assert named(engine)[400][0] == "Portal"
+
+
+def test_a_failure_midway_raises_it_and_leaves_the_engine_clean(
+    archive: Archive, engine: Engine, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A failure with apps still to read raises itself; foreign keys are on and loads go on."""
+    for appid, name in ((620, "620-BR"), (570, "570-BR"), (546560, "546560-BR")):
+        put(archive, Kind.STORE_ITEM, str(appid), "BR", recorded(f"store_item/{name}.json"))
+
+    def crashing(*_args: object, **_kwargs: object) -> Described:
+        message = "a crash on the first app"
+        raise RuntimeError(message)
+
+    monkeypatch.setattr(loader, "LOAD_BATCH", 1)
+    monkeypatch.setattr(loader, "describe", crashing)
+    with pytest.raises(RuntimeError, match="a crash on the first app"):
+        load(archive, engine, countries=COUNTRIES)
+    with engine.connect() as connection:
+        assert connection.exec_driver_sql("PRAGMA foreign_keys").scalar() == 1
+    monkeypatch.setattr(loader, "describe", store_item.describe)
+
+    load(archive, engine, countries=COUNTRIES)
+
+    assert {620, 570, 546560} <= named(engine).keys()
+
+
+def test_an_unreadable_listing_changes_no_app(
+    archive: Archive, engine: Engine, tmp_path: Path
+) -> None:
+    """A listing that can't be read says nothing about which apps are listed."""
+    put(archive, Kind.STORE_ITEM, "620", "BR", recorded("store_item/620-BR.json"))
+    put(archive, Kind.LISTING, "", "BR", listing(620))
+    load(archive, engine, countries=COUNTRIES)
+    put(archive, Kind.LISTING, "", "BR", listing(620), at=AT + timedelta(hours=1))
+    damage(tmp_path / "archive.sqlite", "")
+
+    report = load(archive, engine, countries=COUNTRIES)
+
+    assert listed(engine)[620] is True
+    assert [problem.kind for problem in report.malformed] == ["listing"]
+
+
+def test_new_countries_rebuild_the_tables(archive: Archive, engine: Engine) -> None:
+    """A load that finds other countries than the tables reflect ranks every app again."""
+    put(archive, Kind.STORE_ITEM, "620", "BR", recorded("store_item/620-BR.json"))
+    put(archive, Kind.STORE_ITEM, "620", "US", recorded("store_item/620-US.json"))
+    load(archive, engine, countries=("BR", "US"))
+    assert named(engine)[620] == ("Portal 2", "BR", 1)
+
+    load(archive, engine, countries=("US", "BR"))
+
+    assert named(engine)[620] == ("Portal 2", "US", 1)
+
+
+def test_gaps_are_written_in_batches(
+    archive: Archive, engine: Engine, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Short records are written a batch at a time, never all held at once."""
+    put(archive, Kind.STORE_ITEM, "620", "BR", recorded("store_item/620-BR.json"))
+    sizes: list[int] = []
+    apps = writing.Writer.apps
+
+    def counted(writer: writing.Writer, batch: Sequence[tuple[Described, str]]) -> None:
+        sizes.append(len(batch))
+        apps(writer, batch)
+
+    monkeypatch.setattr(loader, "LOAD_BATCH", 2)
+    monkeypatch.setattr(writing.Writer, "apps", counted)
+
+    load(archive, engine, countries=COUNTRIES)
+
+    assert len(sizes) > 2
+    assert max(sizes) <= 2

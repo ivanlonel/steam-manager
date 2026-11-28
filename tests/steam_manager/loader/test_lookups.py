@@ -97,3 +97,15 @@ def test_languages_name_steams_numbers() -> None:
     assert named[22] == "Portuguese - Brazil"
     assert named[30] == "Indonesian"
     assert named == dict(LANGUAGES)
+
+
+def test_a_genre_id_that_isnt_a_number_is_malformed() -> None:
+    """A genre id must be a number; the message names the field, never the value."""
+    answer = AppDetailsGenresAnswer.model_validate(
+        {"1": {"success": True, "data": {"genres": [{"id": "secret", "description": "x"}]}}}
+    )
+
+    with pytest.raises(MalformedAnswerError, match="isn't a number") as raised:
+        genres(answer, Rows(), Findings())
+
+    assert "secret" not in str(raised.value)

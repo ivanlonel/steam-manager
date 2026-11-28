@@ -147,23 +147,45 @@ class Writer:
                     position=ref.position,
                     credit_id=self._credit_id(ref),
                 )
+            for name, columns in _GROUPED.items():
+                # A later answer's group replaces an earlier's, and an emptied group empties.
+                by_group: dict[tuple[object, ...], list[dict[str, object]]]
+                by_group = {key: [] for key in rows.replaced.get(name, ())}
+                for row in rows.tables.get(name, ()):
+                    by_group.setdefault(tuple(row[column] for column in columns), []).append(row)
+                groups[name].update(by_group)
             for name, table_rows in rows.tables.items():
-                if name in _GROUPED:
-                    by_group: defaultdict[tuple[object, ...], list[dict[str, object]]]
-                    by_group = defaultdict(list)
-                    for row in table_rows:
-                        by_group[tuple(row[column] for column in _GROUPED[name])].append(row)
-                    groups[name].update(by_group)  # a later answer's group replaces an earlier's
-                else:
+                if name not in _GROUPED:
                     combined[country == self._home].tables[name].extend(table_rows)
-        for name, grouped in groups.items():
-            combined[True].tables[name].extend(itertools.chain.from_iterable(grouped.values()))
         # Blank parents only once every app's own row is in: one added between the two writes
         # would take the place of an app the second one writes, whose row then loses.
         self.write(combined[False], home=False, parents=False)
         self.write(combined[True], home=True, parents=False)
-        self._blank_parents(combined[False])
-        self._blank_parents(combined[True])
+        grouped = self._groups(groups)
+        for rows in (combined[False], combined[True], grouped):
+            self._blank_parents(rows)
+
+    def _groups(
+        self, groups: Mapping[str, Mapping[tuple[object, ...], Sequence[dict[str, object]]]]
+    ) -> Rows:
+        """
+        Replace groups of an offer's rows: those of its discounts, apps, categories, descriptors.
+
+        :param groups: Each table's groups, by key, with their new rows, possibly none.
+        :return: The rows written.
+        """
+        written = Rows()
+        for name, by_group in groups.items():
+            table = _TABLES[name]
+            key = tuple_(*(table.c[column] for column in _GROUPED[name]))
+            for chunk in itertools.batched(by_group, CHUNK, strict=False):
+                self._connection.execute(delete(table).where(key.in_(chunk)))
+            values = _complete(table, itertools.chain.from_iterable(by_group.values()))
+            if values:
+                self._connection.execute(insert(table).on_conflict_do_nothing(), values)
+            written.tables[name].extend(values)
+            self.loaded[name] += len(values)
+        return written
 
     def write(self, rows: Rows, *, home: bool, parents: bool = True) -> None:
         """
@@ -182,13 +204,7 @@ class Writer:
                 self._connection.execute(insert(table).prefix_with("OR REPLACE"), values)
             elif name in _KNOWN:
                 self._lookups(table, values)
-            elif name in _GROUPED:
-                keys = {tuple(row[column] for column in _GROUPED[name]) for row in values}
-                columns = tuple_(*(table.c[column] for column in _GROUPED[name]))
-                for chunk in itertools.batched(keys, CHUNK, strict=False):
-                    self._connection.execute(delete(table).where(columns.in_(chunk)))
-                self._connection.execute(insert(table).on_conflict_do_nothing(), values)
-            else:
+            else:  # an app's own rows, cleared first; an offer's groups are replaced by apps()
                 self._connection.execute(insert(table).on_conflict_do_nothing(), values)
             self.loaded[name] += len(values)
         if parents:

@@ -6,7 +6,7 @@ import pytest
 
 from steam_manager.db.schema.lookups import Tag
 from steam_manager.db.schema.media import AppScreenshot, Trailer
-from steam_manager.db.schema.offers import OfferPrice
+from steam_manager.db.schema.offers import OfferDiscount, OfferPrice
 from steam_manager.loader.rows import Findings, MalformedAnswerError, Rows, iso
 from steam_manager.steam.models.details import Metacritic
 
@@ -133,3 +133,15 @@ def test_iso_writes_the_notebooks_text() -> None:
     assert iso(1302566400) == "2011-04-12 00:00:00"
     assert iso(0) is None
     assert iso(None) is None
+
+
+def test_a_group_is_replaced_even_with_no_rows_left() -> None:
+    """An answer says which groups of rows it replaces, so an emptied group is emptied."""
+    rows, more = Rows(), Rows()
+    rows.replace(OfferDiscount, "package", 7, "BR")
+    more.replace(OfferDiscount, "bundle", 1, "US")
+
+    rows.extend(more)
+
+    assert rows.replaced == {"offer_discount": {("package", 7, "BR"), ("bundle", 1, "US")}}
+    assert not rows.tables

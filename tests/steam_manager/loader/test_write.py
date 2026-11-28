@@ -12,7 +12,7 @@ from steam_manager.db.schema.apps import App
 from steam_manager.db.schema.classification import AppTag
 from steam_manager.db.schema.creators import AppCredit, Credit
 from steam_manager.db.schema.lookups import ReviewScore, Tag
-from steam_manager.db.schema.offers import Offer
+from steam_manager.db.schema.offers import Offer, OfferDiscount, OfferPrice
 from steam_manager.loader.rows import Rows
 from steam_manager.loader.store_item import CreditRef, Described
 from steam_manager.loader.write import ForeignKeyViolationError, Writer, check_foreign_keys
@@ -183,3 +183,22 @@ def test_intact_references_pass(connection: Connection) -> None:
     Writer(connection, home="BR").write(rows, home=True)
 
     check_foreign_keys(connection)
+
+
+def test_an_ended_discount_disappears(connection: Connection) -> None:
+    """A newer answer without a running discount ends the one an earlier answer gave."""
+    writer = Writer(connection, home="BR")
+
+    def priced(*, discounted: bool) -> Described:
+        described = app(1)
+        rows = described.rows
+        rows.add(OfferPrice, kind="package", id=7, country="BR", final_price_in_cents=999)
+        rows.replace(OfferDiscount, "package", 7, "BR")
+        if discounted:
+            rows.add(OfferDiscount, kind="package", id=7, country="BR", position=0)
+        return described
+
+    writer.apps([(priced(discounted=True), "BR")])
+    writer.apps([(priced(discounted=False), "BR")])
+
+    assert connection.scalars(select(OfferDiscount.position)).all() == []

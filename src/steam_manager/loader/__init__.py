@@ -36,7 +36,7 @@ from steam_manager.db.schema import SteamBase
 from steam_manager.db.schema.account import FollowedApp, WishlistItem
 from steam_manager.db.schema.apps import App
 from steam_manager.db.schema.lookups import StoreCategory
-from steam_manager.db.schema.progress import LoadedAnswer
+from steam_manager.db.schema.progress import LoadedAnswer, LoadedCountry
 from steam_manager.db.schema.reviews import (
     AppReviewHistogram,
     AppReviewSummary,
@@ -182,13 +182,17 @@ def load(archive: Archive, engine: Engine, *, countries: Sequence[str]) -> LoadR
     Make the Steam tables reflect the archive, loading only what changed since the last load.
 
     A load that stops before it commits leaves the tables as they were, and the next one does
-    its work too. A change of countries needs :func:`rebuild` instead: a load ranks again only
-    the apps whose answers changed.
+    its work too. A load that finds other countries than the tables were ranked for rebuilds
+    them, in the same transaction.
 
     :param archive: The profile's raw archive.
     :param engine: The profile database, its Steam tables current.
     :param countries: The home country, then the fallback countries in order.
     :return: What the load did and found.
+    :raise ValueError: When *countries* is empty.
+    :raise RuntimeError: When SQLite kept foreign keys on, so rows couldn't load in any order.
+    :raise ForeignKeyViolationError: When the load would leave a reference dangling; nothing
+        is written.
     """
     return _load(archive, engine, countries, fresh=False)
 
@@ -201,6 +205,10 @@ def rebuild(archive: Archive, engine: Engine, *, countries: Sequence[str]) -> Lo
     :param engine: The profile database, its Steam tables current.
     :param countries: The home country, then the fallback countries in order.
     :return: What the rebuild did and found.
+    :raise ValueError: When *countries* is empty.
+    :raise RuntimeError: When SQLite kept foreign keys on, so rows couldn't load in any order.
+    :raise ForeignKeyViolationError: When the rebuild would leave a reference dangling; nothing
+        is written.
     """
     return _load(archive, engine, countries, fresh=True)
 
@@ -214,10 +222,11 @@ def _load(
     :param archive: The profile's raw archive.
     :param engine: The profile database.
     :param countries: The home country, then the fallback countries in order.
-    :param fresh: Whether to empty the Steam tables first.
+    :param fresh: Whether to empty the Steam tables first; a change of countries implies it.
     :return: What it did and found.
     :raise ValueError: When *countries* is empty.
-    :raise RuntimeError: When SQLite kept foreign keys on, so rows couldn't load in any order.
+    :raise RuntimeError: When SQLite kept foreign keys on, or didn't turn them back on.
+    :raise ForeignKeyViolationError: When it would leave a reference dangling.
     """
     if not countries:
         message = "a load needs the home country"
@@ -226,21 +235,47 @@ def _load(
     with engine.connect() as connection:
         try:
             with connection.begin():
-                # First in the transaction: SQLite ignores the pragma once a write began one.
-                connection.exec_driver_sql("PRAGMA foreign_keys = OFF")
-                if connection.exec_driver_sql("PRAGMA foreign_keys").scalar():
-                    message = "foreign keys are still on: rows can't load in any order"
-                    raise RuntimeError(message)
-                if fresh:
+                _foreign_keys_off(connection)
+                order = select(LoadedCountry.country).order_by(LoadedCountry.position)
+                ranked = list(connection.scalars(order))
+                if fresh or (ranked and ranked != list(countries)):
                     for table in reversed(SteamBase.metadata.sorted_tables):
                         connection.execute(delete(table))
                 _Load(connection, archive, countries, report).run()
-        finally:
-            connection.rollback()  # no transaction stays open for the clean-up
-            connection.exec_driver_sql("DROP TABLE IF EXISTS temp.stamp")
-            connection.exec_driver_sql("PRAGMA foreign_keys = ON")
-            connection.commit()
+                connection.execute(delete(LoadedCountry))
+                connection.execute(
+                    insert(LoadedCountry),
+                    [{"position": place, "country": name} for place, name in enumerate(countries)],
+                )
+        except BaseException:
+            # The failure may have left a cursor on the temporary table: the connection goes,
+            # and its temporary table and pragma with it.
+            connection.invalidate()
+            raise
+        connection.exec_driver_sql("DROP TABLE temp.stamp")
+        connection.exec_driver_sql("PRAGMA foreign_keys = ON")
+        connection.commit()
+        enforced = connection.exec_driver_sql("PRAGMA foreign_keys").scalar()
+        if not enforced:  # pragma: no cover  # SQLite ignores it only inside a transaction
+            message = "foreign keys didn't turn back on after the load"
+            raise RuntimeError(message)
     return report
+
+
+def _foreign_keys_off(connection: Connection) -> None:
+    """
+    Turn foreign keys off for a load, so its rows can load in any order.
+
+    It must be the first statement of the transaction: SQLite ignores the pragma once a write
+    began one.
+
+    :param connection: The load's connection.
+    :raise RuntimeError: When SQLite kept them on.
+    """
+    connection.exec_driver_sql("PRAGMA foreign_keys = OFF")
+    if connection.exec_driver_sql("PRAGMA foreign_keys").scalar():
+        message = "foreign keys are still on: rows can't load in any order"
+        raise RuntimeError(message)
 
 
 def _reason(error: ValidationError) -> str:
@@ -324,7 +359,11 @@ class _Load:
         self._known = _Known()
 
     def run(self) -> None:
-        """Copy the stamps, load what changed, check every reference and record the progress."""
+        """
+        Copy the stamps, load what changed, check every reference and record the progress.
+
+        :raise ForeignKeyViolationError: When the load would leave a reference dangling.
+        """
         _STAMP.create(self._connection)
         for chunk in itertools.batched(self._archive.stamps(), STAMP_CHUNK, strict=False):
             self._connection.execute(
@@ -493,12 +532,14 @@ class _Load:
             found = True
             self._known.listing_changed |= latest in changed
             answer = self._parse(latest, ListingAnswer)
-            if answer is not None:
-                findings = Findings()
-                # total_matching_records is what the sync checks the listing against.
-                findings.rest(answer, "listing", {"total_matching_records", "appids"})
-                self._report.add(findings)
-                listed.update(answer.appids)
+            if answer is None:  # an unreadable listing says nothing about what is listed
+                self._known.listed, self._known.listing_changed = None, False
+                return
+            findings = Findings()
+            # total_matching_records is what the sync checks the listing against.
+            findings.rest(answer, "listing", {"total_matching_records", "appids"})
+            self._report.add(findings)
+            listed.update(answer.appids)
         self._known.listed = frozenset(listed) if found else None
 
     def _is_listed(self, appid: int, kind: int | None) -> bool | None:
@@ -532,20 +573,23 @@ class _Load:
 
     def _apps(self) -> None:
         """Replace every app whose own answers changed, from its most complete answer."""
-        keys = select(_changed(_STORE_KINDS).subquery().c.key).scalar_subquery()
-        candidates = (
-            select(*_STAMP.c)
-            .where(_STAMP.c.kind.in_(_STORE_KINDS), _STAMP.c.key.in_(keys))
-            .order_by(_STAMP.c.key)
-        )
+        changed = _changed(_STORE_KINDS).subquery()
+        keys = sorted(set(self._connection.scalars(select(changed.c.key))))
         batch: list[tuple[Described, StampRow]] = []
-        results = self._connection.execute(candidates)
-        for _, stamps in itertools.groupby(results, key=attrgetter("key")):
-            if chosen := self._choose(list(stamps)):
-                batch.append(chosen)
-            if len(batch) >= LOAD_BATCH:
-                self._write(batch)
-                batch = []
+        # Each chunk's stamps are read whole: no cursor stays open while the load writes.
+        for chunk in itertools.batched(keys, LOAD_BATCH, strict=False):
+            candidates = (
+                select(*_STAMP.c)
+                .where(_STAMP.c.kind.in_(_STORE_KINDS), _STAMP.c.key.in_(chunk))
+                .order_by(_STAMP.c.key)
+            )
+            results = self._connection.execute(candidates).all()
+            for _, stamps in itertools.groupby(results, key=attrgetter("key")):
+                if chosen := self._choose(list(stamps)):
+                    batch.append(chosen)
+                if len(batch) >= LOAD_BATCH:
+                    self._write(batch)
+                    batch = []
         if batch:
             self._write(batch)
 
@@ -618,7 +662,11 @@ class _Load:
         nested.clear()
         batch: list[tuple[Described, StampRow]] = []
         for stamp, appids in holders.items():
-            batch.extend((found, stamp) for found in self._short_records(stamp, appids))
+            for found in self._short_records(stamp, appids):
+                batch.append((found, stamp))
+                if len(batch) >= LOAD_BATCH:
+                    self._write(batch)
+                    batch = []
         if batch:
             self._write(batch)
 
@@ -716,7 +764,7 @@ class _Load:
             _STAMP.c.key.in_([f"{appid}:{kind}" for appid in appids for kind in (0, 1)]),
         )
         exact: dict[int, dict[int, QuerySummary]] = {}
-        for stamp in self._connection.execute(query):
+        for stamp in self._connection.execute(query).all():
             answer = self._parse(stamp, AppReviewsAnswer)
             counts = exact_totals(answer, findings) if answer else None
             if counts is not None:
