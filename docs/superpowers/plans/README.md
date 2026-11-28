@@ -14,7 +14,7 @@ normative; each stage's plan sits next to this file.
 |    5 | Database schema, part 1                                                                  | #10          |
 |    6 | Database schema, part 2                                                                  | #12          |
 |    7 | Reports (`v_*` views)                                                                    | #13          |
-|    8 | **Loader** (next)                                                                        |              |
+|    8 | **Loader** (next; two PRs: store items into rows, then choosing and writing)             |              |
 |    9 | Sync                                                                                     |              |
 |   10 | CLI and exports                                                                          |              |
 |   11 | Kaggle import                                                                            |              |
