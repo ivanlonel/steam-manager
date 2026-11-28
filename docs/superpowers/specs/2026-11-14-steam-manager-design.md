@@ -218,12 +218,21 @@ The builder's calls, where the owner set no value:
 - **Profiles:** a person's SteamID64 is 76561197960265728 plus a 32-bit account id. A vanity
   URL resolves through `steamcommunity.com/id/<name>?xml=1`; a missing one answers 200 with an
   `<error>` element.
-- **New fields:** on 2026-11-15, Steam sent four fields the notebooks' loader never had. The
-  loader stage decides where they go:
-  - `extra_details.hardware_compatibility`;
-  - `extra_details.dlc_for_purchase`;
-  - `reviews.counts_all_purchases`;
-  - the store categories' `show_in_search`.
+- **New fields:** fields the notebooks' loader never had, and where the loader puts them:
+  - seen on 2026-11-15:
+    - `extra_details.hardware_compatibility` goes to the table `app_compatibility_test`;
+    - `extra_details.dlc_for_purchase` goes to the table `app_dlc`. Its total price goes to
+      `app.dlc_formatted_total_price`; its count, and each DLC's content descriptors, are
+      checked against the answer they follow from;
+    - `reviews.counts_all_purchases` goes to `app.counts_all_purchases`;
+    - the store categories' `show_in_search` goes to `store_category.show_in_search`;
+  - seen on 2026-11-28:
+    - `related_items.provides_engine_appid` goes to `app_related`, of kind `engine`;
+    - `basic_info.featured_creator_home_clan_account_ids` goes to the table
+      `app_featured_creator`. It can't be derived: Steam leaves it out of some apps whose
+      credits have creator pages;
+    - `basic_info.first_franchise_clan_account_id` is checked against the first franchise's
+      creator page whenever Steam sends it.
 
 ### Transport
 
@@ -276,18 +285,31 @@ The builder's calls:
   (`steam-database.ipynb`, cell 2), so completeness can be checked mechanically against a
   notebook-built file. It is declared with SQLAlchemy Declarative classes using `STRICT`,
   `WITHOUT ROWID`, generated columns and partial indexes.
+
 - Changes from the notebooks' schema: no check restricting countries to BR and US; Steam's
   `formatted_*` price strings are stored instead of derived (the derivation only worked for two
   currencies), as four columns appended to `offer_price` after the notebook's own (builder's
   call); `list_entry` is replaced by tracking status and custom lists in milestone 2.
-  Fields Steam added since the notebooks get columns: `store_category.show_in_search`, and a new
-  table `app_compatibility_test` holding the results of Steam's compatibility review per device
-  and in Steam's order (builder's calls).
+  Fields Steam added since the notebooks get columns and tables, listed under *New fields*
+  (builder's calls):
+
+  - the columns `store_category.show_in_search`, `app.counts_all_purchases`,
+    `app.dlc_formatted_total_price` and `app_review_histogram.count_all_reviews`;
+  - the kind `engine` of `app_related`;
+  - the tables `app_compatibility_test` (Steam's compatibility review per device, in Steam's
+    order), `app_dlc` and `app_featured_creator`.
+
+  Event ids (`event_gid`) are uint64 that Steam sends as text, and stay text: they can exceed
+  SQLite's INTEGER. `app.is_listed` is 1 when the latest listing of one of the profile's stores
+  holds the app; 0 when none does and the app is a game, mod or software, the types a listing
+  covers; blank otherwise, and before any listing.
+
 - The notebook's DDL is a test fixture, and every shared table is compared with it column by
   column: name, order, type, NOT NULL, default, generated or not, primary key, foreign keys,
   unique indexes and their conditions, CHECK and generated expressions, `STRICT` and
   `WITHOUT ROWID`. Flags are INTEGER 1 or 0 and dates ISO 8601 text, as the notebooks store
   them (builder's calls).
+
 - Milestone 1 creates the lookup, app, classification, credit, relation, offer, media,
   requirement and review tables, `wishlist_item`, `followed_app`, the HowLongToBeat tables and
   the reports `v_app_scores`, `v_games`, `v_wishlist` and `v_followed`. It also creates the store
@@ -295,18 +317,23 @@ The builder's calls:
   Awards, purchase notes and sign-up options), which every full entry sends (builder's call).
   `wishlist_item` and `followed_app` come from archived answers, so they are Steam tables. Tables
   for data that needs sign-in arrive in milestone 2.
+
 - Steam tables are never migrated: when their schema changes they are dropped and rebuilt from
   the archive. Tables holding the user's own data are migrated with Alembic, whose baseline
   arrives with the first such table in milestone 2 (builder's call: milestone 1 has none).
+
 - A file records each Steam table it holds, with a SHA-256 fingerprint of the DDL that built
   them. Opening it with a release whose fingerprint differs drops the recorded and the declared
   Steam tables, and only those, creates them again and has the caller replay the archive. A
   table holding the user's own data is never dropped (builder's call).
+
 - A rebuild that stops before it finishes (an interrupted sync, a crash) is redone or resumed
   on the next open, never left half-done in silence. The loader's plan settles how: by
   recording the Steam schema only once the rebuild commits, or by keeping the loader's
   progress inside the Steam tables, so it is dropped with them.
+
 - The database runs in WAL mode so it can be read while a sync writes.
+
 - It needs SQLite 3.44 or newer, since the reports order rows inside aggregates. Opening it with
   an older SQLite fails with a message naming both versions (builder's call).
 
