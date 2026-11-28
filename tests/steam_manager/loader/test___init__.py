@@ -614,3 +614,39 @@ def test_an_unchanged_listing_or_figure_writes_nothing_new(
     assert report.loaded["app"] >= 1
     with engine.connect() as connection:
         assert connection.scalar(select(App.current_players).where(App.appid == 570)) == 820992
+
+
+def test_a_loader_bug_fails_the_load(
+    archive: Archive, engine: Engine, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A bug in the loader stops the load instead of passing for Steam's malformed answer."""
+    put(archive, Kind.STORE_ITEM, "620", "BR", recorded("store_item/620-BR.json"))
+
+    def broken(*_args: object, **_kwargs: object) -> Described:
+        message = "a bug in the loader"
+        raise ValueError(message)
+
+    monkeypatch.setattr(loader, "describe", broken)
+
+    with pytest.raises(ValueError, match="a bug in the loader"):
+        load(archive, engine, countries=COUNTRIES)
+
+
+def test_a_malformed_short_record_is_skipped(archive: Archive, engine: Engine) -> None:
+    """A short record missing a value its rows need is reported, and the load goes on."""
+
+    def broken_record(answer: dict[str, object]) -> None:
+        included = answer["included_items"]
+        assert isinstance(included, dict)
+        apps = included["included_apps"]
+        assert isinstance(apps, list)
+        apps[0]["best_purchase_option"] = {"purchase_option_name": "Nothing to buy"}
+
+    put(archive, Kind.STORE_ITEM, "620", "BR", changed("store_item/620-BR.json", broken_record))
+
+    report = load(archive, engine, countries=COUNTRIES)
+
+    assert [problem.key for problem in report.malformed] == ["620"]
+    assert "neither a package nor a bundle" in report.malformed[0].reason
+    assert named(engine)[620] == ("Portal 2", "BR", 1)
+    assert named(engine)[400][0] == "Portal"

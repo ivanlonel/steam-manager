@@ -7,7 +7,7 @@ from typing import Final
 import pytest
 
 from steam_manager.loader.lookups import LANGUAGES, genres, languages, store_categories, tags
-from steam_manager.loader.rows import Findings, Rows
+from steam_manager.loader.rows import Findings, MalformedAnswerError, Rows
 from steam_manager.steam.models.lookups import (
     AppDetailsGenresAnswer,
     StoreCategoriesAnswer,
@@ -82,7 +82,7 @@ def test_a_genre_without_an_id_is_malformed() -> None:
         {"1": {"success": True, "data": {"genres": [{"description": "Action"}]}}}
     )
 
-    with pytest.raises(ValueError, match="has no id"):
+    with pytest.raises(MalformedAnswerError, match="has no id"):
         genres(answer, Rows(), Findings())
 
 

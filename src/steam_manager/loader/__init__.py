@@ -46,7 +46,7 @@ from steam_manager.db.schema.reviews import (
 from steam_manager.loader.account import followed, wishlist
 from steam_manager.loader.lookups import genres, languages, store_categories, tags
 from steam_manager.loader.reviews import exact_totals, histogram, players, review_total
-from steam_manager.loader.rows import Findings, Rows
+from steam_manager.loader.rows import Findings, MalformedAnswerError, Rows
 from steam_manager.loader.store_item import describe
 from steam_manager.loader.write import ForeignKeyViolationError, Writer, check_foreign_keys
 from steam_manager.steam.models.account import FollowedAppsAnswer, WishlistAnswer
@@ -418,7 +418,7 @@ class _Load:
         rows, findings = Rows(), Findings()
         try:
             turn(answer, rows, findings)
-        except ValueError as error:
+        except MalformedAnswerError as error:
             self._malformed(stamp, str(error))
             return None
         self._report.add(findings)
@@ -549,7 +549,7 @@ class _Load:
                 found = describe(
                     item, country=stamp.country, category_types=self._known.category_types
                 )
-            except ValueError as error:
+            except MalformedAnswerError as error:
                 self._malformed(stamp, str(error))
                 continue
             if item.success == 1:
@@ -598,20 +598,36 @@ class _Load:
         nested.clear()
         batch: list[tuple[Described, StampRow]] = []
         for stamp, appids in holders.items():
-            holder = self._parse(stamp, StoreItem)
-            included = holder.included_items if holder else None
-            records = included.included_apps if included else ()
-            for record in records:
-                if record.id in appids:
-                    found = describe(
-                        record,
-                        country=stamp.country,
-                        category_types=self._known.category_types,
-                        path=_NESTED,
-                    )
-                    batch.append((found, stamp))
+            batch.extend((found, stamp) for found in self._short_records(stamp, appids))
         if batch:
             self._write(batch)
+
+    def _short_records(self, stamp: StampRow, appids: Collection[int]) -> list[Described]:
+        """
+        Describe some apps from the short records one full entry holds.
+
+        :param stamp: The full entry's stamp.
+        :param appids: The apps to describe.
+        :return: Each app's rows; a malformed short record is reported and left out.
+        """
+        holder = self._parse(stamp, StoreItem)
+        included = holder.included_items if holder else None
+        described = []
+        for record in included.included_apps if included else ():
+            if record.id not in appids:
+                continue
+            try:
+                found = describe(
+                    record,
+                    country=stamp.country,
+                    category_types=self._known.category_types,
+                    path=_NESTED,
+                )
+            except MalformedAnswerError as error:
+                self._malformed(stamp, str(error))
+                continue
+            described.append(found)
+        return described
 
     def _players(self) -> None:
         """Write how many play each app, where the figure changed or its app was written."""
