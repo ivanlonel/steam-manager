@@ -1,6 +1,8 @@
 """Profiles: one folder per Steam account, holding its settings, database and raw archive."""
 
 import sys
+from contextlib import contextmanager
+from dataclasses import dataclass
 from datetime import timedelta
 from operator import attrgetter
 from pathlib import Path
@@ -10,11 +12,20 @@ from typing import TYPE_CHECKING, Annotated, Final
 from pydantic import AfterValidator, BaseModel, ConfigDict, Field, ValidationInfo, field_validator
 
 from steam_manager.answers import Kind
+from steam_manager.archive import Archive
+from steam_manager.db.engine import open_database
+from steam_manager.db.reports import create_views
+from steam_manager.db.steam_schema import ensure_steam_schema
+from steam_manager.loader import load
 from steam_manager.steam.community import INDIVIDUAL_BASE
 from steam_manager.steam.store import API_LANGUAGES
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping
+    from collections.abc import Generator, Mapping
+
+    from sqlalchemy import Engine
+
+    from steam_manager.loader import LoadReport
 
 MAX_AGES: Final[Mapping[Kind, timedelta]] = MappingProxyType(
     {
@@ -194,3 +205,42 @@ def list_profiles(home: Path) -> list[Settings]:
     """
     found = (read_settings(path.parent) for path in home.glob(f"*/{SETTINGS_FILE}"))
     return sorted(found, key=attrgetter("steamid"))
+
+
+@dataclass(frozen=True, slots=True)
+class OpenProfile:
+    """A profile whose database reflects its archive, ready for a sync or a report."""
+
+    folder: Path
+    """The profile's folder."""
+    settings: Settings
+    """Its settings."""
+    archive: Archive
+    """Its raw archive."""
+    engine: Engine
+    """Its database."""
+    report: LoadReport
+    """What opening it loaded: answers a sync archived but didn't load, after an interruption."""
+
+
+@contextmanager
+def open_profile(folder: Path) -> Generator[OpenProfile]:
+    """
+    Open a profile, bringing its database up to date with this release and its archive.
+
+    The Steam tables are recreated when this release's differ, the archive is loaded into them,
+    and the reports are written as views. Both files are closed when the block ends.
+
+    :param folder: The profile's folder.
+    :yield: The open profile.
+    """
+    settings = read_settings(folder)
+    with Archive(folder / ARCHIVE_FILE) as archive:
+        engine = open_database(folder / DATABASE_FILE)
+        try:
+            ensure_steam_schema(engine)
+            report = load(archive, engine, countries=settings.countries)
+            create_views(engine, home_country=settings.home_country)
+            yield OpenProfile(folder, settings, archive, engine, report)
+        finally:
+            engine.dispose()
