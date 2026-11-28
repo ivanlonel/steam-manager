@@ -3,10 +3,10 @@
 from typing import TYPE_CHECKING, Final
 
 import pytest
-from sqlalchemy import exc, insert
+from sqlalchemy import exc, insert, inspect
 
 from steam_manager.db.schema.apps import App
-from steam_manager.db.schema.media import AppAsset
+from steam_manager.db.schema.media import AppAsset, AppTrack
 from tests.steam_manager.db.schema._notebook import differences
 
 if TYPE_CHECKING:
@@ -54,3 +54,13 @@ def test_a_base_filename_needs_an_override(steam_tables: Engine) -> None:
                 }
             ],
         )
+
+
+def test_app_track_keys_and_references() -> None:
+    """A soundtrack's tracks are known by their place in Steam's list, and belong to the app."""
+    mapper = inspect(AppTrack)
+
+    assert [column.name for column in mapper.primary_key] == ["appid", "position"]
+    assert {(key.parent.name, key.target_fullname) for key in mapper.local_table.foreign_keys} == {
+        ("appid", "app.appid"),
+    }

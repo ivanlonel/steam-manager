@@ -312,6 +312,36 @@ class DlcForPurchase(SteamModel):
     """What they all cost, as the store shows it."""
 
 
+class Track(SteamModel):
+    """A track of a soundtrack (seen first on 2026-11-28)."""
+
+    disc_number: int | None = None
+    """The disc it is on."""
+    track_number: int | None = None
+    """Its number on that disc."""
+    name: str | None = None
+    """Its title."""
+    other_name: str | None = None
+    """Its title in a second language."""
+    duration_seconds: int | None = None
+    """How long it lasts, in seconds."""
+
+
+class MusicAlbum(SteamModel):
+    """A soundtrack's credits and tracks, the credits as free text (seen first on 2026-11-28)."""
+
+    artist: str | None = None
+    """Its artist."""
+    composer: str | None = None
+    """Its composer."""
+    label: str | None = None
+    """Its record label."""
+    other_credits: str | None = None
+    """Everyone else it credits."""
+    tracks: tuple[Track, ...] = ()
+    """Its tracks, in the store's order."""
+
+
 class ExtraDetails(SteamModel):
     """Everything ``include_extra_details`` adds to a store item."""
 
@@ -375,3 +405,5 @@ class ExtraDetails(SteamModel):
     """Steam's compatibility reviews, per device."""
     dlc_for_purchase: DlcForPurchase | None = None
     """The DLC on sale for it."""
+    music_album: MusicAlbum | None = None
+    """A soundtrack's credits and tracks."""

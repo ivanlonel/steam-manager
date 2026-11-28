@@ -4,7 +4,7 @@ import json
 from collections import Counter
 from operator import itemgetter
 from pathlib import Path
-from typing import Final
+from typing import Any, Final
 
 from steam_manager.loader.details import extra_details
 from steam_manager.loader.rows import Findings, Rows
@@ -84,3 +84,49 @@ def test_a_dlc_count_past_steams_list_is_kept() -> None:
 
     assert columns["dlc_count"] == 532
     assert not +findings.mismatches
+
+
+def soundtrack() -> tuple[dict[str, Any], StoreItem]:
+    """
+    Read a recorded soundtrack, with the fields other soundtracks send added to it.
+
+    :return: Its album as sent, and the item.
+    """
+    answer = json.loads((FIXTURES / "492140-BR.json").read_bytes())
+    album = answer["extra_details"]["music_album"]
+    album |= {"label": "A Label", "other_credits": "Mixed by Someone\r\nMastered by Another"}
+    album["tracks"][1]["other_name"] = "Sendo observado"
+    return album, StoreItem.model_validate(answer)
+
+
+def test_a_soundtracks_tracks_keep_steams_order() -> None:
+    """Each track keeps its place in Steam's list, with its second-language title."""
+    album, item = soundtrack()
+    rows, findings = Rows(), Findings()
+
+    extra_details(item.id, item.extra_details, "extra_details", rows, findings, nested=())
+
+    names = ("disc_number", "track_number", "name", "other_name", "duration_seconds")
+    stored = sorted(rows.tables["app_track"], key=itemgetter("position"))
+    assert [(row["appid"], row["position"], *itemgetter(*names)(row)) for row in stored] == [
+        (492140, position, *(track.get(name) for name in names))
+        for position, track in enumerate(album["tracks"])
+    ]
+    assert stored[1]["other_name"] == "Sendo observado"
+    assert findings.unknown == Counter()
+
+
+def test_a_soundtracks_credits_are_texts() -> None:
+    """A soundtrack's credits are free text, often several lines, kept with the app's texts."""
+    album, item = soundtrack()
+
+    _, texts = extra_details(
+        item.id, item.extra_details, "extra_details", Rows(), Findings(), nested=()
+    )
+
+    assert {name: texts[f"music_album_{name}"] for name in ("artist", "composer")} == {
+        "artist": "Michel F. April",
+        "composer": "Michel F. April",
+    }
+    assert texts["music_album_label"] == album["label"]
+    assert texts["music_album_other_credits"] == album["other_credits"]

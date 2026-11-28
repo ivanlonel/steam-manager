@@ -233,3 +233,11 @@ class AppText(SteamBase):
     """Whether its price will change."""
     early_access_community_bbcode: Mapped[str | None]
     """How the community takes part."""
+    music_album_artist: Mapped[str | None]
+    """A soundtrack's artist."""
+    music_album_composer: Mapped[str | None]
+    """A soundtrack's composer."""
+    music_album_label: Mapped[str | None]
+    """A soundtrack's record label."""
+    music_album_other_credits: Mapped[str | None]
+    """Everyone else a soundtrack credits, as free text."""

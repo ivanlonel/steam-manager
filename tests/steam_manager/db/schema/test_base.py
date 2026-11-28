@@ -51,6 +51,7 @@ STEAM_TABLES: Final = frozenset(
         "app_compatibility_test",
         "app_dlc",
         "app_featured_creator",
+        "app_track",
         # The loader's progress, dropped with the tables it describes.
         "loaded_answer",
         "loaded_country",

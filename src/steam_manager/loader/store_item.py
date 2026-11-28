@@ -24,7 +24,14 @@ from steam_manager.db.schema.classification import (
 )
 from steam_manager.db.schema.creators import AppCredit, AppFeaturedCreator, Creator
 from steam_manager.db.schema.lookups import AgeRating, Anticheat, RatingAgency, ReviewScore
-from steam_manager.db.schema.media import AppAsset, AppScreenshot, AppTrailer, Trailer, TrailerFile
+from steam_manager.db.schema.media import (
+    AppAsset,
+    AppScreenshot,
+    AppTrack,
+    AppTrailer,
+    Trailer,
+    TrailerFile,
+)
 from steam_manager.db.schema.offers import (
     AppOffer,
     AppPackageGroup,
@@ -129,6 +136,7 @@ STORE_ITEM_TABLES: Final[tuple[type[SteamBase], ...]] = (
     TrailerFile,
     AppPlatformRequirement,
     AppSystemRequirement,
+    AppTrack,
 )
 """The tables one app owns: its rows there are replaced whenever the app is loaded again."""
 

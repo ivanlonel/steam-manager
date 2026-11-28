@@ -28,8 +28,13 @@ CHANGED_FROM_THE_NOTEBOOK: Final = {
             " hidden=0"
         ),
     ],
+    "app_text": [
+        f"only declared: app_text.music_album_{name} #{15 + index}: TEXT notnull=0 pk=0"
+        " default=None hidden=0"
+        for index, name in enumerate(("artist", "composer", "label", "other_credits"))
+    ],
 }
-"""What the spec changes: a profile can be in any country, and two fields Steam added."""
+"""What the spec changes: a profile can be in any country, and the fields Steam added."""
 
 
 @pytest.mark.parametrize("table", APP_TABLES)

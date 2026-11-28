@@ -1,4 +1,4 @@
-"""The media tables: an app's images, screenshots and trailers."""
+"""The media tables: an app's images, screenshots and trailers, and a soundtrack's tracks."""
 
 from sqlalchemy import CheckConstraint, ForeignKey, ForeignKeyConstraint
 from sqlalchemy.orm import Mapped, mapped_column
@@ -116,3 +116,25 @@ class TrailerFile(SteamBase):
     """Where the file is, within the trailer's address pattern."""
     format: Mapped[str] = mapped_column(primary_key=True)
     """Its video format."""
+
+
+class AppTrack(SteamBase):
+    """A track of a soundtrack, in the store's order."""
+
+    __tablename__ = "app_track"
+    __table_args__ = STRICT_WITHOUT_ROWID
+
+    appid: Mapped[int] = mapped_column(ForeignKey(App.appid), primary_key=True)
+    """The soundtrack."""
+    position: Mapped[int] = mapped_column(primary_key=True)
+    """Its place in the store's list: nothing says a disc and track number can't repeat."""
+    disc_number: Mapped[int | None]
+    """The disc it is on."""
+    track_number: Mapped[int | None]
+    """Its number on that disc."""
+    name: Mapped[str | None]
+    """Its title."""
+    other_name: Mapped[str | None]
+    """Its title in a second language."""
+    duration_seconds: Mapped[int | None]
+    """How long it lasts, in seconds."""

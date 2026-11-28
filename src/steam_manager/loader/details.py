@@ -9,6 +9,7 @@ from steam_manager.db.schema.classification import (
     AppManufacturer,
 )
 from steam_manager.db.schema.lookups import Anticheat
+from steam_manager.db.schema.media import AppTrack
 from steam_manager.db.schema.relations import (
     AppDlc,
     AppRelated,
@@ -137,6 +138,33 @@ def extra_details(
         prefix="early_access_",
     )
     texts |= {name: getattr(extra, name) for name in _EXTRA_TEXTS}
+    album = extra.music_album
+    texts |= read_columns(
+        album,
+        join(at, "music_album"),
+        ("artist", "composer", "label", "other_credits"),
+        findings,
+        prefix="music_album_",
+        used=("tracks",),
+    )
+    positioned(
+        appid,
+        AppTrack,
+        album.tracks if album else (),
+        rows,
+        findings,
+        at=join(at, "music_album.tracks[]"),
+        columns={
+            name: name
+            for name in (
+                "disc_number",
+                "track_number",
+                "name",
+                "other_name",
+                "duration_seconds",
+            )
+        },
+    )
     _season_pass(appid, extra.season_pass, join(at, "season_pass"), rows, findings)
     _requirements(
         appid, extra.system_requirements, join(at, "system_requirements"), rows, findings
@@ -212,6 +240,7 @@ def extra_details(
             "system_requirements",
             "hardware_compatibility",
             "dlc_for_purchase",
+            "music_album",
         },
     )
     return columns, texts
