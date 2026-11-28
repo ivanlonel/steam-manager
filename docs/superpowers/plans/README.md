@@ -15,8 +15,8 @@ normative; each stage's plan sits next to this file.
 |    6 | Database schema, part 2                                                                        | #12          |
 |    7 | Reports (`v_*` views)                                                                          | #13          |
 |    8 | Loader (three pull requests: the new fields, store items into rows, then choosing and writing) | #17–#19      |
-|    9 | **Sync** (next)                                                                                |              |
-|   10 | CLI and exports                                                                                |              |
+|    9 | Profiles and the sync                                                                          | #20          |
+|   10 | **CLI and exports** (next)                                                                     |              |
 |   11 | Kaggle import                                                                                  |              |
 |   12 | HowLongToBeat (spike first: if the list can't be paged or lacks the appid, stop and ask)       |              |
 |   13 | Usage docs                                                                                     |              |
@@ -42,25 +42,36 @@ normative; each stage's plan sits next to this file.
 Decisions and checks a review or a ruling left to the stage that owns them. The spec already
 records the loader's decisions, where every new field went, and Kaggle dating by file time.
 
-**Sync, and whichever stage first reads profile settings**
+**Loader, before the CLI** (the sync's live smoke, 2026-11-28, once it fetched DLC and
+soundtracks as referenced apps)
 
-- On open: `ensure_steam_schema`, then `load`, then `create_views` (later, Alembic for the
-  user's tables). A sync loads after each step, through `asyncio.to_thread`: the database has
-  one synchronous writer.
-- Normalize the home country to two upper-case letters: a lower-case `br` shows no prices.
-- A new home country, or a new list of fallback countries, makes the next load rebuild the
-  tables by itself; `create_views` follows.
+- Soundtracks send `extra_details.music_album`: tracks (disc, number, name, seconds) and an
+  artist. Nothing stores them.
+- DLC with a season pass send `season_pass.milestones[].backfilled_release`, a flag. Nothing
+  stores it.
+- Review histograms can send `past_events` at the top (Tekken 8: a type and two dates).
+  Nothing stores them.
+- Soundtracks send `basic_info.first_franchise_clan_account_id` without `franchises`, so its
+  check against the first franchise's creator page reports a mismatch on each.
+
+**CLI and exports**
+
+- `export <table or report>`; a report exports like a table.
+- `status` reuses `sync.stale`; `profile remove`.
+- Show the `LoadReport` and the `SyncReport`: fields nothing stores, mismatches and malformed
+  answers are empty on a healthy run; failed requests and why the sync stopped.
+- A profile is chosen with `--profile` or `STEAM_MANAGER_PROFILE`, implied when there is one.
+- `profile add` resolves a profile URL with `resolve_steamid`.
+
+**Open, for whoever next touches the transport, the archive or the loads**
+
 - A load ends with `PRAGMA foreign_key_check`, which scans every table: tens of seconds on a
-  full catalog. Batched commits are the upgrade path if that hurts.
-- Show the `LoadReport`: fields nothing stores, mismatches and malformed answers are empty on a
-  healthy run.
+  full catalog, after each country pass. Batched commits are the upgrade path if that hurts.
 - Transport questions left open: POST and non-idempotent retries, per-request headers, a 200
   with an error body in general, the `Date` header in `Retry-After`.
 - Archive: two processes creating a new file at once; no delete API or cross-country key
-  listing; bound each `put` batch (a whole catalog is held in memory and one write lock).
+  listing.
 - Whoever filters `wishlist()` filters it as a subquery: `ROW_NUMBER` runs after `WHERE`.
-
-**CLI and exports**: `export <table or report>`; a report exports like a table.
 
 **Kaggle import**
 
@@ -70,7 +81,11 @@ records the loader's decisions, where every new field went, and Kaggle dating by
 - A Kaggle record's `is_listed`: `app.is_listed` now follows the profile's listings, so decide
   whether the record's value is reported, checked or stored.
 
-**HowLongToBeat**: a key in HLTB's URL path (the transport strips only query strings).
+**HowLongToBeat**
+
+- A key in HLTB's URL path (the transport strips only query strings).
+- A run of failures on any host stops the whole sync; once HLTB is a source, a streak on one
+  host should stop only its own steps.
 
 **Milestone 2**
 
