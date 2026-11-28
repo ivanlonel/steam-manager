@@ -9,7 +9,9 @@ import httpx
 import pytest
 
 from steam_manager.answers import Answer, Kind
+from steam_manager.loader.lookups import LANGUAGES
 from steam_manager.steam.store import (
+    API_LANGUAGES,
     FULL_DATA_REQUEST,
     ListingMismatchError,
     app_genres,
@@ -347,3 +349,10 @@ def test_a_404_is_an_answer_for_current_players() -> None:
     answer = asyncio.run(current_players(transport_for(handler, FakeClock()), 12170))
 
     assert json.loads(answer.body) == {"response": {"result": 42}}
+
+
+def test_api_languages_match_the_loaders_names() -> None:
+    """Every language code maps to an ELanguage number the loader names, and every one has one."""
+    assert len(API_LANGUAGES) == 30
+    assert (API_LANGUAGES["brazilian"], API_LANGUAGES["latam"]) == (22, 27)
+    assert sorted(API_LANGUAGES.values()) == sorted(LANGUAGES)

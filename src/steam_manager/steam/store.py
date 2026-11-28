@@ -2,6 +2,7 @@
 
 import itertools
 import logging
+from types import MappingProxyType
 from typing import TYPE_CHECKING, Final
 
 from pydantic import JsonValue, TypeAdapter
@@ -38,6 +39,46 @@ FULL_DATA_REQUEST: Final[Mapping[str, bool | int]] = {
 """What a full entry asks for: every data flag the notebooks set."""
 LIGHT_DATA_REQUEST: Final[Mapping[str, bool]] = {"include_reviews": True}
 """What a light entry asks for; the name, type and a few more fields come anyway."""
+API_LANGUAGES: Final[Mapping[str, int]] = MappingProxyType(
+    {
+        "english": 0,
+        "german": 1,
+        "french": 2,
+        "italian": 3,
+        "koreana": 4,
+        "spanish": 5,
+        "schinese": 6,
+        "tchinese": 7,
+        "russian": 8,
+        "thai": 9,
+        "japanese": 10,
+        "portuguese": 11,
+        "polish": 12,
+        "danish": 13,
+        "dutch": 14,
+        "finnish": 15,
+        "norwegian": 16,
+        "swedish": 17,
+        "hungarian": 18,
+        "czech": 19,
+        "romanian": 20,
+        "turkish": 21,
+        "brazilian": 22,
+        "bulgarian": 23,
+        "greek": 24,
+        "arabic": 25,
+        "ukrainian": 26,
+        "latam": 27,
+        "vietnamese": 28,
+        "indonesian": 30,
+    }
+)
+"""
+Steam's API language codes, with the ELanguage number :func:`store_categories` takes for each.
+
+The codes are the Steamworks language page's (checked 2026-11-28), matched by name to the
+loader's ELanguage names. Malay has a code but no known number, so it is left out.
+"""
 
 PAGE_SIZE: Final = 1000
 """Apps per listing page: ``Query`` returns 1,000 at most, whatever it is asked for."""
