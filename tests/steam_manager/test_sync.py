@@ -12,8 +12,10 @@ from sqlalchemy import select
 from steam_manager.answers import Kind
 from steam_manager.archive import Archive
 from steam_manager.db.schema.account import WishlistItem
+from steam_manager.db.schema.apps import App
 from steam_manager.profiles import Settings, create_profile, open_profile
 from steam_manager.steam.community import INDIVIDUAL_BASE
+from steam_manager.steam.webapi import STEAM
 from steam_manager.sync import Step, stale, sync
 from tests.steam_manager._steam import FakeSteam, fake_transport
 from tests.steam_manager.loader._archive import put
@@ -82,6 +84,18 @@ def wishlist_apps(profile: OpenProfile) -> list[int]:
     with profile.engine.connect() as connection:
         query = select(WishlistItem.appid).order_by(WishlistItem.position)
         return list(connection.scalars(query))
+
+
+def archived(profile: OpenProfile, kind: Kind, country: str = "") -> set[str]:
+    """
+    List the keys of one kind the archive holds in one country.
+
+    :param profile: The profile.
+    :param kind: The kind.
+    :param country: The country, or ``""``.
+    :return: The keys.
+    """
+    return set(profile.archive.fetched_at(STEAM, kind, country=country))
 
 
 def test_stale_keys(tmp_path: Path) -> None:
@@ -164,3 +178,56 @@ def test_a_failed_request_is_reported_and_the_sync_goes_on(profile: OpenProfile)
     assert "GetTagList" in report.failed[0]
     assert "?" not in report.failed[0]
     assert wishlist_apps(profile) == [620, 400, 70]
+
+
+def test_the_catalog_lists_every_country(profile: OpenProfile) -> None:
+    """A fallback's light entries are archived only for the apps the home store doesn't list."""
+    steam = FakeSteam(listings={"BR": [10, 20], "US": [20, 30]})
+
+    report = run(profile, steam, steps={Step.CATALOG})
+
+    assert archived(profile, Kind.STORE_ITEM_LIGHT, "BR") == {"10", "20"}
+    assert archived(profile, Kind.STORE_ITEM_LIGHT, "US") == {"30"}
+    assert archived(profile, Kind.LISTING, "BR") == archived(profile, Kind.LISTING, "US") == {""}
+    assert report.fetched == Counter({"store_item_light": 3, "listing": 2})
+    with profile.engine.connect() as connection:
+        listed = {row.appid: row.is_listed for row in connection.execute(select(App))}
+    assert listed == {10: True, 20: True, 30: True}
+
+
+def test_a_fresh_listing_isnt_asked_again(profile: OpenProfile) -> None:
+    """A country listed within its maximum age is not listed again."""
+    steam = FakeSteam(listings={"BR": [10], "US": [30]})
+    run(profile, steam, steps={Step.CATALOG})
+
+    run(profile, steam, steps={Step.CATALOG})
+
+    assert steam.methods() == ["Query", "Query"]
+
+
+def test_a_listing_that_misses_its_total_is_skipped(profile: OpenProfile) -> None:
+    """A listing far from Steam's total is reported and not archived; other countries list."""
+    steam = FakeSteam(listings={"BR": [10, 20], "US": [20, 30]}, totals={"BR": 5000})
+
+    report = run(profile, steam, steps={Step.CATALOG})
+
+    assert len(report.failed) == 1
+    assert "BR" in report.failed[0]
+    assert archived(profile, Kind.LISTING, "BR") == set()
+    assert archived(profile, Kind.LISTING, "US") == {""}
+
+
+def test_light_entries_are_archived_a_page_at_a_time(profile: OpenProfile) -> None:
+    """A listing that fails on its second page keeps its first page's light entries."""
+
+    def fail(request: httpx.Request) -> int | None:
+        second_page = '"start":1000' in request.url.params.get("input_json", "")
+        return 400 if second_page else None
+
+    steam = FakeSteam(listings={"BR": range(1, 1501)}, fail=fail)
+
+    report = run(profile, steam, steps={Step.CATALOG})
+
+    assert len(archived(profile, Kind.STORE_ITEM_LIGHT, "BR")) == 1000
+    assert archived(profile, Kind.LISTING, "BR") == set()
+    assert len(report.failed) == 1

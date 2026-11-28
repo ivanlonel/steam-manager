@@ -16,7 +16,15 @@ from typing import TYPE_CHECKING, Final
 from steam_manager.answers import Kind
 from steam_manager.loader import LoadReport, load
 from steam_manager.steam.community import followed_apps, wishlist
-from steam_manager.steam.store import API_LANGUAGES, store_categories, tag_list
+from steam_manager.steam.models.listing import ListingAnswer
+from steam_manager.steam.store import (
+    API_LANGUAGES,
+    PAGE_SIZE,
+    ListingMismatchError,
+    list_apps,
+    store_categories,
+    tag_list,
+)
 from steam_manager.steam.webapi import STEAM
 from steam_manager.transport import FailureStreakError, RequestFailedError
 
@@ -185,14 +193,15 @@ class _Sync:
             self._pending.clear()
             self._unloaded = True
 
-    def _add(self, answers: Iterable[Answer]) -> None:
+    def _add(self, answers: Iterable[Answer], *, chunk: int = ARCHIVE_CHUNK) -> None:
         """
         Queue answers for the archive, archiving the queue once it holds a chunk.
 
         :param answers: The answers.
+        :param chunk: How many answers to archive at a time.
         """
         self._pending.extend(answers)
-        if len(self._pending) >= ARCHIVE_CHUNK:
+        if len(self._pending) >= chunk:
             self._flush()
 
     def _failed(self, error: Exception) -> None:
@@ -249,6 +258,43 @@ class _Sync:
         if self._stale(Kind.FOLLOWED_APPS, [str(steamid)]):
             await self._one(followed_apps(self._transport, steamid))
 
+    async def catalog(self) -> None:
+        """List each country whose listing is stale, the home country first."""
+        settings = self._profile.settings
+        for place, country in enumerate(settings.countries):
+            if self._stale(Kind.LISTING, [""], country):
+                await self._list(country, self._listed(settings.countries[:place]))
+
+    def _listed(self, countries: Iterable[str]) -> set[int]:
+        """
+        Read the apps the latest archived listings of some countries hold.
+
+        :param countries: The countries.
+        :return: The appids.
+        """
+        found: set[int] = set()
+        for country in countries:
+            answer = self._profile.archive.get(STEAM, Kind.LISTING, "", country)
+            if answer is not None:
+                found.update(ListingAnswer.model_validate_json(answer.body).appids)
+        return found
+
+    async def _list(self, country: str, earlier: Collection[int]) -> None:
+        """
+        List one country, archiving its light entries a page at a time, then its listing.
+
+        :param country: The country.
+        :param earlier: The apps earlier countries list, whose light entries this one skips.
+        """
+        language = self._profile.settings.language
+        try:
+            async for answer in list_apps(self._transport, country=country, language=language):
+                if answer.kind is Kind.LISTING or int(answer.key) not in earlier:
+                    self._add([answer], chunk=PAGE_SIZE)
+        except (RequestFailedError, ListingMismatchError) as error:
+            self._failed(error)
+        self._flush()
+
 
 async def sync(  # the command line's options, each a keyword
     profile: OpenProfile,
@@ -273,5 +319,10 @@ async def sync(  # the command line's options, each a keyword
     """
     del catalog_reviews
     run = _Sync(profile, transport, force=force, now=now)
-    actions = {Step.LOOKUPS: run.lookups, Step.WISHLIST: run.wishlist, Step.FOLLOWED: run.followed}
+    actions = {
+        Step.LOOKUPS: run.lookups,
+        Step.WISHLIST: run.wishlist,
+        Step.FOLLOWED: run.followed,
+        Step.CATALOG: run.catalog,
+    }
     return await run.run(action for step, action in actions.items() if step in steps)
