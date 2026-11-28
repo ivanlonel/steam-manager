@@ -50,6 +50,7 @@ STEAM_TABLES: Final = frozenset(
         # The notebook has no such tables, so nothing compares them.
         "app_compatibility_test",
         "app_dlc",
+        "app_featured_creator",
     }
 )
 """Every Steam table this release declares: the notebook's, each compared with it, and more."""

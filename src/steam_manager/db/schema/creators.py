@@ -68,3 +68,17 @@ class AppCredit(SteamBase):
     """Its place among the app's credits in that role."""
     credit_id: Mapped[int] = mapped_column(ForeignKey(Credit.credit_id))
     """The credit."""
+
+
+class AppFeaturedCreator(SteamBase):
+    """A creator home an app's store page features, in the store's order."""
+
+    __tablename__ = "app_featured_creator"
+    __table_args__ = STRICT_WITHOUT_ROWID
+
+    appid: Mapped[int] = mapped_column(ForeignKey(App.appid), primary_key=True)
+    """The app."""
+    position: Mapped[int] = mapped_column(primary_key=True)
+    """Its place in the store's list."""
+    creator_id: Mapped[int] = mapped_column(ForeignKey(Creator.creator_id))
+    """The creator."""

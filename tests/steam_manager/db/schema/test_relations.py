@@ -17,10 +17,25 @@ RELATION_TABLES: Final = (
 """The tables that link apps."""
 
 
+ADDED_SINCE_THE_NOTEBOOK: Final = {
+    "app_related": [
+        (
+            "only in the notebook: app_related check (kind IN ('demo', 'standalone_demo',"
+            " 'playtest', 'dlc_parent', 'included_app', 'related_f2p', 'season_pass'))"
+        ),
+        (
+            "only declared: app_related check (kind IN ('demo', 'standalone_demo', 'playtest',"
+            " 'dlc_parent', 'included_app', 'related_f2p', 'season_pass', 'engine'))"
+        ),
+    ],
+}
+"""The kind of relation Steam sends now that the notebook predates: the app giving the engine."""
+
+
 @pytest.mark.parametrize("table", RELATION_TABLES)
 def test_a_relation_table_matches_the_notebook(table: str) -> None:
-    """Each has the notebook's columns, keys, references and allowed kinds."""
-    assert differences(table) == []
+    """Each has the notebook's columns, keys, references and kinds, plus Steam's new kind."""
+    assert differences(table) == ADDED_SINCE_THE_NOTEBOOK.get(table, [])
 
 
 def test_app_dlc_keys_and_references() -> None:

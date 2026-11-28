@@ -90,6 +90,10 @@ class BasicInfo(SteamModel):
     """Its publishers."""
     franchises: tuple[Credit, ...] = ()
     """Its franchises."""
+    featured_creator_home_clan_account_ids: tuple[int, ...] = ()
+    """The creator pages its store page features (seen first on 2026-11-28)."""
+    first_franchise_clan_account_id: int | None = None
+    """The creator page of its first franchise (seen first on 2026-11-28)."""
 
 
 class Release(SteamModel):
@@ -376,6 +380,8 @@ class RelatedItems(SteamModel):
     """The apps a DLC extends."""
     related_f2p: RelatedF2p | None = None
     """A free-to-play version."""
+    provides_engine_appid: tuple[int, ...] = ()
+    """The apps that provide its engine, itself included (seen first on 2026-11-28)."""
 
 
 class StoreItem(SteamModel):

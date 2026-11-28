@@ -3,10 +3,10 @@
 from typing import TYPE_CHECKING, Final
 
 import pytest
-from sqlalchemy import exc, insert
+from sqlalchemy import exc, insert, inspect
 
 from steam_manager.db.schema.apps import App
-from steam_manager.db.schema.creators import AppCredit, Creator, Credit
+from steam_manager.db.schema.creators import AppCredit, AppFeaturedCreator, Creator, Credit
 from tests.steam_manager.db.schema._notebook import differences
 
 if TYPE_CHECKING:
@@ -53,3 +53,14 @@ def test_an_unknown_role_is_refused(steam_tables: Engine) -> None:
             insert(AppCredit),
             [{"appid": 620, "role": "composer", "position": 0, "credit_id": 1}],
         )
+
+
+def test_a_featured_creator_keys_and_references() -> None:
+    """The store page features creator homes in order, each a creator."""
+    mapper = inspect(AppFeaturedCreator)
+
+    assert [column.name for column in mapper.primary_key] == ["appid", "position"]
+    assert {(key.parent.name, key.target_fullname) for key in mapper.local_table.foreign_keys} == {
+        ("appid", "app.appid"),
+        ("creator_id", "creator.creator_id"),
+    }
