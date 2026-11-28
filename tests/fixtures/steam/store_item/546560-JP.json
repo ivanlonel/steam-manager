@@ -1,0 +1,860 @@
+{
+  "item_type": 0,
+  "id": 546560,
+  "success": 1,
+  "visible": true,
+  "name": "Half-Life: Alyx",
+  "store_url_path": "app/546560/HalfLife_Alyx",
+  "store_url_slug": "HalfLife_Alyx",
+  "appid": 546560,
+  "type": 0,
+  "included_items": {
+    "included_apps": [
+      {
+        "item_type": 0,
+        "id": 1310460,
+        "success": 1,
+        "visible": true,
+        "name": "Half-Life: Alyx Soundtrack",
+        "store_url_path": "app/1310460/HalfLife_Alyx_Soundtrack",
+        "store_url_slug": "HalfLife_Alyx_Soundtrack",
+        "appid": 1310460,
+        "type": 11,
+        "related_items": {
+          "parent_appid": 546560
+        },
+        "categories": {
+          "feature_categoryids": [
+            50
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 457448,
+          "purchase_option_name": "Half-Life: Alyx Soundtrack",
+          "final_price_in_cents": "140000",
+          "formatted_final_price": "¥1,400",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      }
+    ],
+    "included_packages": [
+      {
+        "item_type": 1,
+        "id": 134870,
+        "success": 1,
+        "visible": true,
+        "name": "Half-Life: Alyx",
+        "store_url_path": "app/546560/HalfLife_Alyx",
+        "store_url_slug": "HalfLife_Alyx",
+        "appid": 546560,
+        "type": 0,
+        "included_types": [
+          0
+        ],
+        "included_appids": [
+          546560
+        ],
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            2
+          ],
+          "feature_categoryids": [
+            22,
+            52,
+            54,
+            31,
+            13,
+            30,
+            65,
+            68,
+            69,
+            70,
+            78,
+            79,
+            17,
+            62
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 134870,
+          "purchase_option_name": "Half-Life: Alyx",
+          "final_price_in_cents": "845000",
+          "formatted_final_price": "¥8,450",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      },
+      {
+        "item_type": 1,
+        "id": 457448,
+        "success": 1,
+        "visible": true,
+        "name": "Half-Life: Alyx Soundtrack",
+        "store_url_path": "app/1310460/HalfLife_Alyx_Soundtrack",
+        "store_url_slug": "HalfLife_Alyx_Soundtrack",
+        "appid": 1310460,
+        "type": 11,
+        "included_types": [
+          11
+        ],
+        "included_appids": [
+          1310460
+        ],
+        "categories": {
+          "feature_categoryids": [
+            50
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 457448,
+          "purchase_option_name": "Half-Life: Alyx Soundtrack",
+          "final_price_in_cents": "140000",
+          "formatted_final_price": "¥1,400",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      }
+    ],
+    "included_creators": [
+      {
+        "item_type": 5,
+        "id": 4,
+        "success": 1,
+        "visible": true,
+        "name": "Valve",
+        "store_url_path": "developer/valve",
+        "store_url_slug": "valve",
+        "game_count": 31
+      },
+      {
+        "item_type": 5,
+        "id": 33078398,
+        "success": 1,
+        "visible": true,
+        "name": "Half-Life",
+        "store_url_path": "developer/Half-Life",
+        "store_url_slug": "Half-Life",
+        "game_count": 6
+      }
+    ]
+  },
+  "content_descriptorids": [
+    2,
+    5
+  ],
+  "tagids": [
+    21978,
+    1663,
+    1742,
+    1667,
+    7208,
+    1774,
+    4182,
+    3839,
+    19,
+    3942,
+    4166,
+    1659,
+    5411,
+    1673,
+    21,
+    4295,
+    1721,
+    10397,
+    1756,
+    4345
+  ],
+  "categories": {
+    "supported_player_categoryids": [
+      2
+    ],
+    "feature_categoryids": [
+      22,
+      52,
+      54,
+      31,
+      13,
+      30,
+      65,
+      68,
+      69,
+      70,
+      78,
+      79,
+      17,
+      62
+    ]
+  },
+  "reviews": {
+    "summary_filtered": {
+      "review_count": 93862,
+      "percent_positive": 98,
+      "review_score": 9,
+      "review_score_label": "Overwhelmingly Positive"
+    },
+    "summary_language_specific": {
+      "review_count": 62002,
+      "percent_positive": 98,
+      "review_score": 9,
+      "review_score_label": "Overwhelmingly Positive"
+    }
+  },
+  "basic_info": {
+    "short_description": "Half-Life: Alyx is Valve’s VR return to the Half-Life series. It’s the story of an impossible fight against a vicious alien race known as the Combine, set between the events of Half-Life and Half-Life 2. Playing as Alyx Vance, you are humanity’s only chance for survival.",
+    "publishers": [
+      {
+        "name": "Valve",
+        "creator_clan_account_id": 4
+      }
+    ],
+    "developers": [
+      {
+        "name": "Valve",
+        "creator_clan_account_id": 4
+      }
+    ],
+    "franchises": [
+      {
+        "name": "Half-Life",
+        "creator_clan_account_id": 33078398
+      }
+    ],
+    "featured_creator_home_clan_account_ids": [
+      33078398
+    ],
+    "first_franchise_clan_account_id": 33078398
+  },
+  "tags": [
+    {
+      "tagid": 21978,
+      "weight": 672
+    },
+    {
+      "tagid": 1663,
+      "weight": 583
+    },
+    {
+      "tagid": 1742,
+      "weight": 576
+    },
+    {
+      "tagid": 1667,
+      "weight": 570
+    },
+    {
+      "tagid": 7208,
+      "weight": 566
+    },
+    {
+      "tagid": 1774,
+      "weight": 557
+    },
+    {
+      "tagid": 4182,
+      "weight": 550
+    },
+    {
+      "tagid": 3839,
+      "weight": 542
+    },
+    {
+      "tagid": 19,
+      "weight": 536
+    },
+    {
+      "tagid": 3942,
+      "weight": 532
+    },
+    {
+      "tagid": 4166,
+      "weight": 530
+    },
+    {
+      "tagid": 1659,
+      "weight": 528
+    },
+    {
+      "tagid": 5411,
+      "weight": 520
+    },
+    {
+      "tagid": 1673,
+      "weight": 507
+    },
+    {
+      "tagid": 21,
+      "weight": 502
+    },
+    {
+      "tagid": 4295,
+      "weight": 491
+    },
+    {
+      "tagid": 1721,
+      "weight": 487
+    },
+    {
+      "tagid": 10397,
+      "weight": 442
+    },
+    {
+      "tagid": 1756,
+      "weight": 215
+    },
+    {
+      "tagid": 4345,
+      "weight": 85
+    }
+  ],
+  "assets": {
+    "asset_url_format": "steam/apps/546560/${FILENAME}?t=1790202165",
+    "main_capsule": "capsule_616x353.jpg",
+    "small_capsule": "capsule_231x87.jpg",
+    "header": "header.jpg",
+    "hero_capsule": "hero_capsule.jpg",
+    "library_capsule": "library_600x900.jpg",
+    "library_capsule_2x": "library_600x900_2x.jpg",
+    "library_hero": "library_hero.jpg",
+    "library_hero_2x": "library_hero_2x.jpg",
+    "community_icon": "225032ac2ad1aca8f5fd98baa2b9daf1eebea5ca",
+    "page_background_path": "app/546560?t=1790202165",
+    "last_modified": 1790202165
+  },
+  "release": {
+    "steam_release_date": 1584982200
+  },
+  "platforms": {
+    "windows": true,
+    "vr_support": {
+      "vrhmd": true,
+      "vrhmd_only": true,
+      "htc_vive": true,
+      "oculus_rift": true,
+      "windows_mr": true,
+      "valve_index": true
+    },
+    "steam_deck_compat_category": 1,
+    "steam_os_compat_category": 0,
+    "steam_frame_compat_category": 0,
+    "steam_machine_compat_category": 0
+  },
+  "game_rating": {
+    "content_survey_notes": "Includes violence and gore."
+  },
+  "best_purchase_option": {
+    "packageid": 134870,
+    "purchase_option_name": "Half-Life: Alyx",
+    "final_price_in_cents": "845000",
+    "formatted_final_price": "¥8,450",
+    "user_can_purchase_as_gift": true,
+    "hide_discount_pct_for_compliance": false,
+    "included_game_count": 1,
+    "must_purchase_as_set": false,
+    "package_group": "default",
+    "price_cannot_be_displayed_as_discount": false
+  },
+  "purchase_options": [
+    {
+      "packageid": 134870,
+      "purchase_option_name": "Half-Life: Alyx",
+      "final_price_in_cents": "845000",
+      "formatted_final_price": "¥8,450",
+      "user_can_purchase_as_gift": true,
+      "hide_discount_pct_for_compliance": false,
+      "included_game_count": 1,
+      "must_purchase_as_set": false,
+      "package_group": "default",
+      "price_cannot_be_displayed_as_discount": false
+    }
+  ],
+  "screenshots": {
+    "all_ages_screenshots": [
+      {
+        "filename": "steam/apps/546560/ss_d61365e93f20ceb5a94a1e5b2811cf504cbfa303.jpg?t=1790202165",
+        "ordinal": 1
+      },
+      {
+        "filename": "steam/apps/546560/ss_fe7066404a704aa20f7c6f251facb7aef2606bda.jpg?t=1790202165",
+        "ordinal": 2
+      },
+      {
+        "filename": "steam/apps/546560/ss_6868ae1644628f857e7df4b72a00fdf506f79c7f.jpg?t=1790202165",
+        "ordinal": 3
+      },
+      {
+        "filename": "steam/apps/546560/ss_4236773ab28112613bd7d4c6282331c861bc222a.jpg?t=1790202165",
+        "ordinal": 4
+      },
+      {
+        "filename": "steam/apps/546560/ss_5d228b092e93ff148e6a998c33e751fb968cc956.jpg?t=1790202165",
+        "ordinal": 5
+      },
+      {
+        "filename": "steam/apps/546560/ss_70fce3236bf252d3814f793744f648cbe35164e4.jpg?t=1790202165",
+        "ordinal": 6
+      },
+      {
+        "filename": "steam/apps/546560/ss_fcc7a64234b8b26cac3d69dfc4779dd438582f15.jpg?t=1790202165",
+        "ordinal": 7
+      },
+      {
+        "filename": "steam/apps/546560/ss_0360004603a7861cf6781d5449e641f916f1ee07.jpg?t=1790202165",
+        "ordinal": 8
+      },
+      {
+        "filename": "steam/apps/546560/ss_e5152f19710aaa91c4a4ab161785af3e1f8d850d.jpg?t=1790202165",
+        "ordinal": 9
+      },
+      {
+        "filename": "steam/apps/546560/ss_ac80dfaacaade35a1da835dadd52ab420607603b.jpg?t=1790202165",
+        "ordinal": 10
+      },
+      {
+        "filename": "steam/apps/546560/ss_ddc667aa2687543c0baa1a63c6bdb5fa59e0617e.jpg?t=1790202165",
+        "ordinal": 11
+      },
+      {
+        "filename": "steam/apps/546560/ss_4912f4c3d259a472e9898f0a7b1f819a533d2c1e.jpg?t=1790202165",
+        "ordinal": 12
+      }
+    ]
+  },
+  "trailers": {
+    "highlights": [
+      {
+        "trailer_name": "Half-Life: Alyx Announce Trailer",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1762986581",
+        "trailer_category": 1,
+        "microtrailer": [
+          {
+            "filename": "546560/253732/6dc0a5b4a9f2bb0ea9e74ea2bdd4647eb09e1f4d/1749861541/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "546560/253732/6dc0a5b4a9f2bb0ea9e74ea2bdd4647eb09e1f4d/1749861541/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "546560/253732/6dc0a5b4a9f2bb0ea9e74ea2bdd4647eb09e1f4d/1749861541/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "546560/253732/6dc0a5b4a9f2bb0ea9e74ea2bdd4647eb09e1f4d/1749861541/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "546560/253732/6dc0a5b4a9f2bb0ea9e74ea2bdd4647eb09e1f4d/1749861541/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "256767815/movie.293x165.jpg",
+        "screenshot_full": "256767815/movie_full.jpg",
+        "trailer_base_id": 253732,
+        "all_ages": true,
+        "screenshot_small": "256767815/movie.184x123.jpg",
+        "trailer_id": 253732
+      },
+      {
+        "trailer_name": "Half-Life: Alyx Gameplay 1",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1762986583",
+        "trailer_category": 1,
+        "microtrailer": [
+          {
+            "filename": "546560/269742/acb68750c3e97fa6a239a068e070c9be3811616b/1749861541/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "546560/269742/acb68750c3e97fa6a239a068e070c9be3811616b/1749861541/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "546560/269742/acb68750c3e97fa6a239a068e070c9be3811616b/1749861541/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "546560/269742/acb68750c3e97fa6a239a068e070c9be3811616b/1749861541/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "546560/269742/acb68750c3e97fa6a239a068e070c9be3811616b/1749861541/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "256776744/movie.293x165.jpg",
+        "screenshot_full": "256776744/movie_full.jpg",
+        "trailer_base_id": 269742,
+        "all_ages": true,
+        "screenshot_small": "256776744/movie.184x123.jpg",
+        "trailer_id": 269742
+      },
+      {
+        "trailer_name": "Half-Life: Alyx Gameplay 2",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1762986585",
+        "trailer_category": 1,
+        "microtrailer": [
+          {
+            "filename": "546560/269743/a3ed0da266b7f7321d67f9b90b3e9ea0b419babf/1749861543/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "546560/269743/a3ed0da266b7f7321d67f9b90b3e9ea0b419babf/1749861543/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "546560/269743/a3ed0da266b7f7321d67f9b90b3e9ea0b419babf/1749861543/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "546560/269743/a3ed0da266b7f7321d67f9b90b3e9ea0b419babf/1749861543/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "546560/269743/a3ed0da266b7f7321d67f9b90b3e9ea0b419babf/1749861543/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "256776745/movie.293x165.jpg",
+        "screenshot_full": "256776745/movie_full.jpg",
+        "trailer_base_id": 269743,
+        "all_ages": true,
+        "screenshot_small": "256776745/movie.184x123.jpg",
+        "trailer_id": 269743
+      },
+      {
+        "trailer_name": "Half-Life: Alyx Gameplay 3",
+        "trailer_url_format": "steam/apps/${FILENAME}?t=1762986586",
+        "trailer_category": 1,
+        "microtrailer": [
+          {
+            "filename": "546560/269744/b78dd8982411b6623291fb414747572488f729ea/1749861543/microtrailer.webm",
+            "type": "video/webm"
+          },
+          {
+            "filename": "546560/269744/b78dd8982411b6623291fb414747572488f729ea/1749861543/microtrailer.mp4",
+            "type": "video/mp4"
+          }
+        ],
+        "adaptive_trailers": [
+          {
+            "cdn_path": "546560/269744/b78dd8982411b6623291fb414747572488f729ea/1749861543/dash_av1.mpd",
+            "encoding": "dash_av1"
+          },
+          {
+            "cdn_path": "546560/269744/b78dd8982411b6623291fb414747572488f729ea/1749861543/dash_h264.mpd",
+            "encoding": "dash_h264"
+          },
+          {
+            "cdn_path": "546560/269744/b78dd8982411b6623291fb414747572488f729ea/1749861543/hls_264_master.m3u8",
+            "encoding": "hls_h264"
+          }
+        ],
+        "screenshot_medium": "256776746/movie.293x165.jpg",
+        "screenshot_full": "256776746/movie_full.jpg",
+        "trailer_base_id": 269744,
+        "all_ages": true,
+        "screenshot_small": "256776746/movie.184x123.jpg",
+        "trailer_id": 269744
+      }
+    ]
+  },
+  "supported_languages": [
+    {
+      "elanguage": 0,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": true,
+      "subtitles": true
+    },
+    {
+      "elanguage": 2,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 1,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 5,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 10,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 4,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 8,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 6,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 27,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 7,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 3,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 19,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 18,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 12,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 11,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 22,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 26,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 28,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 23,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 24,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 13,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 14,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 16,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 20,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 9,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 21,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 15,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    },
+    {
+      "elanguage": 17,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": false,
+      "subtitles": true
+    }
+  ],
+  "full_description_bbcode": "Half-Life: Alyx is Valve’s VR return to the Half-Life series. It’s the story of an impossible fight against a vicious alien race known as the Combine, set between the events of Half-Life and Half-Life 2.  \r\n\r\nPlaying as Alyx Vance, you are humanity’s only chance for survival. The Combine’s control of the planet since the Black Mesa incident has only strengthened as they corral the remaining population in cities.  Among them are some of Earth’s greatest scientists: you and your father, Dr. Eli Vance. \r\n\r\nAs founders of a fledgling resistance, you’ve continued your clandestine scientific activity—performing critical research, and building invaluable tools for the few humans brave enough to defy the Combine.  \r\n\r\nEvery day, you learn more about your enemy, and every day you work toward finding a weakness. \r\n\r\n[b]ABOUT GAMEPLAY IN VR: [/b]\r\n\r\nValve’s return to the Half-Life universe that started it all was built from the ground up for virtual reality. VR was built to enable the gameplay that sits at the heart of Half-Life. \r\n\r\nImmerse yourself in deep environmental interactions, puzzle solving, world exploration, and visceral combat.  \r\n\r\nLean to aim around a broken wall and under a Barnacle to make an impossible shot. Rummage through shelves to find a healing syringe and some shotgun shells. Manipulate tools to hack alien interfaces. Toss a bottle through a window to distract an enemy. Rip a Headcrab off your face and throw it out the window.\r\n\r\n[b]COMMUNITY-BUILT ENVIRONMENTS[/b]\r\n\r\nA set of Source 2  for building new levels is included with the game, enabling any player to build and contribute new environments for the community to enjoy through . Hammer, Valve’s level authoring tool, has been updated with all of the game's virtual reality gameplay tools and components.",
+  "assets_without_overrides": {
+    "asset_url_format": "steam/apps/546560/${FILENAME}?t=1790202165",
+    "main_capsule": "capsule_616x353.jpg",
+    "small_capsule": "capsule_231x87.jpg",
+    "header": "header.jpg",
+    "hero_capsule": "hero_capsule.jpg",
+    "library_capsule": "library_600x900.jpg",
+    "library_capsule_2x": "library_600x900_2x.jpg",
+    "library_hero": "library_hero.jpg",
+    "library_hero_2x": "library_hero_2x.jpg",
+    "community_icon": "225032ac2ad1aca8f5fd98baa2b9daf1eebea5ca",
+    "page_background_path": "app/546560?t=1790202165",
+    "last_modified": 1790202165
+  },
+  "package_groups": [
+    {
+      "name": "default"
+    },
+    {
+      "name": "subscriptions",
+      "display_type": 1
+    }
+  ],
+  "extra_details": {
+    "vetted": true,
+    "content_survey_notes": "Includes violence and gore.",
+    "links_and_info": {
+      "website": "http://half-life.com",
+      "genreids": [
+        1,
+        25
+      ],
+      "achievements_visible": true,
+      "achievement_count": 42
+    },
+    "metacritic": {
+      "score": 93,
+      "url": "https://www.metacritic.com/game/pc/half-life-alyx?ftag=MCD-06-10aaa1f"
+    },
+    "system_requirements": {
+      "platforms": [
+        {
+          "platform": 1,
+          "minimum": {
+            "os_version": "Windows 10",
+            "processor": "Core i5-7500 / Ryzen 5 1600",
+            "memory": {
+              "amount": "12",
+              "units": "GB"
+            },
+            "graphics": "GTX 1060 / RX 580 - 6GB VRAM",
+            "vr_support": "SteamVR"
+          },
+          "recommended": {},
+          "requires_64bit": true
+        }
+      ]
+    },
+    "has_community_hub": true,
+    "hardware_compatibility": {
+      "steam_deck_tests": [
+        {
+          "display_type": 2,
+          "loc_token": "#SteamDeckVerified_TestResult_SteamOSDoesNotSupport_VR"
+        }
+      ]
+    },
+    "dlc_for_purchase": {
+      "dlc": [
+        {
+          "appid": 1310460,
+          "packageid": 457448
+        }
+      ],
+      "dlc_count": 1,
+      "formatted_total_price": "¥1,400"
+    }
+  }
+}

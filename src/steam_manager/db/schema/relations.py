@@ -15,7 +15,7 @@ class AppRelated(SteamBase):
     __table_args__ = (
         CheckConstraint(
             "kind IN ('demo', 'standalone_demo', 'playtest', 'dlc_parent', 'included_app',"
-            " 'related_f2p', 'season_pass')"
+            " 'related_f2p', 'season_pass', 'engine')"
         ),
         STRICT_WITHOUT_ROWID,
     )
@@ -23,7 +23,10 @@ class AppRelated(SteamBase):
     appid: Mapped[int] = mapped_column(ForeignKey(App.appid), primary_key=True)
     """The app."""
     kind: Mapped[str] = mapped_column(primary_key=True)
-    """How the other app relates to it, such as ``demo`` or ``dlc_parent``."""
+    """
+    How the other app relates to it, such as ``demo`` or ``dlc_parent``; ``engine`` is an app
+    that provides its engine, which can be the app itself.
+    """
     related_appid: Mapped[int] = mapped_column(ForeignKey(App.appid), primary_key=True)
     """The other app."""
     label: Mapped[str | None]
