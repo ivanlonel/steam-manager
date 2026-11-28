@@ -2,7 +2,7 @@
 
 import compression.zstd
 from datetime import UTC, datetime, timedelta
-from typing import TYPE_CHECKING, Final, Self
+from typing import TYPE_CHECKING, Final, NamedTuple, Self
 
 from sqlalchemy import URL, Integer, LargeBinary, Text, create_engine, event, select, text
 from sqlalchemy.dialects.sqlite import insert
@@ -11,7 +11,7 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from steam_manager.answers import Answer, Kind
 
 if TYPE_CHECKING:
-    from collections.abc import Generator, Iterable, Mapping
+    from collections.abc import Collection, Generator, Iterable, Mapping
     from pathlib import Path
     from types import TracebackType
 
@@ -25,6 +25,7 @@ __all__ = [
     "Archive",
     "ArchiveVersionError",
     "CorruptAnswerError",
+    "Stamp",
 ]
 
 ARCHIVE_VERSION: Final = 1
@@ -55,6 +56,22 @@ class ArchiveVersionError(RuntimeError):
         """The version the file records."""
         self.supported: int = supported
         """The newest version this release reads."""
+
+
+class Stamp(NamedTuple):
+    """An archived answer's identity and time, without its body: what the loader compares."""
+
+    source: str
+    """Where the answer came from, such as ``steam``."""
+    kind: str
+    """What it is about, as stored: a :class:`~steam_manager.answers.Kind` this release knows,
+    or one from a release that knows more."""
+    key: str
+    """What it is about within its kind."""
+    country: str
+    """The store country it was asked in, or ``""``."""
+    fetched_at: datetime
+    """When it arrived, in UTC."""
 
 
 class _Base(DeclarativeBase):
@@ -315,6 +332,26 @@ class Archive:
                     )
                 except CorruptAnswerError as damage:
                     yield damage
+
+    def stamps(self, *, kinds: Collection[Kind] | None = None) -> Generator[Stamp]:
+        """
+        List every answer's identity and time, or those of some kinds, without reading a body.
+
+        :param kinds: Only answers of these kinds.
+        :yield: The stamps, read as they are used: a whole catalog's are never held at once.
+        """
+        query = select(
+            _ArchivedAnswer.source,
+            _ArchivedAnswer.kind,
+            _ArchivedAnswer.key,
+            _ArchivedAnswer.country,
+            _ArchivedAnswer.fetched_at,
+        )
+        if kinds is not None:
+            query = query.where(_ArchivedAnswer.kind.in_([str(kind) for kind in kinds]))
+        with self._engine.connect() as connection:
+            for row in connection.execute(query.execution_options(yield_per=STREAM_ROWS)):
+                yield Stamp(row.source, row.kind, row.key, row.country, _moment(row.fetched_at))
 
     def fetched_at(self, source: str, kind: Kind, *, country: str) -> dict[str, datetime]:
         """
