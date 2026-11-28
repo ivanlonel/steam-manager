@@ -4,7 +4,9 @@ from collections import Counter
 
 import pytest
 
+from steam_manager.db.schema.creators import Credit
 from steam_manager.db.schema.lookups import Tag
+from steam_manager.db.schema.media import AppScreenshot
 from steam_manager.db.schema.offers import OfferPrice
 from steam_manager.loader.rows import Findings, Rows, iso
 from steam_manager.steam.models.details import Metacritic
@@ -40,6 +42,22 @@ def test_a_generated_column_is_refused() -> None:
     """SQLite works out a generated column itself; a value for one is a mistake."""
     with pytest.raises(ValueError, match=r"offer_price\.discount_pct is generated"):
         Rows().add(OfferPrice, kind="package", id=7, country="BR", discount_pct=10)
+
+
+def test_a_row_without_a_required_value_is_refused() -> None:
+    """A blank Steam sent for a column that can't be blank makes the answer malformed, at once."""
+    with pytest.raises(ValueError, match=r"app_screenshot needs filename"):
+        Rows().add(AppScreenshot, appid=620, is_mature=False, ordinal=0, filename=None)
+    with pytest.raises(ValueError, match=r"app_screenshot needs ordinal, filename"):
+        Rows().add(AppScreenshot, appid=620, is_mature=False)
+
+
+def test_a_key_sqlite_numbers_may_be_left_out() -> None:
+    """A credit's id is SQLite's to give."""
+    rows = Rows()
+    rows.add(Credit, name="Valve")
+
+    assert rows.tables == {"credit": [{"name": "Valve"}]}
 
 
 def test_rest_counts_fields_left_unused() -> None:
