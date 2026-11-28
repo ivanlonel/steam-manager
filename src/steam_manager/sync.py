@@ -12,6 +12,7 @@ from collections import Counter
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from enum import StrEnum
+from functools import partial
 from typing import TYPE_CHECKING, Final
 
 from sqlalchemy import select, union
@@ -22,9 +23,12 @@ from steam_manager.db.schema.apps import App
 from steam_manager.db.schema.classification import AppGenre
 from steam_manager.db.schema.lookups import Genre
 from steam_manager.db.schema.relations import AppDlc, AppRelated
+from steam_manager.db.schema.reviews import AppReviewSummary
 from steam_manager.loader import LoadReport, load
+from steam_manager.loader.reviews import EXACT_UP_TO
 from steam_manager.steam.community import followed_apps, wishlist
 from steam_manager.steam.models.listing import ListingAnswer
+from steam_manager.steam.reviews import exact_review_answers, review_histogram
 from steam_manager.steam.store import (
     API_LANGUAGES,
     BATCH_SIZE,
@@ -393,6 +397,49 @@ class _Sync:
                 language = self._profile.settings.language
                 await self._one(app_genres(self._transport, appids[0], language=language))
 
+    async def reviews(self, *, catalog: bool) -> None:
+        """
+        Fetch exact review totals where Steam's percentage can't give them, then histograms.
+
+        :param catalog: Whether every app above :data:`~steam_manager.loader.reviews.EXACT_UP_TO`
+            reviews gets exact totals, not only the account apps; the most reviewed go first.
+        """
+        query = (
+            select(App.appid, App.is_free, AppReviewSummary.review_count)
+            .join(AppReviewSummary, AppReviewSummary.appid == App.appid)
+            .where(
+                AppReviewSummary.scope == "filtered", AppReviewSummary.review_count > EXACT_UP_TO
+            )
+            .order_by(AppReviewSummary.review_count.desc(), App.appid)
+        )
+        if not catalog:
+            query = query.where(App.appid.in_(_ACCOUNT))
+        with self._profile.engine.connect() as connection:
+            # Keyed by the purchase type whose totals match the app's count: 1 if free, else 0.
+            targets = {
+                f"{row.appid}:{1 if row.is_free else 0}": row for row in connection.execute(query)
+            }
+        for key in self._stale(Kind.APP_REVIEWS, targets):
+            row = targets[key]
+            try:
+                self._add(
+                    await exact_review_answers(
+                        self._transport,
+                        row.appid,
+                        is_free=bool(row.is_free),
+                        review_count=row.review_count,
+                    )
+                )
+            except RequestFailedError as error:
+                self._failed(error)
+        language = self._profile.settings.language
+        for key in self._stale(Kind.REVIEW_HISTOGRAM, map(str, sorted(self._appids(_ACCOUNT)))):
+            await self._one(review_histogram(self._transport, int(key), language=language))
+
+    async def full_catalog(self) -> None:
+        """Fetch a full entry for every app a store of the profile lists."""
+        await self._entries(self._appids(select(App.appid).where(App.is_listed.is_(True))))
+
 
 async def sync(  # the command line's options, each a keyword
     profile: OpenProfile,
@@ -415,13 +462,35 @@ async def sync(  # the command line's options, each a keyword
     :param now: Tells the time staleness is measured from.
     :return: What the sync fetched, what failed, what its loads found, and why it stopped.
     """
-    del catalog_reviews
     run = _Sync(profile, transport, force=force, now=now)
-    actions = {
+    actions: dict[Step, Callable[[], Awaitable[None]]] = {
         Step.LOOKUPS: run.lookups,
         Step.WISHLIST: run.wishlist,
         Step.FOLLOWED: run.followed,
         Step.CATALOG: run.catalog,
         Step.APPS: run.apps,
+        Step.REVIEWS: partial(run.reviews, catalog=catalog_reviews),
     }
     return await run.run(action for step, action in actions.items() if step in steps)
+
+
+async def fetch_full_catalog(
+    profile: OpenProfile,
+    transport: Transport,
+    *,
+    force: bool = False,
+    now: Callable[[], datetime] = _now,
+) -> SyncReport:
+    """
+    Fetch a full entry for every app a store of the profile lists, as the catalog last showed.
+
+    It is resumable: a run stopped halfway fetches, when run again, only what is still stale.
+
+    :param profile: The open profile, its catalog listed.
+    :param transport: Sends the requests.
+    :param force: Whether to fetch fresh full entries too.
+    :param now: Tells the time staleness is measured from.
+    :return: What it fetched, what failed, what its loads found, and why it stopped.
+    """
+    run = _Sync(profile, transport, force=force, now=now)
+    return await run.run([run.full_catalog])
