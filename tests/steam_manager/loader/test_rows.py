@@ -82,6 +82,15 @@ def test_rest_counts_an_empty_text_but_not_an_empty_list() -> None:
     assert findings.unknown == Counter({"metacritic.url": 1})
 
 
+def test_rest_at_the_top_names_fields_bare() -> None:
+    """A field at the top of an answer is named as ``unknown_fields`` names it."""
+    findings = Findings()
+
+    findings.rest(Metacritic(url="x"), "", {"score"})
+
+    assert findings.unknown == Counter({"url": 1})
+
+
 def test_rest_of_nothing_counts_nothing() -> None:
     """A part Steam didn't send has nothing left over."""
     findings = Findings()
