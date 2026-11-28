@@ -229,6 +229,7 @@ def included_offer(
     findings: Findings,
     *,
     kind: Literal["package", "bundle"],
+    groups: Collection[str] = ("default",),
 ) -> None:
     """
     Turn the short record of a package or bundle into its offer, apps, categories and prices.
@@ -239,6 +240,8 @@ def included_offer(
     :param rows: Where the rows go.
     :param findings: Where fields nothing stores and derived values that differ are counted.
     :param kind: ``package`` or ``bundle``.
+    :param groups: The package groups its options may sit in: ``default`` and those of the page
+        that includes it.
     :raise MalformedAnswerError: When the short record has no id.
     """
     if item.id is None:
@@ -255,18 +258,23 @@ def included_offer(
         rows.add(OfferCategory, kind=kind, id=item.id, categoryid=categoryid)
     for descriptor in item.content_descriptorids:
         rows.add(OfferContentDescriptor, kind=kind, id=item.id, descriptorid=descriptor)
-    best_kind, best_id = None, None
+    best: tuple[str | None, int | None] = (None, None)
     for name in ("best_purchase_option", "self_purchase_option"):
         option = getattr(item, name)
         if option is None:
             continue
-        # A short record's options belong to no app's page: their group is "default".
-        findings.same("included_offer.package_group", option.package_group or "default", "default")
+        # A short record's options sit in "default" or in a group of the page that includes it,
+        # such as a DLC's "subscriptions"; the app's own offer rows already say which.
+        findings.same(
+            "included_offer.package_group",
+            stored=(option.package_group or "default") in groups,
+            derived=True,
+        )
         key = purchase_option(
             option, f"{path}.{name}", country, rows, findings, caller=_SHORT_RECORD_CALLER
         )
         if name == "best_purchase_option":
-            best_kind, best_id = key
+            best = key
     rows.add(
         Offer,
         kind=kind,
@@ -279,8 +287,8 @@ def included_offer(
         type=item.type,
         purchase_description_bbcode=item.purchase_description_bbcode,
         unavailable_for_country_restriction=item.unvailable_for_country_restriction,
-        best_kind=best_kind,
-        best_id=best_id,
+        best_kind=best[0],
+        best_id=best[1],
     )
     # item_type and visible are checked above. included_types are the distinct types of the
     # apps it holds, in all 72,920 packages checked on 2026-11-06: the apps' own rows say it.

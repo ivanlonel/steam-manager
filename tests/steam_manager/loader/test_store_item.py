@@ -185,6 +185,37 @@ def test_a_first_franchise_without_franchises_is_no_mismatch() -> None:
     assert app["first_franchise_creator_id"] == 9
 
 
+def grouped(group: str) -> Described:
+    """
+    Describe Portal 2 with its first included package's best option in a given group.
+
+    :param group: The group the option names.
+    :return: Its rows and findings.
+    """
+    path = FIXTURES / "store_item" / "620-BR.json"
+    payload = read(path)
+    included = payload["included_items"]
+    assert isinstance(included, dict)
+    packages = included["included_packages"]
+    assert isinstance(packages, list)
+    packages[0]["best_purchase_option"]["package_group"] = group
+    return described(path, payload)
+
+
+def test_a_short_records_option_may_sit_in_a_page_group() -> None:
+    """A subscription a DLC includes sits in that DLC's own subscriptions group: no mismatch."""
+    found = grouped("subscriptions")
+
+    assert found.findings.mismatches["included_offer.package_group"] == 0
+
+
+def test_a_short_records_option_in_an_unknown_group_is_a_mismatch() -> None:
+    """An option in a group the including page lacks is reported."""
+    found = grouped("elsewhere")
+
+    assert found.findings.mismatches["included_offer.package_group"] == 1
+
+
 def test_a_light_entry_keeps_its_best_price() -> None:
     """A light entry's only offer is its best one, priced in the store it came from."""
     found = described(FIXTURES / "store_item_light" / "10-BR.json")

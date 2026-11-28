@@ -80,7 +80,7 @@ from steam_manager.loader.rows import (
 )
 
 if TYPE_CHECKING:
-    from collections.abc import Mapping, Sequence
+    from collections.abc import Collection, Mapping, Sequence
 
     from steam_manager.db.schema import SteamBase
     from steam_manager.loader.rows import Columns
@@ -281,8 +281,16 @@ def describe(
     text |= texts
     _store_lists(appid, item, path, rows, findings)
     _offers(appid, item, path, rows, findings, country=country)
+    groups = {"default", *(group.name for group in item.package_groups if group.name)}
     found.nested.extend(
-        _included(appid, item.included_items, join(path, "included_items"), country, found)
+        _included(
+            appid,
+            item.included_items,
+            join(path, "included_items"),
+            country,
+            found,
+            groups=groups,
+        )
     )
     app["parent_appid"] = _related(
         appid, item.related_items, join(path, "related_items"), rows, findings
@@ -709,7 +717,13 @@ def _offers(
 
 
 def _included(
-    appid: int, included: IncludedItems | None, at: str, country: str, found: Described
+    appid: int,
+    included: IncludedItems | None,
+    at: str,
+    country: str,
+    found: Described,
+    *,
+    groups: Collection[str],
 ) -> Sequence[StoreItem]:
     """
     Turn the short records an item holds into offers and creators, and list its other apps.
@@ -719,6 +733,7 @@ def _included(
     :param at: Where they sit in the answer.
     :param country: The store country that sent them.
     :param found: What the item becomes; its rows and findings grow.
+    :param groups: The package groups the short records' options may sit in.
     :return: The short records of other apps, loaded only where nothing better describes them.
     :raise MalformedAnswerError: When a short record has no id.
     """
@@ -732,7 +747,13 @@ def _included(
     for records, kind in offers:
         for record in records:
             included_offer(
-                record, join(at, f"included_{kind}s[]"), country, rows, findings, kind=kind
+                record,
+                join(at, f"included_{kind}s[]"),
+                country,
+                rows,
+                findings,
+                kind=kind,
+                groups=groups,
             )
     for creator in included.included_creators:
         _creator(creator, join(at, "included_creators[]"), rows, findings)
