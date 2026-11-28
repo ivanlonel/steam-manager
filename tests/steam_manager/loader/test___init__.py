@@ -18,7 +18,12 @@ from steam_manager.db.schema.classification import AppTag
 from steam_manager.db.schema.lookups import Genre, Language, StoreCategory, Tag
 from steam_manager.db.schema.offers import OfferPrice
 from steam_manager.db.schema.progress import LoadedAnswer
-from steam_manager.db.schema.reviews import AppReviewHistogram, AppReviewTotal, ReviewHistory
+from steam_manager.db.schema.reviews import (
+    AppReviewHistogram,
+    AppReviewTotal,
+    ReviewEvent,
+    ReviewHistory,
+)
 from steam_manager.loader import ForeignKeyViolationError, Malformed, load, rebuild, store_item
 from steam_manager.loader import write as writing
 from tests.steam_manager.loader._archive import AT, changed, damage, put, recorded
@@ -491,6 +496,23 @@ def test_a_histogram_is_loaded(archive: Archive, engine: Engine) -> None:
 
     assert count(engine, AppReviewHistogram.appid) == 1
     assert count(engine, ReviewHistory.date) == 218
+
+
+def test_a_newer_histogram_replaces_its_events(archive: Archive, engine: Engine) -> None:
+    """A later histogram without events leaves none of the earlier one's."""
+
+    def marked(answer: dict[str, object]) -> None:
+        answer["past_events"] = [{"type": 0, "start_date": 1739491200, "end_date": 1743379200}]
+
+    put(archive, Kind.REVIEW_HISTOGRAM, "620", "", changed("review_histogram-620.json", marked))
+    load(archive, engine, countries=COUNTRIES)
+    assert count(engine, ReviewEvent.position) == 1
+    newer = recorded("review_histogram-620.json")
+    put(archive, Kind.REVIEW_HISTOGRAM, "620", "", newer, at=AT + timedelta(hours=1))
+
+    load(archive, engine, countries=COUNTRIES)
+
+    assert count(engine, ReviewEvent.position) == 0
 
 
 def wishlisted(engine: Engine) -> list[tuple[int, int]]:

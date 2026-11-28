@@ -52,3 +52,13 @@ def test_current_players_are_fully_declared() -> None:
     assert unknown_fields(answer) == []
     assert answer.response is not None
     assert (answer.response.player_count or 0) > 0
+
+
+def test_a_histogram_reads_its_past_events() -> None:
+    """A histogram can mark periods on the review graph, at the top of its answer."""
+    answer = ReviewHistogramAnswer.model_validate(
+        {"past_events": [{"type": 0, "start_date": 1646265600, "end_date": 1646697600}]}
+    )
+
+    assert answer.past_events[0].start_date == 1646265600
+    assert unknown_fields(answer) == []

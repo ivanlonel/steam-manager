@@ -1,5 +1,6 @@
 """Tests for review totals, the review histogram and player counts."""
 
+import json
 from collections import Counter
 from pathlib import Path
 from typing import Final
@@ -191,6 +192,30 @@ def test_a_histogram_gives_periods_and_recent_days() -> None:
     assert findings.unknown == Counter()
 
 
+def test_a_histograms_events_are_stored() -> None:
+    """The periods a histogram marks keep their order, with dates as the history's."""
+    answer = json.loads((FIXTURES / "review_histogram-620.json").read_bytes())
+    answer["past_events"] = [
+        {"type": 0, "start_date": 1739491200, "end_date": 1743379200},
+        {"type": 0, "start_date": 1790121600, "end_date": 1790726400},
+    ]
+    rows, findings = Rows(), Findings()
+
+    histogram(620, ReviewHistogramAnswer.model_validate(answer), rows, findings)
+
+    assert rows.tables["review_event"] == [
+        {
+            "appid": 620,
+            "position": position,
+            "type": 0,
+            "start_date": iso(event["start_date"]),
+            "end_date": iso(event["end_date"]),
+        }
+        for position, event in enumerate(answer["past_events"])
+    ]
+    assert findings.unknown == Counter()
+
+
 def test_a_histogram_without_results_gives_no_rows() -> None:
     """The store answers an app it doesn't know without a histogram."""
     rows = Rows()
@@ -198,6 +223,17 @@ def test_a_histogram_without_results_gives_no_rows() -> None:
     histogram(620, ReviewHistogramAnswer(success=2), rows, Findings())
 
     assert not rows.tables
+
+
+def test_events_without_results_are_reported() -> None:
+    """Events need the histogram they mark: without one they are reported, not dropped."""
+    answer = ReviewHistogramAnswer.model_validate({"success": 2, "past_events": [{"type": 0}]})
+    rows, findings = Rows(), Findings()
+
+    histogram(620, answer, rows, findings)
+
+    assert not rows.tables
+    assert findings.unknown == Counter({"review_histogram.past_events": 1})
 
 
 def test_players_are_counted() -> None:

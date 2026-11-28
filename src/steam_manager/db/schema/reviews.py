@@ -79,3 +79,25 @@ class ReviewHistory(SteamBase):
     """The positive reviews in it."""
     recommendations_down: Mapped[int | None]
     """The negative reviews in it."""
+
+
+class ReviewEvent(SteamBase):
+    """
+    A period the store marks on an app's review graph.
+
+    Its meaning is unverified: :attr:`type` was 0 on every one seen (2026-11-28).
+    """
+
+    __tablename__ = "review_event"
+    __table_args__ = STRICT_WITHOUT_ROWID
+
+    appid: Mapped[int] = mapped_column(ForeignKey(AppReviewHistogram.appid), primary_key=True)
+    """The app."""
+    position: Mapped[int] = mapped_column(primary_key=True)
+    """Its place in the histogram's list."""
+    type: Mapped[int | None]
+    """Steam's code for its kind."""
+    start_date: Mapped[str | None]
+    """When it starts."""
+    end_date: Mapped[str | None]
+    """When it ends."""

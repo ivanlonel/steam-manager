@@ -3,7 +3,12 @@
 from typing import TYPE_CHECKING, Final
 
 from steam_manager.db.schema.lookups import ReviewScore
-from steam_manager.db.schema.reviews import AppReviewHistogram, AppReviewTotal, ReviewHistory
+from steam_manager.db.schema.reviews import (
+    AppReviewHistogram,
+    AppReviewTotal,
+    ReviewEvent,
+    ReviewHistory,
+)
 from steam_manager.loader.rows import iso
 
 if TYPE_CHECKING:
@@ -128,20 +133,30 @@ def review_total(
 
 def histogram(appid: int, answer: ReviewHistogramAnswer, rows: Rows, findings: Findings) -> None:
     """
-    Turn an app's review histogram into its span and its periods.
+    Turn an app's review histogram into its span, its periods and the periods it marks.
 
     :param appid: The app.
     :param answer: The ``appreviewhistogram`` answer.
     :param rows: Where the rows go.
     :param findings: Where fields nothing stores are counted.
     """
-    # success is 1 whenever there are results; expand_graph is how the store page draws them.
-    findings.rest(
-        answer, "review_histogram", {"success", "results", "count_all_reviews", "expand_graph"}
-    )
     results = answer.results
+    # success is 1 whenever there are results; expand_graph is how the store page draws them.
+    used = {"success", "results", "count_all_reviews", "expand_graph"}
+    # The events mark the histogram's graph: without one, they have nothing to belong to.
+    findings.rest(answer, "review_histogram", used if results is None else {*used, "past_events"})
     if results is None:
         return
+    for position, event in enumerate(answer.past_events):
+        findings.rest(event, "review_histogram.past_events[]", {"type", "start_date", "end_date"})
+        rows.add(
+            ReviewEvent,
+            appid=appid,
+            position=position,
+            type=event.type,
+            start_date=iso(event.start_date),
+            end_date=iso(event.end_date),
+        )
     for is_recent, key in ((False, "rollups"), (True, "recent")):
         for entry in getattr(results, key):
             findings.rest(
