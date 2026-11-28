@@ -118,7 +118,7 @@ def extra_details(
         prefix="ai_generation_service_",
     )
     columns |= {name: getattr(extra, name) for name in _EXTRA_COLUMNS}
-    columns["dlc_formatted_total_price"] = _dlc(
+    columns["dlc_formatted_total_price"], columns["dlc_count"] = _dlc(
         appid, extra.dlc_for_purchase, join(at, "dlc_for_purchase"), rows, findings, nested=nested
     )
     texts = read_columns(
@@ -262,7 +262,7 @@ def _dlc(
     findings: Findings,
     *,
     nested: Sequence[StoreItem],
-) -> str | None:
+) -> tuple[str | None, int | None]:
     """
     Turn the DLC an app's store page offers into rows, checking what follows from the answer.
 
@@ -273,11 +273,11 @@ def _dlc(
     :param findings: Where fields nothing stores and derived values that differ are counted.
     :param nested: The short records of other apps in the same answer, which hold each DLC's
         content descriptors.
-    :return: What all the DLC cost, as the store shows it.
+    :return: What all the DLC cost, as the store shows it, and how many there are: Steam lists
+        200 at most, so the count doesn't follow from the list.
     """
     if dlc is None:
-        return None
-    findings.same("dlc_for_purchase.dlc_count", dlc.dlc_count, len(dlc.dlc))
+        return None, None
     descriptors: dict[int | None, list[int]] = {
         app.id: sorted(app.content_descriptorids) for app in nested
     }
@@ -301,7 +301,7 @@ def _dlc(
             descriptors.get(offer.appid, []),
         )
     findings.rest(dlc, at, {"dlc", "dlc_count", "formatted_total_price"})
-    return dlc.formatted_total_price
+    return dlc.formatted_total_price, dlc.dlc_count
 
 
 def _season_pass(

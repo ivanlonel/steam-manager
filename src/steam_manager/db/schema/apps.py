@@ -193,6 +193,8 @@ class App(SteamBase):
     """Whether its review counts include people who didn't buy it on Steam."""
     dlc_formatted_total_price: Mapped[str | None]
     """What all the DLC on sale for it cost, as the store shows it in :attr:`store_country`."""
+    dlc_count: Mapped[int | None]
+    """How many DLC are on sale for it, which Steam lists 200 of at most."""
 
 
 class AppText(SteamBase):
