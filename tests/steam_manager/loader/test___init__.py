@@ -19,7 +19,7 @@ from steam_manager.db.schema.lookups import Genre, Language, StoreCategory, Tag
 from steam_manager.db.schema.offers import OfferPrice
 from steam_manager.db.schema.progress import LoadedAnswer
 from steam_manager.db.schema.reviews import AppReviewHistogram, AppReviewTotal, ReviewHistory
-from steam_manager.loader import ForeignKeyViolationError, Malformed, load, rebuild
+from steam_manager.loader import ForeignKeyViolationError, Malformed, load, rebuild, store_item
 from steam_manager.loader import write as writing
 from tests.steam_manager.loader._archive import AT, changed, damage, put, recorded
 
@@ -100,7 +100,7 @@ def test_a_second_load_parses_nothing(
     put(archive, Kind.STORE_ITEM, "620", "BR", recorded("store_item/620-BR.json"))
     load(archive, engine, countries=COUNTRIES)
     calls: list[int] = []
-    describe = loader.describe
+    describe = store_item.describe
 
     def counted(
         item: StoreItem, *, country: str, category_types: Mapping[int, int], path: str = ""
@@ -212,7 +212,7 @@ def test_an_interrupted_load_commits_nothing(
     put(archive, Kind.STORE_ITEM, "620", "BR", recorded("store_item/620-BR.json"))
     put(archive, Kind.STORE_ITEM, "570", "BR", recorded("store_item/570-BR.json"))
     calls: list[int] = []
-    describe = loader.describe
+    describe = store_item.describe
 
     def failing(
         item: StoreItem, *, country: str, category_types: Mapping[int, int], path: str = ""
@@ -229,7 +229,7 @@ def test_an_interrupted_load_commits_nothing(
         load(archive, engine, countries=COUNTRIES)
     assert count(engine, App.appid) == 0
     assert count(engine, LoadedAnswer.key) == 0
-    monkeypatch.setattr(loader, "describe", describe)
+    monkeypatch.setattr(loader, "describe", store_item.describe)
 
     load(archive, engine, countries=COUNTRIES)
 
