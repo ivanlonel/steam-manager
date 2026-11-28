@@ -99,6 +99,27 @@ plus the archive, rather than rebuilding everything on each run.
   and one language (default English). A fallback country is asked only for apps the home
   country doesn't sell.
 
+The builder's calls (2026-11-28):
+
+- **Data folder:** `STEAM_MANAGER_HOME` when set. Otherwise `%LOCALAPPDATA%\steam-manager` on
+  Windows (local rather than roaming: an archive reaches gigabytes),
+  `~/Library/Application Support/steam-manager` on macOS, and elsewhere
+  `$XDG_DATA_HOME/steam-manager`, falling back to `~/.local/share/steam-manager`.
+- **Profile folder:** `<data folder>/<steamid>/`, holding `settings.json`, `steam.sqlite` and
+  `archive.sqlite`.
+- **Settings file:** JSON holding the SteamID, the home country, the fallback countries, the
+  language and the maximum ages. Only the ages the user changed are written, as ISO 8601
+  durations, so a release's new defaults reach existing profiles.
+- **Countries** are stripped, upper-cased and refused unless they are two ASCII letters: a
+  lower-case `br` would show no prices. The fallbacks drop the home country and repeats,
+  keeping the first.
+- **Language** is one of Steam's API language codes (the Steamworks language page, 2026-11-28),
+  refused otherwise: a typo would silently give English. Malay has a code but no known
+  ELanguage number for the store categories, so it isn't offered.
+- **Opening a profile** recreates the Steam tables when this release's differ, loads what the
+  archive holds that the tables don't (a sync stopped between archiving and loading loses
+  nothing), and writes the reports as views.
+
 ### Sources
 
 - **Steam store and community, over HTTPS.** The endpoints and their quirks are listed under
@@ -427,6 +448,46 @@ The builder's calls (2026-11-28):
   fetches regardless, and an interrupted sync continues from what the archive already holds.
 - The network side is asyncio. The database has a single synchronous writer called through
   `asyncio.to_thread`.
+- The owner decided on 2026-11-28 that the apps the account apps point at get a full entry
+  too, one level deep: their related apps of every kind but `included_app` (parent game,
+  demos, playtests, season pass, free-to-play version, engine) and the DLC their store page
+  lists. An included app already comes with a short record, and bundles are out.
+
+The builder's calls (2026-11-28):
+
+- **Steps** run in this order, whatever order they are given in, with a load after each:
+  `lookups`, `wishlist`, `followed`, `catalog`, `apps`, `reviews`. The loader checks store
+  categories while it reads apps, the apps step reads the account lists from the database, and
+  the reviews step reads review summaries from it. A load runs only when the step archived
+  something.
+- **Country passes:** full entries are asked a country at a time. The home country is asked
+  for every stale app; fallback country *n* for the stale apps no earlier country sells,
+  meaning no `app` row with `success` 1 and a `store_country` among the earlier countries. A
+  load follows each pass, so each pass reads what the loader ranked.
+- **Catalog:** each country whose `listing` is stale is listed again. A fallback's light entries
+  are archived only for apps no earlier country's latest listing holds; the listing itself is
+  archived whole, so `is_listed` is right for every country.
+- **Apps:** full entries for the account apps, then for the apps they point at; then current
+  players for the account apps, and one `appdetails` request per genre without a name,
+  skipping genres an app asked before also has.
+- **Reviews:** exact totals for the account apps above 100 reviews, or for every such app on
+  request, the most reviewed first. Their staleness is read from the key of the purchase type
+  the app's count matches: 1 if it is free, else 0. Then histograms for the account apps.
+- **Maximum ages**, by default: store categories and tags 7 days; the wishlist and the
+  followed apps 1 hour (one request each, so a sync run again within the hour, after an
+  interruption, skips them); listings 7 days; full entries 1 day; current players 1 day; exact
+  review totals 7 days; histograms 7 days (1 s per app). Light entries go stale with their
+  listing, and genre names are asked only for a genre without one.
+- **Failures:** a request that fails after its retries skips its unit (one batch of 100, one
+  app, one listing, one lookup), is reported by its endpoint alone, and the step goes on. A
+  listing that strays from Steam's total is reported and its `listing` answer isn't archived.
+  A run of failures stops the sync: what was archived is loaded, the report says why it
+  stopped, and no exception escapes. A loader error is a bug and propagates.
+- **Archive writes:** answers asked one app at a time are archived 100 at a time, a batch's
+  answers together and light entries a page (1,000) at a time, so a stop loses little and no
+  answer costs a transaction of its own. A stop still archives what is waiting.
+- **Full catalog:** `catalog fetch --full` runs the country passes over every app with
+  `is_listed` 1, and resumes through staleness.
 
 ## Tooling
 

@@ -17,3 +17,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Database schema, part 2: relations, offers, media, store lists, requirements, reviews, the wishlist and followed apps.
 - Reports: app scores, games, the wishlist and followed apps, computed by the application and written into the database as views.
 - Loader: fills the database from the raw archive, loading only what changed, and reports the fields nothing stores, the values that don't follow and the answers it skipped.
+- Profiles and the sync: settings per profile, and a sync that fetches only what is stale, archives as it goes and loads after each step.
