@@ -43,6 +43,17 @@ from steam_manager.db.schema.reviews import (
     AppReviewTotal,
     ReviewHistory,
 )
+from steam_manager.loader import (
+    account,
+    details,
+    lookups,
+    media,
+    offers,
+    reviews,
+    rows,
+    store_item,
+    write,
+)
 from steam_manager.loader.account import followed, wishlist
 from steam_manager.loader.lookups import genres, languages, store_categories, tags
 from steam_manager.loader.reviews import exact_totals, histogram, players, review_total
@@ -74,15 +85,24 @@ if TYPE_CHECKING:
     from steam_manager.loader.store_item import Described
     from steam_manager.steam.models.reviews import QuerySummary
 
+# The docs list these, the submodules included; describe stays importable for the tests.
 __all__ = [
     "LISTED_TYPES",
     "LOAD_BATCH",
     "ForeignKeyViolationError",
     "LoadReport",
     "Malformed",
-    "describe",
+    "account",
+    "details",
     "load",
+    "lookups",
+    "media",
+    "offers",
     "rebuild",
+    "reviews",
+    "rows",
+    "store_item",
+    "write",
 ]
 
 LOAD_BATCH: Final = 500
@@ -415,14 +435,14 @@ class _Load:
         answer = self._parse(stamp, model)
         if answer is None:
             return None
-        rows, findings = Rows(), Findings()
+        new, findings = Rows(), Findings()
         try:
-            turn(answer, rows, findings)
+            turn(answer, new, findings)
         except MalformedAnswerError as error:
             self._malformed(stamp, str(error))
             return None
         self._report.add(findings)
-        return rows
+        return new
 
     def _malformed(self, stamp: StampRow, reason: str) -> None:
         """
@@ -437,8 +457,8 @@ class _Load:
 
     def _lookups(self) -> None:
         """Name languages, store categories, tags and genres, from the latest lists."""
-        rows = Rows()
-        languages(rows)
+        new = Rows()
+        languages(new)
         lists = (
             (
                 Kind.STORE_CATEGORIES,
@@ -449,10 +469,10 @@ class _Load:
         for kind, turn in lists:
             latest = _latest(self._stamps(kind))
             if latest is not None and latest in self._stamps(kind, changed=True):
-                rows.extend(turn(latest) or Rows())
+                new.extend(turn(latest) or Rows())
         for stamp in self._stamps(Kind.APP_GENRES, changed=True):
-            rows.extend(self._turn(stamp, AppDetailsGenresAnswer, genres) or Rows())
-        self._writer.write(rows, home=True)
+            new.extend(self._turn(stamp, AppDetailsGenresAnswer, genres) or Rows())
+        self._writer.write(new, home=True)
         types = select(StoreCategory.categoryid, StoreCategory.type)
         self._known.category_types = {
             categoryid: kind
@@ -519,8 +539,8 @@ class _Load:
             .order_by(_STAMP.c.key)
         )
         batch: list[tuple[Described, StampRow]] = []
-        rows = self._connection.execute(candidates)
-        for _, stamps in itertools.groupby(rows, key=attrgetter("key")):
+        results = self._connection.execute(candidates)
+        for _, stamps in itertools.groupby(results, key=attrgetter("key")):
             if chosen := self._choose(list(stamps)):
                 batch.append(chosen)
             if len(batch) >= LOAD_BATCH:
@@ -658,7 +678,7 @@ class _Load:
             int(stamp.key.split(":")[0]) for stamp in self._stamps(Kind.APP_REVIEWS, changed=True)
         }
         targets = sorted(changed | self._known.written.keys())
-        rows, findings = Rows(), Findings()
+        new, findings = Rows(), Findings()
         for chunk in itertools.batched(targets, LOAD_BATCH, strict=False):
             stored = self._summaries(
                 [appid for appid in chunk if appid not in self._known.written]
@@ -673,12 +693,12 @@ class _Load:
                     summary,
                     exact.get(appid, {}),
                     is_free=is_free,
-                    rows=rows,
+                    rows=new,
                     findings=findings,
                 )
         self._report.add(findings)
         self._writer.clear([AppReviewTotal], targets)
-        self._writer.write(rows, home=True)
+        self._writer.write(new, home=True)
 
     def _exact(
         self, appids: Collection[int], findings: Findings
@@ -744,16 +764,16 @@ class _Load:
         changed = self._stamps(Kind.REVIEW_HISTOGRAM, changed=True)
         for stamp in sorted(changed, key=attrgetter("fetched_at")):
             latest[stamp.key] = stamp
-        rows = Rows()
+        new = Rows()
         appids = []
         for key, stamp in latest.items():
             turn = partial(histogram, int(key))
             found = self._turn(stamp, ReviewHistogramAnswer, turn)
             if found is not None:
                 appids.append(int(key))
-                rows.extend(found)
+                new.extend(found)
         self._writer.clear([ReviewHistory, AppReviewHistogram], appids)
-        self._writer.write(rows, home=True)
+        self._writer.write(new, home=True)
 
     def _replace_list[M: BaseModel](
         self,
@@ -773,7 +793,7 @@ class _Load:
         latest = _latest(self._stamps(kind))
         if latest is None or latest not in self._stamps(kind, changed=True):
             return
-        rows = self._turn(latest, model, turn)
-        if rows is not None:
+        new = self._turn(latest, model, turn)
+        if new is not None:
             self._writer.clear([table], None)  # positions are unique: delete before inserting
-            self._writer.write(rows, home=True)
+            self._writer.write(new, home=True)
