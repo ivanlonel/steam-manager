@@ -509,3 +509,24 @@ PR A2:
 - Signatures follow pylint's limit of five positional arguments: `included_offer`'s `kind` and
   `_offers`' `country` are keywords. The media functions' parameters are renamed so they don't
   shadow their functions.
+
+PR A2's review led to three fixes before it merged:
+
+- An edition flag on a short record's option is reported, not taken as the caller's.
+- `MalformedAnswerError` tells Steam's malformed answers from loader bugs.
+- A blank key SQLite would number is refused.
+
+PR B:
+
+- A new payload model, `steam/models/listing.py`, reads the `listing` answers.
+- `exact_totals` takes a `GetAppReviews` answer's paging out on purpose.
+- Paths of answers other than store items start with their kind.
+- Every changed stamp is recorded in `loaded_answer`, malformed ones included, so a malformed
+  answer is reported once, until it is fetched again or the tables are rebuilt.
+- `ForeignKeyViolationError` lives in `loader/write.py`, to avoid a circular import.
+- `Writer.apps` adds blank parents only after both of a batch's writes. Adding them between the
+  two let a blank row take the place of an app the second write then lost.
+- The load skips and reports only a `MalformedAnswerError`; any other error stops it. A
+  malformed short record is skipped too.
+- The live smoke showed that Steam lists 200 DLC at most, so `dlc_count` goes to
+  `app.dlc_count` instead of being checked.

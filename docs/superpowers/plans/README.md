@@ -14,8 +14,8 @@ normative; each stage's plan sits next to this file.
 |    5 | Database schema, part 1                                                                        | #10          |
 |    6 | Database schema, part 2                                                                        | #12          |
 |    7 | Reports (`v_*` views)                                                                          | #13          |
-|    8 | **Loader** (next; three PRs: the new fields, store items into rows, then choosing and writing) |              |
-|    9 | Sync                                                                                           |              |
+|    8 | Loader (three pull requests: the new fields, store items into rows, then choosing and writing) | #17–#19      |
+|    9 | **Sync** (next)                                                                                |              |
 |   10 | CLI and exports                                                                                |              |
 |   11 | Kaggle import                                                                                  |              |
 |   12 | HowLongToBeat (spike first: if the list can't be paged or lacks the appid, stop and ask)       |              |
@@ -40,33 +40,20 @@ normative; each stage's plan sits next to this file.
 ## Owed to later stages
 
 Decisions and checks a review or a ruling left to the stage that owns them. The spec already
-records the loader's answer ranking, the interrupted rebuild, the placement of
-`dlc_for_purchase` and `counts_all_purchases`, and Kaggle dating by file time.
-
-**Loader**
-
-- Check whether Steam's `*_in_cents` are hundredths in zero-decimal currencies (JPY) against a
-  recorded answer: `v_games.price` divides by 100.
-- Negative discounts round differently: SQL `ROUND` in `offer_price.discount_pct` gives -20
-  where the notebook's `int(x + 0.5)` gives -19. Decide what the derivation report flags.
-- `event_gid` is a uint64 Steam sends as text and the model types as `int`; it can exceed
-  SQLite's INTEGER, so store it as text.
-- `offer.unavailable_for_country_restriction` and `best_kind`/`best_id` depend on the country
-  but have no country column (the notebook's design): decide how fallback countries merge.
-- `wishlist_item.position` is UNIQUE and not deferrable: replace the wishlist in one
-  transaction, deleting before inserting.
-- Fields the spec's list of new fields leaves out: the histogram's `count_all_reviews` and
-  `expand_graph`, the tag list's `version_hash`, and `GetAppReviews`' `cursor`,
-  `day_range_used`, `total_matching`, `num_reviews` and `review_score(_desc)`.
-- `app_genres` answers with `data: []` or `null` fail validation.
-- Light entries carry `best_purchase_option` prices.
+records the loader's decisions, where every new field went, and Kaggle dating by file time.
 
 **Sync, and whichever stage first reads profile settings**
 
-- On open: `ensure_steam_schema`, then `create_views` (later, Alembic for the user's tables).
+- On open: `ensure_steam_schema`, then `load`, then `create_views` (later, Alembic for the
+  user's tables). A sync loads after each step, through `asyncio.to_thread`: the database has
+  one synchronous writer.
 - Normalize the home country to two upper-case letters: a lower-case `br` shows no prices.
-- A new home country means a rebuild (the loader picks that country's answers), then
-  `create_views`.
+- A new home country, or a new list of fallback countries, means `rebuild`, then
+  `create_views`: a load ranks again only the apps whose answers changed.
+- A load ends with `PRAGMA foreign_key_check`, which scans every table: tens of seconds on a
+  full catalog. Batched commits are the upgrade path if that hurts.
+- Show the `LoadReport`: fields nothing stores, mismatches and malformed answers are empty on a
+  healthy run.
 - Transport questions left open: POST and non-idempotent retries, per-request headers, a 200
   with an error body in general, the `Date` header in `Retry-After`.
 - Archive: two processes creating a new file at once; no delete API or cross-country key
@@ -74,6 +61,14 @@ records the loader's answer ranking, the interrupted rebuild, the placement of
 - Whoever filters `wishlist()` filters it as a subquery: `ROW_NUMBER` runs after `WHERE`.
 
 **CLI and exports**: `export <table or report>`; a report exports like a table.
+
+**Kaggle import**
+
+- A shared row (an offer's price, a trailer, a creator) takes the last loaded answer's values:
+  guard it by fetch time before imported answers, older than fresh ones, load after them.
+- Exact review counts come from the source `steam` only: an import adds its own.
+- A Kaggle record's `is_listed`: `app.is_listed` now follows the profile's listings, so decide
+  whether the record's value is reported, checked or stored.
 
 **HowLongToBeat**: a key in HLTB's URL path (the transport strips only query strings).
 
@@ -140,7 +135,7 @@ Polish the reviews found and the owner chose not to fix yet, by the stage that f
   `FULL_DATA_REQUEST` itself.
 - A `Query` page past the total (the catalog shrinking mid-listing) is rejected for 270 s, then
   the listing fails.
-- `models/offers.py`, `media.py` and `details.py` have no test module of their own.
+- `models/offers.py` and `media.py` have no test module of their own.
 - A vanity lookup that gets an HTML or rate-limit page reports `ProfileNotFoundError` instead
   of retrying.
 - The missing-items warning gives a count, not the appids.
@@ -182,7 +177,7 @@ Polish the reviews found and the owner chose not to fix yet, by the stage that f
 - `open_database` doesn't check that WAL took effect (network shares keep the old journal
   mode).
 - Two processes opening right after an upgrade can both drop and recreate (no `BEGIN IMMEDIATE` around the check and the drop).
-- Part 5's plan counts tables off by one; `app.is_listed`'s docstring assumes two stores.
+- Part 5's plan counts tables off by one.
 
 **Part 6, schema 2**
 
@@ -195,6 +190,27 @@ Polish the reviews found and the owner chose not to fix yet, by the stage that f
 
 - `Store.listed` is the app alias `n`, while `Store.report`'s `listed` parameter and the locals
   in `wishlist.py` and `followed.py` are the list alias `w`; rename one.
+
+**Part 8, loader**
+
+- The README listed as owed items PR #17 settled, until this stage's last pull request.
+- No test in PR #17 exercised `provides_engine_appid`; PR #18's hand-built entry does.
+- `app_featured_creator`'s docstring says "creator home" where the code and spec say "creator
+  page".
+- Commit "declare and store three fields" stores two of them; the third is checked (a reword
+  needed a force-push, which wasn't allowed).
+- The media helpers report at fixed paths (`assets`, `screenshots`, `trailers`), ignoring a
+  short record's path.
+- A DLC without a short record reads as one without content descriptors.
+- An empty `{}` part (assets, release, a review summary, `dlc_for_purchase`) isn't treated as
+  missing, unlike the notebook's `if x:` guards.
+- The table-classification and schema-fit tests don't cover `EVERY_SECTION`'s tables or the
+  short records.
+- When `best_purchase_option` repeats a listed option, its own fields are never compared.
+- "record" alone in a few docstrings and locals of `offers.py` and `store_item.py`.
+- `_included` returns `Sequence[StoreItem]`; `extra_details`, `positioned`, `screenshots` and
+  `trailers` lack a `:raise:` for `Rows.add`.
+- `_creator`'s comment doesn't say a creator's `success` isn't stored.
 
 ## The owner's to-dos
 
