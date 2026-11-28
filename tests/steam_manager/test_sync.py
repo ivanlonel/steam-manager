@@ -274,6 +274,28 @@ def test_fallbacks_ask_only_what_earlier_countries_dont_sell(tmp_path: Path) -> 
     assert steam.items_asked("JP") == [99]
 
 
+def test_a_stale_home_light_entry_doesnt_hide_an_app_from_the_fallbacks(tmp_path: Path) -> None:
+    """An app home listed once but now says it doesn't sell is asked in the fallback."""
+    items = {(777, "US"): sold(777)}
+    steam = FakeSteam(listings={"BR": [777]}, wishlist=[777], followed=[], items=items)
+    with opened(tmp_path) as profile:
+        run(profile, steam, steps={Step.WISHLIST, Step.CATALOG, Step.APPS})
+
+    assert steam.items_asked("BR") == [777]
+    assert steam.items_asked("US") == [777]
+
+
+def test_a_home_short_record_doesnt_hide_an_app_from_the_fallbacks(tmp_path: Path) -> None:
+    """An app home doesn't sell is asked in the fallback, whatever another app's record says."""
+    nested = {"included_apps": [sold(778)]}
+    items = {(5, "BR"): sold(5, included_items=nested), (778, "US"): sold(778)}
+    steam = FakeSteam(wishlist=[5, 778], followed=[], items=items)
+    with opened(tmp_path) as profile:
+        run(profile, steam, steps={Step.WISHLIST, Step.APPS})
+
+    assert steam.items_asked("US") == [778]
+
+
 def test_a_failed_batch_skips_only_that_batch(tmp_path: Path) -> None:
     """A batch that fails is reported, and the next batch's apps are still archived."""
     steam = FakeSteam(
@@ -419,7 +441,9 @@ def test_histograms_for_account_apps(profile: OpenProfile) -> None:
 
 def test_the_full_catalog_fetches_every_listed_app(profile: OpenProfile) -> None:
     """Every app a store lists gets a full entry; a fallback isn't asked what home sells."""
-    steam = FakeSteam(listings={"BR": [10, 20]})
+    steam = FakeSteam(
+        listings={"BR": [10, 20]}, items={(10, "BR"): sold(10), (20, "BR"): sold(20)}
+    )
     run(profile, steam, steps={Step.CATALOG})
 
     asyncio.run(fetch_full_catalog(profile, fake_transport(steam)))
