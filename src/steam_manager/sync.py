@@ -56,6 +56,9 @@ if TYPE_CHECKING:
     from steam_manager.profiles import OpenProfile
     from steam_manager.transport import Transport
 
+# The docs list only these; the names imported from SQLAlchemy stay out of them.
+__all__ = ["ARCHIVE_CHUNK", "Step", "SyncReport", "fetch_full_catalog", "stale", "sync"]
+
 ARCHIVE_CHUNK: Final = 100
 """Answers asked one app at a time that are archived together, so a stop loses few."""
 
