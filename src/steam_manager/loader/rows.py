@@ -32,6 +32,8 @@ class Rows:
         """Start with no rows."""
         self.tables: defaultdict[str, list[dict[str, object]]] = defaultdict(list)
         """The rows of each table, by table name, in the order they were added."""
+        self.replaced: defaultdict[str, set[tuple[object, ...]]] = defaultdict(set)
+        """The groups of rows these rows replace, by table name, even groups left empty."""
 
     def add(self, table: type[SteamBase], /, **values: object) -> None:
         r"""
@@ -61,14 +63,25 @@ class Rows:
             raise MalformedAnswerError(message)
         self.tables[name].append(values)
 
+    def replace(self, table: type[SteamBase], /, *key: object) -> None:
+        r"""
+        Mark a group of a table's rows as replaced by these, even when none is left.
+
+        :param table: The table.
+        :param \*key: The group's key, such as an offer's kind, id and country.
+        """
+        self.replaced[table.__tablename__].add(key)
+
     def extend(self, other: Rows) -> None:
         """
-        Add every row of *other*, after the rows already here.
+        Add every row of *other*, after the rows already here, and the groups it replaces.
 
         :param other: Rows built apart.
         """
         for name, rows in other.tables.items():
             self.tables[name].extend(rows)
+        for name, keys in other.replaced.items():
+            self.replaced[name].update(keys)
 
 
 @dataclass

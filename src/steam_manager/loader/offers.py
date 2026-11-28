@@ -173,6 +173,7 @@ def purchase_option(
         formatted_price_before_bundle_discount=option.formatted_price_before_bundle_discount,
         formatted_renewal_price=recurrence.formatted_renewal_price,
     )
+    rows.replace(OfferDiscount, kind, id_, country)  # a price without discounts ends them
     for position, discount in enumerate(option.active_discounts):
         findings.rest(
             discount,
@@ -243,6 +244,9 @@ def included_offer(
     if item.id is None:
         message = f"{path} has no id"
         raise MalformedAnswerError(message)
+    rows.replace(OfferApp, kind, item.id, country)
+    rows.replace(OfferCategory, kind, item.id)
+    rows.replace(OfferContentDescriptor, kind, item.id)
     findings.same("offer.item_type", item.item_type, _ITEM_TYPES[kind])
     findings.same("offer.visible", item.visible, item.success == 1)
     for appid in item.included_appids:
