@@ -61,7 +61,15 @@ soundtracks as referenced apps)
 - Show the `LoadReport` and the `SyncReport`: fields nothing stores, mismatches and malformed
   answers are empty on a healthy run; failed requests and why the sync stopped.
 - A profile is chosen with `--profile` or `STEAM_MANAGER_PROFILE`, implied when there is one.
-- `profile add` resolves a profile URL with `resolve_steamid`.
+- `profile add` resolves a profile URL with `resolve_steamid`. Countries are only checked to be
+  two letters, so `UK` passes where Steam wants `GB`: warn when a first listing comes back
+  empty.
+- `open_profile` always loads, which copies every stamp and checks every foreign key even when
+  nothing changed: tens of seconds per command on a full catalog. Decide which commands open
+  with a load, or make a load with nothing new cheap. A loader error on open is a bug, and
+  locks the user out of every command that loads.
+- Ctrl-C during a load waits for its thread to finish the transaction; say so.
+- `SyncReport.failed` names endpoints only; a listing mismatch names its country.
 
 **Open, for whoever next touches the transport, the archive or the loads**
 
@@ -71,6 +79,8 @@ soundtracks as referenced apps)
   with an error body in general, the `Date` header in `Retry-After`.
 - Archive: two processes creating a new file at once; no delete API or cross-country key
   listing.
+- The transport keeps a host's failure count after a streak, so a `Transport` reused after one
+  (a web interface, a scheduled sync) stops at its first failure; build a new one per run.
 - Whoever filters `wishlist()` filters it as a subquery: `ROW_NUMBER` runs after `WHERE`.
 
 **Kaggle import**
@@ -240,6 +250,20 @@ Polish the reviews found and the owner chose not to fix yet, by the stage that f
   sources' review counts, kinds from newer releases), which a later release would only read
   after a rebuild.
 - The latest listings are read on every load, so their unknown fields are reported every time.
+
+**Part 9, sync**
+
+- `_merge` copies `LoadReport`'s five fields by hand: a field added later would be left out of
+  `SyncReport.load`.
+- With one `get_items` call per batch, a new field around `GetItems`' items logs one warning per
+  batch (about 2,000 on a full catalog); a shared `reported` set would log it once.
+- The spec's *Transport* says a streak stops "the step", and `transport.py`'s docstrings too;
+  the sync stops whole.
+- Apps of a home batch that failed have no row yet, so each fallback asks them in the same run.
+- `Settings` is frozen but `max_ages` is a `dict`: `hash()` raises and it can be mutated.
+- `default_home` raises a bare `KeyError` when `LOCALAPPDATA` is unset on Windows.
+- No test passes `sync`'s `now`; its wiring is tested only through `stale()`.
+- `sync()` and `FakeSteam.__init__` keep a reason comment whose `noqa` ruff removed as unused.
 
 ## The owner's to-dos
 
