@@ -3,7 +3,12 @@
 from typing import Final
 
 from steam_manager.steam.models.base import unknown_fields
-from steam_manager.steam.models.details import ExtraDetails, Milestone, SalePage
+from steam_manager.steam.models.details import (
+    ExtraDetails,
+    HardwareCompatibility,
+    Milestone,
+    SalePage,
+)
 
 LARGEST_UINT64: Final = "18446744073709551615"
 """An event id SQLite's INTEGER can't hold."""
@@ -37,3 +42,12 @@ def test_a_milestone_reads_its_backfilled_release() -> None:
 
     assert milestone.backfilled_release is True
     assert unknown_fields(milestone) == []
+
+
+def test_compatibility_reads_the_steam_deck_blog_url() -> None:
+    """The compatibility reviews can link the announcement of the Steam Deck review."""
+    url = "https://steamcommunity.com/games/10/announcements/detail/1?snr=2___"
+    tests = HardwareCompatibility.model_validate({"steam_deck_blog_url": url})
+
+    assert tests.steam_deck_blog_url == url
+    assert unknown_fields(tests) == []

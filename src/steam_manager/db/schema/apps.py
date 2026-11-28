@@ -195,6 +195,8 @@ class App(SteamBase):
     """What all the DLC on sale for it cost, as the store shows it in :attr:`store_country`."""
     dlc_count: Mapped[int | None]
     """How many DLC are on sale for it, which Steam lists 200 of at most."""
+    steam_deck_blog_url: Mapped[str | None]
+    """The announcement of its Steam Deck review, as Steam sends it."""
 
 
 class AppText(SteamBase):

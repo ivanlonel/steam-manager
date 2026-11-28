@@ -169,7 +169,7 @@ def extra_details(
     _requirements(
         appid, extra.system_requirements, join(at, "system_requirements"), rows, findings
     )
-    _compatibility(
+    columns |= _compatibility(
         appid, extra.hardware_compatibility, join(at, "hardware_compatibility"), rows, findings
     )
     positioned(
@@ -461,7 +461,7 @@ def _requirements(
 
 def _compatibility(
     appid: int, tests: HardwareCompatibility | None, at: str, rows: Rows, findings: Findings
-) -> None:
+) -> Columns:
     """
     Turn the results of Steam's compatibility reviews into rows, per device in Steam's order.
 
@@ -470,6 +470,7 @@ def _compatibility(
     :param at: Where they sit in the answer.
     :param rows: Where the rows go.
     :param findings: Where fields nothing stores are counted.
+    :return: The columns: the Steam Deck review's announcement.
     """
     for device in DEVICES if tests else ():
         for position, test in enumerate(getattr(tests, f"{device}_tests")):
@@ -482,4 +483,10 @@ def _compatibility(
                 display_type=test.display_type,
                 loc_token=test.loc_token,
             )
-    findings.rest(tests, at, {f"{device}_tests" for device in DEVICES})
+    return read_columns(
+        tests,
+        at,
+        ("steam_deck_blog_url",),
+        findings,
+        used=[f"{device}_tests" for device in DEVICES],
+    )

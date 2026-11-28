@@ -27,6 +27,7 @@ CHANGED_FROM_THE_NOTEBOOK: Final = {
             "only declared: app.dlc_formatted_total_price #83: TEXT notnull=0 pk=0 default=None"
             " hidden=0"
         ),
+        ("only declared: app.steam_deck_blog_url #85: TEXT notnull=0 pk=0 default=None hidden=0"),
     ],
     "app_text": [
         f"only declared: app_text.music_album_{name} #{15 + index}: TEXT notnull=0 pk=0"

@@ -157,3 +157,19 @@ def test_a_milestones_backfilled_release_is_stored() -> None:
         for row in rows.tables["season_pass_milestone"]
     ] == [(93226, None), (49672, True)]
     assert findings.unknown == Counter()
+
+
+def test_the_steam_deck_blog_url_is_stored() -> None:
+    """The Steam Deck review's announcement is kept as sent, Steam's navigation code included."""
+    url = "https://steamcommunity.com/games/620/announcements/detail/6356356787200715685?snr=2___"
+    answer = json.loads((FIXTURES / "620-BR.json").read_bytes())
+    answer["extra_details"]["hardware_compatibility"]["steam_deck_blog_url"] = url
+    item = StoreItem.model_validate(answer)
+    findings = Findings()
+
+    columns, _ = extra_details(
+        item.id, item.extra_details, "extra_details", Rows(), findings, nested=()
+    )
+
+    assert columns["steam_deck_blog_url"] == url
+    assert findings.unknown == Counter()

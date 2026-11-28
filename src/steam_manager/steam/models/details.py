@@ -288,6 +288,8 @@ class HardwareCompatibility(SteamModel):
     """On the Steam Machine."""
     steam_frame_tests: tuple[HardwareTest, ...] = ()
     """On the Steam Frame."""
+    steam_deck_blog_url: str | None = None
+    """The announcement of the Steam Deck review (seen first on 2026-11-28)."""
 
 
 class DlcOffer(SteamModel):
