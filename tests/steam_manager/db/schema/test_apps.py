@@ -22,6 +22,7 @@ CHANGED_FROM_THE_NOTEBOOK: Final = {
             "only declared: app.counts_all_purchases #82: INTEGER notnull=0 pk=0 default=None"
             " hidden=0"
         ),
+        "only declared: app.dlc_count #84: INTEGER notnull=0 pk=0 default=None hidden=0",
         (
             "only declared: app.dlc_formatted_total_price #83: TEXT notnull=0 pk=0 default=None"
             " hidden=0"

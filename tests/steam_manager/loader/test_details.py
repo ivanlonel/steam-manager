@@ -8,6 +8,7 @@ from typing import Final
 
 from steam_manager.loader.details import extra_details
 from steam_manager.loader.rows import Findings, Rows
+from steam_manager.steam.models.details import DlcForPurchase, ExtraDetails
 from steam_manager.steam.models.store_item import StoreItem
 
 FIXTURES: Final = Path(__file__).parents[2] / "fixtures" / "steam" / "store_item"
@@ -40,7 +41,7 @@ def test_dlc_on_sale_keep_steams_order() -> None:
         (652720, 1, None),
     ]
     assert columns["dlc_formatted_total_price"] == "R$33,99"
-    assert findings.mismatches["dlc_for_purchase.dlc_count"] == 0
+    assert columns["dlc_count"] == 2
     assert findings.mismatches["dlc_for_purchase.content_descriptorids"] == 0
 
 
@@ -69,3 +70,17 @@ def test_no_extra_details_give_nothing() -> None:
 
     assert extra_details(10, None, "extra_details", rows, Findings(), nested=()) == ({}, {})
     assert not rows.tables
+
+
+def test_a_dlc_count_past_steams_list_is_kept() -> None:
+    """Steam lists 200 DLC at most, so an app's count of them is stored, not derived."""
+    dlc = DlcForPurchase.model_validate(
+        {"dlc": [{"appid": appid} for appid in range(1, 201)], "dlc_count": 532}
+    )
+    extra = ExtraDetails(dlc_for_purchase=dlc)
+    findings = Findings()
+
+    columns, _ = extra_details(10, extra, "extra_details", Rows(), findings, nested=())
+
+    assert columns["dlc_count"] == 532
+    assert not +findings.mismatches
