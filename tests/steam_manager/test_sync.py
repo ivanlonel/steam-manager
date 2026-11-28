@@ -14,10 +14,10 @@ from steam_manager.answers import Kind
 from steam_manager.archive import Archive
 from steam_manager.db.schema.account import WishlistItem
 from steam_manager.db.schema.apps import App
-from steam_manager.profiles import Settings, create_profile, open_profile
+from steam_manager.profiles import ARCHIVE_FILE, Settings, create_profile, open_profile
 from steam_manager.steam.community import INDIVIDUAL_BASE
 from steam_manager.steam.webapi import STEAM
-from steam_manager.sync import Step, stale, sync
+from steam_manager.sync import Step, fetch_full_catalog, stale, sync
 from tests.steam_manager._steam import FakeSteam, fake_transport, sold
 from tests.steam_manager.loader._archive import put
 
@@ -341,3 +341,126 @@ def test_genre_names_are_asked_once_per_unnamed_genre(tmp_path: Path) -> None:
 
     asked = [params["appids"] for path, params in steam.asked if path == "/api/appdetails"]
     assert asked == ["620", "2"]
+
+
+def reviews_asked(steam: FakeSteam) -> list[tuple[int, int]]:
+    """
+    List the exact review totals asked, in order.
+
+    :param steam: The fake Steam.
+    :return: Each request's app and purchase type.
+    """
+    return [
+        (params["input_json"]["appid"], params["input_json"]["purchase_type"])
+        for path, params in steam.asked
+        if path.endswith("/GetAppReviews/v1/")
+    ]
+
+
+def summary(count: int) -> dict[str, object]:
+    """
+    Make a store item's review summaries.
+
+    :param count: The reviews counted without the ones Steam filters out.
+    :return: The ``reviews`` field.
+    """
+    return {"summary_filtered": {"review_count": count, "percent_positive": 90, "review_score": 8}}
+
+
+def test_exact_counts_for_account_apps_above_100_reviews(tmp_path: Path) -> None:
+    """Exact totals are asked for account apps above 100 reviews, by the app's purchase type."""
+    items = {(5, "BR"): sold(5, reviews=summary(99))}
+    steam = FakeSteam(wishlist=[620, 5], followed=[], items=items)
+    with opened(tmp_path, ["BR"]) as profile:
+        run(profile, steam, steps={Step.WISHLIST, Step.APPS, Step.REVIEWS})
+
+    assert reviews_asked(steam) == [(620, 0)]
+
+
+def test_catalog_reviews_go_largest_first(tmp_path: Path) -> None:
+    """On request, every app above 100 reviews gets exact totals, the most reviewed first."""
+    counts = {1: 200, 2: 5000, 3: 150}
+    folder = create_profile(tmp_path, Settings(steamid=STEAMID, home_country="BR"))
+    with Archive(folder / ARCHIVE_FILE) as archive:
+        for appid, count in counts.items():
+            body = json.dumps(sold(appid, reviews=summary(count)))
+            put(archive, Kind.STORE_ITEM_LIGHT, str(appid), "BR", body)
+    steam = FakeSteam(reviews={appid: (count, 0) for appid, count in counts.items()})
+    with open_profile(folder) as profile:
+        run(profile, steam, steps={Step.REVIEWS})
+        account_only = reviews_asked(steam)
+        run(profile, steam, steps={Step.REVIEWS}, catalog_reviews=True)
+
+    assert account_only == []
+    assert reviews_asked(steam) == [(2, 0), (1, 0), (3, 0)]
+
+
+def test_review_staleness_reads_the_apps_own_purchase_type(tmp_path: Path) -> None:
+    """A free app's fresh totals are those of all purchases: they aren't asked again."""
+    steam = FakeSteam(wishlist=[620, 570], followed=[], reviews={570: (2_500_000, 314_930)})
+    with opened(tmp_path, ["BR"]) as profile:
+        run(profile, steam, steps={Step.WISHLIST, Step.APPS, Step.REVIEWS})
+        first = reviews_asked(steam)
+        run(profile, steam, steps={Step.REVIEWS})
+
+    assert first == [(570, 1), (620, 0)]
+    assert reviews_asked(steam) == first
+
+
+def test_histograms_for_account_apps(profile: OpenProfile) -> None:
+    """Every account app gets its review histogram."""
+    steam = FakeSteam(wishlist=[620], followed=[])
+
+    run(profile, steam, steps={Step.WISHLIST, Step.REVIEWS})
+
+    assert archived(profile, Kind.REVIEW_HISTOGRAM) == {"620"}
+    assert "appreviewhistogram" in steam.methods()
+
+
+def test_the_full_catalog_fetches_every_listed_app(profile: OpenProfile) -> None:
+    """Every app a store lists gets a full entry; a fallback isn't asked what home sells."""
+    steam = FakeSteam(listings={"BR": [10, 20]})
+    run(profile, steam, steps={Step.CATALOG})
+
+    asyncio.run(fetch_full_catalog(profile, fake_transport(steam)))
+
+    assert steam.items_asked("BR") == [10, 20]
+    assert steam.items_asked("US") == []
+
+
+def test_the_full_catalog_resumes(profile: OpenProfile) -> None:
+    """A full catalog stopped by a failing host continues with what it didn't archive."""
+
+    def fail(request: httpx.Request) -> int | None:
+        appid = first_asked(request)
+        return 503 if appid is not None and appid > 200 else None
+
+    steam = FakeSteam(listings={"BR": range(1, 1201)})
+    run(profile, steam, steps={Step.CATALOG})
+    steam.fail = fail
+    stopped = asyncio.run(fetch_full_catalog(profile, fake_transport(steam)))
+    steam.asked.clear()
+    steam.fail = lambda _request: None
+
+    asyncio.run(fetch_full_catalog(profile, fake_transport(steam)))
+
+    assert stopped.stopped is not None
+    assert steam.items_asked("BR") == list(range(201, 1201))
+
+
+def test_a_failed_review_request_skips_only_its_app(tmp_path: Path) -> None:
+    """An app whose totals fail is reported by its endpoint, and the next app's still land."""
+
+    def fail(request: httpx.Request) -> int | None:
+        asked = request.url.params.get("input_json", "")
+        return 400 if "GetAppReviews" in request.url.path and '"appid":570' in asked else None
+
+    steam = FakeSteam(wishlist=[620, 570], followed=[], fail=fail)
+    with opened(tmp_path, ["BR"]) as profile:
+        report = run(profile, steam, steps={Step.WISHLIST, Step.APPS, Step.REVIEWS})
+        totals = archived(profile, Kind.APP_REVIEWS)
+
+    assert totals == {"620:0"}
+    assert len(report.failed) == 1
+    assert "GetAppReviews" in report.failed[0]
+    assert "?" not in report.failed[0]
