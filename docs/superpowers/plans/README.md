@@ -48,8 +48,8 @@ records the loader's decisions, where every new field went, and Kaggle dating by
   user's tables). A sync loads after each step, through `asyncio.to_thread`: the database has
   one synchronous writer.
 - Normalize the home country to two upper-case letters: a lower-case `br` shows no prices.
-- A new home country, or a new list of fallback countries, means `rebuild`, then
-  `create_views`: a load ranks again only the apps whose answers changed.
+- A new home country, or a new list of fallback countries, makes the next load rebuild the
+  tables by itself; `create_views` follows.
 - A load ends with `PRAGMA foreign_key_check`, which scans every table: tens of seconds on a
   full catalog. Batched commits are the upgrade path if that hurts.
 - Show the `LoadReport`: fields nothing stores, mismatches and malformed answers are empty on a
@@ -211,6 +211,20 @@ Polish the reviews found and the owner chose not to fix yet, by the stage that f
 - `_included` returns `Sequence[StoreItem]`; `extra_details`, `positioned`, `screenshots` and
   `trailers` lack a `:raise:` for `Rows.add`.
 - `_creator`'s comment doesn't say a creator's `success` isn't stored.
+- A histogram takes the latest of the changed answers only, not of all its sources' answers.
+- On a rebuild, a row several apps share takes the answer loaded last (by appid), not the
+  newest; an incremental load gets the newest.
+- An app a short record filled keeps it when its own failed answer arrives in a later load,
+  where a rebuild keeps the short record's data too: loads and rebuilds can disagree.
+- The load keeps each written app's whole `ReviewSummary`, and writes every total in one go.
+- `LoadReport` counts are approximate: blank parents a batch then describes, rows ON CONFLICT
+  ignored.
+- An app row made as a blank parent, or for a player count, gets `is_listed` only when a
+  listing changes.
+- `Archive.stamps(kinds=…)` is unused; `loaded_answer` records stamps the load ignores (other
+  sources' review counts, kinds from newer releases), which a later release would only read
+  after a rebuild.
+- The latest listings are read on every load, so their unknown fields are reported every time.
 
 ## The owner's to-dos
 

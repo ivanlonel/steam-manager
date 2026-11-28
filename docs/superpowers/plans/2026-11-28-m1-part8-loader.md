@@ -530,3 +530,14 @@ PR B:
   malformed short record is skipped too.
 - The live smoke showed that Steam lists 200 DLC at most, so `dlc_count` goes to
   `app.dlc_count` instead of being checked.
+
+PR B's review led to these fixes before it merged:
+
+- A failure midway raises itself, and the connection is discarded with its temporary table
+  and pragma.
+- An offer's groups of rows are replaced even when emptied, so an ended discount goes.
+- An unreadable listing changes no app.
+- The countries the tables were ranked for are kept in `loaded_country`, and other countries
+  make a load rebuild.
+- Short records are written a batch at a time.
+- A genre id that isn't a number is a malformed answer.
