@@ -6,15 +6,19 @@ from datetime import datetime, timedelta
 from typing import TYPE_CHECKING, Final, cast
 
 if TYPE_CHECKING:
-    from collections.abc import Collection
+    from collections.abc import Collection, Mapping, Sequence
 
     from pydantic import BaseModel
     from sqlalchemy import Table
 
     from steam_manager.db.schema import SteamBase
+    from steam_manager.steam.models.base import SteamModel
 
 _EPOCH: Final = datetime(1970, 1, 1)  # noqa: DTZ001  # the notebook's dates are naive UTC text
 _EMPTY: Final[tuple[object, ...]] = (None, (), [], {})
+
+type Columns = dict[str, object]
+"""Values of one row, by column name."""
 
 
 class Rows:
@@ -82,7 +86,8 @@ class Findings:
         notebooks skipped them; ``""`` is a value and is.
 
         :param model: A part of an answer, or ``None`` when Steam didn't send it.
-        :param path: Where the part sits in the answer, such as ``extra_details.metacritic``.
+        :param path: Where the part sits in the answer, such as ``extra_details.metacritic``,
+            or ``""`` at its top.
         :param used: The declared fields the loader stored, checked or deliberately skipped.
         :raise ValueError: When *used* names a field the model doesn't declare.
         """
@@ -96,7 +101,7 @@ class Findings:
         left |= model.model_extra or {}
         for name, value in left.items():
             if value not in _EMPTY:
-                self.unknown[f"{path}.{name}"] += 1
+                self.unknown[join(path, name)] += 1
 
     def same(self, name: str, stored: object, derived: object) -> None:
         """
@@ -126,3 +131,65 @@ def iso(seconds: int | None) -> str | None:
     :return: Text such as ``2011-04-12 00:00:00``, or ``None``.
     """
     return str(_EPOCH + timedelta(seconds=seconds)) if seconds else None
+
+
+def join(path: str, name: str) -> str:
+    """
+    Name a field within a part of an answer, as ``unknown_fields`` names it.
+
+    :param path: Where the part sits, or ``""`` at the top of the answer.
+    :param name: The field, or a deeper path.
+    :return: ``path.name``, or *name* alone at the top.
+    """
+    return f"{path}.{name}" if path else name
+
+
+def read_columns(
+    part: SteamModel | None,
+    at: str,
+    names: Sequence[str],
+    findings: Findings,
+    *,
+    prefix: str = "",
+    used: Collection[str] = (),
+) -> Columns:
+    """
+    Read a part's fields into columns of the same names, after a prefix.
+
+    :param part: The part, or ``None``.
+    :param at: Where it sits in the answer.
+    :param names: The fields stored as columns.
+    :param findings: Where the fields left over are counted.
+    :param prefix: What the columns' names start with, such as ``metacritic_``.
+    :param used: Fields the caller handles itself.
+    :return: The columns, blank when the part is missing.
+    """
+    findings.rest(part, at, {*names, *used})
+    return {f"{prefix}{name}": getattr(part, name, None) for name in names}
+
+
+def positioned(
+    appid: int,
+    table: type[SteamBase],
+    entries: Sequence[SteamModel],
+    rows: Rows,
+    findings: Findings,
+    *,
+    at: str,
+    columns: Mapping[str, str],
+) -> None:
+    """
+    Turn a list into rows that keep Steam's order.
+
+    :param appid: The app.
+    :param table: The table the rows go to.
+    :param entries: The list.
+    :param rows: Where the rows go.
+    :param findings: Where fields nothing stores are counted.
+    :param at: Where each entry sits in the answer, such as ``links[]``.
+    :param columns: Each stored field's column.
+    """
+    for position, entry in enumerate(entries):
+        findings.rest(entry, at, columns.keys())
+        values = {column: getattr(entry, name) for name, column in columns.items()}
+        rows.add(table, appid=appid, position=position, **values)

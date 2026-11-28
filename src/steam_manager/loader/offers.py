@@ -31,6 +31,17 @@ CATEGORY_LISTS: Final = (
 )
 """The lists Steam keeps store categories in, in the order of their ``store_category.type``."""
 
+SHORT_RECORD_FIELDS: Final = (
+    "id",
+    "item_type",
+    "visible",
+    "success",
+    "name",
+    "store_url_path",
+    "store_url_slug",
+)
+"""The fields the short record of an offer or a creator page starts with."""
+
 _ITEM_TYPES: Final = {"package": 1, "bundle": 2}
 
 type OfferKey = tuple[str, int]
@@ -256,23 +267,17 @@ def included_offer(
         best_kind=best_kind,
         best_id=best_id,
     )
+    # item_type and visible are checked above. included_types are the distinct types of the
+    # apps it holds, in all 72,920 packages checked on 2026-11-06: the apps' own rows say it.
     findings.rest(
         item,
         path,
         {
-            "id",
-            "item_type",  # checked above
-            "visible",  # checked above
-            "success",
-            "name",
-            "store_url_path",
-            "store_url_slug",
+            *SHORT_RECORD_FIELDS,
             "appid",
             "type",
             "purchase_description_bbcode",
             "unvailable_for_country_restriction",
-            # The distinct types of the apps it holds, in all 72,920 packages checked on
-            # 2026-11-06: the apps' own rows say it.
             "included_types",
             "included_appids",
             "categories",
