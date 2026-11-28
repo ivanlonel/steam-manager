@@ -461,9 +461,12 @@ The builder's calls (2026-11-28):
   the reviews step reads review summaries from it. A load runs only when the step archived
   something.
 - **Country passes:** full entries are asked a country at a time. The home country is asked
-  for every stale app; fallback country *n* for the stale apps no earlier country sells,
-  meaning no `app` row with `success` 1 and a `store_country` among the earlier countries. A
-  load follows each pass, so each pass reads what the loader ranked.
+  for every stale app; fallback country *n* for the stale apps no earlier country sells. An
+  earlier country's answer in the same run decides; for an app no earlier pass asked, the
+  loaded row does: an `app` row with `success` 1 and a `store_country` among the earlier
+  countries means sold. The run's own answers come first because a row can say sold while
+  that country's full entry says it isn't: the loader ranks an older light entry, or a short
+  record nested in another app, above an answer that failed. A load follows each pass.
 - **Catalog:** each country whose `listing` is stale is listed again. A fallback's light entries
   are archived only for apps no earlier country's latest listing holds; the listing itself is
   archived whole, so `is_listed` is right for every country.

@@ -8,6 +8,7 @@ loads what it archived and returns. A sync run again continues from what the arc
 
 import asyncio
 import itertools
+import json
 from collections import Counter
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
@@ -352,31 +353,40 @@ class _Sync:
         Fetch the stale full entries of some apps, a country at a time, loading after each.
 
         The home country is asked for every app, and each fallback for the apps no earlier
-        country sells, as the loaded rows tell.
+        country sells. What an earlier country answered in this run tells; for the other apps,
+        the loaded rows do.
 
         :param appids: The apps.
         """
         settings = self._profile.settings
+        # A row can say an app is sold while its own full entry from that country says it
+        # isn't: the loader ranks an older light entry, or a short record nested in another
+        # app, above an answer that failed. This run's answers outweigh the row.
+        sold_now: set[int] = set()
+        unsold_now: set[int] = set()
         for place, country in enumerate(settings.countries):
             wanted = appids
             if place:
-                sold = select(App.appid).where(
+                rows = select(App.appid).where(
                     App.success == 1, App.store_country.in_(settings.countries[:place])
                 )
-                wanted = appids - self._appids(sold)
+                wanted = appids - ((self._appids(rows) - unsold_now) | sold_now)
             keys = self._stale(Kind.STORE_ITEM, map(str, sorted(wanted)), country)
             for batch in itertools.batched(map(int, keys), BATCH_SIZE, strict=False):
                 try:
-                    self._add(
-                        [
-                            answer
-                            async for answer in get_items(
-                                self._transport, batch, country=country, language=settings.language
-                            )
-                        ]
-                    )
+                    answers = [
+                        answer
+                        async for answer in get_items(
+                            self._transport, batch, country=country, language=settings.language
+                        )
+                    ]
                 except RequestFailedError as error:
                     self._failed(error)
+                    continue
+                for answer in answers:
+                    sells = json.loads(answer.body).get("success") == 1
+                    (sold_now if sells else unsold_now).add(int(answer.key))
+                self._add(answers)
             await self._load()
 
     async def _genres(self) -> None:
