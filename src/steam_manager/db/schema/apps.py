@@ -197,6 +197,15 @@ class App(SteamBase):
     """How many DLC are on sale for it, which Steam lists 200 of at most."""
     steam_deck_blog_url: Mapped[str | None]
     """The announcement of its Steam Deck review, as Steam sends it."""
+    first_franchise_creator_id: Mapped[int | None] = mapped_column(
+        ForeignKey("creator.creator_id")
+    )
+    """
+    The creator page of its first franchise.
+
+    Stored, not derived: a DLC sends its parent's without the franchises, and a franchise
+    credit can lack a creator page.
+    """
 
 
 class AppText(SteamBase):

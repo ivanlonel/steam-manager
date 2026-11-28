@@ -249,7 +249,9 @@ def describe(
         appid, item.reviews, join(path, "reviews"), rows, findings
     )
     text: Columns = {"full_description_bbcode": item.full_description_bbcode}
-    text |= _basic_info(appid, item.basic_info, join(path, "basic_info"), found)
+    columns, texts = _basic_info(appid, item.basic_info, join(path, "basic_info"), found)
+    app |= columns
+    text |= texts
     app |= _release(item, path, findings)
     app |= read_columns(
         item.free_weekend,
@@ -432,19 +434,22 @@ def _reviews(
     return reviews.counts_all_purchases
 
 
-def _basic_info(appid: int, basic: BasicInfo | None, at: str, found: Described) -> Columns:
+def _basic_info(
+    appid: int, basic: BasicInfo | None, at: str, found: Described
+) -> tuple[Columns, Columns]:
     """
-    Turn an app's credits and featured creators into rows, and return its short texts.
+    Turn an app's credits and featured creators into rows; return its first franchise and texts.
 
     :param appid: The app.
     :param basic: Its basic info.
     :param at: Where it sits in the answer.
     :param found: What the item becomes; its credits, rows and findings grow.
-    :return: The ``app_text`` columns ``short_description`` and ``capsule_headline``.
+    :return: The ``app`` column ``first_franchise_creator_id``, and the ``app_text`` columns
+        ``short_description`` and ``capsule_headline``.
     :raise MalformedAnswerError: When a credit has no name.
     """
     if basic is None:
-        return {}
+        return {}, {}
     findings = found.findings
     for key, role in _ROLES:
         for position, credit in enumerate(getattr(basic, key)):
@@ -458,27 +463,20 @@ def _basic_info(appid: int, basic: BasicInfo | None, at: str, found: Described) 
             )
     for position, creator_id in enumerate(basic.featured_creator_home_clan_account_ids):
         found.rows.add(AppFeaturedCreator, appid=appid, position=position, creator_id=creator_id)
-    if basic.first_franchise_clan_account_id is not None:  # sent since late 2026 only
-        first = basic.franchises[0].creator_clan_account_id if basic.franchises else None
-        findings.same(
-            "basic_info.first_franchise_clan_account_id",
-            basic.first_franchise_clan_account_id,
-            first,
-        )
-    texts = ("short_description", "capsule_headline")
-    return read_columns(
+    texts = read_columns(
         basic,
         at,
-        texts,
+        ("short_description", "capsule_headline"),
         findings,
         used=(
             "developers",
             "publishers",
             "franchises",
             "featured_creator_home_clan_account_ids",
-            "first_franchise_clan_account_id",  # checked
+            "first_franchise_clan_account_id",
         ),
     )
+    return {"first_franchise_creator_id": basic.first_franchise_clan_account_id}, texts
 
 
 def _release(item: StoreItem, path: str, findings: Findings) -> Columns:

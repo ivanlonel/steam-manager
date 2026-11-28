@@ -161,19 +161,28 @@ def test_featured_creators_are_stored() -> None:
     ]
 
 
-def test_the_first_franchise_is_checked_against_the_franchises() -> None:
-    """The first franchise's creator page follows from the franchises, so it is checked."""
-    path = FIXTURES / "store_item" / "620-BR.json"
-    agrees, differs = read(path), read(path)
-    for payload, first in ((agrees, 9), (differs, 8)):
-        basic = payload["basic_info"]
-        assert isinstance(basic, dict)
-        basic["franchises"] = [{"name": "Portal", "creator_clan_account_id": 9}]
-        basic["first_franchise_clan_account_id"] = first
+def test_the_first_franchise_is_stored() -> None:
+    """The creator page of an app's first franchise is kept on the app."""
+    found = described(FIXTURES / "store_item" / "546560-JP.json")
 
-    name = "basic_info.first_franchise_clan_account_id"
-    assert described(path, agrees).findings.mismatches[name] == 0
-    assert described(path, differs).findings.mismatches[name] == 1
+    [app] = found.rows.tables["app"]
+    assert app["first_franchise_creator_id"] == 33078398
+
+
+def test_a_first_franchise_without_franchises_is_no_mismatch() -> None:
+    """A DLC sends its parent's first franchise without the franchises: stored, not checked."""
+    path = FIXTURES / "store_item" / "620-BR.json"
+    payload = read(path)
+    basic = payload["basic_info"]
+    assert isinstance(basic, dict)
+    basic["first_franchise_clan_account_id"] = 9
+
+    found = described(path, payload)
+
+    assert "basic_info.first_franchise_clan_account_id" not in found.findings.mismatches
+    assert found.findings.unknown == Counter()
+    [app] = found.rows.tables["app"]
+    assert app["first_franchise_creator_id"] == 9
 
 
 def test_a_light_entry_keeps_its_best_price() -> None:
