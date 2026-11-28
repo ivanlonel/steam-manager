@@ -57,6 +57,7 @@ _EXTRA_COLUMNS: Final = (
     "drm_third_party_type",
     "user_account_third_party",
     "user_account_third_party_link_to_steam",
+    "running_time_minutes",
 )
 
 

@@ -206,6 +206,8 @@ class App(SteamBase):
     Stored, not derived: a DLC sends its parent's without the franchises, and a franchise
     credit can lack a creator page.
     """
+    running_time_minutes: Mapped[int | None]
+    """How long it runs, in minutes, when it is a video."""
 
 
 class AppText(SteamBase):

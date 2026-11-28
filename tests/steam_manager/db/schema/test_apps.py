@@ -32,6 +32,10 @@ CHANGED_FROM_THE_NOTEBOOK: Final = {
             "only declared: app.first_franchise_creator_id #86: INTEGER notnull=0 pk=0"
             " default=None hidden=0"
         ),
+        (
+            "only declared: app.running_time_minutes #87: INTEGER notnull=0 pk=0 default=None"
+            " hidden=0"
+        ),
         "only declared: app.steam_deck_blog_url #85: TEXT notnull=0 pk=0 default=None hidden=0",
     ],
     "app_text": [

@@ -411,3 +411,5 @@ class ExtraDetails(SteamModel):
     """The DLC on sale for it."""
     music_album: MusicAlbum | None = None
     """A soundtrack's credits and tracks."""
+    running_time_minutes: int | None = None
+    """How long a video runs, in minutes (seen first on 2026-11-28)."""

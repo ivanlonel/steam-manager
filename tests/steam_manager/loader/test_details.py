@@ -173,3 +173,14 @@ def test_the_steam_deck_blog_url_is_stored() -> None:
 
     assert columns["steam_deck_blog_url"] == url
     assert findings.unknown == Counter()
+
+
+def test_a_videos_running_time_is_stored() -> None:
+    """A video says how long it runs, and the app keeps it."""
+    extra = ExtraDetails.model_validate({"running_time_minutes": 76})
+    findings = Findings()
+
+    columns, _ = extra_details(10, extra, "extra_details", Rows(), findings, nested=())
+
+    assert columns["running_time_minutes"] == 76
+    assert findings.unknown == Counter()
