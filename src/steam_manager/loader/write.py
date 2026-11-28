@@ -158,15 +158,20 @@ class Writer:
                     combined[country == self._home].tables[name].extend(table_rows)
         for name, grouped in groups.items():
             combined[True].tables[name].extend(itertools.chain.from_iterable(grouped.values()))
-        self.write(combined[False], home=False)
-        self.write(combined[True], home=True)
+        # Blank parents only once every app's own row is in: one added between the two writes
+        # would take the place of an app the second one writes, whose row then loses.
+        self.write(combined[False], home=False, parents=False)
+        self.write(combined[True], home=True, parents=False)
+        self._blank_parents(combined[False])
+        self._blank_parents(combined[True])
 
-    def write(self, rows: Rows, *, home: bool) -> None:
+    def write(self, rows: Rows, *, home: bool, parents: bool = True) -> None:
         """
         Write rows by their tables' rules; rows of an app's own tables must be cleared first.
 
         :param rows: The rows.
         :param home: Whether they came from the home country, whose word on an offer stands.
+        :param parents: Whether to give references to missing rows blank ones.
         """
         for name, table_rows in rows.tables.items():
             table = _TABLES[name]
@@ -186,7 +191,8 @@ class Writer:
             else:
                 self._connection.execute(insert(table).on_conflict_do_nothing(), values)
             self.loaded[name] += len(values)
-        self._blank_parents(rows)
+        if parents:
+            self._blank_parents(rows)
 
     def _offers(self, table: Table, values: Sequence[Mapping[str, object]], *, home: bool) -> None:
         """

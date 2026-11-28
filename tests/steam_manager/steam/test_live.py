@@ -12,6 +12,7 @@ lazy from collections.abc import Awaitable, Callable
 
 import pytest
 
+from steam_manager.loader import LISTED_TYPES
 from steam_manager.steam.community import followed_apps, resolve_steamid, wishlist
 from steam_manager.steam.models.account import FollowedAppsAnswer, WishlistAnswer
 from steam_manager.steam.models.base import unknown_fields
@@ -24,12 +25,14 @@ from steam_manager.steam.models.reviews import (
 from steam_manager.steam.models.store_item import StoreItem
 from steam_manager.steam.reviews import exact_review_answers, review_histogram
 from steam_manager.steam.store import (
+    QUERY_INTERVAL,
     current_players,
     get_items,
     list_apps,
     store_categories,
     tag_list,
 )
+from steam_manager.steam.webapi import call
 from steam_manager.transport import Transport, make_client
 
 pytestmark = pytest.mark.live
@@ -157,3 +160,26 @@ def test_a_public_accounts_lists_are_fully_declared() -> None:
     assert unknown_fields(WishlistAnswer.model_validate_json(wishlist_body)) == []
     assert unknown_fields(FollowedAppsAnswer.model_validate_json(followed_body)) == []
     assert "response" in json.loads(wishlist_body)
+
+
+def test_the_listing_type_filters_match_the_type_codes() -> None:
+    """Listings of games, mods and software hold types 0, 2 and 6: what LISTED_TYPES says."""
+
+    async def types(transport: Transport) -> dict[str, set[int]]:
+        found: dict[str, set[int]] = {}
+        for name in ("include_games", "include_mods", "include_software"):
+            asked = {
+                "query": {"count": 100, "sort": 2, "filters": {"type_filters": {name: True}}},
+                "context": {"language": "english", "country_code": "US"},
+                "data_request": {},
+            }
+            method = ("IStoreQueryService", "Query")
+            response = await call(transport, *method, input_json=asked, interval=QUERY_INTERVAL)
+            items = response.json()["response"]["store_items"]
+            found[name] = {item["type"] for item in items}
+        return found
+
+    found = live(types)
+
+    assert found == {"include_games": {0}, "include_mods": {2}, "include_software": {6}}
+    assert set().union(*found.values()) == LISTED_TYPES

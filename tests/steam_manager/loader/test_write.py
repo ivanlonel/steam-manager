@@ -92,6 +92,17 @@ def test_an_app_is_replaced_in_place(connection: Connection) -> None:
     assert [tuple(row) for row in stored] == [(1, 5), (2, 6)]
 
 
+def test_an_app_another_in_its_batch_points_at_keeps_its_row(connection: Connection) -> None:
+    """A reference from an answer abroad never leaves a blank row where the app's own goes."""
+    writer = Writer(connection, home="BR")
+    abroad = app(2)
+    abroad.rows.tables["app"][0]["parent_appid"] = 1
+
+    writer.apps([(abroad, "US"), (app(1), "BR")])
+
+    assert connection.scalar(select(App.name).where(App.appid == 1)) == "App 1"
+
+
 def test_home_offer_fields_overwrite_and_others_fill_blanks(connection: Connection) -> None:
     """The home store's word on an offer's country-dependent fields stands; others fill gaps."""
     writer = Writer(connection, home="BR")

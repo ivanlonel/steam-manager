@@ -1,5 +1,6 @@
 """Tests for loading the archive into the database: choosing answers and replacing apps."""
 
+import json
 from collections import Counter
 from datetime import timedelta
 from typing import TYPE_CHECKING
@@ -10,10 +11,14 @@ from sqlalchemy import event, func, select
 from steam_manager import loader
 from steam_manager.answers import Kind
 from steam_manager.archive import Archive
+from steam_manager.db.reports import create_views
+from steam_manager.db.schema.account import FollowedApp, WishlistItem
 from steam_manager.db.schema.apps import App
 from steam_manager.db.schema.classification import AppTag
+from steam_manager.db.schema.lookups import Genre, Language, StoreCategory, Tag
 from steam_manager.db.schema.offers import OfferPrice
 from steam_manager.db.schema.progress import LoadedAnswer
+from steam_manager.db.schema.reviews import AppReviewHistogram, AppReviewTotal, ReviewHistory
 from steam_manager.loader import ForeignKeyViolationError, Malformed, load, rebuild
 from steam_manager.loader import write as writing
 from tests.steam_manager.loader._archive import AT, changed, damage, put, recorded
@@ -356,3 +361,256 @@ def test_a_load_refuses_to_run_with_foreign_keys_on(archive: Archive, engine: En
 
     with pytest.raises(RuntimeError, match="foreign keys are still on"):
         load(archive, engine, countries=COUNTRIES)
+
+
+def test_lookups_come_from_the_latest_answer(archive: Archive, engine: Engine) -> None:
+    """Names come from the newest list of each kind, whatever language it was asked in."""
+
+    def renamed(answer: dict[str, object]) -> None:
+        response = answer["response"]
+        assert isinstance(response, dict)
+        response["tags"] = [{"tagid": 9, "name": "Estrategia"}]
+
+    later = AT + timedelta(hours=1)
+    put(archive, Kind.TAGS, "english", "", recorded("tags.json"))
+    put(archive, Kind.TAGS, "portuguese", "", changed("tags.json", renamed), at=later)
+    put(archive, Kind.STORE_CATEGORIES, "0", "", recorded("store_categories.json"))
+    put(archive, Kind.APP_GENRES, "620", "", recorded("app_genres-620.json"))
+
+    report = load(archive, engine, countries=COUNTRIES)
+
+    with engine.connect() as connection:
+        assert connection.scalar(select(Tag.name).where(Tag.tagid == 9)) == "Estrategia"
+        assert (connection.scalar(select(func.count(StoreCategory.categoryid))) or 0) > 0
+        assert connection.scalar(select(Genre.name).where(Genre.genreid == 25)) == "Adventure"
+        language = connection.scalar(select(Language.name).where(Language.elanguage == 22))
+    assert language == "Portuguese - Brazil"
+    assert report.unknown == Counter()
+
+
+def listing(*appids: int) -> str:
+    r"""
+    Write a listing answer, as list_apps archives one.
+
+    :param \*appids: The apps it lists.
+    :return: Its text.
+    """
+    return json.dumps({"total_matching_records": len(appids), "appids": list(appids)})
+
+
+def listed(engine: Engine) -> dict[int, bool | None]:
+    """
+    Read whether each app is listed.
+
+    :param engine: The profile database.
+    :return: Each app's ``is_listed``.
+    """
+    with engine.connect() as connection:
+        return {
+            row.appid: row.is_listed
+            for row in connection.execute(select(App.appid, App.is_listed))
+        }
+
+
+def test_is_listed_follows_the_profiles_listings(archive: Archive, engine: Engine) -> None:
+    """Listed is 1, a game no listing holds is 0, a DLC is blank; without a listing, blank."""
+    apps = (620, 570, 2778580)
+    for appid in apps:
+        put(archive, Kind.STORE_ITEM, str(appid), "BR", recorded(f"store_item/{appid}-BR.json"))
+    load(archive, engine, countries=COUNTRIES)
+    assert [listed(engine)[appid] for appid in apps] == [None, None, None]
+
+    put(archive, Kind.LISTING, "", "BR", listing(620))
+    load(archive, engine, countries=COUNTRIES)
+    assert [listed(engine)[appid] for appid in apps] == [True, False, None]
+
+    put(archive, Kind.LISTING, "", "US", listing(570))
+    load(archive, engine, countries=COUNTRIES)
+    assert [listed(engine)[appid] for appid in apps] == [True, True, None]
+
+
+def test_current_players_survive_a_reload(archive: Archive, engine: Engine) -> None:
+    """The player count is the app's, and a newer store item keeps it."""
+    dota = recorded("store_item/570-BR.json")
+    put(archive, Kind.CURRENT_PLAYERS, "570", "", recorded("current_players-570.json"))
+    put(archive, Kind.STORE_ITEM, "570", "BR", dota)
+    load(archive, engine, countries=COUNTRIES)
+    put(archive, Kind.STORE_ITEM, "570", "BR", dota, at=AT + timedelta(hours=1))
+
+    load(archive, engine, countries=COUNTRIES)
+
+    with engine.connect() as connection:
+        assert connection.scalar(select(App.current_players).where(App.appid == 570)) == 820992
+
+
+def totals(engine: Engine, appid: int) -> tuple[int, int, bool] | None:
+    """
+    Read an app's review totals.
+
+    :param engine: The profile database.
+    :param appid: The app.
+    :return: Its positive and negative counts and whether they are exact, or ``None``.
+    """
+    query = select(
+        AppReviewTotal.positive, AppReviewTotal.negative, AppReviewTotal.counts_exact
+    ).where(AppReviewTotal.appid == appid)
+    with engine.connect() as connection:
+        row = connection.execute(query).one_or_none()
+    return None if row is None else (row.positive, row.negative, row.counts_exact)
+
+
+def test_exact_counts_replace_the_estimate(archive: Archive, engine: Engine) -> None:
+    """Archived exact counts replace the estimate, even when the app itself didn't change."""
+    put(archive, Kind.STORE_ITEM, "620", "BR", recorded("store_item/620-BR.json"))
+    load(archive, engine, countries=COUNTRIES)
+    estimate = totals(engine, 620)
+    assert estimate is not None
+    assert estimate[2] is False
+
+    put(archive, Kind.APP_REVIEWS, "620:0", "", recorded("app_reviews-620-0.json"))
+    report = load(archive, engine, countries=COUNTRIES)
+
+    assert totals(engine, 620) == (387851, 5009, True)
+    assert report.unknown == Counter()
+
+
+def test_every_app_with_reviews_gets_totals(archive: Archive, engine: Engine) -> None:
+    """A DLC with reviews gets totals too, so its scores show (the owner's choice)."""
+    put(archive, Kind.STORE_ITEM, "2778580", "BR", recorded("store_item/2778580-BR.json"))
+
+    load(archive, engine, countries=COUNTRIES)
+
+    assert totals(engine, 2778580) is not None
+
+
+def test_a_histogram_is_loaded(archive: Archive, engine: Engine) -> None:
+    """The review histogram gets its span and its periods."""
+    put(archive, Kind.REVIEW_HISTOGRAM, "620", "", recorded("review_histogram-620.json"))
+
+    load(archive, engine, countries=COUNTRIES)
+
+    assert count(engine, AppReviewHistogram.appid) == 1
+    assert count(engine, ReviewHistory.date) == 218
+
+
+def wishlisted(engine: Engine) -> list[tuple[int, int]]:
+    """
+    Read the wishlist in its order.
+
+    :param engine: The profile database.
+    :return: Each app with its position.
+    """
+    query = select(WishlistItem.appid, WishlistItem.position).order_by(WishlistItem.position)
+    with engine.connect() as connection:
+        return [(row.appid, row.position) for row in connection.execute(query)]
+
+
+def test_a_reordered_wishlist_replaces_the_old_one(archive: Archive, engine: Engine) -> None:
+    """Two apps swapping places on Steam swap places here, with no clash of positions."""
+
+    def swapped(answer: dict[str, object]) -> None:
+        response = answer["response"]
+        assert isinstance(response, dict)
+        items = response["items"]
+        assert isinstance(items, list)
+        items[0], items[1] = items[1], items[0]
+
+    steamid = "76561197960287930"
+    put(archive, Kind.WISHLIST, steamid, "", recorded("wishlist.json"))
+    load(archive, engine, countries=COUNTRIES)
+    assert wishlisted(engine) == [(620, 1), (400, 2), (70, 3)]
+    newer = changed("wishlist.json", swapped)
+    put(archive, Kind.WISHLIST, steamid, "", newer, at=AT + timedelta(hours=1))
+
+    load(archive, engine, countries=COUNTRIES)
+
+    assert wishlisted(engine) == [(400, 1), (620, 2), (70, 3)]
+
+
+def test_followed_apps_are_replaced(archive: Archive, engine: Engine) -> None:
+    """The followed apps are the latest answer's."""
+    steamid = "76561197960287930"
+    put(archive, Kind.FOLLOWED_APPS, steamid, "", recorded("followed_apps.json"))
+    load(archive, engine, countries=COUNTRIES)
+    fewer = '{"response":{"appids":[400]}}'
+    put(archive, Kind.FOLLOWED_APPS, steamid, "", fewer, at=AT + timedelta(hours=1))
+
+    load(archive, engine, countries=COUNTRIES)
+
+    with engine.connect() as connection:
+        assert connection.scalars(select(FollowedApp.appid)).all() == [400]
+
+
+def test_reports_read_what_was_loaded(archive: Archive, engine: Engine) -> None:
+    """v_games shows the home price and exact counts, and no price for a fallback store's app."""
+
+    def as_12170(answer: dict[str, object]) -> None:
+        answer.update(id=12170, appid=12170)
+
+    put(archive, Kind.STORE_ITEM, "620", "BR", recorded("store_item/620-BR.json"))
+    put(archive, Kind.APP_REVIEWS, "620:0", "", recorded("app_reviews-620-0.json"))
+    put(archive, Kind.STORE_ITEM, "12170", "BR", recorded("store_item/12170-BR.json"))
+    put(archive, Kind.STORE_ITEM, "12170", "US", changed("store_item/620-US.json", as_12170))
+    load(archive, engine, countries=COUNTRIES)
+
+    create_views(engine, home_country="BR")
+
+    best = json.loads(recorded("store_item/620-BR.json"))["best_purchase_option"]
+    cents = int(best.get("original_price_in_cents") or best["final_price_in_cents"])
+    query = "SELECT appid, price, positive, counts_exact FROM v_games"
+    with engine.connect() as connection:
+        games = {row.appid: row for row in connection.exec_driver_sql(query)}
+    assert (games[620].price, games[620].positive, games[620].counts_exact) == (
+        cents / 100,
+        387851,
+        1,
+    )
+    assert games[12170].price is None
+
+
+def test_malformed_answers_of_every_kind_are_skipped(archive: Archive, engine: Engine) -> None:
+    """A broken answer of any kind is named and skipped, and the rest of the load goes on."""
+    nameless = '{"620": {"success": true, "data": {"genres": [{"description": "Action"}]}}}'
+    put(archive, Kind.STORE_ITEM, "620", "BR", recorded("store_item/620-BR.json"))
+    put(archive, Kind.LISTING, "", "BR", '{"appids": [620,')
+    put(archive, Kind.CURRENT_PLAYERS, "620", "", '{"response":')
+    put(archive, Kind.APP_REVIEWS, "620:0", "", "{")
+    put(archive, Kind.REVIEW_HISTOGRAM, "620", "", "{")
+    put(archive, Kind.WISHLIST, "1", "", '{"response": {"items": [{"appid": "x"}]}}')
+    put(archive, Kind.APP_GENRES, "620", "", nameless)
+
+    report = load(archive, engine, countries=COUNTRIES)
+
+    assert {problem.kind for problem in report.malformed} == {
+        "listing",
+        "current_players",
+        "app_reviews",
+        "review_histogram",
+        "wishlist",
+        "app_genres",
+    }
+    assert named(engine)[620] == ("Portal 2", "BR", 1)
+    assert wishlisted(engine) == []
+    estimate = totals(engine, 620)
+    assert estimate is not None
+    assert estimate[2] is False
+
+
+def test_an_unchanged_listing_or_figure_writes_nothing_new(
+    archive: Archive, engine: Engine
+) -> None:
+    """A listing fetched again with the same apps, or a figure whose app didn't change, stays."""
+    put(archive, Kind.STORE_ITEM, "570", "BR", recorded("store_item/570-BR.json"))
+    put(archive, Kind.CURRENT_PLAYERS, "570", "", recorded("current_players-570.json"))
+    put(archive, Kind.LISTING, "", "BR", listing(570))
+    load(archive, engine, countries=COUNTRIES)
+    later = AT + timedelta(hours=1)
+    put(archive, Kind.LISTING, "", "BR", listing(570), at=later)
+    put(archive, Kind.STORE_ITEM, "620", "BR", recorded("store_item/620-BR.json"), at=later)
+
+    report = load(archive, engine, countries=COUNTRIES)
+
+    assert listed(engine)[570] is True
+    assert report.loaded["app"] >= 1
+    with engine.connect() as connection:
+        assert connection.scalar(select(App.current_players).where(App.appid == 570)) == 820992
