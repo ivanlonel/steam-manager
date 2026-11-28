@@ -7,16 +7,22 @@ from typing import Final
 
 import pytest
 from pydantic import ValidationError
+from sqlalchemy import select
 
 from steam_manager.answers import Kind
+from steam_manager.archive import Archive
+from steam_manager.db.schema.apps import App
 from steam_manager.profiles import (
+    ARCHIVE_FILE,
     Settings,
     create_profile,
     default_home,
     list_profiles,
+    open_profile,
     read_settings,
 )
 from steam_manager.steam.community import INDIVIDUAL_BASE
+from tests.steam_manager.loader._archive import put, recorded
 
 STEAMID: Final = INDIVIDUAL_BASE + 1234
 """An individual's SteamID64."""
@@ -125,3 +131,38 @@ def test_a_profile_round_trips(tmp_path: Path) -> None:
 def test_list_profiles_of_a_missing_home_is_empty(tmp_path: Path) -> None:
     """A data folder that doesn't exist yet holds no profile."""
     assert list_profiles(tmp_path / "missing") == []
+
+
+def test_opening_loads_what_was_archived(tmp_path: Path) -> None:
+    """Answers archived by a sync that stopped before its load are loaded on the next open."""
+    folder = create_profile(tmp_path, Settings(steamid=STEAMID, home_country="BR"))
+    with Archive(folder / ARCHIVE_FILE) as archive:
+        put(archive, Kind.STORE_ITEM, "620", "BR", recorded("store_item/620-BR.json"))
+
+    with open_profile(folder) as profile, profile.engine.connect() as connection:
+        names = connection.scalars(select(App.name).where(App.appid == 620)).all()
+
+    assert names == ["Portal 2"]
+    assert profile.report.loaded["app"] >= 1
+    assert profile.settings.home_country == "BR"
+
+
+def test_opening_creates_the_views(tmp_path: Path) -> None:
+    """The reports are in the database as views once a profile is open."""
+    folder = create_profile(tmp_path, Settings(steamid=STEAMID, home_country="BR"))
+
+    with open_profile(folder) as profile, profile.engine.connect() as connection:
+        rows = connection.exec_driver_sql("SELECT * FROM v_games").all()
+
+    assert rows == []
+
+
+def test_opening_closes_both_files(tmp_path: Path) -> None:
+    """Leaving the block closes the database and the archive: Windows won't move an open file."""
+    folder = create_profile(tmp_path, Settings(steamid=STEAMID, home_country="BR"))
+
+    with open_profile(folder):
+        pass
+    folder.rename(tmp_path / "moved")
+
+    assert (tmp_path / "moved" / ARCHIVE_FILE).exists()
