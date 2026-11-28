@@ -378,6 +378,7 @@ def _season_pass(
             event_gid=milestone.event_gid,
             rtime_complete=iso(milestone.rtime_complete),
             shipped=milestone.shipped,
+            backfilled_release=milestone.backfilled_release,
         )
         findings.rest(
             milestone,
@@ -389,6 +390,7 @@ def _season_pass(
                 "event_gid",
                 "rtime_complete",
                 "shipped",
+                "backfilled_release",
                 "dates",
                 "title",
                 "milestone_desc",

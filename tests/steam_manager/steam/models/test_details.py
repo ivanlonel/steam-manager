@@ -2,6 +2,7 @@
 
 from typing import Final
 
+from steam_manager.steam.models.base import unknown_fields
 from steam_manager.steam.models.details import ExtraDetails, Milestone, SalePage
 
 LARGEST_UINT64: Final = "18446744073709551615"
@@ -28,3 +29,11 @@ def test_a_soundtrack_reads_its_album() -> None:
     assert extra.music_album is not None
     assert extra.music_album.artist == "Someone"
     assert extra.music_album.tracks[0].other_name == "Otro"
+
+
+def test_a_milestone_reads_its_backfilled_release() -> None:
+    """A season pass milestone says whether it shipped as a backfilled release."""
+    milestone = Milestone.model_validate({"backfilled_release": True})
+
+    assert milestone.backfilled_release is True
+    assert unknown_fields(milestone) == []

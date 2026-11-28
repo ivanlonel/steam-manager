@@ -191,6 +191,8 @@ class Milestone(SteamModel):
     """Its name, per language."""
     milestone_desc: tuple[LocalizedString, ...] = ()
     """Its description, per language."""
+    backfilled_release: bool | None = None
+    """Whether it shipped as a backfilled release (seen first on 2026-11-28)."""
 
 
 class SeasonPass(SteamModel):

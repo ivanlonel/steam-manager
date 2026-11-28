@@ -8,7 +8,7 @@ from typing import Any, Final
 
 from steam_manager.loader.details import extra_details
 from steam_manager.loader.rows import Findings, Rows
-from steam_manager.steam.models.details import DlcForPurchase, ExtraDetails
+from steam_manager.steam.models.details import DlcForPurchase, ExtraDetails, SeasonPass
 from steam_manager.steam.models.store_item import StoreItem
 
 FIXTURES: Final = Path(__file__).parents[2] / "fixtures" / "steam" / "store_item"
@@ -130,3 +130,30 @@ def test_a_soundtracks_credits_are_texts() -> None:
     }
     assert texts["music_album_label"] == album["label"]
     assert texts["music_album_other_credits"] == album["other_credits"]
+
+
+def test_a_milestones_backfilled_release_is_stored() -> None:
+    """A milestone that shipped as a backfilled release says so in its row."""
+    season = SeasonPass.model_validate(
+        {
+            "appid": 4241400,
+            "milestones": [
+                {"milestone_id": 93226, "appid": 4241420, "shipped": True},
+                {
+                    "milestone_id": 49672,
+                    "appid": 4241440,
+                    "shipped": True,
+                    "backfilled_release": True,
+                },
+            ],
+        }
+    )
+    rows, findings = Rows(), Findings()
+
+    extra_details(10, ExtraDetails(season_pass=season), "extra_details", rows, findings, nested=())
+
+    assert [
+        (row["milestone_id"], row["backfilled_release"])
+        for row in rows.tables["season_pass_milestone"]
+    ] == [(93226, None), (49672, True)]
+    assert findings.unknown == Counter()
