@@ -222,8 +222,8 @@ The builder's calls, where the owner set no value:
   - seen on 2026-11-15:
     - `extra_details.hardware_compatibility` goes to the table `app_compatibility_test`;
     - `extra_details.dlc_for_purchase` goes to the table `app_dlc`. Its total price goes to
-      `app.dlc_formatted_total_price`; its count, and each DLC's content descriptors, are
-      checked against the answer they follow from;
+      `app.dlc_formatted_total_price`, and its count to `app.dlc_count`, since Steam lists 200
+      DLC at most. Each DLC's content descriptors are checked against the answer;
     - `reviews.counts_all_purchases` goes to `app.counts_all_purchases`;
     - the store categories' `show_in_search` goes to `store_category.show_in_search`;
   - seen on 2026-11-28:
@@ -294,7 +294,7 @@ The builder's calls:
   (builder's calls):
 
   - the columns `store_category.show_in_search`, `app.counts_all_purchases`,
-    `app.dlc_formatted_total_price` and `app_review_histogram.count_all_reviews`;
+    `app.dlc_formatted_total_price`, `app.dlc_count` and `app_review_histogram.count_all_reviews`;
   - the kind `engine` of `app_related`;
   - the tables `app_compatibility_test` (Steam's compatibility review per device, in Steam's
     order), `app_dlc` and `app_featured_creator`.
@@ -327,10 +327,10 @@ The builder's calls:
   Steam tables, and only those, creates them again and has the caller replay the archive. A
   table holding the user's own data is never dropped (builder's call).
 
-- A rebuild that stops before it finishes (an interrupted sync, a crash) is redone or resumed
-  on the next open, never left half-done in silence. The loader's plan settles how: by
-  recording the Steam schema only once the rebuild commits, or by keeping the loader's
-  progress inside the Steam tables, so it is dropped with them.
+- A rebuild that stops before it finishes (an interrupted sync, a crash) is redone on the next
+  load, never left half-done in silence. The loader keeps its progress inside the Steam tables,
+  in `loaded_answer`, so it is dropped with them, and a load is one transaction: one that stops
+  writes nothing.
 
 - The database runs in WAL mode so it can be read while a sync writes.
 
@@ -377,7 +377,10 @@ The builder's calls:
   short record nested inside another app, each of these two in the same country order. Within
   one rank and country the most recently fetched answer wins, whichever source it came from
   (builder's calls: the country order for light entries and short records makes an app the home
-  store describes count as described by it, so the reports show its home price).
+  store describes count as described by it, so the reports show its home price). An answer
+  whose `success` isn't 1, such as a store's "not sold here", ranks after every answer that
+  succeeded (the owner's decision, 2026-11-28). A short record only fills a gap: an app with no
+  row, no name, or a failed answer's row.
 - A price is always stored under the country it was quoted in. The reports show the home
   country's prices only, so a price in another currency is never mistaken for a local one: a
   profile outside Brazil that imports the Kaggle catalog gets names, tags, reviews and
@@ -389,6 +392,26 @@ The builder's calls:
   empty on a healthy run. A malformed answer is reported and skipped, never fatal.
 - Foreign keys are off while loading and `PRAGMA foreign_key_check` runs before the commit;
   a reference to an app nothing else describes gets a blank parent row.
+
+The builder's calls (2026-11-28):
+
+- **What changed:** a load compares every archived answer's fetch time with `loaded_answer`,
+  the Steam table that records what the tables reflect, and reloads only what changed: an app
+  whose own answers changed, and the figures, lists and lookups whose answers changed. One
+  transaction holds the whole load, and `rebuild` empties the Steam tables first in it. A change
+  of countries needs a rebuild.
+- **Shared rows:** an app's own rows are replaced. An offer takes the newer value Steam sent for
+  each column, but for `success`, `unavailable_for_country_restriction` and the best offer,
+  which depend on the country, a fallback country only fills what the home country left blank.
+  A lookup value that contradicts the one already known is reported.
+- **Review totals:** every app with a review summary gets them (the owner's decision,
+  2026-11-28), exact when Steam's counts are archived: the app's purchase type when within 2%
+  of the store's count, else the closer total.
+- **The rest:** lookups come from the latest list of each kind, whatever its language; language
+  names are Steam's fixed list; `is_listed` follows the latest listing of each of the profile's
+  countries; the wishlist and the followed apps are replaced whole.
+- **Malformed answers:** an answer lacking a value its rows need is skipped and reported, named
+  without a word of what it holds; any other error is a loader bug and stops the load.
 
 ### Derived figures
 
