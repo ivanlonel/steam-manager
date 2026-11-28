@@ -27,6 +27,21 @@ if TYPE_CHECKING:
 
     from steam_manager.loader import LoadReport
 
+# The docs list only these; the names imported from Pydantic and the standard library stay out.
+__all__ = [
+    "ARCHIVE_FILE",
+    "DATABASE_FILE",
+    "MAX_AGES",
+    "SETTINGS_FILE",
+    "OpenProfile",
+    "Settings",
+    "create_profile",
+    "default_home",
+    "list_profiles",
+    "open_profile",
+    "read_settings",
+]
+
 MAX_AGES: Final[Mapping[Kind, timedelta]] = MappingProxyType(
     {
         Kind.STORE_CATEGORIES: timedelta(days=7),
@@ -101,10 +116,6 @@ def _aged(kind: Kind) -> Kind:
     return kind
 
 
-type Country = Annotated[str, AfterValidator(_country)]
-"""A store country: two upper-case ASCII letters, such as ``BR``."""
-
-
 class Settings(BaseModel):
     """What a profile is about, and how its sync behaves."""
 
@@ -112,10 +123,10 @@ class Settings(BaseModel):
 
     steamid: Annotated[int, Field(gt=INDIVIDUAL_BASE, lt=INDIVIDUAL_BASE + 2**32)]
     """The account's SteamID64."""
-    home_country: Country
+    home_country: str
     """The store country whose prices the reports show."""
     # Validated by default too, so that a home in the US drops the default fallback.
-    fallback_countries: tuple[Country, ...] = Field(default=("US",), validate_default=True)
+    fallback_countries: tuple[str, ...] = Field(default=("US",), validate_default=True)
     """Countries asked, in order, for the apps the earlier ones don't sell."""
     language: Annotated[str, AfterValidator(_language)] = "english"
     """Steam's API code for the language of the answers, such as ``english``."""
@@ -124,18 +135,30 @@ class Settings(BaseModel):
     )
     """The user's own maximum ages; every other kind takes :data:`MAX_AGES`'."""
 
+    @field_validator("home_country")
+    @classmethod
+    def _home(cls, code: str) -> str:
+        """
+        Normalize the home country.
+
+        :param code: The country, as typed.
+        :return: It stripped and upper-cased.
+        """
+        return _country(code)
+
     @field_validator("fallback_countries")
     @classmethod
-    def _drop_repeats(cls, countries: tuple[str, ...], info: ValidationInfo) -> tuple[str, ...]:
+    def _fallbacks(cls, codes: tuple[str, ...], info: ValidationInfo) -> tuple[str, ...]:
         """
-        Drop the home country and repeats from the fallbacks, keeping the first of each.
+        Normalize the fallbacks, dropping the home country and repeats, keeping the first of each.
 
-        :param countries: The fallbacks, each already normalized.
+        :param codes: The fallbacks, as typed.
         :param info: The fields validated before, the home country among them.
         :return: What remains, in order.
         """
         home = info.data.get("home_country")
-        return tuple(country for country in dict.fromkeys(countries) if country != home)
+        found = dict.fromkeys(_country(code) for code in codes)
+        return tuple(country for country in found if country != home)
 
     @property
     def countries(self) -> tuple[str, ...]:
