@@ -36,8 +36,10 @@ class App(SteamBase):
     """The country whose store described it."""
     is_listed: Mapped[bool | None]
     """
-    Whether the latest listing of one of the profile's stores holds it: blank for an app
-    listings don't cover (anything but games, mods and software), and before any listing.
+    Whether the latest listing of one of the profile's stores holds it.
+
+    Blank for an app listings don't cover (anything but games, mods and software), and before
+    any listing.
     """
     is_free: Mapped[bool | None]
     """Whether it is free."""

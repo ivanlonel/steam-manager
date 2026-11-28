@@ -52,6 +52,11 @@ _Avoid_: Library (that is the owned apps), store, index
 A catalog app holding only its name, type and review summary.
 _Avoid_: Stub, partial app
 
+**Short record**:
+The brief form of an app, package, bundle or creator page that a full entry nests in its own
+answer, which only fills gaps that nothing better describes.
+_Avoid_: Nested entry, included item, record (alone)
+
 **Full entry**:
 A catalog app holding everything the store returns for it.
 _Avoid_: Detailed app, complete record
