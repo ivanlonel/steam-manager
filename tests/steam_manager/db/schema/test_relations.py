@@ -28,8 +28,15 @@ ADDED_SINCE_THE_NOTEBOOK: Final = {
             " 'dlc_parent', 'included_app', 'related_f2p', 'season_pass', 'engine'))"
         ),
     ],
+    "season_pass_milestone": [
+        (
+            "only declared: season_pass_milestone.backfilled_release #7: INTEGER notnull=0 pk=0"
+            " default=None hidden=0"
+        ),
+    ],
 }
-"""The kind of relation Steam sends now that the notebook predates: the app giving the engine."""
+"""What Steam sends now that the notebook predates: the app giving the engine, and whether a
+milestone shipped as a backfilled release."""
 
 
 @pytest.mark.parametrize("table", RELATION_TABLES)

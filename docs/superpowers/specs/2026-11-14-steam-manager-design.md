@@ -252,8 +252,20 @@ The builder's calls, where the owner set no value:
     - `basic_info.featured_creator_home_clan_account_ids` goes to the table
       `app_featured_creator`. It can't be derived: Steam leaves it out of some apps whose
       credits have creator pages;
-    - `basic_info.first_franchise_clan_account_id` is checked against the first franchise's
-      creator page whenever Steam sends it.
+    - `basic_info.first_franchise_clan_account_id` goes to `app.first_franchise_creator_id`, a
+      reference to the creator page. It can't be derived: a DLC sends its parent's without the
+      franchises, and a franchise credit can lack a creator page;
+    - `extra_details.music_album`, on soundtracks: its credits, free text, go to the `app_text`
+      columns `music_album_artist`, `music_album_composer`, `music_album_label` and
+      `music_album_other_credits`, and its tracks to the table `app_track`, in Steam's order;
+    - `extra_details.season_pass.milestones[].backfilled_release` goes to
+      `season_pass_milestone.backfilled_release`;
+    - `extra_details.hardware_compatibility.steam_deck_blog_url` goes to
+      `app.steam_deck_blog_url`, as Steam sends it;
+    - `extra_details.running_time_minutes`, on videos, goes to `app.running_time_minutes`;
+    - the review histogram's `past_events` go to the table `review_event`, in Steam's order, and
+      are replaced with the histogram. They are periods the store marks on the review graph:
+      their `type` was 0 on every one seen, and its meaning is unverified.
 
 ### Transport
 
@@ -315,10 +327,14 @@ The builder's calls:
   (builder's calls):
 
   - the columns `store_category.show_in_search`, `app.counts_all_purchases`,
-    `app.dlc_formatted_total_price`, `app.dlc_count` and `app_review_histogram.count_all_reviews`;
+    `app.dlc_formatted_total_price`, `app.dlc_count`, `app.steam_deck_blog_url`,
+    `app.first_franchise_creator_id`, `app.running_time_minutes`, the four
+    `app_text.music_album_*`, `season_pass_milestone.backfilled_release` and
+    `app_review_histogram.count_all_reviews`;
   - the kind `engine` of `app_related`;
   - the tables `app_compatibility_test` (Steam's compatibility review per device, in Steam's
-    order), `app_dlc` and `app_featured_creator`.
+    order), `app_dlc`, `app_featured_creator`, `app_track` (a soundtrack's tracks, in Steam's
+    order) and `review_event` (the periods a review histogram marks).
 
   Event ids (`event_gid`) are uint64 that Steam sends as text, and stay text: they can exceed
   SQLite's INTEGER. `app.is_listed` is 1 when the latest listing of one of the profile's stores

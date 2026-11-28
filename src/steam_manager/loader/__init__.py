@@ -41,6 +41,7 @@ from steam_manager.db.schema.reviews import (
     AppReviewHistogram,
     AppReviewSummary,
     AppReviewTotal,
+    ReviewEvent,
     ReviewHistory,
 )
 from steam_manager.loader import (
@@ -820,7 +821,7 @@ class _Load:
             if found is not None:
                 appids.append(int(key))
                 new.extend(found)
-        self._writer.clear([ReviewHistory, AppReviewHistogram], appids)
+        self._writer.clear([ReviewHistory, ReviewEvent, AppReviewHistogram], appids)
         self._writer.write(new, home=True)
 
     def _replace_list[M: BaseModel](

@@ -191,6 +191,8 @@ class Milestone(SteamModel):
     """Its name, per language."""
     milestone_desc: tuple[LocalizedString, ...] = ()
     """Its description, per language."""
+    backfilled_release: bool | None = None
+    """Whether it shipped as a backfilled release (seen first on 2026-11-28)."""
 
 
 class SeasonPass(SteamModel):
@@ -286,6 +288,8 @@ class HardwareCompatibility(SteamModel):
     """On the Steam Machine."""
     steam_frame_tests: tuple[HardwareTest, ...] = ()
     """On the Steam Frame."""
+    steam_deck_blog_url: str | None = None
+    """The announcement of the Steam Deck review (seen first on 2026-11-28)."""
 
 
 class DlcOffer(SteamModel):
@@ -310,6 +314,36 @@ class DlcForPurchase(SteamModel):
     """How many there are."""
     formatted_total_price: str | None = None
     """What they all cost, as the store shows it."""
+
+
+class Track(SteamModel):
+    """A track of a soundtrack (seen first on 2026-11-28)."""
+
+    disc_number: int | None = None
+    """The disc it is on."""
+    track_number: int | None = None
+    """Its number on that disc."""
+    name: str | None = None
+    """Its title."""
+    other_name: str | None = None
+    """Its title in a second language."""
+    duration_seconds: int | None = None
+    """How long it lasts, in seconds."""
+
+
+class MusicAlbum(SteamModel):
+    """A soundtrack's credits and tracks, the credits as free text (seen first on 2026-11-28)."""
+
+    artist: str | None = None
+    """Its artist."""
+    composer: str | None = None
+    """Its composer."""
+    label: str | None = None
+    """Its record label."""
+    other_credits: str | None = None
+    """Everyone else it credits."""
+    tracks: tuple[Track, ...] = ()
+    """Its tracks, in the store's order."""
 
 
 class ExtraDetails(SteamModel):
@@ -375,3 +409,7 @@ class ExtraDetails(SteamModel):
     """Steam's compatibility reviews, per device."""
     dlc_for_purchase: DlcForPurchase | None = None
     """The DLC on sale for it."""
+    music_album: MusicAlbum | None = None
+    """A soundtrack's credits and tracks."""
+    running_time_minutes: int | None = None
+    """How long a video runs, in minutes (seen first on 2026-11-28)."""

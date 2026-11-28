@@ -161,19 +161,59 @@ def test_featured_creators_are_stored() -> None:
     ]
 
 
-def test_the_first_franchise_is_checked_against_the_franchises() -> None:
-    """The first franchise's creator page follows from the franchises, so it is checked."""
-    path = FIXTURES / "store_item" / "620-BR.json"
-    agrees, differs = read(path), read(path)
-    for payload, first in ((agrees, 9), (differs, 8)):
-        basic = payload["basic_info"]
-        assert isinstance(basic, dict)
-        basic["franchises"] = [{"name": "Portal", "creator_clan_account_id": 9}]
-        basic["first_franchise_clan_account_id"] = first
+def test_the_first_franchise_is_stored() -> None:
+    """The creator page of an app's first franchise is kept on the app."""
+    found = described(FIXTURES / "store_item" / "546560-JP.json")
 
-    name = "basic_info.first_franchise_clan_account_id"
-    assert described(path, agrees).findings.mismatches[name] == 0
-    assert described(path, differs).findings.mismatches[name] == 1
+    [app] = found.rows.tables["app"]
+    assert app["first_franchise_creator_id"] == 33078398
+
+
+def test_a_first_franchise_without_franchises_is_no_mismatch() -> None:
+    """A DLC sends its parent's first franchise without the franchises: stored, not checked."""
+    path = FIXTURES / "store_item" / "620-BR.json"
+    payload = read(path)
+    basic = payload["basic_info"]
+    assert isinstance(basic, dict)
+    basic["first_franchise_clan_account_id"] = 9
+
+    found = described(path, payload)
+
+    assert "basic_info.first_franchise_clan_account_id" not in found.findings.mismatches
+    assert found.findings.unknown == Counter()
+    [app] = found.rows.tables["app"]
+    assert app["first_franchise_creator_id"] == 9
+
+
+def grouped(group: str) -> Described:
+    """
+    Describe Portal 2 with its first included package's best option in a given group.
+
+    :param group: The group the option names.
+    :return: Its rows and findings.
+    """
+    path = FIXTURES / "store_item" / "620-BR.json"
+    payload = read(path)
+    included = payload["included_items"]
+    assert isinstance(included, dict)
+    packages = included["included_packages"]
+    assert isinstance(packages, list)
+    packages[0]["best_purchase_option"]["package_group"] = group
+    return described(path, payload)
+
+
+def test_a_short_records_option_may_sit_in_a_page_group() -> None:
+    """A subscription a DLC includes sits in that DLC's own subscriptions group: no mismatch."""
+    found = grouped("subscriptions")
+
+    assert found.findings.mismatches["included_offer.package_group"] == 0
+
+
+def test_a_short_records_option_in_an_unknown_group_is_a_mismatch() -> None:
+    """An option in a group the including page lacks is reported."""
+    found = grouped("elsewhere")
+
+    assert found.findings.mismatches["included_offer.package_group"] == 1
 
 
 def test_a_light_entry_keeps_its_best_price() -> None:

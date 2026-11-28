@@ -62,6 +62,8 @@ class SeasonPassMilestone(SteamBase):
     """When it shipped."""
     shipped: Mapped[bool | None]
     """Whether it has shipped."""
+    backfilled_release: Mapped[bool | None]
+    """Whether it shipped as a backfilled release."""
 
 
 class SeasonPassMilestoneDate(SteamBase):

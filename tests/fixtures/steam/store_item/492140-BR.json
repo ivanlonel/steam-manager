@@ -1,0 +1,431 @@
+{
+  "item_type": 0,
+  "id": 492140,
+  "success": 1,
+  "visible": true,
+  "name": "Dead by Daylight - Original Soundtrack",
+  "store_url_path": "app/492140/Dead_by_Daylight_Original_Soundtrack",
+  "store_url_slug": "Dead_by_Daylight_Original_Soundtrack",
+  "appid": 492140,
+  "type": 11,
+  "related_items": {
+    "parent_appid": 381210
+  },
+  "included_items": {
+    "included_apps": [
+      {
+        "item_type": 0,
+        "id": 381210,
+        "success": 1,
+        "visible": true,
+        "name": "Dead by Daylight",
+        "store_url_path": "app/381210/Dead_by_Daylight",
+        "store_url_slug": "Dead_by_Daylight",
+        "appid": 381210,
+        "type": 0,
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            49,
+            36,
+            9,
+            38,
+            27
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            65,
+            66,
+            68,
+            69,
+            70,
+            23,
+            41,
+            42,
+            43,
+            62
+          ],
+          "controller_categoryids": [
+            28,
+            59
+          ]
+        },
+        "best_purchase_option": {
+          "bundleid": 99939,
+          "purchase_option_name": "Dead by Daylight: Terrifier Edition",
+          "final_price_in_cents": "5388",
+          "formatted_final_price": "R$53,88",
+          "bundle_discount_pct": 45,
+          "price_before_bundle_discount": "9798",
+          "formatted_price_before_bundle_discount": "R$97,98",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 1,
+          "must_purchase_as_set": true,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false,
+          "combined_discount_pct": 45
+        }
+      }
+    ],
+    "included_packages": [
+      {
+        "item_type": 1,
+        "id": 111571,
+        "success": 1,
+        "visible": true,
+        "name": "Dead by Daylight: Original Soundtrack",
+        "store_url_path": "app/492140/Dead_by_Daylight_Original_Soundtrack",
+        "store_url_slug": "Dead_by_Daylight_Original_Soundtrack",
+        "appid": 492140,
+        "type": 11,
+        "included_types": [
+          11
+        ],
+        "included_appids": [
+          492140
+        ],
+        "content_descriptorids": [
+          2,
+          5
+        ],
+        "categories": {
+          "supported_player_categoryids": [
+            1,
+            9
+          ],
+          "feature_categoryids": [
+            22,
+            29,
+            23
+          ],
+          "controller_categoryids": [
+            18
+          ]
+        },
+        "best_purchase_option": {
+          "packageid": 111571,
+          "purchase_option_name": "Dead by Daylight: Original Soundtrack",
+          "final_price_in_cents": "3499",
+          "formatted_final_price": "R$34,99",
+          "user_can_purchase_as_gift": true,
+          "hide_discount_pct_for_compliance": false,
+          "included_game_count": 0,
+          "must_purchase_as_set": false,
+          "package_group": "default",
+          "price_cannot_be_displayed_as_discount": false
+        }
+      }
+    ],
+    "included_creators": [
+      {
+        "item_type": 5,
+        "id": 33367148,
+        "success": 1,
+        "visible": true,
+        "name": "Behaviour Interactive Inc.",
+        "store_url_path": "developer/behaviourinteractive",
+        "store_url_slug": "behaviourinteractive",
+        "game_count": 20
+      }
+    ]
+  },
+  "content_descriptorids": [
+    2,
+    5
+  ],
+  "tagids": [
+    19,
+    4345,
+    4667,
+    1621,
+    7948
+  ],
+  "categories": {
+    "supported_player_categoryids": [
+      1,
+      9
+    ],
+    "feature_categoryids": [
+      22,
+      29,
+      23
+    ],
+    "controller_categoryids": [
+      18
+    ]
+  },
+  "reviews": {
+    "summary_filtered": {
+      "review_count": 326,
+      "percent_positive": 76,
+      "review_score": 6,
+      "review_score_label": "Mostly Positive"
+    }
+  },
+  "basic_info": {
+    "short_description": "Dead by Daylight: Original Soundtracks contains the memorable music from the game. It includes a collection of 18 MP3 tracks made by composer Michel F. April.",
+    "publishers": [
+      {
+        "name": "Behaviour Digital Inc.",
+        "creator_clan_account_id": 33367148
+      }
+    ],
+    "developers": [
+      {
+        "name": "Behaviour Digital Inc.",
+        "creator_clan_account_id": 33367148
+      }
+    ]
+  },
+  "tags": [
+    {
+      "tagid": 19,
+      "weight": 4105
+    },
+    {
+      "tagid": 4345,
+      "weight": 2105
+    },
+    {
+      "tagid": 4667,
+      "weight": 2105
+    },
+    {
+      "tagid": 1621,
+      "weight": 1052
+    },
+    {
+      "tagid": 7948,
+      "weight": 631
+    }
+  ],
+  "assets": {
+    "asset_url_format": "steam/apps/492140/${FILENAME}?t=1682025158",
+    "main_capsule": "capsule_616x353.jpg",
+    "small_capsule": "capsule_231x87.jpg",
+    "header": "header.jpg",
+    "header_2x": "header.jpg",
+    "library_capsule": "portrait.png",
+    "community_icon": "200432943e688ac5e75145df3a9cbdb49bb48306",
+    "page_background_path": "app/492140?t=1682025158",
+    "last_modified": 1682025158
+  },
+  "release": {
+    "steam_release_date": 1465938000,
+    "original_release_date": 1465887600
+  },
+  "platforms": {
+    "windows": true,
+    "vr_support": {},
+    "steam_deck_compat_category": 0,
+    "steam_os_compat_category": 0,
+    "steam_frame_compat_category": 0,
+    "steam_machine_compat_category": 0
+  },
+  "game_rating": {
+    "rating": "18",
+    "agency": 10,
+    "banned": false,
+    "esrb_online_music_not_rated": false,
+    "esrb_online_interactions_not_rated": false,
+    "required_age": 0,
+    "use_age_gate": false,
+    "agency_rating": 186,
+    "image_url": "public/shared/images/game_ratings/DEJUS/18.png"
+  },
+  "best_purchase_option": {
+    "packageid": 111571,
+    "purchase_option_name": "Dead by Daylight: Original Soundtrack",
+    "final_price_in_cents": "3499",
+    "formatted_final_price": "R$34,99",
+    "user_can_purchase_as_gift": true,
+    "hide_discount_pct_for_compliance": false,
+    "included_game_count": 0,
+    "must_purchase_as_set": false,
+    "package_group": "default",
+    "price_cannot_be_displayed_as_discount": false
+  },
+  "purchase_options": [
+    {
+      "packageid": 111571,
+      "purchase_option_name": "Dead by Daylight: Original Soundtrack",
+      "final_price_in_cents": "3499",
+      "formatted_final_price": "R$34,99",
+      "user_can_purchase_as_gift": true,
+      "hide_discount_pct_for_compliance": false,
+      "included_game_count": 0,
+      "must_purchase_as_set": false,
+      "package_group": "default",
+      "price_cannot_be_displayed_as_discount": false
+    }
+  ],
+  "screenshots": {
+    "mature_content_screenshots": [
+      {
+        "filename": "steam/apps/492140/ss_24deb9d6b70761ae13f5bf449b599820b264f145.jpg?t=1682025158",
+        "ordinal": 1
+      }
+    ]
+  },
+  "supported_languages": [
+    {
+      "elanguage": 0,
+      "eadditionallanguage": -1,
+      "supported": true,
+      "full_audio": true,
+      "subtitles": true
+    }
+  ],
+  "full_description_bbcode": "Dead by Daylight: Original Soundtracks contains the memorable music from the game. It includes a collection of 18 MP3 tracks made by composer Michel F. April. \r\n\r\n[h2]A Word from the Composer[/h2]\r\n[i]After reading the synopsis I was hooked! Even though the surroundings look and feel absolutely real to you, you\u2019re in for a surprise! As a survivor, you think you can outsmart the stalker. Again, nothing could be further from the truth... let's just say that death is not an escape.\r\n\r\nIt is certainly the most addictive game I've played thanks to Behaviour's evil geniuses!\r\n\r\nTo capture the essence of this \u00abone-track-mind-almost-indestructible\u00bb killer, I immediately switched to \u00abreptilian brain\u00bb mode. Having the luxury and excitement of scoring while playing the game in the development process allowed us to make adjustments so that the music is seamlessly integrated in all other aspects of the game experience.\r\n\r\nCreating with this state of mind was a truly compelling and thrilling experience, and with this soundtrack, I hope to re-capture as much as possible the multi-state nature of Dead By Daylight.\r\n\r\nEnjoy it and if you can, play it loud![/i] - Michel F. April\r\n\r\n[h2]Track List[/h2]\r\n[list][*]1. Dead by Daylight (Theme)\r\n[/*][*]2. Closing In\r\n[/*][*]3. Being Watched\r\n[/*][*]4. No Place to Hide\r\n[/*][*]5. Petrified\r\n[/*][*]6. Disoriented\r\n[/*][*]7. Darkness Rising\r\n[/*][*]8. Liberation\r\n[/*][*]9. Suffering\r\n[/*][*]10. Entity Brain\r\n[/*][*]11. One Track Mind\r\n[/*][*]12. Punished\r\n[/*][*]13. Enduring Torment\r\n[/*][*]14. The Hook\r\n[/*][*]15. Dark Infinity\r\n[/*][*]16. Death Is Not an Escape\r\n[/*][*]17. Black Blood (Bonus Track)\r\n[/*][*]18. Dead Again (Bonus Track) [/*][/list]\r\n\r\n\u2022\t[b]Please note[/b] \u2013 The Dead by Daylight: Official Soundtrack will be placed in your Dead by Daylight folder in the Steam Directory: ...Steam\\steamapps\\common\\DeadbyDaylight\\Dead by Daylight Original Soundtrack\r\n\r\n[h2]Credits[/h2]\r\n[list][*]All tracks by Michel F. April[/*][/list]",
+  "assets_without_overrides": {
+    "asset_url_format": "steam/apps/492140/${FILENAME}?t=1682025158",
+    "main_capsule": "capsule_616x353.jpg",
+    "small_capsule": "capsule_231x87.jpg",
+    "header": "header.jpg",
+    "header_2x": "header.jpg",
+    "library_capsule": "portrait.png",
+    "community_icon": "200432943e688ac5e75145df3a9cbdb49bb48306",
+    "page_background_path": "app/492140?t=1682025158",
+    "last_modified": 1682025158
+  },
+  "package_groups": [
+    {
+      "name": "default"
+    },
+    {
+      "name": "subscriptions",
+      "display_type": 1
+    }
+  ],
+  "extra_details": {
+    "vetted": true,
+    "legal_notice_bbcode": "\u00a9 2015-2023 and BEHAVIOUR, DEAD BY DAYLIGHT and other related trademarks and logos belong to Behaviour Interactive Inc. All rights reserved.",
+    "links_and_info": {
+      "website": "http://www.deadbydaylight.com",
+      "genreids": [
+        1
+      ]
+    },
+    "points_shop_eligible": true,
+    "music_album": {
+      "tracks": [
+        {
+          "disc_number": 1,
+          "track_number": 1,
+          "name": "Dead by Daylight (Theme)",
+          "duration_seconds": 240
+        },
+        {
+          "disc_number": 1,
+          "track_number": 2,
+          "name": "Being Watched",
+          "duration_seconds": 120
+        },
+        {
+          "disc_number": 1,
+          "track_number": 3,
+          "name": "Closing In ",
+          "duration_seconds": 116
+        },
+        {
+          "disc_number": 1,
+          "track_number": 4,
+          "name": "No Place to Hide",
+          "duration_seconds": 86
+        },
+        {
+          "disc_number": 1,
+          "track_number": 5,
+          "name": "Petrified",
+          "duration_seconds": 78
+        },
+        {
+          "disc_number": 1,
+          "track_number": 6,
+          "name": "Disoriented",
+          "duration_seconds": 88
+        },
+        {
+          "disc_number": 1,
+          "track_number": 7,
+          "name": "Darkness Rising",
+          "duration_seconds": 66
+        },
+        {
+          "disc_number": 1,
+          "track_number": 8,
+          "name": "Liberation",
+          "duration_seconds": 64
+        },
+        {
+          "disc_number": 1,
+          "track_number": 9,
+          "name": "Suffering",
+          "duration_seconds": 68
+        },
+        {
+          "disc_number": 1,
+          "track_number": 10,
+          "name": "Entity Brain",
+          "duration_seconds": 100
+        },
+        {
+          "disc_number": 1,
+          "track_number": 11,
+          "name": "One Track Mind",
+          "duration_seconds": 129
+        },
+        {
+          "disc_number": 1,
+          "track_number": 12,
+          "name": "Punished",
+          "duration_seconds": 70
+        },
+        {
+          "disc_number": 1,
+          "track_number": 13,
+          "name": "Enduring Torment",
+          "duration_seconds": 93
+        },
+        {
+          "disc_number": 1,
+          "track_number": 14,
+          "name": "The Hook",
+          "duration_seconds": 61
+        },
+        {
+          "disc_number": 1,
+          "track_number": 15,
+          "name": "Dark Infinity",
+          "duration_seconds": 84
+        },
+        {
+          "disc_number": 1,
+          "track_number": 16,
+          "name": "Death Is Not an Escape",
+          "duration_seconds": 90
+        },
+        {
+          "disc_number": 1,
+          "track_number": 17,
+          "name": "Black Blood",
+          "duration_seconds": 109
+        },
+        {
+          "disc_number": 1,
+          "track_number": 18,
+          "name": "Dead Again (Bonus Track)",
+          "duration_seconds": 34
+        }
+      ],
+      "artist": "Michel F. April",
+      "composer": "Michel F. April"
+    }
+  }
+}

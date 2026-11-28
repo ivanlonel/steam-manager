@@ -18,6 +18,7 @@ APP_TABLES: Final = ("app", "app_text")
 CHANGED_FROM_THE_NOTEBOOK: Final = {
     "app": [
         "only in the notebook: app check (store_country IN ('BR', 'US'))",
+        "only declared: app foreign key (first_franchise_creator_id) -> creator (creator_id)",
         (
             "only declared: app.counts_all_purchases #82: INTEGER notnull=0 pk=0 default=None"
             " hidden=0"
@@ -27,9 +28,23 @@ CHANGED_FROM_THE_NOTEBOOK: Final = {
             "only declared: app.dlc_formatted_total_price #83: TEXT notnull=0 pk=0 default=None"
             " hidden=0"
         ),
+        (
+            "only declared: app.first_franchise_creator_id #86: INTEGER notnull=0 pk=0"
+            " default=None hidden=0"
+        ),
+        (
+            "only declared: app.running_time_minutes #87: INTEGER notnull=0 pk=0 default=None"
+            " hidden=0"
+        ),
+        "only declared: app.steam_deck_blog_url #85: TEXT notnull=0 pk=0 default=None hidden=0",
+    ],
+    "app_text": [
+        f"only declared: app_text.music_album_{name} #{15 + index}: TEXT notnull=0 pk=0"
+        " default=None hidden=0"
+        for index, name in enumerate(("artist", "composer", "label", "other_credits"))
     ],
 }
-"""What the spec changes: a profile can be in any country, and two fields Steam added."""
+"""What the spec changes: a profile can be in any country, and the fields Steam added."""
 
 
 @pytest.mark.parametrize("table", APP_TABLES)

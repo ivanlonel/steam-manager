@@ -72,6 +72,21 @@ class HistogramResults(SteamModel):
     """Always empty so far."""
 
 
+class PastEvent(SteamModel):
+    """
+    A period the store marks on the review graph (seen first on 2026-11-28).
+
+    Its meaning is unverified: ``type`` was 0 on every one seen.
+    """
+
+    type: int | None = None
+    """Steam's code for its kind."""
+    start_date: int | None = None
+    """When it starts, in epoch seconds."""
+    end_date: int | None = None
+    """When it ends, in epoch seconds."""
+
+
 class ReviewHistogramAnswer(SteamModel):
     """The answer of ``appreviewhistogram``. Its totals differ from the store's review count."""
 
@@ -83,6 +98,8 @@ class ReviewHistogramAnswer(SteamModel):
     """Whether it counts reviews by people who didn't buy the app on Steam."""
     expand_graph: bool | None = None
     """Whether the store page shows it expanded."""
+    past_events: tuple[PastEvent, ...] = ()
+    """Periods the store marks on the graph."""
 
 
 class CurrentPlayersResponse(SteamModel):

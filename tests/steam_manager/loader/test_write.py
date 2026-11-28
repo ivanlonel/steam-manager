@@ -10,7 +10,7 @@ from steam_manager.db.engine import open_database
 from steam_manager.db.schema import SteamBase
 from steam_manager.db.schema.apps import App
 from steam_manager.db.schema.classification import AppTag
-from steam_manager.db.schema.creators import AppCredit, Credit
+from steam_manager.db.schema.creators import AppCredit, Creator, Credit
 from steam_manager.db.schema.lookups import ReviewScore, Tag
 from steam_manager.db.schema.offers import Offer, OfferDiscount, OfferPrice
 from steam_manager.loader.rows import Rows
@@ -70,6 +70,18 @@ def test_references_get_blank_parents(connection: Connection) -> None:
     assert connection.scalars(select(Tag.tagid)).all() == [5]
     assert writer.blank_parents == Counter({"app": 1, "tag": 1})
     assert writer.loaded == Counter({"app_tag": 1})
+
+
+def test_a_first_franchise_gets_a_blank_creator(connection: Connection) -> None:
+    """An app's first franchise nothing describes gets a blank creator page to point at."""
+    rows = Rows()
+    rows.add(App, appid=1, first_franchise_creator_id=77)
+    writer = Writer(connection, home="BR")
+
+    writer.write(rows, home=True)
+
+    assert connection.scalars(select(Creator.creator_id)).all() == [77]
+    assert writer.blank_parents == Counter({"creator": 1})
 
 
 def test_a_repeat_within_an_answer_keeps_the_first(connection: Connection) -> None:

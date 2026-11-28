@@ -195,6 +195,19 @@ class App(SteamBase):
     """What all the DLC on sale for it cost, as the store shows it in :attr:`store_country`."""
     dlc_count: Mapped[int | None]
     """How many DLC are on sale for it, which Steam lists 200 of at most."""
+    steam_deck_blog_url: Mapped[str | None]
+    """The announcement of its Steam Deck review, as Steam sends it."""
+    first_franchise_creator_id: Mapped[int | None] = mapped_column(
+        ForeignKey("creator.creator_id")
+    )
+    """
+    The creator page of its first franchise.
+
+    Stored, not derived: a DLC sends its parent's without the franchises, and a franchise
+    credit can lack a creator page.
+    """
+    running_time_minutes: Mapped[int | None]
+    """How long it runs, in minutes, when it is a video."""
 
 
 class AppText(SteamBase):
@@ -233,3 +246,11 @@ class AppText(SteamBase):
     """Whether its price will change."""
     early_access_community_bbcode: Mapped[str | None]
     """How the community takes part."""
+    music_album_artist: Mapped[str | None]
+    """A soundtrack's artist."""
+    music_album_composer: Mapped[str | None]
+    """A soundtrack's composer."""
+    music_album_label: Mapped[str | None]
+    """A soundtrack's record label."""
+    music_album_other_credits: Mapped[str | None]
+    """Everyone else a soundtrack credits, as free text."""

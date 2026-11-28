@@ -15,7 +15,7 @@ normative; each stage's plan sits next to this file.
 |    6 | Database schema, part 2                                                                        | #12          |
 |    7 | Reports (`v_*` views)                                                                          | #13          |
 |    8 | Loader (three pull requests: the new fields, store items into rows, then choosing and writing) | #17–#19      |
-|    9 | Profiles and the sync                                                                          | #20          |
+|    9 | Profiles and the sync, then the fields its live runs found                                     | #20–#21      |
 |   10 | **CLI and exports** (next)                                                                     |              |
 |   11 | Kaggle import                                                                                  |              |
 |   12 | HowLongToBeat (spike first: if the list can't be paged or lacks the appid, stop and ask)       |              |
@@ -41,18 +41,6 @@ normative; each stage's plan sits next to this file.
 
 Decisions and checks a review or a ruling left to the stage that owns them. The spec already
 records the loader's decisions, where every new field went, and Kaggle dating by file time.
-
-**Loader, before the CLI** (the sync's live smoke, 2026-11-28, once it fetched DLC and
-soundtracks as referenced apps)
-
-- Soundtracks send `extra_details.music_album`: tracks (disc, number, name, seconds) and an
-  artist. Nothing stores them.
-- DLC with a season pass send `season_pass.milestones[].backfilled_release`, a flag. Nothing
-  stores it.
-- Review histograms can send `past_events` at the top (Tekken 8: a type and two dates).
-  Nothing stores them.
-- Soundtracks send `basic_info.first_franchise_clan_account_id` without `franchises`, so its
-  check against the first franchise's creator page reports a mismatch on each.
 
 **CLI and exports**
 
@@ -82,6 +70,9 @@ soundtracks as referenced apps)
 - The transport keeps a host's failure count after a streak, so a `Transport` reused after one
   (a web interface, a scheduled sync) stops at its first failure; build a new one per run.
 - Whoever filters `wishlist()` filters it as a subquery: `ROW_NUMBER` runs after `WHERE`.
+- The live runs of 2026-11-28 reached games, demos, DLC, soundtracks, software, hardware, mods
+  and a video, but no tool or playtest (SteamVR and Steam Audio come back as games): the first
+  sync to reach one may meet fields nothing stores.
 
 **Kaggle import**
 

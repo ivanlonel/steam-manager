@@ -9,6 +9,7 @@ from steam_manager.db.schema.classification import (
     AppManufacturer,
 )
 from steam_manager.db.schema.lookups import Anticheat
+from steam_manager.db.schema.media import AppTrack
 from steam_manager.db.schema.relations import (
     AppDlc,
     AppRelated,
@@ -56,6 +57,7 @@ _EXTRA_COLUMNS: Final = (
     "drm_third_party_type",
     "user_account_third_party",
     "user_account_third_party_link_to_steam",
+    "running_time_minutes",
 )
 
 
@@ -137,11 +139,38 @@ def extra_details(
         prefix="early_access_",
     )
     texts |= {name: getattr(extra, name) for name in _EXTRA_TEXTS}
+    album = extra.music_album
+    texts |= read_columns(
+        album,
+        join(at, "music_album"),
+        ("artist", "composer", "label", "other_credits"),
+        findings,
+        prefix="music_album_",
+        used=("tracks",),
+    )
+    positioned(
+        appid,
+        AppTrack,
+        album.tracks if album else (),
+        rows,
+        findings,
+        at=join(at, "music_album.tracks[]"),
+        columns={
+            name: name
+            for name in (
+                "disc_number",
+                "track_number",
+                "name",
+                "other_name",
+                "duration_seconds",
+            )
+        },
+    )
     _season_pass(appid, extra.season_pass, join(at, "season_pass"), rows, findings)
     _requirements(
         appid, extra.system_requirements, join(at, "system_requirements"), rows, findings
     )
-    _compatibility(
+    columns |= _compatibility(
         appid, extra.hardware_compatibility, join(at, "hardware_compatibility"), rows, findings
     )
     positioned(
@@ -212,6 +241,7 @@ def extra_details(
             "system_requirements",
             "hardware_compatibility",
             "dlc_for_purchase",
+            "music_album",
         },
     )
     return columns, texts
@@ -349,6 +379,7 @@ def _season_pass(
             event_gid=milestone.event_gid,
             rtime_complete=iso(milestone.rtime_complete),
             shipped=milestone.shipped,
+            backfilled_release=milestone.backfilled_release,
         )
         findings.rest(
             milestone,
@@ -360,6 +391,7 @@ def _season_pass(
                 "event_gid",
                 "rtime_complete",
                 "shipped",
+                "backfilled_release",
                 "dates",
                 "title",
                 "milestone_desc",
@@ -430,7 +462,7 @@ def _requirements(
 
 def _compatibility(
     appid: int, tests: HardwareCompatibility | None, at: str, rows: Rows, findings: Findings
-) -> None:
+) -> Columns:
     """
     Turn the results of Steam's compatibility reviews into rows, per device in Steam's order.
 
@@ -439,6 +471,7 @@ def _compatibility(
     :param at: Where they sit in the answer.
     :param rows: Where the rows go.
     :param findings: Where fields nothing stores are counted.
+    :return: The columns: the Steam Deck review's announcement.
     """
     for device in DEVICES if tests else ():
         for position, test in enumerate(getattr(tests, f"{device}_tests")):
@@ -451,4 +484,10 @@ def _compatibility(
                 display_type=test.display_type,
                 loc_token=test.loc_token,
             )
-    findings.rest(tests, at, {f"{device}_tests" for device in DEVICES})
+    return read_columns(
+        tests,
+        at,
+        ("steam_deck_blog_url",),
+        findings,
+        used=[f"{device}_tests" for device in DEVICES],
+    )
