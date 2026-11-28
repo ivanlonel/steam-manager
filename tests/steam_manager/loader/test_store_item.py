@@ -9,7 +9,7 @@ import pytest
 from sqlalchemy import create_engine, insert
 
 from steam_manager.db.schema import SteamBase
-from steam_manager.loader.rows import iso
+from steam_manager.loader.rows import MalformedAnswerError, iso
 from steam_manager.loader.store_item import (
     SHARED_TABLES,
     STORE_ITEM_TABLES,
@@ -203,7 +203,7 @@ def test_a_credit_without_a_name_is_malformed() -> None:
     """A credit names someone; without a name it can't be stored."""
     item = StoreItem.model_validate({"id": 620, "basic_info": {"developers": [{}]}})
 
-    with pytest.raises(ValueError, match=r"basic_info\.developers\[\] has no name"):
+    with pytest.raises(MalformedAnswerError, match=r"basic_info\.developers\[\] has no name"):
         describe(item, country="BR", category_types={})
 
 
@@ -211,7 +211,7 @@ def test_a_creator_without_an_id_is_malformed() -> None:
     """A creator page is known by its id; without one it can't be stored."""
     item = StoreItem.model_validate({"id": 620, "included_items": {"included_creators": [{}]}})
 
-    with pytest.raises(ValueError, match=r"included_creators\[\] has no id"):
+    with pytest.raises(MalformedAnswerError, match=r"included_creators\[\] has no id"):
         describe(item, country="BR", category_types={})
 
 

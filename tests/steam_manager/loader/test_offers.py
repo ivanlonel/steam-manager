@@ -13,7 +13,7 @@ from hypothesis import given
 from hypothesis import strategies as st
 
 from steam_manager.loader.offers import included_offer, purchase_option, sql_round
-from steam_manager.loader.rows import Findings, Rows
+from steam_manager.loader.rows import Findings, MalformedAnswerError, Rows
 from steam_manager.steam.models.offers import PurchaseOption
 from steam_manager.steam.models.store_item import IncludedOffer, StoreItem
 
@@ -171,7 +171,7 @@ def test_a_new_field_in_an_option_is_reported_at_its_path() -> None:
 
 def test_an_option_without_an_offer_is_refused() -> None:
     """An option naming neither a package nor a bundle can't be stored."""
-    with pytest.raises(ValueError, match="neither a package nor a bundle"):
+    with pytest.raises(MalformedAnswerError, match="neither a package nor a bundle"):
         purchase_option(PurchaseOption(), "o", "BR", Rows(), Findings())
 
 
@@ -233,7 +233,26 @@ def test_an_included_package_keeps_its_descriptors_and_own_price() -> None:
 
 def test_an_included_offer_without_an_id_is_refused() -> None:
     """A short record naming no offer can't be stored."""
-    with pytest.raises(ValueError, match=r"included_packages\[\] has no id"):
+    with pytest.raises(MalformedAnswerError, match=r"included_packages\[\] has no id"):
         included_offer(
             IncludedOffer(), "included_packages[]", "BR", Rows(), Findings(), kind="package"
         )
+
+
+def test_an_included_offers_option_reports_what_no_page_stores() -> None:
+    """A short record's option belongs to no app's page: an edition flag there is reported."""
+    package = IncludedOffer.model_validate(
+        {
+            "id": 7,
+            "item_type": 1,
+            "visible": True,
+            "success": 1,
+            "best_purchase_option": {"packageid": 7, "is_edition": True, "package_group": "x"},
+        }
+    )
+    findings = Findings()
+
+    included_offer(package, "included_packages[]", "BR", Rows(), findings, kind="package")
+
+    assert findings.unknown == Counter({"included_packages[].best_purchase_option.is_edition": 1})
+    assert findings.mismatches["included_offer.package_group"] == 1
