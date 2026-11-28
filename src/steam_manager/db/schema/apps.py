@@ -35,7 +35,10 @@ class App(SteamBase):
     store_country: Mapped[str | None]
     """The country whose store described it."""
     is_listed: Mapped[bool | None]
-    """Whether either store lists it, known only for apps imported from the Kaggle catalog."""
+    """
+    Whether the latest listing of one of the profile's stores holds it: blank for an app
+    listings don't cover (anything but games, mods and software), and before any listing.
+    """
     is_free: Mapped[bool | None]
     """Whether it is free."""
     unlisted: Mapped[bool | None]
@@ -184,6 +187,10 @@ class App(SteamBase):
     """When its images last changed, in epoch seconds."""
     assets_appid: Mapped[int | None] = mapped_column(ForeignKey("app.appid"))
     """The app its images belong to, when another one."""
+    counts_all_purchases: Mapped[bool | None]
+    """Whether its review counts include people who didn't buy it on Steam."""
+    dlc_formatted_total_price: Mapped[str | None]
+    """What all the DLC on sale for it cost, as the store shows it in :attr:`store_country`."""
 
 
 class AppText(SteamBase):

@@ -16,9 +16,19 @@ APP_TABLES: Final = ("app", "app_text")
 """The app tables."""
 
 CHANGED_FROM_THE_NOTEBOOK: Final = {
-    "app": ["only in the notebook: app check (store_country IN ('BR', 'US'))"],
+    "app": [
+        "only in the notebook: app check (store_country IN ('BR', 'US'))",
+        (
+            "only declared: app.counts_all_purchases #82: INTEGER notnull=0 pk=0 default=None"
+            " hidden=0"
+        ),
+        (
+            "only declared: app.dlc_formatted_total_price #83: TEXT notnull=0 pk=0 default=None"
+            " hidden=0"
+        ),
+    ],
 }
-"""What the spec changes: a profile can be in any country."""
+"""What the spec changes: a profile can be in any country, and two fields Steam added."""
 
 
 @pytest.mark.parametrize("table", APP_TABLES)

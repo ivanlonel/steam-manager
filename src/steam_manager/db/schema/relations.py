@@ -107,3 +107,21 @@ class SeasonPassMilestoneText(SteamBase):
     """The language."""
     localized_string: Mapped[str | None]
     """The text."""
+
+
+class AppDlc(SteamBase):
+    """A DLC the store page offers next to an app, in the store's order."""
+
+    __tablename__ = "app_dlc"
+    __table_args__ = STRICT_WITHOUT_ROWID
+
+    appid: Mapped[int] = mapped_column(ForeignKey(App.appid), primary_key=True)
+    """The app."""
+    dlc_appid: Mapped[int] = mapped_column(ForeignKey(App.appid), primary_key=True)
+    """The DLC."""
+    position: Mapped[int]
+    """Its place in the store's list."""
+    packageid: Mapped[int | None]
+    """The package it is sold in, which isn't always among the app's offers."""
+    highlight_reason: Mapped[int | None]
+    """Steam's code for why the store highlights it."""

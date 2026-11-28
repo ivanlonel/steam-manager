@@ -59,6 +59,8 @@ class AppReviewHistogram(SteamBase):
     """Its first day."""
     end_date: Mapped[str | None]
     """Its last day."""
+    count_all_reviews: Mapped[bool | None]
+    """Whether it counts people who didn't buy the app on Steam."""
 
 
 class ReviewHistory(SteamBase):
