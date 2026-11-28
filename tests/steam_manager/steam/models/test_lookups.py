@@ -41,6 +41,19 @@ def test_the_genres_of_an_app_are_fully_declared() -> None:
     )
 
     assert unknown_fields(answer) == []
-    data = answer.root["620"].data
+    part = answer.root["620"]
+    assert part is not None
+    data = part.data
     assert data is not None
     assert data.genres
+
+
+def test_genres_without_data_validate() -> None:
+    """Steam says "no genres" as an empty list, or with no part for the app at all."""
+    empty = AppDetailsGenresAnswer.model_validate_json('{"1": {"success": true, "data": []}}')
+    missing = AppDetailsGenresAnswer.model_validate_json('{"1": null}')
+
+    part = empty.root["1"]
+    assert part is not None
+    assert part.data is None
+    assert missing.root["1"] is None

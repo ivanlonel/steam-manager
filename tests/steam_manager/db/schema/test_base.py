@@ -47,7 +47,9 @@ STEAM_TABLES: Final = frozenset(
         *REQUIREMENT_TABLES,
         *REVIEW_TABLES,
         *ACCOUNT_TABLES,
-        "app_compatibility_test",  # the notebook has no such table, so nothing compares it
+        # The notebook has no such tables, so nothing compares them.
+        "app_compatibility_test",
+        "app_dlc",
     }
 )
 """Every Steam table this release declares: the notebook's, each compared with it, and more."""

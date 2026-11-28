@@ -122,8 +122,9 @@ class SalePage(SteamModel):
 
     clan_account_id: int | None = None
     """The group that owns the page."""
-    event_gid: int | None = None
-    """The page's event, an int64 sent as a string."""
+    event_gid: str | None = None
+    """The page's event: a uint64 Steam sends as text, kept as text since it can exceed
+    SQLite's INTEGER."""
 
 
 class AwardLocalization(SteamModel):
@@ -171,8 +172,9 @@ class Milestone(SteamModel):
     """The app it delivers, once it ships."""
     coming_soon_appid: int | None = None
     """The app it will deliver."""
-    event_gid: int | None = None
-    """Its announcement event, an int64 sent as a string."""
+    event_gid: str | None = None
+    """Its announcement event: a uint64 Steam sends as text, kept as text since it can exceed
+    SQLite's INTEGER."""
     rtime_complete: int | None = None
     """When it shipped, in epoch seconds."""
     shipped: bool | None = None

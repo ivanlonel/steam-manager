@@ -1,6 +1,6 @@
 """Payload models of the lookups: the names of store categories, tags and genres."""
 
-from pydantic import ConfigDict, RootModel
+from pydantic import ConfigDict, RootModel, field_validator
 
 from steam_manager.steam.models.base import SteamModel
 
@@ -103,10 +103,25 @@ class AppGenres(SteamModel):
     success: bool | None = None
     """Whether the store knows the app."""
     data: AppGenresData | None = None
-    """Its genres."""
+    """Its genres, or ``None`` when it has none."""
+
+    @field_validator("data", mode="before")
+    @classmethod
+    def _no_genres(cls, value: object) -> object:
+        """
+        Read Steam's empty list as no genres: it sends ``[]`` where an object would go.
+
+        :param value: The ``data`` Steam sent.
+        :return: ``None`` for an empty list, else the value as sent.
+        """
+        return None if value == [] else value
 
 
-class AppDetailsGenresAnswer(RootModel[dict[str, AppGenres]]):
-    """The answer of ``appdetails``: a part per appid asked, keyed by the appid as text."""
+class AppDetailsGenresAnswer(RootModel[dict[str, AppGenres | None]]):
+    """
+    The answer of ``appdetails``: a part per appid asked, keyed by the appid as text.
+
+    A part is ``None`` when Steam sends ``null`` for the app.
+    """
 
     model_config = ConfigDict(frozen=True)
