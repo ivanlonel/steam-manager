@@ -15,7 +15,13 @@ from hypothesis import given, settings
 from hypothesis import strategies as st
 
 from steam_manager.answers import Answer, Kind
-from steam_manager.archive import ARCHIVE_VERSION, Archive, ArchiveVersionError, CorruptAnswerError
+from steam_manager.archive import (
+    ARCHIVE_VERSION,
+    Archive,
+    ArchiveVersionError,
+    CorruptAnswerError,
+    Stamp,
+)
 
 AT: Final = datetime(2026, 11, 15, 12, 0, 0, 123456, UTC)
 """When the test answers arrived, to the microsecond."""
@@ -285,6 +291,26 @@ def test_fetched_at_maps_each_key_to_its_time(archive: Archive) -> None:
     assert archive.fetched_at("steam", Kind.STORE_ITEM, country="BR") == {"620": AT, "400": LATER}
 
 
+def test_stamps_list_answers_without_their_bodies(archive: Archive) -> None:
+    """The loader learns what the archive holds, and how old it is, without reading a body."""
+    later = AT + timedelta(seconds=1)
+    archive.put([answer("620"), answer("570", country="US", at=later)])
+
+    assert sorted(archive.stamps()) == [
+        Stamp("steam", "store_item", "570", "US", later),
+        Stamp("steam", "store_item", "620", "BR", AT),
+    ]
+
+
+def test_stamps_of_some_kinds(archive: Archive) -> None:
+    """The loader can ask for the stamps of the kinds it needs only."""
+    archive.put([answer("620"), answer("", kind=Kind.LISTING), answer("620", kind=Kind.TAGS)])
+
+    stamps = archive.stamps(kinds={Kind.LISTING, Kind.TAGS})
+
+    assert sorted(stamp.kind for stamp in stamps) == ["listing", "tags"]
+
+
 def test_a_corrupt_body_names_its_answer(archive: Archive, path: Path) -> None:
     """A damaged row is reported with its key, so the loader can say which answer it skipped."""
     archive.put([answer()])
@@ -360,3 +386,11 @@ def test_any_text_and_time_come_back_exactly(
         fresh.put([answer(body=body, at=at)])
 
         assert fresh.get("steam", Kind.STORE_ITEM, "620", "BR") == answer(body=body, at=at)
+
+
+def test_a_damaged_answer_still_has_a_stamp(archive: Archive, path: Path) -> None:
+    """Stamps never decompress a body, so a damaged one is still listed, to be reported later."""
+    archive.put([answer("620")])
+    damage(path, "620", {"body": b"oops"})
+
+    assert [stamp.key for stamp in archive.stamps()] == ["620"]
