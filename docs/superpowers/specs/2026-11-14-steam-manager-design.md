@@ -396,10 +396,10 @@ The builder's calls:
 The builder's calls (2026-11-28):
 
 - **What changed:** a load compares every archived answer's fetch time with `loaded_answer`,
-  the Steam table that records what the tables reflect, and reloads only what changed: an app
-  whose own answers changed, and the figures, lists and lookups whose answers changed. One
-  transaction holds the whole load, and `rebuild` empties the Steam tables first in it. A change
-  of countries needs a rebuild.
+  the Steam table that records what the tables reflect, and loads again only what changed: an
+  app whose own answers changed, and the figures, lists and lookups whose answers changed. One
+  transaction holds the whole load, and `rebuild` empties the Steam tables first in it. A load
+  that finds other countries than the tables were ranked for (`loaded_country`) rebuilds them.
 - **Shared rows:** an app's own rows are replaced. An offer takes the newer value Steam sent for
   each column, but for `success`, `unavailable_for_country_restriction` and the best offer,
   which depend on the country, a fallback country only fills what the home country left blank.
