@@ -51,6 +51,7 @@ STEAM_TABLES: Final = frozenset(
         "app_compatibility_test",
         "app_dlc",
         "app_featured_creator",
+        "loaded_answer",  # the loader's progress, dropped with the tables it describes
     }
 )
 """Every Steam table this release declares: the notebook's, each compared with it, and more."""
