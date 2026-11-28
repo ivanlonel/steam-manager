@@ -3,41 +3,79 @@ The loader: the one path from archived answers to database rows (ADR 0002).
 
 A load makes the Steam tables reflect the raw archive in one transaction. It reads every
 answer's stamp, finds those fetched since the database last reflected them, and loads only
-what they change: each app they describe is replaced in place, from its most complete answer.
+what they change: each app they describe is replaced in place, from its most complete answer,
+and every other kind of answer fills the tables it owns.
 """
 
 import itertools
 from collections import Counter
 from dataclasses import dataclass, field
 from datetime import datetime
+from functools import partial
 from operator import attrgetter
 from typing import TYPE_CHECKING, Any, Final, cast
 
 from pydantic import ValidationError
-from sqlalchemy import Column, MetaData, Table, Text, and_, delete, insert, select
+from sqlalchemy import (
+    Column,
+    MetaData,
+    Table,
+    Text,
+    and_,
+    bindparam,
+    delete,
+    insert,
+    select,
+    update,
+)
 from sqlalchemy.dialects.sqlite import insert as upsert
 
 from steam_manager.answers import Kind
 from steam_manager.archive import CorruptAnswerError
 from steam_manager.db.schema import SteamBase
+from steam_manager.db.schema.account import FollowedApp, WishlistItem
 from steam_manager.db.schema.apps import App
 from steam_manager.db.schema.lookups import StoreCategory
 from steam_manager.db.schema.progress import LoadedAnswer
+from steam_manager.db.schema.reviews import (
+    AppReviewHistogram,
+    AppReviewSummary,
+    AppReviewTotal,
+    ReviewHistory,
+)
+from steam_manager.loader.account import followed, wishlist
+from steam_manager.loader.lookups import genres, languages, store_categories, tags
+from steam_manager.loader.reviews import exact_totals, histogram, players, review_total
+from steam_manager.loader.rows import Findings, Rows
 from steam_manager.loader.store_item import describe
 from steam_manager.loader.write import ForeignKeyViolationError, Writer, check_foreign_keys
-from steam_manager.steam.models.store_item import StoreItem
+from steam_manager.steam.models.account import FollowedAppsAnswer, WishlistAnswer
+from steam_manager.steam.models.listing import ListingAnswer
+from steam_manager.steam.models.lookups import (
+    AppDetailsGenresAnswer,
+    StoreCategoriesAnswer,
+    TagListAnswer,
+)
+from steam_manager.steam.models.reviews import (
+    AppReviewsAnswer,
+    CurrentPlayersAnswer,
+    ReviewHistogramAnswer,
+)
+from steam_manager.steam.models.store_item import ReviewSummary, StoreItem
+from steam_manager.steam.webapi import STEAM
 
 if TYPE_CHECKING:
-    from collections.abc import Iterable, Sequence
+    from collections.abc import Callable, Collection, Iterable, Sequence
 
     from pydantic import BaseModel
     from sqlalchemy import Connection, Engine, Row, Select
 
     from steam_manager.archive import Archive
-    from steam_manager.loader.rows import Findings
     from steam_manager.loader.store_item import Described
+    from steam_manager.steam.models.reviews import QuerySummary
 
 __all__ = [
+    "LISTED_TYPES",
     "LOAD_BATCH",
     "ForeignKeyViolationError",
     "LoadReport",
@@ -51,6 +89,8 @@ LOAD_BATCH: Final = 500
 """Apps written at a time, inside the load's one transaction."""
 STAMP_CHUNK: Final = 5000
 """Stamps copied into the database at a time."""
+LISTED_TYPES: Final = frozenset({0, 2, 6})
+"""The app types a listing covers: games, mods and software, what ``list_apps`` asks for."""
 
 _STORE_KINDS: Final = (str(Kind.STORE_ITEM), str(Kind.STORE_ITEM_LIGHT))
 _NESTED: Final = "included_items.included_apps[]"
@@ -93,8 +133,11 @@ class LoadReport:
     """What a load did, and what a healthy one leaves empty."""
 
     unknown: Counter[str] = field(default_factory=Counter)
-    """Fields Steam sent that nothing stores, by path. A store item's paths start at its top;
-    every other kind's start with the kind."""
+    """
+    Fields Steam sent that nothing stores, by path.
+
+    A store item's paths start at its top; every other kind's start with the kind.
+    """
     mismatches: Counter[str] = field(default_factory=Counter)
     """Values left out as derivable, with how often they didn't follow."""
     malformed: list[Malformed] = field(default_factory=list)
@@ -209,6 +252,32 @@ def _changed(kinds: Iterable[str] | None = None) -> Select[*tuple[Any, ...]]:
     return query if kinds is None else query.where(_STAMP.c.kind.in_(list(kinds)))
 
 
+def _latest(stamps: Iterable[StampRow]) -> StampRow | None:
+    """
+    Pick the stamp fetched last.
+
+    :param stamps: Some stamps.
+    :return: The latest, or ``None`` without any; their times are text of a fixed width.
+    """
+    return max(stamps, key=attrgetter("fetched_at"), default=None)
+
+
+@dataclass(slots=True)
+class _Known:
+    """What a load has learned in its earlier steps, for its later ones."""
+
+    category_types: dict[int, int] = field(default_factory=dict)
+    """Each store category's list, by id."""
+    listed: frozenset[int] | None = None
+    """The apps the profile's latest listings hold, or ``None`` before any listing."""
+    listing_changed: bool = False
+    """Whether one of those listings changed in this load."""
+    nested: dict[int, tuple[tuple[int, float], StampRow]] = field(default_factory=dict)
+    """The best short record of each app, as its holder's place and stamp."""
+    written: dict[int, tuple[ReviewSummary | None, bool | None]] = field(default_factory=dict)
+    """Each app this load wrote, with its review summary and whether it is free."""
+
+
 class _Load:
     """One load's work, inside its transaction."""
 
@@ -232,8 +301,7 @@ class _Load:
         self._countries = list(countries)
         self._report = report
         self._writer = Writer(connection, home=countries[0])
-        self._category_types: dict[int, int] = {}
-        self._nested: dict[int, tuple[tuple[int, float], StampRow]] = {}
+        self._known = _Known()
 
     def run(self) -> None:
         """Copy the stamps, load what changed, check every reference and record the progress."""
@@ -252,14 +320,17 @@ class _Load:
                     for stamp in chunk
                 ],
             )
-        types = select(StoreCategory.categoryid, StoreCategory.type)
-        self._category_types = {
-            categoryid: kind
-            for categoryid, kind in self._connection.execute(types)
-            if kind is not None
-        }
+        self._lookups()
+        self._listings()
         self._apps()
         self._gaps()
+        if self._known.listing_changed:
+            self._relist()
+        self._players()
+        self._totals()
+        self._histograms()
+        self._replace_list(Kind.WISHLIST, WishlistAnswer, wishlist, WishlistItem)
+        self._replace_list(Kind.FOLLOWED_APPS, FollowedAppsAnswer, followed, FollowedApp)
         check_foreign_keys(self._connection)
         statement = upsert(_LOADED).from_select([*_IDENTITY, "fetched_at"], _changed())
         statement = statement.on_conflict_do_update(
@@ -269,6 +340,21 @@ class _Load:
         self._report.add(self._writer.findings)
         self._report.loaded.update(self._writer.loaded)
         self._report.blank_parents.update(self._writer.blank_parents)
+
+    def _stamps(self, kind: Kind, *, changed: bool = False) -> list[StampRow]:
+        """
+        Read the stamps of one kind.
+
+        :param kind: The kind.
+        :param changed: Only those fetched since the database last reflected them.
+        :return: The stamps.
+        """
+        query = (
+            _changed([str(kind)])
+            if changed
+            else select(*_STAMP.c).where(_STAMP.c.kind == str(kind))
+        )
+        return list(self._connection.execute(query))
 
     def _place(self, stamp: StampRow) -> tuple[int, float]:
         """
@@ -315,6 +401,29 @@ class _Load:
             self._malformed(stamp, _reason(error))
             return None
 
+    def _turn[M: BaseModel](
+        self, stamp: StampRow, model: type[M], turn: Callable[[M, Rows, Findings], None]
+    ) -> Rows | None:
+        """
+        Read an archived answer and turn it into rows, reporting it when it can't be.
+
+        :param stamp: The answer's stamp.
+        :param model: Its payload model.
+        :param turn: What turns the validated answer into rows.
+        :return: The rows, or ``None`` when the answer was skipped.
+        """
+        answer = self._parse(stamp, model)
+        if answer is None:
+            return None
+        rows, findings = Rows(), Findings()
+        try:
+            turn(answer, rows, findings)
+        except ValueError as error:
+            self._malformed(stamp, str(error))
+            return None
+        self._report.add(findings)
+        return rows
+
     def _malformed(self, stamp: StampRow, reason: str) -> None:
         """
         Report an answer the load skips.
@@ -325,6 +434,81 @@ class _Load:
         self._report.malformed.append(
             Malformed(stamp.source, stamp.kind, stamp.key, stamp.country, reason)
         )
+
+    def _lookups(self) -> None:
+        """Name languages, store categories, tags and genres, from the latest lists."""
+        rows = Rows()
+        languages(rows)
+        lists = (
+            (
+                Kind.STORE_CATEGORIES,
+                partial(self._turn, model=StoreCategoriesAnswer, turn=store_categories),
+            ),
+            (Kind.TAGS, partial(self._turn, model=TagListAnswer, turn=tags)),
+        )
+        for kind, turn in lists:
+            latest = _latest(self._stamps(kind))
+            if latest is not None and latest in self._stamps(kind, changed=True):
+                rows.extend(turn(latest) or Rows())
+        for stamp in self._stamps(Kind.APP_GENRES, changed=True):
+            rows.extend(self._turn(stamp, AppDetailsGenresAnswer, genres) or Rows())
+        self._writer.write(rows, home=True)
+        types = select(StoreCategory.categoryid, StoreCategory.type)
+        self._known.category_types = {
+            categoryid: kind
+            for categoryid, kind in self._connection.execute(types)
+            if kind is not None
+        }
+
+    def _listings(self) -> None:
+        """Read the apps the latest listing of each of the profile's countries holds."""
+        stamps = self._stamps(Kind.LISTING)
+        changed = set(self._stamps(Kind.LISTING, changed=True))
+        listed: set[int] = set()
+        found = False
+        for country in self._countries:
+            latest = _latest(stamp for stamp in stamps if stamp.country == country)
+            if latest is None:
+                continue
+            found = True
+            self._known.listing_changed |= latest in changed
+            answer = self._parse(latest, ListingAnswer)
+            if answer is not None:
+                findings = Findings()
+                # total_matching_records is what the sync checks the listing against.
+                findings.rest(answer, "listing", {"total_matching_records", "appids"})
+                self._report.add(findings)
+                listed.update(answer.appids)
+        self._known.listed = frozenset(listed) if found else None
+
+    def _is_listed(self, appid: int, kind: int | None) -> bool | None:
+        """
+        Tell whether a listing of the profile's stores holds an app.
+
+        :param appid: The app.
+        :param kind: Its type, such as 0 for a game.
+        :return: ``True`` when one does; ``False`` when none does and listings cover its type;
+            ``None`` otherwise, and before any listing.
+        """
+        listed = self._known.listed
+        if listed is None:
+            return None
+        if appid in listed:
+            return True
+        return False if kind in LISTED_TYPES else None
+
+    def _relist(self) -> None:
+        """Write again whether each app is listed, where a changed listing changed it."""
+        changes = [
+            {"b_appid": appid, "b_listed": now}
+            for appid, kind, was in self._connection.execute(
+                select(App.appid, App.type, App.is_listed)
+            ).all()
+            if (now := self._is_listed(appid, kind)) != was
+        ]
+        if changes:
+            statement = update(App).where(App.appid == bindparam("b_appid"))
+            self._connection.execute(statement.values(is_listed=bindparam("b_listed")), changes)
 
     def _apps(self) -> None:
         """Replace every app whose own answers changed, from its most complete answer."""
@@ -362,7 +546,9 @@ class _Load:
                 self._malformed(stamp, "its id isn't its key")
                 continue
             try:
-                found = describe(item, country=stamp.country, category_types=self._category_types)
+                found = describe(
+                    item, country=stamp.country, category_types=self._known.category_types
+                )
             except ValueError as error:
                 self._malformed(stamp, str(error))
                 continue
@@ -373,17 +559,22 @@ class _Load:
 
     def _write(self, batch: Sequence[tuple[Described, StampRow]]) -> None:
         """
-        Write a batch of apps, and remember the best short records they hold.
+        Write a batch of apps, and remember what later steps need of them.
 
         :param batch: Each app's rows, with the answer they came from.
         """
+        known = self._known
         for found, stamp in batch:
+            item = found.item
             self._report.add(found.findings)
+            found.rows.tables["app"][0]["is_listed"] = self._is_listed(item.id, item.type)
+            summary = item.reviews.summary_filtered if item.reviews else None
+            known.written[item.id] = (summary, item.is_free)
             place = self._place(stamp)
             for record in found.nested:
-                best = self._nested.get(record.id)
+                best = known.nested.get(record.id)
                 if best is None or place < best[0]:
-                    self._nested[record.id] = (place, stamp)
+                    known.nested[record.id] = (place, stamp)
         self._writer.apps([(found, stamp.country) for found, stamp in batch])
 
     def _gaps(self) -> None:
@@ -393,17 +584,18 @@ class _Load:
         A gap takes the best short record this load read, by country, then the latest. Ceiling:
         an app keeps a short record from an earlier load until a rebuild.
         """
+        nested = self._known.nested
         filled: set[int] = set()
-        for chunk in itertools.batched(self._nested, LOAD_BATCH, strict=False):
+        for chunk in itertools.batched(nested, LOAD_BATCH, strict=False):
             query = select(App.appid).where(
                 App.appid.in_(chunk), App.name.is_not(None), App.success == 1
             )
             filled.update(self._connection.scalars(query))
         holders: dict[StampRow, set[int]] = {}
-        for appid, (_, stamp) in self._nested.items():
+        for appid, (_, stamp) in nested.items():
             if appid not in filled:
                 holders.setdefault(stamp, set()).add(appid)
-        self._nested.clear()
+        nested.clear()
         batch: list[tuple[Described, StampRow]] = []
         for stamp, appids in holders.items():
             holder = self._parse(stamp, StoreItem)
@@ -414,9 +606,158 @@ class _Load:
                     found = describe(
                         record,
                         country=stamp.country,
-                        category_types=self._category_types,
+                        category_types=self._known.category_types,
                         path=_NESTED,
                     )
                     batch.append((found, stamp))
         if batch:
             self._write(batch)
+
+    def _players(self) -> None:
+        """Write how many play each app, where the figure changed or its app was written."""
+        latest: dict[str, StampRow] = {}
+        for stamp in sorted(self._stamps(Kind.CURRENT_PLAYERS), key=attrgetter("fetched_at")):
+            latest[stamp.key] = stamp
+        changed = {stamp.key for stamp in self._stamps(Kind.CURRENT_PLAYERS, changed=True)}
+        figures = []
+        for key, stamp in latest.items():
+            if key not in changed and int(key) not in self._known.written:
+                continue
+            answer = self._parse(stamp, CurrentPlayersAnswer)
+            if answer is not None:
+                findings = Findings()
+                figures.append({"appid": int(key), "current_players": players(answer, findings)})
+                self._report.add(findings)
+        if figures:
+            statement = upsert(App)
+            statement = statement.on_conflict_do_update(
+                index_elements=["appid"],
+                set_={"current_players": statement.excluded.current_players},
+            )
+            self._connection.execute(statement, figures)
+
+    def _totals(self) -> None:
+        """Work out the review totals of every app written, and of those whose counts changed."""
+        changed = {
+            int(stamp.key.split(":")[0]) for stamp in self._stamps(Kind.APP_REVIEWS, changed=True)
+        }
+        targets = sorted(changed | self._known.written.keys())
+        rows, findings = Rows(), Findings()
+        for chunk in itertools.batched(targets, LOAD_BATCH, strict=False):
+            stored = self._summaries(
+                [appid for appid in chunk if appid not in self._known.written]
+            )
+            exact = self._exact(chunk, findings)
+            for appid in chunk:
+                summary, is_free = self._known.written.get(appid) or stored.get(
+                    appid, (None, None)
+                )
+                review_total(
+                    appid,
+                    summary,
+                    exact.get(appid, {}),
+                    is_free=is_free,
+                    rows=rows,
+                    findings=findings,
+                )
+        self._report.add(findings)
+        self._writer.clear([AppReviewTotal], targets)
+        self._writer.write(rows, home=True)
+
+    def _exact(
+        self, appids: Collection[int], findings: Findings
+    ) -> dict[int, dict[int, QuerySummary]]:
+        """
+        Read the exact review counts Steam's archived answers give some apps.
+
+        :param appids: The apps.
+        :param findings: Where fields nothing stores are counted.
+        :return: Each app's totals, by purchase type.
+        """
+        query = select(*_STAMP.c).where(
+            _STAMP.c.kind == str(Kind.APP_REVIEWS),
+            _STAMP.c.source == STEAM,
+            _STAMP.c.key.in_([f"{appid}:{kind}" for appid in appids for kind in (0, 1)]),
+        )
+        exact: dict[int, dict[int, QuerySummary]] = {}
+        for stamp in self._connection.execute(query):
+            answer = self._parse(stamp, AppReviewsAnswer)
+            counts = exact_totals(answer, findings) if answer else None
+            if counts is not None:
+                appid, kind = map(int, stamp.key.split(":"))
+                exact.setdefault(appid, {})[kind] = counts
+        return exact
+
+    def _summaries(
+        self, appids: Collection[int]
+    ) -> dict[int, tuple[ReviewSummary | None, bool | None]]:
+        """
+        Read the stored review summaries of apps this load didn't write.
+
+        :param appids: The apps.
+        :return: Each app's summary without the filtered-out reviews, and whether it is free.
+        """
+        query = (
+            select(
+                App.appid,
+                App.is_free,
+                AppReviewSummary.review_count,
+                AppReviewSummary.percent_positive,
+            )
+            .outerjoin(
+                AppReviewSummary,
+                and_(AppReviewSummary.appid == App.appid, AppReviewSummary.scope == "filtered"),
+            )
+            .where(App.appid.in_(appids))
+        )
+        return {
+            row.appid: (
+                None
+                if row.review_count is None
+                else ReviewSummary(
+                    review_count=row.review_count, percent_positive=row.percent_positive
+                ),
+                row.is_free,
+            )
+            for row in self._connection.execute(query)
+        }
+
+    def _histograms(self) -> None:
+        """Replace the review histograms that changed."""
+        latest: dict[str, StampRow] = {}
+        changed = self._stamps(Kind.REVIEW_HISTOGRAM, changed=True)
+        for stamp in sorted(changed, key=attrgetter("fetched_at")):
+            latest[stamp.key] = stamp
+        rows = Rows()
+        appids = []
+        for key, stamp in latest.items():
+            turn = partial(histogram, int(key))
+            found = self._turn(stamp, ReviewHistogramAnswer, turn)
+            if found is not None:
+                appids.append(int(key))
+                rows.extend(found)
+        self._writer.clear([ReviewHistory, AppReviewHistogram], appids)
+        self._writer.write(rows, home=True)
+
+    def _replace_list[M: BaseModel](
+        self,
+        kind: Kind,
+        model: type[M],
+        turn: Callable[[M, Rows, Findings], None],
+        table: type[SteamBase],
+    ) -> None:
+        """
+        Replace an account list whole with its latest answer, when that answer changed.
+
+        :param kind: The list's kind of answer.
+        :param model: Its payload model.
+        :param turn: What turns it into rows.
+        :param table: The table the list fills, emptied first.
+        """
+        latest = _latest(self._stamps(kind))
+        if latest is None or latest not in self._stamps(kind, changed=True):
+            return
+        rows = self._turn(latest, model, turn)
+        if rows is not None:
+            self._writer.clear([table], None)  # positions are unique: delete before inserting
+            self._writer.write(rows, home=True)
