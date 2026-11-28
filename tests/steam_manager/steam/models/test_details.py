@@ -1,8 +1,10 @@
 """Tests for the extra details' models."""
 
+from typing import Final
+
 from steam_manager.steam.models.details import Milestone, SalePage
 
-LARGEST_UINT64 = "18446744073709551615"
+LARGEST_UINT64: Final = "18446744073709551615"
 """An event id SQLite's INTEGER can't hold."""
 
 

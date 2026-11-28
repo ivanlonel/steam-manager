@@ -24,8 +24,9 @@ class AppRelated(SteamBase):
     """The app."""
     kind: Mapped[str] = mapped_column(primary_key=True)
     """
-    How the other app relates to it, such as ``demo`` or ``dlc_parent``; ``engine`` is an app
-    that provides its engine, which can be the app itself.
+    How the other app relates to it, such as ``demo`` or ``dlc_parent``.
+
+    ``engine`` is an app that provides its engine, which can be the app itself.
     """
     related_appid: Mapped[int] = mapped_column(ForeignKey(App.appid), primary_key=True)
     """The other app."""
@@ -56,7 +57,7 @@ class SeasonPassMilestone(SteamBase):
     coming_soon_appid: Mapped[int | None] = mapped_column(ForeignKey(App.appid))
     """The app it will deliver."""
     event_gid: Mapped[str | None]
-    """Its announcement event, an int64 Steam sends as text."""
+    """Its announcement event, a uint64 Steam sends as text."""
     rtime_complete: Mapped[str | None]
     """When it shipped."""
     shipped: Mapped[bool | None]

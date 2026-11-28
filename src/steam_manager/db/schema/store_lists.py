@@ -92,7 +92,7 @@ class AppSalePage(SteamBase):
     clan_account_id: Mapped[int | None]
     """The group that owns the page."""
     event_gid: Mapped[str | None]
-    """The page's event, an int64 Steam sends as text."""
+    """The page's event, a uint64 Steam sends as text."""
 
 
 class AppSteamAward(SteamBase):

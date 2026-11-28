@@ -5,21 +5,21 @@ normative; each stage's plan sits next to this file.
 
 ## Stages
 
-| Part | Stage                                                                                    | Pull request |
-| ---: | ---------------------------------------------------------------------------------------- | ------------ |
-|    1 | Scaffold, gates and automation                                                           | #2–#6        |
-|    2 | HTTP transport                                                                           | #7           |
-|    3 | Steam endpoints and payload models                                                       | #8           |
-|    4 | Raw archive                                                                              | #9           |
-|    5 | Database schema, part 1                                                                  | #10          |
-|    6 | Database schema, part 2                                                                  | #12          |
-|    7 | Reports (`v_*` views)                                                                    | #13          |
-|    8 | **Loader** (next; two PRs: store items into rows, then choosing and writing)             |              |
-|    9 | Sync                                                                                     |              |
-|   10 | CLI and exports                                                                          |              |
-|   11 | Kaggle import                                                                            |              |
-|   12 | HowLongToBeat (spike first: if the list can't be paged or lacks the appid, stop and ask) |              |
-|   13 | Usage docs                                                                               |              |
+| Part | Stage                                                                                          | Pull request |
+| ---: | ---------------------------------------------------------------------------------------------- | ------------ |
+|    1 | Scaffold, gates and automation                                                                 | #2–#6        |
+|    2 | HTTP transport                                                                                 | #7           |
+|    3 | Steam endpoints and payload models                                                             | #8           |
+|    4 | Raw archive                                                                                    | #9           |
+|    5 | Database schema, part 1                                                                        | #10          |
+|    6 | Database schema, part 2                                                                        | #12          |
+|    7 | Reports (`v_*` views)                                                                          | #13          |
+|    8 | **Loader** (next; three PRs: the new fields, store items into rows, then choosing and writing) |              |
+|    9 | Sync                                                                                           |              |
+|   10 | CLI and exports                                                                                |              |
+|   11 | Kaggle import                                                                                  |              |
+|   12 | HowLongToBeat (spike first: if the list can't be paged or lacks the appid, stop and ask)       |              |
+|   13 | Usage docs                                                                                     |              |
 
 ## How a stage runs
 
