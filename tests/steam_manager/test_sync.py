@@ -1,13 +1,14 @@
 """Tests for the sync: what it asks Steam, what it archives, and what it loads."""
 
 import asyncio
+import json
 from collections import Counter
 from contextlib import contextmanager
 from datetime import UTC, datetime, timedelta
 from typing import TYPE_CHECKING, Final
 
 import pytest
-from sqlalchemy import select
+from sqlalchemy import func, select
 
 from steam_manager.answers import Kind
 from steam_manager.archive import Archive
@@ -17,7 +18,7 @@ from steam_manager.profiles import Settings, create_profile, open_profile
 from steam_manager.steam.community import INDIVIDUAL_BASE
 from steam_manager.steam.webapi import STEAM
 from steam_manager.sync import Step, stale, sync
-from tests.steam_manager._steam import FakeSteam, fake_transport
+from tests.steam_manager._steam import FakeSteam, fake_transport, sold
 from tests.steam_manager.loader._archive import put
 
 if TYPE_CHECKING:
@@ -231,3 +232,112 @@ def test_light_entries_are_archived_a_page_at_a_time(profile: OpenProfile) -> No
     assert len(archived(profile, Kind.STORE_ITEM_LIGHT, "BR")) == 1000
     assert archived(profile, Kind.LISTING, "BR") == set()
     assert len(report.failed) == 1
+
+
+def first_asked(request: httpx.Request) -> int | None:
+    """
+    Tell which app a ``GetItems`` request asks first.
+
+    :param request: Any request.
+    :return: The first appid of a ``GetItems`` request, else ``None``.
+    """
+    if not request.url.path.endswith("/GetItems/v1/"):
+        return None
+    return int(json.loads(request.url.params["input_json"])["ids"][0]["appid"])
+
+
+def test_account_apps_and_their_references_get_full_entries(tmp_path: Path) -> None:
+    """The apps the account apps point at get full entries too, once, but not included apps."""
+    steam = FakeSteam(wishlist=[620, 2778580], followed=[1778820])
+    with opened(tmp_path, ["BR"]) as profile:
+        run(profile, steam, steps={Step.WISHLIST, Step.FOLLOWED, Step.APPS})
+
+    asked = steam.items_asked("BR")
+    account = [620, 1778820, 2778580]
+    # 620's DLC, 2778580's parent game, and 1778820's demo.
+    assert asked[:3] == account
+    assert {323180, 1245620, 2524440} <= set(asked[3:])
+    assert len(asked) == len(set(asked))
+    # Apps 620 and 2778580 include, and nothing points at otherwise.
+    assert not {104600, 240, 10, 80, 2778590, 2855520} & set(asked)
+
+
+def test_fallbacks_ask_only_what_earlier_countries_dont_sell(tmp_path: Path) -> None:
+    """A fallback asks for what no earlier country sells; what nobody sells, every one asks."""
+    items = {(620, "BR"): sold(620), (12170, "US"): sold(12170)}
+    steam = FakeSteam(wishlist=[620, 12170, 99], followed=[], items=items)
+    with opened(tmp_path, ["BR", "US", "JP"]) as profile:
+        run(profile, steam, steps={Step.WISHLIST, Step.APPS})
+
+    assert steam.items_asked("BR") == [99, 620, 12170]
+    assert steam.items_asked("US") == [99, 12170]
+    assert steam.items_asked("JP") == [99]
+
+
+def test_a_failed_batch_skips_only_that_batch(tmp_path: Path) -> None:
+    """A batch that fails is reported, and the next batch's apps are still archived."""
+    steam = FakeSteam(
+        wishlist=range(1, 151), followed=[], fail=lambda r: 400 if first_asked(r) == 1 else None
+    )
+    with opened(tmp_path, ["BR"]) as profile:
+        report = run(profile, steam, steps={Step.WISHLIST, Step.APPS})
+        entries = archived(profile, Kind.STORE_ITEM, "BR")
+
+    assert entries == {str(appid) for appid in range(101, 151)}
+    assert len(report.failed) == 1
+    assert "GetItems" in report.failed[0]
+
+
+def test_a_failure_streak_stops_the_sync(tmp_path: Path) -> None:
+    """A host failing ten requests in a row stops the sync; what came is loaded, and resumed."""
+
+    def fail(request: httpx.Request) -> int | None:
+        appid = first_asked(request)
+        return 503 if appid is not None and appid > 200 else None
+
+    steam = FakeSteam(wishlist=range(1, 1201), followed=[], fail=fail)
+    steps = {Step.WISHLIST, Step.APPS}
+    with opened(tmp_path, ["BR"]) as profile:
+        report = run(profile, steam, steps=steps)
+        with profile.engine.connect() as connection:
+            described = connection.scalar(select(func.count()).where(App.success.is_not(None)))
+        stopped_after = steam.methods()
+        steam.asked.clear()
+        steam.fail = lambda _request: None
+        run(profile, steam, steps=steps)
+
+    assert report.stopped is not None
+    assert "api.steampowered.com" in report.stopped
+    # Two batches, then ten that fail after five retries each, and nothing more.
+    assert stopped_after == ["GetWishlist"] + ["GetItems"] * 62
+    assert described == 200
+    # The account apps still stale; then what 570 and 620, among them, point at.
+    assert steam.items_asked("BR")[:1000] == list(range(201, 1201))
+
+
+def test_current_players_for_account_apps(profile: OpenProfile) -> None:
+    """How many play each account app is fetched, and stored on the app."""
+    run(profile, FakeSteam(), steps={Step.WISHLIST, Step.FOLLOWED, Step.APPS})
+
+    with profile.engine.connect() as connection:
+        players = connection.execute(
+            select(App.appid, App.current_players).where(App.appid.in_([620, 400, 70]))
+        )
+        found = {row.appid: row.current_players for row in players}
+
+    assert archived(profile, Kind.CURRENT_PLAYERS) == {"620", "400", "70"}
+    assert found == {620: 7, 400: 7, 70: 7}
+
+
+def test_genre_names_are_asked_once_per_unnamed_genre(tmp_path: Path) -> None:
+    """One app is asked per genre without a name; its other genres need no call of their own."""
+    info = {
+        (appid, "BR"): sold(appid, extra_details={"links_and_info": {"genreids": genres}})
+        for appid, genres in ((620, [1, 25]), (2, [25, 37]))
+    }
+    steam = FakeSteam(wishlist=[620, 2], followed=[], items=info)
+    with opened(tmp_path, ["BR"]) as profile:
+        run(profile, steam, steps={Step.WISHLIST, Step.APPS})
+
+    asked = [params["appids"] for path, params in steam.asked if path == "/api/appdetails"]
+    assert asked == ["620", "2"]

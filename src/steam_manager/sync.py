@@ -7,20 +7,32 @@ loads what it archived and returns. A sync run again continues from what the arc
 """
 
 import asyncio
+import itertools
 from collections import Counter
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from enum import StrEnum
 from typing import TYPE_CHECKING, Final
 
+from sqlalchemy import select, union
+
 from steam_manager.answers import Kind
+from steam_manager.db.schema.account import FollowedApp, WishlistItem
+from steam_manager.db.schema.apps import App
+from steam_manager.db.schema.classification import AppGenre
+from steam_manager.db.schema.lookups import Genre
+from steam_manager.db.schema.relations import AppDlc, AppRelated
 from steam_manager.loader import LoadReport, load
 from steam_manager.steam.community import followed_apps, wishlist
 from steam_manager.steam.models.listing import ListingAnswer
 from steam_manager.steam.store import (
     API_LANGUAGES,
+    BATCH_SIZE,
     PAGE_SIZE,
     ListingMismatchError,
+    app_genres,
+    current_players,
+    get_items,
     list_apps,
     store_categories,
     tag_list,
@@ -30,7 +42,10 @@ from steam_manager.transport import FailureStreakError, RequestFailedError
 
 if TYPE_CHECKING:
     from collections.abc import Awaitable, Callable, Collection, Iterable
+    from collections.abc import Set as AbstractSet
     from datetime import timedelta
+
+    from sqlalchemy import CompoundSelect, Select
 
     from steam_manager.answers import Answer
     from steam_manager.archive import Archive
@@ -39,6 +54,17 @@ if TYPE_CHECKING:
 
 ARCHIVE_CHUNK: Final = 100
 """Answers asked one app at a time that are archived together, so a stop loses few."""
+
+_ACCOUNT: Final = union(select(WishlistItem.appid), select(FollowedApp.appid))
+# The apps the account apps point at, one level deep: an included app comes with its short
+# record, and bundles are out. The parent game sits on the app's own row.
+_REFERENCES: Final[CompoundSelect[int]] = union(
+    select(AppRelated.related_appid).where(
+        AppRelated.appid.in_(_ACCOUNT), AppRelated.kind != "included_app"
+    ),
+    select(AppDlc.dlc_appid).where(AppDlc.appid.in_(_ACCOUNT)),
+    select(App.parent_appid).where(App.appid.in_(_ACCOUNT), App.parent_appid.is_not(None)),
+)
 
 
 class Step(StrEnum):
@@ -295,6 +321,78 @@ class _Sync:
             self._failed(error)
         self._flush()
 
+    def _appids(self, query: Select[int] | CompoundSelect[int]) -> set[int]:
+        """
+        Read appids from the database.
+
+        :param query: A query of one column of appids.
+        :return: The appids.
+        """
+        with self._profile.engine.connect() as connection:
+            return set(connection.scalars(query))
+
+    async def apps(self) -> None:
+        """Fetch full entries for the account apps and what they point at, and their figures."""
+        account = self._appids(_ACCOUNT)
+        await self._entries(account)
+        await self._entries(self._appids(_REFERENCES) - account)
+        for key in self._stale(Kind.CURRENT_PLAYERS, map(str, sorted(account))):
+            await self._one(current_players(self._transport, int(key)))
+        await self._genres()
+
+    async def _entries(self, appids: AbstractSet[int]) -> None:
+        """
+        Fetch the stale full entries of some apps, a country at a time, loading after each.
+
+        The home country is asked for every app, and each fallback for the apps no earlier
+        country sells, as the loaded rows tell.
+
+        :param appids: The apps.
+        """
+        settings = self._profile.settings
+        for place, country in enumerate(settings.countries):
+            wanted = appids
+            if place:
+                sold = select(App.appid).where(
+                    App.success == 1, App.store_country.in_(settings.countries[:place])
+                )
+                wanted = appids - self._appids(sold)
+            keys = self._stale(Kind.STORE_ITEM, map(str, sorted(wanted)), country)
+            for batch in itertools.batched(map(int, keys), BATCH_SIZE, strict=False):
+                try:
+                    self._add(
+                        [
+                            answer
+                            async for answer in get_items(
+                                self._transport, batch, country=country, language=settings.language
+                            )
+                        ]
+                    )
+                except RequestFailedError as error:
+                    self._failed(error)
+            await self._load()
+
+    async def _genres(self) -> None:
+        """Ask one app per genre without a name, skipping genres an app asked before has."""
+        query = (
+            select(AppGenre.genreid, AppGenre.appid)
+            .join(Genre, Genre.genreid == AppGenre.genreid)
+            .where(Genre.name.is_(None))
+            .order_by(AppGenre.genreid, AppGenre.appid)
+        )
+        holders: dict[int, list[int]] = {}
+        held: dict[int, set[int]] = {}
+        with self._profile.engine.connect() as connection:
+            for genreid, appid in connection.execute(query):
+                holders.setdefault(genreid, []).append(appid)
+                held.setdefault(appid, set()).add(genreid)
+        covered: set[int] = set()
+        for genreid, appids in holders.items():
+            if genreid not in covered:
+                covered |= held[appids[0]]
+                language = self._profile.settings.language
+                await self._one(app_genres(self._transport, appids[0], language=language))
+
 
 async def sync(  # the command line's options, each a keyword
     profile: OpenProfile,
@@ -324,5 +422,6 @@ async def sync(  # the command line's options, each a keyword
         Step.WISHLIST: run.wishlist,
         Step.FOLLOWED: run.followed,
         Step.CATALOG: run.catalog,
+        Step.APPS: run.apps,
     }
     return await run.run(action for step, action in actions.items() if step in steps)
